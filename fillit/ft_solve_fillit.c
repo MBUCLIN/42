@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_solve_fillit.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/18 17:09:18 by mbuclin           #+#    #+#             */
+/*   Updated: 2015/12/18 17:45:04 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 
@@ -81,8 +93,9 @@ char **ft_solve(t_sample *tetri, char **map, size_t size, t_pos pos)
 		pos = ft_last_tetri(map, tetri, pos);
 		map = ft_remove_tetri(map, pos);
 		pos = ft_change_pos(map, pos);
-		ft_solve(tetri, map, size, pos);
+		if (ft_solve(tetri, map, size, pos) == NULL)
 	}
+
 }
 
 char **ft_init_solv(t_sample *tetri)
@@ -94,13 +107,15 @@ char **ft_init_solv(t_sample *tetri)
 
 	pos.x = 0;
 	pos.y = 0;
-	n = ft_sample_len(tetri);
+	n = ft_lstlen(tetri);
 	size = ft_get_pft_sqr((int)n);
 	while (ft_check_map(map, tetri))
 	{
-		map = ft_get_map_rdy(n);
+		if (map)
+			ft_tabdel(map);
+		map = ft_create_map(size);
 		ft_solve(tetri, map, size, 'A', pos);
-		n++;
+		size++;
 	}
 	return (map);
 }

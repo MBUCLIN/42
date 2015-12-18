@@ -80,8 +80,8 @@ char **ft_solve(t_sample *tetri, char **map, size_t size, t_pos pos)
 	{
 		pos = ft_last_tetri(map, tetri, pos);
 		map = ft_remove_tetri(map, pos);
-		pos.x++;
-		ft_solve
+		pos = ft_change_pos(map, pos);
+		ft_solve(tetri, map, size, pos);
 	}
 }
 

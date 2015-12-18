@@ -30,10 +30,3 @@ char **ft_create_map(size_t size)
 	return (map);
 }
 
-char **ft_get_map_rdy(size_t n)
-{
-	size_t size;
-
-	size = ft_get_pft_sqr((int)n);
-	return (ft_create_map(size));
-}

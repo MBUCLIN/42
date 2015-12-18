@@ -1,6 +1,12 @@
 #include "fillit.h"
 
 
+t_pos	ft_get_dif(t_pos cur, t_pos next, t_pos pos)
+{
+	pos.y = pos.y + ((cur.y - next.y) * -1);
+	pos.x = pos.x + ((cur.x - next.x) * -1);
+	return (pos);
+}
 t_pos	ft_get_next_pos(t_pos pos, t_sample *tetri, int match)
 {
 	t_pos next;
@@ -8,28 +14,22 @@ t_pos	ft_get_next_pos(t_pos pos, t_sample *tetri, int match)
 	int	count;
 	int	size;
 
-	pos.y = 0;
-	while (tetri[next.y])
+	next.y = -1;
+	count = 0;
+	cur.x = 0;
+	cur.y = 0;
+	while (tetri[++next.y])
 	{
-		pos.x = 0;
-		while (tetri[next.y][next.x])
+		next.x = -1;
+		while (tetri[next.y][++next.x])
 		{
 			if (tetri[next.y][next.x] != '.')
 				count++;
-			if (count == match)
-			{
-				cur.y = next.y;
-				cur.x = next.x;
-			}
+			if (count == match && match != 0)
+				cur = next;
 			else if (count > match)
-			{
-				pos.y = pos.y + ((cur.y - next.y) * -1);
-				pos.x = pos.x + ((cur.x - next.x) * -1);
-				return (pos);
-			}
-			pos.x++;
+				return (ft_get_dif(cur, next, pos));
 		}
-		pos.y++;
 	}
 	return (NULL);
 }

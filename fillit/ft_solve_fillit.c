@@ -43,7 +43,7 @@ t_pos	ft_get_next_pos(t_pos pos, t_sample *tetri, int match)
 				return (ft_get_dif(cur, next, pos));
 		}
 	}
-	return (NULL);
+	return (pos);
 }
 
 t_sample *ft_search_tetri(t_sample *tetri, char c)
@@ -114,7 +114,7 @@ char **ft_init_solv(t_sample *tetri)
 		if (map)
 			ft_tabdel(map);
 		map = ft_create_map(size);
-		ft_solve(tetri, map, size, 'A', pos);
+		ft_solve(tetri, map, size, pos);
 		size++;
 	}
 	return (map);

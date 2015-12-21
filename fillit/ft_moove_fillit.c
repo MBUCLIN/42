@@ -1,39 +1,60 @@
 #include "../libft/libft.h"
 
+t_pos		ft_change_pos(char **map, t_pos pos, size_t size, t_sample *tmp)
+{
+	while (map[pos.y])
+	{
+		while (map[pos.y][++pos.x])
+		{
+			if (map[pos.y][pos.x] == '.')
+				break ;
+		}
+		if (map[pos.y][pos.x] == '.')
+			break ;
+		pos.y++;
+	}
+	if (pos.y > size - 2 && pos.x > size - 2 && tmp->c == 'A')
+	{
+		pos.y = size;
+		pos.x = size;
+	}
+	else if (pos.y > size - 2 && pos.x > size - 2)
+	{
+		pos = ft_pos_tetri(map);
+		ft_remove_tetri(map, pos);
+	}
+	return (pos);
+}
+
 t_pos		ft_pos_tetri(char **map)
 {
 	t_pos	pos;
 	char	c;
 
-	pos.y = 0;
 	c = 0;
-	while (map[pos.y])
+	while (map[++pos.y])
 	{
-		pos.x = 0;
-		while (map[pos.y][pos.x])
+		pos.x = -1;
+		while (map[pos.y][++pos.x])
 		{
 			if (map[pos.y][pos.x] != '.' && map[pos.y][pos.x] > c)
 				c = map[pos.y][pos.x];
-			pos.x++;
 		}
-		pos.y++;
 	}
-	pos.y = 0;
-	while (map[pos.y])
+	pos.y = -1;
+	while (map[++pos.y])
 	{
-		pos.x = 0;
-		while (map[pos.y][pos.x])
+		pos.x = -1;
+		while (map[pos.y][++pos.x])
 		{
 			if (map[pos.y][pos.x] == c)
 				return (pos);
-			pos.x++;
 		}
-		pos.y++;
 	}
 	return (NULL);
 }
 
-char		**ft_remove_tetri(char **map, t_pos pos)
+void		ft_remove_tetri(char **map, t_pos pos)
 {
 	char		c;
 	int		count;
@@ -49,22 +70,12 @@ char		**ft_remove_tetri(char **map, t_pos pos)
 				count++;
 				map[pos.y][pos.x] = '.';
 				if (count == 4)
-					return (map);
+					return ;
 			}
 			pos.x++;
 		}
 		pos.x = 0;
 		pos.y++;
 	}
-	return (NULL);
 }
 
-t_pos		ft_last_tetri(char **map, t_sample *tetri, t_pos pos)
-{
-	t_sample	*tmp;
-
-	tmp = tetri;
-	if (pos = ft_pos_tetri(map) == NULL)
-		return (NULL);
-	return (pos);
-}

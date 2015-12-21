@@ -1,8 +1,35 @@
 #include "fillit.h"
 
+t_pos	ft_get_next_pos(t_pos pos, t_sample *tetri, int match)
+{
+	t_pos		next;
+	t_pos		cur;
+	int			count;
+	int			size;
+
+	next.y = -1;
+	count = 0;
+	cur.x = 0;
+	cur.y = 0;
+	while (tetri[++next.y])
+	{
+		next.x = -1;
+		while (tetri[next.y][++next.x])
+		{
+			if (tetri[next.y][newt.x])
+				count++;
+			if(count == match && match != 0)
+				cur = next;
+			else if (count > match)
+				return (ft_get_dif(cur, next, pos));
+		}
+	}
+	return (pos);
+}
+
 size_t	ft_get_pft_sqr(int n)
 {
-	int mult;
+	int			mult;
 
 	mult = 2;
 	while (((mult * mult) - (n * 4)) < 0)

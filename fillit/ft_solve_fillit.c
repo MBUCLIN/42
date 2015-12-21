@@ -13,42 +13,16 @@
 #include "fillit.h"
 
 
-t_pos	ft_get_dif(t_pos cur, t_pos next, t_pos pos)
+t_pos		ft_get_dif(t_pos cur, t_pos next, t_pos pos)
 {
 	pos.y = pos.y + ((cur.y - next.y) * -1);
 	pos.x = pos.x + ((cur.x - next.x) * -1);
 	return (pos);
 }
-t_pos	ft_get_next_pos(t_pos pos, t_sample *tetri, int match)
-{
-	t_pos next;
-	t_pos cur;
-	int	count;
-	int	size;
 
-	next.y = -1;
-	count = 0;
-	cur.x = 0;
-	cur.y = 0;
-	while (tetri[++next.y])
-	{
-		next.x = -1;
-		while (tetri[next.y][++next.x])
-		{
-			if (tetri[next.y][next.x] != '.')
-				count++;
-			if (count == match && match != 0)
-				cur = next;
-			else if (count > match)
-				return (ft_get_dif(cur, next, pos));
-		}
-	}
-	return (pos);
-}
-
-t_sample *ft_search_tetri(t_sample *tetri, char c)
+t_sample	*ft_search_tetri(t_sample *tetri, char c)
 {
-	t_sample tmp;
+	t_sample	*tmp;
 
 	tmp = tetri;
 	while (tmp)
@@ -60,10 +34,10 @@ t_sample *ft_search_tetri(t_sample *tetri, char c)
 	return (tmp);
 }
 
-t_sample *ft_get_tetri(t_sample *tetri, char **map)
+t_sample	*ft_get_tetri(t_sample *tetri, char **map)
 {
-	t_pos pos;
-	char c;
+	t_pos		pos;
+	char		c;
 
 	pos.y = 0;
 	c = '0';
@@ -72,7 +46,7 @@ t_sample *ft_get_tetri(t_sample *tetri, char **map)
 		pos.x = 0;
 		while (map[pos.y][pos.x])
 		{
-			if (map[pos.y][pos.x]!= '.')
+			if (map[pos.y][pos.x] != '.')
 				c = map[pos.y][pos.x];
 			pos.x++;
 		}
@@ -83,27 +57,29 @@ t_sample *ft_get_tetri(t_sample *tetri, char **map)
 	return (ft_search_tetri(tetri, c));
 }
 
-char **ft_solve(t_sample *tetri, char **map, size_t size, t_pos pos)
+char		**ft_solve(t_sample *tetri, char **map, size_t size, t_pos pos)
 {
-	t_sample *tmp;
+	t_sample	*tmp;
 
-	tmp = ft_get_tetri(tetri, map);
+	if (!(tmp = ft_get_tetri(tetri, map)))
+		return (map);
 	if (!(ft_check_pos(map, pos, tmp)))
 	{
-		pos = ft_last_tetri(map, tetri, pos);
-		map = ft_remove_tetri(map, pos);
-		pos = ft_change_pos(map, pos);
-		if (ft_solve(tetri, map, size, pos) == NULL)
+		pos = ft_change_pos(map, pos, size, tmp);
+		if (!(ft_solve(tetri, map, size, pos)))
+			return (map);
 	}
-
+	/* POSE LE PUTAIN DE TETRI !!*/
+	/* RAPELLE LA FONCTIO ET FAIT TA VIE BIATCH */
+	return (map);
 }
 
-char **ft_init_solv(t_sample *tetri)
+char		**ft_init_solv(t_sample *tetri)
 {
-	size_t n;
-	char **map;
-	size_t size;
-	t_pos pos;
+	size_t		n;
+	char		**map;
+	size_t		size;
+	t_pos		pos;
 
 	pos.x = 0;
 	pos.y = 0;

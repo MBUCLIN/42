@@ -27,11 +27,13 @@ int		ft_check_pos(char **map, t_pos pos, t_sample tetri)
 	t_pos	new;
 	int		size;
 
-	match = 0;
+	match = 1;
 	size = 0;
 	new.x = pos.x;
 	new.y = pos.y;
-	while (match != 4)
+	if (map[new.y][new.x] != '.')
+		return (0);
+	while (match < 4)
 	{
 		new = ft_get_next_pos(new, tetri, match);
 		if (map[new.y][new.x] == '.')

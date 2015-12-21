@@ -1,5 +1,18 @@
 #include "../libft/libft.h"
 
+void		ft_place_tetri(char **map, t_sample *toplace, t_pos pos)
+{
+	int		match;
+
+	match = 1;
+	map[pos.y][pos.x] = tmp->c;
+	while (match < 4)
+	{
+		pos = ft_get_next_pos(pos, toplace, match);
+		map[pos.y][pos.x] = tmp->c;
+		match++;
+	}
+}
 t_pos		ft_change_pos(char **map, t_pos pos, size_t size, t_sample *tmp)
 {
 	while (map[pos.y])

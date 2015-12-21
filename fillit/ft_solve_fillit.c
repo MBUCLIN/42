@@ -66,11 +66,14 @@ char		**ft_solve(t_sample *tetri, char **map, size_t size, t_pos pos)
 	if (!(ft_check_pos(map, pos, tmp)))
 	{
 		pos = ft_change_pos(map, pos, size, tmp);
-		if (!(ft_solve(tetri, map, size, pos)))
+		map = ft_solve(tetri, map, size, pos)
+		if (pos.y == size && pos.x == size)
 			return (map);
 	}
-	/* POSE LE PUTAIN DE TETRI !!*/
-	/* RAPELLE LA FONCTIO ET FAIT TA VIE BIATCH */
+	ft_place_tetri(map, tmp, pos);
+	map = ft_solve(tetri, map, size, pos);
+	if (pos.y == size && pos.x == size)
+		return (map);
 	return (map);
 }
 

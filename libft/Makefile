@@ -61,7 +61,9 @@ PC = ft_memset.c \
 	 ft_lstmap.c \
 	 ft_putnbrbase.c \
 	 ft_atoibase.c \
-	 ft_itoabase.c
+	 ft_itoabase.c \
+	 ft_tabdel.c \
+	 ft_puttab.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -123,7 +125,9 @@ PO = ft_memset.o \
 	 ft_lstmap.o \
 	 ft_putnbrbase.o \
 	 ft_atoibase.o \
-	 ft_itoabase.o
+	 ft_itoabase.o \
+	 ft_tabdel.o \
+	 ft_puttab.o
 
 FLAGS = -Wall -Wextra -Werror
 

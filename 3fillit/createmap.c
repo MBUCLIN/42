@@ -1,33 +1,38 @@
-#include "fillit.h"
+#include "fillit_proto.h"
 
-t_pos	ft_get_next_pos(t_pos pos, t_sample *tetri, int match)
+t_pos		ft_get_next_pos(t_pos pos, char **tetri, int match)
 {
 	t_pos		next;
-	t_pos		cur;
 	int			count;
 	int			size;
 
 	next.y = -1;
 	count = 0;
-	cur.x = 0;
-	cur.y = 0;
+	ft_putendl("O");
 	while (tetri[++next.y])
 	{
+		ft_putendl("Y");
 		next.x = -1;
 		while (tetri[next.y][++next.x])
 		{
-			if (tetri[next.y][newt.x])
+			ft_putendl("X");
+			if (tetri[next.y][next.x] != '.' && count <= match)
+			{
+				ft_putchar('a');
 				count++;
-			if(count == match && match != 0)
-				cur = next;
-			else if (count > match)
-				return (ft_get_dif(cur, next, pos));
+			}
+			if (count > match && tetri[next.y][next.x] != '.')
+			{
+				ft_putchar('b');
+				return (ft_get_dif(next, pos, tetri));
+			}
 		}
 	}
+	ft_putendl("P");
 	return (pos);
 }
 
-size_t	ft_get_pft_sqr(int n)
+size_t		ft_get_pft_sqr(int n)
 {
 	int			mult;
 
@@ -37,7 +42,7 @@ size_t	ft_get_pft_sqr(int n)
 	return (mult);
 }
 
-char	*ft_push_tetri_left(char **tetri, int size)
+char		**ft_push_tetri_left(char **tetri)
 {
 	char		*cpy;
 	char		c;
@@ -50,7 +55,7 @@ char	*ft_push_tetri_left(char **tetri, int size)
 	{
 		y = -1;
 		while (tetri[++y])
-			if (tetri != '.')
+			if (tetri[y][0] != '.')
 				return (tetri);
 		y = -1;
 		while (tetri[++y])
@@ -61,31 +66,30 @@ char	*ft_push_tetri_left(char **tetri, int size)
 			tetri[y] = NULL;
 			if (!(tetri[y] = ft_strjoin(cpy, &c)))
 				return (NULL);
+			tetri[y][4] = '\0';
 		}
 	}
 	return (tetri);
 }
 
-void	ft_prepare_tetri(t_sample *tetri)
+void		ft_prepare_tetri(t_sample *tetri)
 {
 	t_sample	*temp;
-	int			size;
 
 	temp = tetri;
 	while (temp)
 	{
-		size = ft_strlen(temp->tetri);
-		temp->tetri = ft_push_tetri_left(temp->tetri, size);
+		temp->tetri = ft_push_tetri_left(temp->tetri);
 		if (temp->tetri == NULL)
 			return ;
 		temp = temp->next;
 	}
 }
 
-char **ft_create_map(size_t size)
+char		**ft_create_map(size_t size)
 {
-	char **map;
-	size_t i;
+	char		**map;
+	size_t		i;
 
 	i = 0;
 	if (!(map = (char **)ft_memalloc(sizeof(char *) * (size + 1))))
@@ -101,4 +105,3 @@ char **ft_create_map(size_t size)
 	map[i] = NULL;
 	return (map);
 }
-

@@ -8,27 +8,22 @@ t_pos		ft_get_next_pos(t_pos pos, char **tetri, int match)
 
 	next.y = -1;
 	count = 0;
-	ft_putendl("O");
 	while (tetri[++next.y])
 	{
-		ft_putendl("Y");
 		next.x = -1;
 		while (tetri[next.y][++next.x])
 		{
-			ft_putendl("X");
 			if (tetri[next.y][next.x] != '.' && count <= match)
 			{
-				ft_putchar('a');
 				count++;
 			}
 			if (count > match && tetri[next.y][next.x] != '.')
 			{
-				ft_putchar('b');
-				return (ft_get_dif(next, pos, tetri));
+				pos = ft_get_dif(next, pos, tetri);
+				return (pos);
 			}
 		}
 	}
-	ft_putendl("P");
 	return (pos);
 }
 

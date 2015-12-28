@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft__strlcat.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lgosse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/27 16:32:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2015/12/13 15:20:48 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/25 11:14:59 by lgosse            #+#    #+#             */
+/*   Updated: 2015/12/12 19:01:42 by lgosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t		ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	i;
-	size_t	k;
+	char	*str;
+	size_t	toret;
 
-	i = 0;
-	while (dst[i])
-		i++;
-	k = 0;
-	while (src[k])
-		k++;
-	if (i < size)
+	if (!(str = ft_memchr(dst, '\0', size)))
+		return (size + ft_strlen(src));
+	toret = (size_t)(str - dst) + ft_strlen(src);
+	while ((size_t)(str - dst) < size - 1 && *src)
 	{
-		ft_strncat(dst, src, size - i - 1);
-		return (i + ft_strlen(src));
+		*str = *src;
+		str++;
+		src++;
 	}
-	return (size + k);
+	*str = '\0';
+	return (toret);
 }

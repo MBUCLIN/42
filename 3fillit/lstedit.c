@@ -6,26 +6,11 @@
 /*   By: lgosse <lgosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/17 17:15:41 by lgosse            #+#    #+#             */
-/*   Updated: 2015/12/17 17:16:34 by lgosse           ###   ########.fr       */
+/*   Updated: 2015/12/28 14:16:17 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit_proto.h"
-
-void	ft_printlst(t_sample *lst)
-{
-	int y;
-
-	while (lst)
-	{
-		y = -1;
-		while (++y < 4)
-			ft_putendl(lst->tetri[y]);
-		ft_putchar(lst->c);
-		ft_putchar('\n');
-		lst = lst->next;
-	}
-}
 
 int		ft_lstlen(t_sample *lst)
 {

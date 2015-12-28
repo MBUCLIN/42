@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lgosse <lgosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 16:18:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2015/12/15 13:25:16 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/25 18:02:34 by lgosse            #+#    #+#             */
+/*   Updated: 2015/12/10 12:01:39 by lgosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 char	*ft_strstr(const char *s1, const char *s2)
 {
-	size_t	len;
-	size_t	i;
+	int i;
+	int j;
 
-	i = -1;
-	len = 0;
-	while (s2[++i])
-		len++;
 	i = 0;
-	while (s1[i])
-		i++;
-	if (i < len)
-		return (NULL);
-	if (len == 0 && s2 != NULL)
+	if (s2[0] == '\0')
 		return ((char *)s1);
-	i = 0;
-	while (s1[i + len - 1])
+	while (s1[i] != '\0')
 	{
-		if ((ft_memcmp((char *)(s1 + i), s2, len) == 0))
-			return ((char *)(s1 + i));
+		j = 0;
+		while (s1[i + j] == s2[j] && s1[i + j] != '\0')
+		{
+			j++;
+			if (s2[j] == '\0')
+				return ((char *)(s1 + i));
+		}
 		i++;
 	}
 	return (NULL);

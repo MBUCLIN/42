@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lgosse <lgosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/26 16:55:02 by mbuclin           #+#    #+#             */
-/*   Updated: 2015/12/02 14:12:58 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/26 15:56:38 by lgosse            #+#    #+#             */
+/*   Updated: 2015/12/09 11:31:43 by lgosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,18 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*toret;
-	int		i;
-	int		j;
+	char	*str;
 
-	i = -1;
-	j = 0;
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	if (!(toret = (char *)ft_memalloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
-		return (NULL);
-	if (s1)
-		while (s1[++i])
+	str = NULL;
+	if (s1 == NULL && s2 != NULL)
+		return (ft_strdup(s2));
+	if (s1 != NULL && s2 == NULL)
+		return (ft_strdup(s1));
+	if (s1 && s2)
+		if ((str = ft_strnew(ft_strlen(s1) + ft_strlen(s2))))
 		{
-			toret[j] = s1[i];
-			j++;
+			ft_strcpy(str, s1);
+			ft_strcpy(str + ft_strlen(s1), s2);
 		}
-	i = -1;
-	if (s2)
-		while (s2[++i])
-		{
-			toret[j] = s2[i];
-			j++;
-		}
-	toret[j] = '\0';
-	return (toret);
+	return (str);
 }

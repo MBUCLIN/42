@@ -1,6 +1,6 @@
 #include "fillit_proto.h"
 
-void		ft_place_tetri(char **map, t_sample *toplace, t_pos pos)
+void		ft_place_tetri(char **map, t_sample *toplace, t_pos pos, int size)
 {
 	int		match;
 	t_pos	carpos;
@@ -10,7 +10,8 @@ void		ft_place_tetri(char **map, t_sample *toplace, t_pos pos)
 	while (match < 4)
 	{
 		carpos = ft_get_next_pos(pos, toplace->tetri, match);
-		map[carpos.y][carpos.x] = toplace->c;
+		if (carpos.y < size && carpos.x < size)
+			map[carpos.y][carpos.x] = toplace->c;
 		match++;
 	}
 }

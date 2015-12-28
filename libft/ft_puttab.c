@@ -1,16 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_puttab.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgosse <lgosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/16 18:53:48 by lgosse            #+#    #+#             */
+/*   Updated: 2015/12/16 18:55:59 by lgosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void		ft_puttab(char **tab)
+void	ft_puttab(char **tab)
 {
-	int		i;
+	int y;
 
-	i = 0;
-	if (tab)
-	while (tab[i])
-	{
-		if (!tab[i])
-			return ;
-		ft_putendl(tab[i]);
-		i++;
-	}
+	y = -1;
+	while (tab[++y])
+		ft_putendl(tab[y]);
 }

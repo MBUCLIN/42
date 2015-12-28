@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 17:09:18 by mbuclin           #+#    #+#             */
-/*   Updated: 2015/12/18 17:45:04 by mbuclin          ###   ########.fr       */
+/*   Updated: 2015/12/28 15:34:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void		ft_solve(t_sample *tetri, char **map, size_t size, t_pos pos)
 	boleen = 1;
 	while (boleen == 1)
 	{
-		if (!(tmp = ft_get_tetri(tetri, map)))
-			boleen = 0;
 		if (!(ft_check_pos(map, pos, tmp, size)))
 		{
 			pos = ft_change_pos(map, pos, size, tmp);
@@ -81,10 +79,12 @@ void		ft_solve(t_sample *tetri, char **map, size_t size, t_pos pos)
 		}
 		else
 		{
-			ft_place_tetri(map, tmp, pos);
+			ft_place_tetri(map, tmp, pos, size);
 			pos.y = 0;
 			pos.x = 0;
 		}
+		if (!(tmp = ft_get_tetri(tetri, map)))
+			boleen = 0;
 	}
 	return ;
 }

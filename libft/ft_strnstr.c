@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   strnstr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lgosse <lgosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 16:39:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2015/12/14 13:59:27 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/25 18:53:09 by lgosse            #+#    #+#             */
+/*   Updated: 2015/12/03 14:02:47 by lgosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	size_t	len;
-	size_t	i;
+	size_t i;
+	size_t j;
 
 	i = 0;
-	len = 0;
-	while (s2[len])
-		len++;
-	if (len == 0 && s2 != NULL)
+	if (s2[0] == '\0')
 		return ((char *)s1);
-	while (s1[i] && i + len <= n)
+	while (i < n && s1[i] != '\0')
 	{
-		if (ft_memcmp((s1 + i), s2, len) == 0)
-			return ((char *)(s1 + i));
+		j = 0;
+		while (s1[i + j] == s2[j] && i + j != n)
+		{
+			j++;
+			if (s2[j] == '\0')
+				return ((char *)s1 + i);
+		}
 		i++;
 	}
 	return (NULL);

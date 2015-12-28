@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lgosse <lgosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/01 16:11:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2015/12/01 16:11:22 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/28 15:04:26 by lgosse            #+#    #+#             */
+/*   Updated: 2015/11/30 15:31:07 by lgosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list	*lst_cpy;
-	t_list	*tmp_cpy;
+	t_list		*pmap;
+	t_list		*map;
 
-	lst_cpy = NULL;
-	tmp_cpy = NULL;
-	if (!(lst_cpy = ft_lstnew(lst->content, lst->content_size)))
+	pmap = NULL;
+	if ((pmap = f(lst)) == NULL)
 		return (NULL);
-	*lst_cpy = *f(lst_cpy);
-	tmp_cpy = lst_cpy;
-	lst = lst->next;
-	while (lst)
+	map = pmap;
+	map->next = NULL;
+	while (lst->next)
 	{
-		if (!(tmp_cpy->next = ft_lstnew(lst->content, lst->content_size)))
-			return (NULL);
-		tmp_cpy = tmp_cpy->next;
-		*tmp_cpy = *f(tmp_cpy);
 		lst = lst->next;
+		map->next = f(lst);
+		if (map->next == NULL)
+			return (NULL);
+		map = map->next;
 	}
-	return (lst_cpy);
+	return (pmap);
 }

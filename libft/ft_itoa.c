@@ -3,56 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lgosse <lgosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 16:01:26 by mbuclin           #+#    #+#             */
-/*   Updated: 2015/12/15 14:41:03 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/27 11:25:06 by lgosse            #+#    #+#             */
+/*   Updated: 2015/12/11 15:00:30 by lgosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		check_size(int nbr)
+static int	ft_get_nb_length(int n)
 {
-	int		size;
+	int len;
 
-	size = 0;
-	if (nbr == 0)
-		return (1);
-	if (nbr < 0)
+	len = 1;
+	if (n < 0)
 	{
-		size = 1;
-		nbr = nbr * -1;
+		n = -n;
+		len++;
 	}
-	while (nbr)
+	while (n >= 10)
 	{
-		size++;
-		nbr = nbr / 10;
+		n = n / 10;
+		len++;
 	}
-	return (size);
+	return (len);
 }
 
-char			*ft_itoa(int nbr)
+char		*ft_itoa(int n)
 {
-	char	*str;
-	int		size;
+	char	*nb;
+	int		i;
 
-	if (nbr * -1 - 1 == 2147483647)
+	nb = NULL;
+	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	else if (!nbr)
-		return (ft_strdup("0"));
-	size = check_size(nbr);
-	if (!(str = (char *)ft_memalloc(sizeof(char) * (size + 1))))
-		return (NULL);
-	if (nbr < 0)
+	i = ft_get_nb_length(n);
+	if ((nb = ft_strnew(i)))
 	{
-		str[0] = '-';
-		nbr = nbr * -1;
+		if (n < 0)
+		{
+			n = -n;
+			nb[0] = '-';
+		}
+		while (i >= 0 && nb[--i] != '-')
+		{
+			nb[i] = n % 10 + '0';
+			n /= 10;
+		}
 	}
-	while (--size >= 0 && str[size] != '-')
-	{
-		str[size] = nbr % 10 + 48;
-		nbr = nbr / 10;
-	}
-	return (str);
+	return (nb);
 }

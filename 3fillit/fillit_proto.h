@@ -19,9 +19,8 @@ t_sample	*ft_treat_sample(char **sample);
 /*
 			check validity
 */
-
-t_pos		ft_get_first_pos(char **sample, int y);
-int			ft_check_tetri(char **sample, t_pos pos);
+int			ft_check_x_size(char **sample, int y);
+int			ft_check_tetri(char **sample, int y);
 int			ft_check_block(char **sample, int y);
 int			ft_check_empty_lines(char *read_result);
 int			ft_is_sample_valid(char **sample);
@@ -41,6 +40,7 @@ void		ft_lstdestroy(t_sample *lst);
 
 char		**ft_treat_read(char *read_result);
 char		**ft_read_sample(char *filename);
+int			ft_check_splitted(char *read);
 /*
 		FUNCTIONS FROM SOLVE PART
 */
@@ -63,7 +63,7 @@ int			ft_check_pos(char **map, t_pos pos, t_sample *tetri, int size);
 			solve moove
 */
 
-void		ft_place_tetri(char **map, t_sample *toplace, t_pos pos);
+void		ft_place_tetri(char **map, t_sample *toplace, t_pos pos, int size);
 t_pos		ft_change_pos(char **map, t_pos pos, size_t size, t_sample *tmp);
 t_pos		ft_pos_tetri(char **map);
 void		ft_remove_tetri(char **map, t_pos pos);

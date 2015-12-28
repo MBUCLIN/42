@@ -3,77 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lgosse <lgosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/26 14:54:37 by mbuclin           #+#    #+#             */
-/*   Updated: 2015/12/15 14:29:25 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/26 17:52:21 by lgosse            #+#    #+#             */
+/*   Updated: 2015/12/12 19:01:28 by lgosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		find_nword(const char *s, char c)
+static	int		ft_wordlen(char const *s, char c)
 {
-	int		n;
-	int		i;
+	int i;
 
 	i = 0;
-	n = 0;
-	if (s[0] != c)
-	{
-		n++;
-		i++;
-	}
-	while (s[i])
-	{
-		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
-			n++;
-		i++;
-	}
-	return (n);
-}
-
-static int		find_sword(const char *s, unsigned int i, char c)
-{
-	int		size;
-
-	size = 0;
 	while (s[i] != c && s[i] != '\0')
-	{
-		size++;
 		i++;
-	}
-	return (size);
+	return (i);
 }
 
-static char		*complete_tab(char *tab, const char *s, int i, char c)
+static	size_t	ft_count(char const *s, char c)
 {
-	if (!(tab = ft_strsub(s, i, find_sword(s, i, c))))
-		return (NULL);
-	return (tab);
-}
-
-char			**ft_strsplit(const char *s, char c)
-{
-	char	**tab;
-	int		i;
-	int		j;
+	size_t i;
+	size_t j;
 
 	i = 0;
 	j = 0;
-	if (s == NULL)
-		return (NULL);
-	if (!(tab = (char **)ft_memalloc(sizeof(tab) * find_nword(s, c))))
-		return (NULL);
-	while (s[i])
+	while (s[i] != '\0')
 	{
-		if ((i == 0 && s[i] != c) || (s[i] != c && s[i - 1] == c))
-		{
-			tab[j] = complete_tab(tab[j], s, i, c);
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		if (s[i] != c && s[i] != '\0')
 			j++;
-		}
-		i++;
+		while (s[i] != c && s[i] != '\0')
+			i++;
 	}
-	tab[j] = NULL;
+	return (j);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char	**tab;
+	size_t	i;
+	size_t	j;
+	size_t	nb_len;
+
+	tab = NULL;
+	if (s != NULL)
+		if ((tab = (char **)ft_memalloc(sizeof(char *) * (ft_count(s, c) + 1))))
+		{
+			i = 0;
+			j = 0;
+			while (j < ft_count(s, c))
+			{
+				while (s[i] == c && s[i])
+					i++;
+				nb_len = ft_wordlen(s + i, c);
+				tab[j] = ft_strsub(s, i, nb_len);
+				i += nb_len;
+				j++;
+			}
+			tab[j] = NULL;
+		}
 	return (tab);
 }

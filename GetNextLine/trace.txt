@@ -1,0 +1,19 @@
+80B/* ************************************************************************** */
+11B         */
+23B+:      :+:    :+:   */
+35B       +#+  +:+       +#+        */
+47B by mbuclin           #+#    #+#             */
+59B                                                         */
+18B "get_next_line.h"
+2B);
+0B
+33B(!(*line = ft_strsub(lrd, 0, i)))
+5BNULL;
+8Bt		size;
+1B;
+19Bline, lrd) == NULL)
+14B_readed	*tmp2;
+10Bmp = NULL;
+3BLL;
+9Burn (-1);
+28Bread_fd(fd, tmp->lrd, line);

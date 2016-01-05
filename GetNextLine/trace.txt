@@ -1,19 +1,266 @@
-80B/* ************************************************************************** */
-11B         */
-23B+:      :+:    :+:   */
-35B       +#+  +:+       +#+        */
-47B by mbuclin           #+#    #+#             */
-59B                                                         */
-18B "get_next_line.h"
-2B);
-0B
-33B(!(*line = ft_strsub(lrd, 0, i)))
-5BNULL;
-8Bt		size;
-1B;
-19Bline, lrd) == NULL)
-14B_readed	*tmp2;
-10Bmp = NULL;
-3BLL;
-9Burn (-1);
-28Bread_fd(fd, tmp->lrd, line);
+1
+/* ************************************************************************** */
+1
+/*                                                                            */
+1
+/*                                                        :::      ::::::::   */
+1
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+1
+/*                                                    +:+ +:+         +:+     */
+1
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+1
+/*                                                +#+#+#+#+#+   +#+           */
+1
+/*   Created: 2016/01/02 17:41:10 by mbuclin           #+#    #+#             */
+1
+/*   Updated: 2016/01/04 16:28:41 by mbuclin          ###   ########.fr       */
+1
+/*                                                                            */
+1
+/* ************************************************************************** */
+1
+
+1
+#include "get_next_line.h"
+1
+
+1
+t_readed	*get_fd(t_readed **last, int const fd)
+1
+{
+1
+	t_readed	*tmp;
+1
+
+1
+	tmp = *last;
+1
+	while (tmp)
+1
+	{
+1
+		if (tmp->fd == fd)
+1
+			return (tmp);
+1
+		tmp = tmp->next;
+1
+	}
+1
+	if (!(tmp = (t_readed *)ft_memalloc(sizeof(t_readed))))
+1
+		return (NULL);
+1
+	tmp->fd = fd;
+1
+	tmp->lrd = NULL;
+1
+	tmp->next = *last;
+1
+	*last = tmp;
+1
+	return (tmp);
+1
+}
+1
+
+1
+int		search_last_read(t_readed *lrd, char **line)
+1
+{
+1
+	int		i;
+1
+	char	*tmp;
+1
+
+1
+	i = -1;
+1
+	while (lrd->lrd[++i])
+1
+	{
+1
+		if (lrd->lrd[i] == '\n')
+1
+		{
+1
+			if (!(*line = ft_strsub(lrd->lrd, 0, i)))
+1
+				return (-1);
+1
+			if (!(tmp = ft_strdup(lrd->lrd)))
+1
+				return (-1);
+1
+			free(lrd->lrd);
+1
+			lrd->lrd = NULL;
+1
+			if (!(lrd->lrd = ft_strsub(tmp, i + 1, ft_strlen(tmp) - i)))
+1
+				return (-1);
+1
+			free(tmp);
+1
+			tmp = NULL;
+1
+			return (1);
+1
+		}
+1
+	}
+1
+	return (0);
+1
+}
+1
+
+1
+int		read_fd(int const fd, t_readed *lrd, char **line)
+1
+{
+1
+	char	buf[BUF_SIZE + 1];
+1
+	int		ret;
+1
+	int		size;
+1
+	int		gob;
+1
+
+1
+	ret = 1;
+1
+	while ((ret = read(fd, buf, BUF_SIZE)))
+1
+	{
+1
+		if (ret == -1)
+1
+			return (-1);
+1
+		buf[ret] = '\0';
+1
+		size = ft_strlen(lrd->lrd);
+1
+		lrd->lrd = ft_strjoinfree(lrd->lrd, buf);
+1
+		gob = search_last_read(lrd, line);
+1
+		if (line)
+1
+		if (gob == 1 || gob == -1)
+1
+			return (gob);
+1
+	}
+1
+	if ((*line = ft_strdup(lrd->lrd)) == NULL)
+1
+		return (-1);
+1
+	free (lrd->lrd);
+1
+	lrd->lrd = NULL;
+1
+	return (0);
+1
+}
+1
+
+1
+void	del_nod(t_readed *last, int const fd)
+1
+{
+1
+	t_readed	*tmp;
+1
+	int			i;
+1
+	t_readed	*tmp2;
+1
+
+1
+	i = 0;
+1
+	tmp = get_fd(&last, fd);
+1
+	if (tmp->lrd)
+1
+	{
+1
+		free(tmp->lrd);
+1
+		tmp->lrd = NULL;
+1
+	}
+1
+	if (tmp->next == NULL)
+1
+	{
+1
+		free(tmp);
+1
+		tmp = NULL;
+1
+		return ;
+1
+	}
+1
+	tmp2 = last;
+1
+	while (tmp2->next->fd != fd && tmp2->next)
+1
+		tmp2 = tmp2->next;
+1
+	tmp2->next = tmp->next;
+1
+	free(tmp);
+1
+	tmp = NULL;
+1
+}
+1
+
+1
+int		get_next_line(int const fd, char **line)
+1
+{
+1
+	static t_readed		*last = NULL;
+1
+	t_readed			*tmp;
+1
+	int					gob;
+1
+
+1
+	if (!(tmp = get_fd(&last, fd)))
+1
+		return (-1);
+1
+	if (tmp->lrd)
+1
+		if ((gob = search_last_read(tmp, line)) != 0)
+1
+		{
+1
+			return (gob);
+1
+		}
+1
+	gob = read_fd(fd, tmp, line);
+1
+	if (gob == 0)
+1
+		del_nod(last, fd);
+1
+	return (gob);
+1
+}
+0
+

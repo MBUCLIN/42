@@ -19,7 +19,6 @@ int		main(int ac, char **av)
 				ft_putendl("FUCKED ERROR");
 				return (0);
 			}
-			ft_putchar('C');
 			ft_putendl(line);
 			free(line);
 			line = NULL;
@@ -32,12 +31,13 @@ int		main(int ac, char **av)
 	while (gob == 1)
 	{
 		gob = get_next_line(fd, &line);
+		ft_putnbr(gob);
+		ft_putendl("");
 		if (gob == -1)
 		{
 			ft_putendl("FUCKED ERROR");
 			return (0);
 		}
-		ft_putchar('B');
 		ft_putendl(line);
 		free(line);
 		line = NULL;

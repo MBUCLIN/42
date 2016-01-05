@@ -6,56 +6,59 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:41:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/02 18:53:50 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/04 18:01:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_readed	*get_fd(t_readed *last, int const fd)
+t_readed	*get_fd(t_readed **last, int const fd)
 {
 	t_readed	*tmp;
 
-	tmp = last;
+	tmp = *last;
 	while (tmp)
 	{
 		if (tmp->fd == fd)
 			return (tmp);
 		tmp = tmp->next;
 	}
-
 	if (!(tmp = (t_readed *)ft_memalloc(sizeof(t_readed))))
 		return (NULL);
 	tmp->fd = fd;
 	tmp->lrd = NULL;
+	tmp->next = *last;
+	*last = tmp;
 	return (tmp);
 }
 
-int		search_last_read(char *lrd, char **line)
+int		search_last_read(t_readed *lrd, char **line)
 {
 	int		i;
 	char	*tmp;
 
 	i = -1;
-	while (lrd[++i])
+	while (lrd->lrd[++i])
 	{
-		if (lrd[i] == '\n')
+		if (lrd->lrd[i] == '\n')
 		{
-			ft_putnbr(i);
-			if (!(*line = ft_strsub(lrd, 0, i)))
+			if (!(*line = ft_strsub(lrd->lrd, 0, i)))
 				return (-1);
-			if (!(tmp = ft_strsub(lrd, i + 1, ft_strlen(lrd) - i)))
+			if (!(tmp = ft_strdup(lrd->lrd)))
 				return (-1);
-			free(lrd);
-			lrd = NULL;
-			lrd = tmp;
+			free(lrd->lrd);
+			lrd->lrd = NULL;
+			if (!(lrd->lrd = ft_strsub(tmp, i + 1, ft_strlen(tmp) - i)))
+				return (-1);
+			free(tmp);
+			tmp = NULL;
 			return (1);
 		}
 	}
 	return (0);
 }
 
-int		read_fd(int const fd, char *lrd, char **line)
+int		read_fd(int const fd, t_readed *lrd, char **line)
 {
 	char	buf[BUF_SIZE + 1];
 	int		ret;
@@ -68,18 +71,20 @@ int		read_fd(int const fd, char *lrd, char **line)
 		if (ret == -1)
 			return (-1);
 		buf[ret] = '\0';
-		size = ft_strlen(lrd);
-		lrd = ft_strjoinfree(lrd, buf);
+		size = ft_strlen(lrd->lrd);
+		lrd->lrd = ft_strjoinfree(lrd->lrd, buf);
 		gob = search_last_read(lrd, line);
 		if (line)
-		if (gob == 1 || gob == -1)
-			return (gob);
+			if (gob == 1 || gob == -1)
+				return (gob);
 	}
-	if (ft_strcpy(*line, lrd) == NULL)
+    if (lrd->lrd == NULL)
+        return (0);
+    if ((*line = ft_strdup(lrd->lrd)) == NULL)
 		return (-1);
-	free (lrd);
-	lrd = NULL;
-	return (0);
+	free (lrd->lrd);
+	lrd->lrd = NULL;
+	return (1);
 }
 
 void	del_nod(t_readed *last, int const fd)
@@ -89,7 +94,7 @@ void	del_nod(t_readed *last, int const fd)
 	t_readed	*tmp2;
 
 	i = 0;
-	tmp = get_fd(last, fd);
+	tmp = get_fd(&last, fd);
 	if (tmp->lrd)
 	{
 		free(tmp->lrd);
@@ -111,17 +116,19 @@ void	del_nod(t_readed *last, int const fd)
 
 int		get_next_line(int const fd, char **line)
 {
-	static t_readed		*last;
+	static t_readed		*last = NULL;
 	t_readed			*tmp;
 	int					gob;
 
-	if (!(tmp = get_fd(last, fd)))
+	if (!(tmp = get_fd(&last, fd)))
 		return (-1);
 	if (tmp->lrd)
-		if ((gob = search_last_read(tmp->lrd, line)) != 0)
+		if ((gob = search_last_read(tmp, line)) != 0)
+		{
 			return (gob);
-	gob = read_fd(fd, tmp->lrd, line);
+		}
+	gob = read_fd(fd, tmp, line);
 	if (gob == 0)
 		del_nod(last, fd);
-		return (gob);
+	return (gob);
 }

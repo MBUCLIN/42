@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:43:19 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/02 18:48:35 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/03 16:05:33 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ typedef struct		s_readed
 	struct s_readed	*next;
 }					t_readed;
 
-t_readed			*get_fd(t_readed *last, int const fd);
-int					search_last_read(char *lrd, char **line);
-int					read_fd(int const fd, char *lrd, char **line);
+t_readed			*get_fd(t_readed **last, int const fd);
+int					search_last_read(t_readed *lrd, char **line);
+int					read_fd(int const fd, t_readed *lrd, char **line);
 void				del_nod(t_readed *last, int const fd);
 int					get_next_line(int const fd, char **line);
 

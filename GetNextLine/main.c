@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "Get_Next_Line/get_next_line.h"
 
 int		main(int ac, char **av)
 {
@@ -7,18 +7,11 @@ int		main(int ac, char **av)
 	int			fd;
 
 	gob = 1;
-	fd = 0;
 	line = NULL;
 	if (ac < 2)
 	{
-		while (gob == 1)
+		while ((gob = get_next_line(0, &line)) > 0)
 		{
-			gob = get_next_line(0, &line);
-			if (gob == -1)
-			{
-				ft_putendl("FUCKED ERROR");
-				return (0);
-			}
 			ft_putendl(line);
 			free(line);
 			line = NULL;
@@ -28,19 +21,21 @@ int		main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (0);
-	while (gob == 1)
+	while ((gob = get_next_line(fd, &line)) > 0)
 	{
-		gob = get_next_line(fd, &line);
-		ft_putnbr(gob);
-		ft_putendl("");
-		if (gob == -1)
-		{
-			ft_putendl("FUCKED ERROR");
-			return (0);
-		}
 		ft_putendl(line);
 		free(line);
 		line = NULL;
 	}
+	close(fd);
+	if ((fd = open(av[2], O_RDONLY)) == -1)
+		return (0);
+	while ((gob = get_next_line(fd, &line)) > 0)
+	{
+		ft_putendl(line);
+		free(line);
+		line = NULL;
+	}
+	close (fd);
 	return (1);
 }

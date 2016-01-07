@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:41:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/06 16:37:56 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/07 16:16:46 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int					search_last_read(t_readed *lrd, char **line)
 				return (-1);
 			free(lrd->lrd);
 			lrd->lrd = NULL;
-			if (!(lrd->lrd = ft_strsub(tmp, i + 1, ft_strlen(tmp) - i)))
+			if (!(lrd->lrd = ft_strsub(tmp, i + 1, ft_strlen(tmp + i + 1))))
 				return (-1);
 			free(tmp);
 			tmp = NULL;
@@ -81,11 +81,11 @@ int					read_fd(int const fd, t_readed *lrd, char **line)
 				return (gob);
 		i++;
 	}
-	if (i == 0)
+	if ((i == 0 && lrd->lrd == NULL) || (lrd->lrd[0] == '\0' && i == 0))
 		return (0);
 	if ((*line = ft_strdup(lrd->lrd)) == NULL)
 		return (-1);
-	return (1);
+	return (2);
 }
 
 void				del_nod(t_readed **last)
@@ -124,7 +124,11 @@ int					get_next_line(int const fd, char **line)
 			return (gob);
 		}
 	gob = read_fd(fd, tmp, line);
-	if (gob == 0)
+	if (gob == 2 || gob == 0)
+	{
 		del_nod(&last);
+		if (gob == 2)
+			return (1);
+	}
 	return (gob);
 }

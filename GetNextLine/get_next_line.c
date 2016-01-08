@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:41:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/07 16:16:46 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/08 16:55:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ int					search_last_read(t_readed *lrd, char **line)
 
 	i = -1;
 	while (lrd->lrd[++i])
-	{
 		if (lrd->lrd[i] == '\n')
 		{
-			if (!(*line = ft_strsub(lrd->lrd, 0, 1)))
-				return (-1);
-			if (!(*line = ft_strsub(lrd->lrd, 0, i)))
+			if (i == 0)
+			{
+				if (!(*line = ft_strsub(lrd->lrd, 0, 0)))
+					return (-1);
+			}
+			else if (!(*line = ft_strsub(lrd->lrd, 0, i)))
 				return (-1);
 			if (!(tmp = ft_strdup(lrd->lrd)))
 				return (-1);
@@ -56,7 +58,6 @@ int					search_last_read(t_readed *lrd, char **line)
 			tmp = NULL;
 			return (1);
 		}
-	}
 	return (0);
 }
 
@@ -88,22 +89,20 @@ int					read_fd(int const fd, t_readed *lrd, char **line)
 	return (2);
 }
 
-void				del_nod(t_readed **last)
+void				del_nod(t_readed *todel, t_readed **last)
 {
-	t_readed	*tmp;
-
-	tmp = *last;
-	*last = tmp->next;
-	if (tmp->lrd)
+	if (todel->next)
+		*last = todel->next;
+	if (todel->lrd)
 	{
-		free(tmp->lrd);
-		tmp->lrd = NULL;
+		free(todel->lrd);
+		todel->lrd = NULL;
 	}
-	if (tmp->next)
+	if (todel->next)
 	{
-		tmp->next = NULL;
-		free(tmp);
-		tmp = NULL;
+		todel->next = NULL;
+		free(todel);
+		todel = NULL;
 		return ;
 	}
 }
@@ -126,7 +125,7 @@ int					get_next_line(int const fd, char **line)
 	gob = read_fd(fd, tmp, line);
 	if (gob == 2 || gob == 0)
 	{
-		del_nod(&last);
+		del_nod(tmp, &last);
 		if (gob == 2)
 			return (1);
 	}

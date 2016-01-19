@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/02 17:56:29 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/19 14:30:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char				*ft_strmap(char *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoinfree(char *s1, char const *s2);
+char				*ft_strjoindfree(char *s1, char *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 

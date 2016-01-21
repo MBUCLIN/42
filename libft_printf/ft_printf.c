@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 14:29:27 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/19 16:46:20 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/21 17:57:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char			*get_output(const char *format, va_list ap, int n)
 		if (!(output = add_part(output, format, i)))
 			return (NULL);
 		i = get_nmod(n, format);
-		if (!(check_mod))
+		if (!(check_mod(format, i)))
 		{
 			if (!(output = bad_mod_cpy(output, format, i)))
 				return (NULL);

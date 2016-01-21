@@ -32,44 +32,47 @@ static char		*add_part(char *input, const char *format, int i)
 	return (output);
 }
 
-static char		*conv_mod(char *input, const char *format, int i, va_list ap)
+char			*get_output(const char *format, va_list ap, int n)
 {
-	char	flag;
-	char	*add;
-	char	width;
-	char	presi;
+	int		i;
+	char	*conv;
+	char	*output;
 
-	if (flag = get_flag(format, i))
-		if (!(add = apply_flag(add, flag, ap)))
+	i = 0;
+	while (n > 0)
+	{
+		if (!(output = add_part(output, format, i)))
 			return (NULL);
-	if (width = get_width(format, i))
-		if (!(add = apply_width(add, width, ap)))
-			return (NULL);
-	if (preci = get_preci(format, i))
-		if (!(add = apply_preci(add, presi, ap)))
-			return (NULL);
+		i = get_nmod(n, format);
+		if (!(check_mod))
+		{
+			if (!(output = bad_mod_cpy(output, format, i)))
+				return (NULL);
+		}
+		else
+		{
+			if (!(conv = conv_mod(format, i, ap)))
+				return (NULL);
+			if (!(output = ft_strjoindfree(output, conv)))
+				return (NULL);
+		}
+		n--;
+	}
+	return (output);
 }
 
 int				ft_printf(const char *format, ...)
 {
 	va_list		ap;
 	int			n;
-	int			i;
 	char		*output;
 
 	i = 0;
 	output = NULL;
 	n = get_modn(format);
 	va_start(ap, format);
-	while (n > 0)
-	{
-		if (!(output = add_part(output, format, i)))
-			return (0);
-		i = get_nmod(n, format);
-		if (!(output = conv_mod(output, format, i)))
-			return (0);
-		n--;
-	}
+	if (!(output = get_output(format, ap, n)))
+		return (0);
 	va_end(ap);
 	ft_putstr(output);
 	free(output);

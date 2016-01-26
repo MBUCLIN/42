@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 17:53:08 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/21 18:28:53 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/26 14:43:47 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ char	*conv_mod(const char *fmt, int i, va_list ap)
 		return (NULL);
 	if (extr[0] != 0)
 		size = get_size(extr);
+	else
+		free(extr);
 	return (fill_conv(extr, size));
 }

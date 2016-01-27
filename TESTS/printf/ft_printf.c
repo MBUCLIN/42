@@ -1,4 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/27 14:40:11 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/27 15:09:19 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
+
+static int		after_conv(const char *fmt, int i)
+{
+	while (fmt[i])
+	{
+		if (ft_is_conv(fmt[i]))
+			return (i++);
+	}
+	return (i);
+}
 
 static char		*get_output(const char *fmt, int max, va_list ap)
 {
@@ -16,7 +38,7 @@ static char		*get_output(const char *fmt, int max, va_list ap)
 		{
 			if (!(output = ft_strsub(fmt, start, i - 1)))
 				return (NULL);
-			if (!output = ft_conv(fmt, output, i, ap))
+			if (!(output = ft_conv(fmt, output, i, ap)))
 				return (NULL);
 			i = after_conv(fmt, i);
 			start = i;
@@ -26,7 +48,7 @@ static char		*get_output(const char *fmt, int max, va_list ap)
 	return (output);
 }
 
-int		ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	int			size;
 	char		*output;
@@ -34,7 +56,7 @@ int		ft_printf(const char *format, ...)
 	va_list		ap;
 
 	va_start(ap, format);
-	if (!(output = get_output(format, n)))
+	if (!(output = get_output(format, n, ap)))
 		return (0);
 	va_end(ap);
 	size = ft_strlen(output);

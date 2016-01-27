@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_conv.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/27 14:40:06 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/27 15:14:06 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int		get_nconv(const char *fmt)
+int		ft_get_nconv(const char *fmt)
 {
 	int		i;
 	int		n;
@@ -16,7 +28,7 @@ int		get_nconv(const char *fmt)
 	return (n);
 }
 
-int		ft_conv(const char *fmt, char *opt, int i, va_list ap)
+char	*ft_conv(const char *fmt, char *opt, int i, va_list ap)
 {
 	char	*conv;
 	int		c;
@@ -24,6 +36,14 @@ int		ft_conv(const char *fmt, char *opt, int i, va_list ap)
 	while (fmt[i])
 	{
 		if ((c = ft_is_conv(fmt[i])))
-			conv = ft_apply_conv(c, ap)
+		{
+			if (!(conv = ft_apply_conv(c, ap)))
+				return (NULL);
+			if (!(opt = ft_strjoindfree(opt, conv)))
+				return (NULL);
+			break ;
+		}
+		i++;
 	}
+	return (opt);
 }

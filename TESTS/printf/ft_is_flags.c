@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv.c                                          :+:      :+:    :+:   */
+/*   ft_is_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 14:40:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/28 12:45:24 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/01/28 12:39:53 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/28 12:42:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_conv(const char *fmt, char *opt, int i, va_list ap)
+int		ft_is_flags(int c)
 {
-	char	*conv;
-	int		c;
-
-	while (fmt[i])
-	{
-		if ((c = ft_is_conv(fmt[i])))
-		{
-			if (!(conv = ft_apply_conv(c, ap)))
-				return (NULL);
-			if (!(opt = ft_strjoindfree(opt, conv)))
-				return (NULL);
-			break ;
-		}
-		i++;
-	}
-	return (opt);
+	if (c == '#' || c == '0' || c == '-' ||\
+		c == ' ' || c == '+')
+		return (c);
+	return (0);
 }

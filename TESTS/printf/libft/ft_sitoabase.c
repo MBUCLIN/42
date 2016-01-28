@@ -7,7 +7,7 @@ static int		check_base(char *base)
 	int			match;
 
 	i = -1;
-	if (base == NULL || ft_strlen(base))
+	if (base == NULL || !ft_strlen(base))
 		return (0);
 	match = 0;
 	while (base[++i])
@@ -46,11 +46,8 @@ char	*ft_sitoabase(size_t nbr, char *base)
 		return (NULL);
 	sbase = ft_strlen(base);
 	i = get_size(nbr, sbase);
-	ft_putnbr(i);
-	ft_putstr("....");
-	if (!(convert = (char *)ft_memalloc(sizeof(char) * i)))
+	if (!(convert = (char *)ft_memalloc(sizeof(char) * i + 1)))
 		return (NULL);
-	i--;
 	while (--i >= 0)
 	{
 		if (nbr)

@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv.c                                          :+:      :+:    :+:   */
+/*   ft_apply_long.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 14:40:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/28 12:45:24 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/01/28 12:20:26 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/28 12:25:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_conv(const char *fmt, char *opt, int i, va_list ap)
+char	*ft_apply_long(int c, va_list ap)
 {
-	char	*conv;
-	int		c;
+	long	arg;
 
-	while (fmt[i])
-	{
-		if ((c = ft_is_conv(fmt[i])))
-		{
-			if (!(conv = ft_apply_conv(c, ap)))
-				return (NULL);
-			if (!(opt = ft_strjoindfree(opt, conv)))
-				return (NULL);
-			break ;
-		}
-		i++;
-	}
-	return (opt);
+	arg = va_arg(ap, long);
+	if (c == 'D')
+		return (ft_sitoa(arg));
+	else if (c == 'U')
+		return (ft_sitoabase(arg, "0123456789"));
+	else if (c == 'O')
+		return (ft_sitoabase(arg, "01234567"));
+	return (NULL);
 }

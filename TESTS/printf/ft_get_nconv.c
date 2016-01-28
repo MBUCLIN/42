@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv.c                                          :+:      :+:    :+:   */
+/*   ft_get_nconv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 14:40:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/28 12:45:24 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/01/28 12:32:37 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/28 12:32:48 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_conv(const char *fmt, char *opt, int i, va_list ap)
+int		ft_get_nconv(const char *fmt)
 {
-	char	*conv;
-	int		c;
+	int		i;
+	int		n;
 
-	while (fmt[i])
-	{
-		if ((c = ft_is_conv(fmt[i])))
+	i = 0;
+	n = 0;
+	if (fmt)
+		while (fmt[i])
 		{
-			if (!(conv = ft_apply_conv(c, ap)))
-				return (NULL);
-			if (!(opt = ft_strjoindfree(opt, conv)))
-				return (NULL);
-			break ;
+			if (fmt[i] == '%' && fmt[i + 1] != '%')
+				n++;
 		}
-		i++;
-	}
-	return (opt);
+	return (n);
 }

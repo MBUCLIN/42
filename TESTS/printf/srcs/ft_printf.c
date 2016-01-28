@@ -6,11 +6,11 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 14:40:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/28 15:02:44 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/28 13:30:22 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/printf.h"
 
 static int		after_conv(const char *fmt, int i)
 {

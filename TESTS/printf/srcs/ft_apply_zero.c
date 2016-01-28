@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_long.c                                       :+:      :+:    :+:   */
+/*   ft_apply_zero.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 14:44:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/27 15:06:51 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/01/28 13:58:31 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/28 14:25:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/printf.h"
 
-int		ft_is_long(int c)
+char	*ft_apply_zero(const char *fmt, int i)
 {
-	if (c == 'D' || c == 'U' || c == 'O')
-		return (c);
-	return (0);
+	int		size;
+	int		sizew;
+
+	size = ft_get_preci(fmt, i);
+	sizew = ft_get_width(fmt, i);
+	if (size < sizew)
+		size = sizew;
+	
 }

@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_apply_int.c                                     :+:      :+:    :+:   */
+/*   ft_apply_shade.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 14:52:02 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/28 12:24:10 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/01/28 13:52:21 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/28 13:58:19 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/printf.h"
 
-char	*ft_apply_int(int c, va_list ap)
+char	*ft_apply_shade(const char *fmt, int i)
 {
-	int		arg;
+	int		c;
+	int		j;
 
-	arg = va_arg(ap, int);
-	if (c == 'd' || c == 'i')
-		return (ft_sitoa(arg));
-	else if (c == 'u')
-		return (ft_sitoabase(arg, "0123456789"));
-	else if (c == 'o')
-		return (ft_sitoabase(arg, "01234567"));
+	j = i;
+	while (fmt[++i])
+		if ((c = ft_is_conv(fmt[i])))
+			break ;
+	if (c == 'o')
+		return (ft_strdup("0"));
 	else if (c == 'x')
-		return (ft_sitoabase(arg, "0123456789abcdef"));
+		return (ft_strdup("0x"));
 	else if (c == 'X')
-		return (ft_sitoabase(arg, "0123456789ABCDEF"));
+		return (ft_strdup("0X"));
 	return (NULL);
 }

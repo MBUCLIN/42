@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_apply_conv.c                                    :+:      :+:    :+:   */
+/*   ft_is_long.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 14:45:26 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/28 12:25:56 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/01/27 14:44:24 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/27 15:06:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/printf.h"
 
-char	*ft_apply_conv(int c, va_list ap)
+int		ft_is_long(int c)
 {
-
-	if (ft_is_int(c))
-		return (ft_apply_int(c, ap));
-	else if (ft_is_long(c))
-		return (ft_apply_long(c, ap));
-//	else if (ft_is_char(c))
-//		return (ft_apply_char(c, ap));
-//	else if (ft_is_wconv(c))
-//		return (ft_apply_wconv(c, ap));
-	return (NULL);
+	if (c == 'D' || c == 'U' || c == 'O')
+		return (c);
+	return (0);
 }

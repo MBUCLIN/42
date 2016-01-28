@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_wconv.c                                      :+:      :+:    :+:   */
+/*   ft_conv.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 14:44:45 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/27 14:44:49 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/01/27 14:40:06 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/28 13:32:39 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/printf.h"
 
-int		ft_is_wconv(int c)
+char	*ft_conv(const char *fmt, char *opt, int i, va_list ap)
 {
-	if (c == 'C' || c == 'S')
-		return (c);
-	return (0);
+	char	*conv;
+	int		c;
+
+	while (fmt[i])
+	{
+		if ((c = ft_is_conv(fmt[i])))
+		{
+			if (!(conv = ft_apply_conv(c, ap)))
+				return (NULL);
+			if (!(opt = ft_strjoindfree(opt, conv)))
+				return (NULL);
+			break ;
+		}
+		i++;
+	}
+	return (opt);
 }

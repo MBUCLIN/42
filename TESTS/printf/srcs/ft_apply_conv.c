@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/printf.h"
+#include "../includes/ft_printf.h"
 
 char	*ft_apply_conv(int c, va_list ap)
 {

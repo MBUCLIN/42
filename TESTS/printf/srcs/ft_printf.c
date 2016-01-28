@@ -6,11 +6,11 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 14:40:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/28 13:30:22 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/28 15:35:48 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/printf.h"
+#include "../includes/ft_printf.h"
 
 static int		after_conv(const char *fmt, int i)
 {
@@ -21,6 +21,24 @@ static int		after_conv(const char *fmt, int i)
 		i++;
 	}
 	return (i);
+}
+
+static int		check_conv(const char *fmt, int i)
+{
+	int		start;
+
+	start = i + 1;
+	while (fmt[i])
+	{
+		if (ft_is_conv(fmt[i]))
+			return (1);
+		else if (ft_is_flags(fmt[i]) || ft_is_preci(fmt[i]) ||\
+			   	ft_is_width(fmt[i]) || ft_is_lm(fmt[i]))
+			i++;
+		else
+			return (0);
+	}
+	return (0);
 }
 
 static char		*get_output(const char *fmt, va_list ap)
@@ -37,9 +55,7 @@ static char		*get_output(const char *fmt, va_list ap)
 		{
 			if (!(output = ft_strsub(fmt, start, i)))
 				return (NULL);
-//			if (!(output = ft_flags(fmt, output, i, ap)))
-//				return (NULL);
-			if (!(output = ft_conv(fmt, output, i, ap)))
+			if (!(output = ft_treat_conv(fmt, i, ap)))
 				return (NULL);
 			i = after_conv(fmt, i);
 			start = i;

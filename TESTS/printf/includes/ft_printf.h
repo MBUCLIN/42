@@ -6,22 +6,22 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 14:39:12 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/28 15:02:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/28 15:40:32 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 # include <stdarg.h>
 
 typedef struct			s_printf
 {
 	char				*conv;
-	int					sizemin;
-	int					sizemax;
-	char				*flags;
-	char				*lm;
+	int					fieldcar;
+	int					preci;
+	int					width;
+	int					lor;
 }						t_printf;
 
 int						ft_is_int(int c);

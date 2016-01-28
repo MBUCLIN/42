@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/printf.h"
+#include "../includes/ft_printf.h"
 
 char	*ft_conv(const char *fmt, char *opt, int i, va_list ap)
 {

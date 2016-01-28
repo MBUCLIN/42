@@ -20,7 +20,7 @@ char	*ft_apply_int(int c, va_list ap)
 	if (c == 'd' || c == 'i')
 		return (ft_sitoa(arg));
 	else if (c == 'u')
-		return (ft_sitoa((unsigned int)arg));
+		return (ft_sitoabase(arg, "0123456789"));
 	else if (c == 'o')
 		return (ft_sitoabase(arg, "01234567"));
 	else if (c == 'x')

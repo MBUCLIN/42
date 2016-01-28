@@ -15,17 +15,29 @@
 
 int		main(void)
 {
+	ft_putstr("d : sys = ");
 	printf("%d\n", 20);
+	ft_putstr("d : my  = ");
 	ft_printf("%d\n", 20);
+	ft_putstr("i : sys = ");
 	printf("%i\n", 20);
-	ft_printf("%i\n, 20");
+	ft_putstr("i : my  = ");
+	ft_printf("%i\n", 20);
+	ft_putstr("o : sys = ");
 	printf("%o\n", 20);
+	ft_putstr("o : my  = ");
 	ft_printf("%o\n", 20);
+	ft_putstr("u : sys = ");
 	printf("%u\n", 20);
+	ft_putstr("u : my  = ");
 	ft_printf("%u\n", 20);
+	ft_putstr("x : sys = ");
 	printf("%x\n", 20);
+	ft_putstr("x : my  = ");
 	ft_printf("%x\n", 20);
+	ft_putstr("X : sys = ");
 	printf("%X\n", 20);
+	ft_putstr("X : my  = ");
 	ft_printf("%X\n", 20);
 	return (0);
 }

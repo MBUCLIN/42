@@ -12,7 +12,7 @@
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include "libft/libft.h"
+# include "libft/includes/libft.h"
 # include <stdarg.h>
 
 int		ft_is_int(int c);

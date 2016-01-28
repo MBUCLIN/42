@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int		ft_iswconv(int c)
+int		ft_is_wconv(int c)
 {
 	if (c == 'C' || c == 'S')
 		return (c);

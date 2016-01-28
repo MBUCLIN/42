@@ -65,7 +65,9 @@ PC = ft_memset.c \
 	 ft_tabdel.c \
 	 ft_puttab.c \
 	 ft_strjoinfree.c \
-	 ft_strjoindfree.c
+	 ft_strjoindfree.c \
+	 ft_sitoa.c \
+	 ft_sitoabase.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -131,7 +133,9 @@ PO = ft_memset.o \
 	 ft_tabdel.o \
 	 ft_puttab.o \
 	 ft_strjoinfree.o \
-	 ft_strjoindfree.o
+	 ft_strjoindfree.o \
+	 ft_sitoa.o \
+	 ft_sitoabase.o
 
 FLAGS = -Wall -Wextra -Werror
 

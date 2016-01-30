@@ -14,7 +14,6 @@
 
 char	*ft_apply_conv(int c, va_list ap)
 {
-
 	if (ft_is_int(c))
 		return (ft_apply_int(c, ap));
 	else if (ft_is_long(c))

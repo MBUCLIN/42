@@ -25,7 +25,8 @@ char	*ft_strjoinfree(char *s1, char const *s2)
 	if (s2)
 		ft_strcpy((toret + ft_strlen(s1)), s2);
 	toret[ft_strlen(s1) + ft_strlen(s2)] = '\0';
-	free(s1);
+	if (s1)
+		free(s1);
 	s1 = NULL;
 	return (toret);
 }

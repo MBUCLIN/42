@@ -23,24 +23,6 @@ static int		after_conv(const char *fmt, int i)
 	return (i);
 }
 
-static int		check_conv(const char *fmt, int i)
-{
-	int		start;
-
-	start = i + 1;
-	while (fmt[i])
-	{
-		if (ft_is_conv(fmt[i]))
-			return (1);
-		else if (ft_is_flags(fmt[i]) || ft_is_preci(fmt[i]) ||\
-			   	ft_is_width(fmt[i]) || ft_is_lm(fmt[i]))
-			i++;
-		else
-			return (0);
-	}
-	return (0);
-}
-
 static char		*get_output(const char *fmt, va_list ap)
 {
 	int		i;
@@ -48,14 +30,17 @@ static char		*get_output(const char *fmt, va_list ap)
 	char	*output;
 
 	i = 0;
-	start = i;
+	output = NULL;
+	start = 0;
+	ft_putendl("");
 	while (fmt[i])
 	{
+
 		if (fmt[i] == '%' && fmt[i + 1] != '%')
 		{
-			if (!(output = ft_strsub(fmt, start, i)))
+			if (!(output = ft_strjoinfree(output, ft_strsub(fmt, start, i))))
 				return (NULL);
-			if (!(output = ft_treat_conv(fmt, i, ap)))
+			if (!(output = ft_strjoindfree(output, ft_treat_conv(fmt, i, ap))))
 				return (NULL);
 			i = after_conv(fmt, i);
 			start = i;
@@ -73,6 +58,8 @@ int				ft_printf(const char *format, ...)
 	char		*output;
 	va_list		ap;
 
+	ft_putstr(format);
+	ft_putendl(" = format");
 	va_start(ap, format);
 	if (!(output = get_output(format, ap)))
 		return (0);

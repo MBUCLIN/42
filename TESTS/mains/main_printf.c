@@ -17,30 +17,30 @@ int		main(void)
 {
 	ft_putendl("---TEST INT\n\n");
 	ft_putstr("d : sys = ");
-	printf("j ai %d ans\n", 20);
+	printf("j ai %0d ans\n", 20);
 	ft_putstr("d : my  = ");
-	ft_printf("j ai %.5#d ans\n", 20);
+	ft_printf("j ai %0d ans\n", 20);
 	ft_putstr("i : sys = ");
-	printf("j ai %#i ans\n", 20);
+	printf("j ai %0i ans\n", 20);
 	ft_putstr("i : my  = ");
-	ft_printf("j ai %#i ans\n", 20);
+	ft_printf("j ai %0i ans\n", 20);
 	ft_putstr("o : sys = ");
-	printf("0o%5#o\n", 20);
+	printf("0o%0o\n", 20);
 	ft_putstr("o : my  = ");
-	ft_printf("0o%#o\n", 20);
+	ft_printf("0o%0o\n", 20);
 	ft_putstr("u : sys = ");
-	printf("j ai %#u ans\n", 20);
+	printf("j ai %0u ans\n", 20);
 	ft_putstr("u : my  = ");
-	ft_printf("j ai %#u ans\n", 20);
+	ft_printf("j ai %0u ans\n", 20);
 	ft_putstr("x : sys = ");
-	printf("0x%#x\n", 20);
+	printf("0x%0x\n", 20);
 	ft_putstr("x : my  = ");
-	ft_printf("0x%#x\n", 20);
+	ft_printf("0x%0x\n", 20);
 	ft_putstr("X : sys = ");
-	printf("0X%#X\n", 20);
+	printf("0X%0X\n", 20);
 	ft_putstr("X : my  = ");
-	ft_printf("0X%#X\n", 20);
-
+	ft_printf("0X%0X\n", 20);
+/*
 	ft_putendl("\n\n\n---TEST LONG---\n\n");
 	ft_putstr("D : sys = ");
 	printf("j ai %#D ans\n", 20);
@@ -54,5 +54,6 @@ int		main(void)
 	printf("J ai %#U ans\n", 20);
 	ft_putstr("U : my  = ");
 	ft_printf("j ai %#U ans\n", 20);
+*/
 	return (0);
 }

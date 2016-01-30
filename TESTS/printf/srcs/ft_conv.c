@@ -12,22 +12,17 @@
 
 #include "../includes/ft_printf.h"
 
-char	*ft_conv(const char *fmt, char *opt, int i, va_list ap)
+char	*ft_conv(t_printf *inf, va_list ap)
 {
 	char	*conv;
-	int		c;
+	char	*nbr;
 
-	while (fmt[i])
-	{
-		if ((c = ft_is_conv(fmt[i])))
-		{
-			if (!(conv = ft_apply_conv(c, ap)))
-				return (NULL);
-			if (!(opt = ft_strjoindfree(opt, conv)))
-				return (NULL);
-			break ;
-		}
-		i++;
-	}
-	return (opt);
+	conv = NULL;
+	nbr = NULL;
+	if (inf->flag)
+		conv = ft_apply_flag(inf->flag, inf->c);
+	nbr = ft_apply_conv(inf->c, ap);
+	if (!(conv = ft_strjoindfree(conv, nbr)))
+		return (NULL);
+	return (conv);
 }

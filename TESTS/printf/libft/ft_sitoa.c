@@ -30,15 +30,18 @@ char			*ft_sitoa(ssize_t nbr)
 	size = check_size(nbr);
 	if (!(str = (char *)ft_memalloc(sizeof(char) * size + 1)))
 		return (NULL);
+	str[size] = '\0';
+	size--;
 	if (nbr < 0)
 	{
 		str[0] = '-';
 		nbr = nbr * -1;
 	}
-	while (--size >= 0 && str[size] != '-')
+	while (size >= 0 && str[size] != '-')
 	{
 		str[size] = nbr % 10 + 48;
 		nbr = nbr / 10;
+		size--;
 	}
 	return (str);
 }

@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/03 13:53:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/03 16:30:30 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/25 16:13:35 by mbuclin           #+#    #+#             */
+/*   Updated: 2015/12/15 14:29:09 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/includes/libft.h"
-# include <stdarg.h>
+#include "includes/libft.h"
 
-int					ft_isconvc(int c);
-int					ft_isconvi(int c);
-int					ft_isconv(int c);
-int					ft_get_lm(char *conv);
-int					ft_printf(const char *format, ...);
+char	*ft_strdup(const char *s)
+{
+	char	*dest;
+	size_t	len;
 
-#endif
+	len = 0;
+	while (s[len])
+		len++;
+	if (!(dest = (char *)ft_memalloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	dest = ft_memcpy(dest, s, len);
+	return (dest);
+}

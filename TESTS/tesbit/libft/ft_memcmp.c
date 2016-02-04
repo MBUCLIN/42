@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/03 13:53:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/03 16:30:30 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/25 15:56:30 by mbuclin           #+#    #+#             */
+/*   Updated: 2015/12/10 15:09:56 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/includes/libft.h"
-# include <stdarg.h>
+#include "includes/libft.h"
 
-int					ft_isconvc(int c);
-int					ft_isconvi(int c);
-int					ft_isconv(int c);
-int					ft_get_lm(char *conv);
-int					ft_printf(const char *format, ...);
+int	ft_memcmp(const void *s1, const void *s2, size_t len)
+{
+	int			i;
 
-#endif
+	i = 0;
+	while (i < (int)len)
+	{
+		if (*(unsigned char *)(s1 + i) != *(unsigned char *)(s2 + i))
+			return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
+		i++;
+	}
+	return (0);
+}

@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/03 13:53:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/03 16:30:30 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/26 16:59:14 by mbuclin           #+#    #+#             */
+/*   Updated: 2015/12/14 14:20:36 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/includes/libft.h"
-# include <stdarg.h>
+#include "includes/libft.h"
 
-int					ft_isconvc(int c);
-int					ft_isconvi(int c);
-int					ft_isconv(int c);
-int					ft_get_lm(char *conv);
-int					ft_printf(const char *format, ...);
+char	*ft_strtrim(char const *s)
+{
+	int		i;
+	int		j;
 
-#endif
+	if (s == NULL)
+		return (NULL);
+	i = 0;
+	while (s[i] && (s[i] == ' ' || s[i] == '\n' || s[i] == '\t'))
+		i++;
+	j = ft_strlen(s);
+	if (j > 0)
+		j--;
+	while (i < j && (s[j] == ' ' || s[j] == '\n' || s[j] == '\t'))
+		j--;
+	return (ft_strsub(s, i, j - i + 1));
+}

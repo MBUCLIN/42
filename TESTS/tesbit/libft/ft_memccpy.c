@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/03 13:53:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/03 16:30:30 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/25 15:56:52 by mbuclin           #+#    #+#             */
+/*   Updated: 2015/12/08 16:27:58 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/includes/libft.h"
-# include <stdarg.h>
+#include "includes/libft.h"
 
-int					ft_isconvc(int c);
-int					ft_isconvi(int c);
-int					ft_isconv(int c);
-int					ft_get_lm(char *conv);
-int					ft_printf(const char *format, ...);
+void	*ft_memccpy(void *dest, void const *src, int c, size_t n)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (i < n && *(unsigned char *)(src + i) != (unsigned char)c)
+	{
+		*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
+		i++;
+	}
+	if (i < n)
+	{
+		*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
+		return (dest + i + 1);
+	}
+	return (NULL);
+}

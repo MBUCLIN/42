@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/03 13:53:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/03 16:30:30 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/26 16:53:07 by mbuclin           #+#    #+#             */
+/*   Updated: 2015/12/07 11:41:56 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/includes/libft.h"
-# include <stdarg.h>
+#include "includes/libft.h"
 
-int					ft_isconvc(int c);
-int					ft_isconvi(int c);
-int					ft_isconv(int c);
-int					ft_get_lm(char *conv);
-int					ft_printf(const char *format, ...);
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+{
+	unsigned int	i;
 
-#endif
+	i = 0;
+	if (s && f)
+		while (s[i])
+		{
+			f(i, (s + i));
+			i++;
+		}
+}

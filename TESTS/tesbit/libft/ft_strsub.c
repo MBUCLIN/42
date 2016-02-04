@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/03 13:53:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/03 16:30:30 by mbuclin          ###   ########.fr       */
+/*   Created: 2015/11/26 16:57:47 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/01/02 17:39:47 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/includes/libft.h"
-# include <stdarg.h>
+#include "includes/libft.h"
 
-int					ft_isconvc(int c);
-int					ft_isconvi(int c);
-int					ft_isconv(int c);
-int					ft_get_lm(char *conv);
-int					ft_printf(const char *format, ...);
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	char	*toret;
+	int		i;
+	int		j;
 
-#endif
+	i = 0;
+	j = start;
+	if (!(toret = (char *)ft_memalloc(sizeof(char) * len + 1)) || s == NULL)
+		return (NULL);
+	while ((unsigned char *)(s + j) <= (unsigned char *)(s + start + len - 1))
+	{
+		toret[i] = s[j];
+		i++;
+		j++;
+	}
+	return (toret);
+}

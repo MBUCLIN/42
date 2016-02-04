@@ -14,7 +14,7 @@
 
 static int		after_conv(const char fmt, int pos)
 {
-	while (fmt[pos])	
+	while (fmt[pos])
 	{
 		if (ft_isconv(fmt[pos]))
 			return (pos);
@@ -37,13 +37,27 @@ static char		*extract_conv(char *start)
 	return (NULL);
 }
 
-static char		*get_conv(char *conv)
+static char		*get_conv(char *conv, va_list ap)
 {
 	unsigned char	info;
 	char			*ret;
+	int				lm;
 
-	if (!(ret = ft_apply_conv(conv[ft_strlen(conv) - 1])))
-		return (NULL);
+	if (ft_isconvc(conv[ft_strlen(conv) - 1]))
+	{
+		if (!(ret = ft_apply_carc(conv, ap)))
+			return (NULL);
+		if (!(ret = ft_apply_flagsc(conv, ret)))
+			return (NULL);
+	}
+	else
+	{
+		lm = ft_get_lm(conv);
+		if (!(ret = ft_apply_integc(lm, conv[ft_strlen(conv) - 1], ap)))
+			return (NULL);
+		if (!(ret = ft_apply_flagsi(conv, ret)))
+			return (NULL);
+	}
 	return (ret);
 }
 
@@ -66,7 +80,7 @@ static char		*get_opt(const char *fmt, va_list ap)
 				return (NULL);
 			i = after_conv(format, i);
 			start = i;
-			if (!(opt = ft_strjoindfree(opt, get_conv(extr))))
+			if (!(opt = ft_strjoindfree(opt, get_conv(extri, ap))))
 				return (NULL);
 		}
 		i++;

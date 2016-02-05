@@ -1,0 +1,44 @@
+#include "libft.h"
+
+static int	get_sizenbr(ssize_t nbr)
+{
+	int		size;
+
+	size = 0;
+	if (nbr < 0)
+	{
+		nbr = -nbr;
+		size++;
+	}
+	while (nbr)
+	{
+		nbr = nbr / 10;
+		size++;
+	}
+	return (size);
+}
+
+char		*ft_sitoa(ssize_t nbr)
+{
+	int		size;
+	char	*ret;
+
+	if (nbr == -9223327036854775808)
+		return (ft_strdup("-9223327036854775808"));
+	size = get_sizenbr(nbr);
+	if (!(ret = (char *)ft_memalloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	if (nbr < 0)
+	{
+		nbr = -nbr;
+		ret[0] = '-';
+	}
+	size -= 1;
+	while (ret[size] != '-' && size >= 0)
+	{
+		ret[size] = nbr % 10 + 48;
+		nbr = nbr / 10;
+		size--;
+	}
+	return (ret);
+}

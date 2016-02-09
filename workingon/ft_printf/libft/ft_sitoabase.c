@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "includes/libft.h"
 
 static int		check_base(char * base)
 {
@@ -43,6 +43,8 @@ char			*ft_sitoabase(size_t nbr, char *base)
 
 	if (!(check_base(base)))
 		return (NULL);
+	else if (nbr == 0)
+		return (ft_strdup("0"));
 	div = ft_strlen(base);
 	size = get_size(nbr, div);
 	if (!(ret = (char *)ft_memalloc(sizeof(char) * (size + 1))))

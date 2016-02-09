@@ -10,11 +10,11 @@ static char		*apply_unsignedflags(int c, char *info)
 		if (info[i] == '#')
 		{
 			if (c == 'x')
-				return ("0x");
+				return (ft_strdup("0x"));
 			else if (c == 'X')
-				return ("0X");
+				return (ft_strdup("0X"));
 			else
-				return ("0");
+				return (ft_strdup("0"));
 		}
 		i++;
 	}
@@ -31,19 +31,19 @@ static char		*apply_signedflags(char *info)
 	while (info[i])
 	{
 		if (info[i] == '+')
-			return ("+");
+			return (ft_strdup("+"));
 		else if (info[i] == ' ')
 			space = 1;
 		i++;
 	}
 	if (space == 1)
-		return (" ");
+		return (ft_strdup(" "));
 	return (NULL);
 }
 
-static char		*apply_flags(int c, char *info)
+static char		*apply_flags(int c, char *info, char *conv)
 {
-	if (c == 'x' || c == 'X' || c == 'o' || c == 'O')
+	if (conv[0] != '0' && (c == 'x' || c == 'X' || c == 'o' || c == 'O'))
 		return (apply_unsignedflags(c, info));
 	else if (c == 'd' || c == 'i')
 		return (apply_signedflags(info));
@@ -72,9 +72,9 @@ char			*ft_apply_flagsi(char *info, char *conv)
 	int		c;
 	int		adjustment;
 
-	c = info[ft_strlen(info)] - 1;
-	if (!(conv = ft_strjoindfree(apply_flags(c, info), conv)))
-		return (NULL);
+	c = info[ft_strlen(info) - 1];
+		if (!(conv = ft_strjoindfree(apply_flags(c, info, conv), conv)))
+			return (NULL);
 	adjustment = get_adj(info);
 	if (!(conv = ft_apply_pandw(adjustment, info, conv)))
 		return (NULL);

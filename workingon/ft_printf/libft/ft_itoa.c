@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 static int		check_size(int nbr)
 {
@@ -39,7 +39,7 @@ char			*ft_itoa(int nbr)
 
 	if (nbr * -1 - 1 == 2147483647)
 		return (ft_strdup("-2147483648"));
-	else if (!nbr)
+	else if (nbr == 0)
 		return (ft_strdup("0"));
 	size = check_size(nbr);
 	if (!(str = (char *)ft_memalloc(sizeof(char) * (size + 1))))

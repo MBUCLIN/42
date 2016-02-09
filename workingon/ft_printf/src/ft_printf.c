@@ -12,18 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-static int		after_conv(const char *fmt, int pos)
-{
-	while (fmt[pos])
-	{
-		if (ft_isconv(fmt[pos]))
-			return (pos);
-		pos++;
-	}
-	return (pos);
-}
-
-static char		*extract_conv(char *start)
+static char		*extcnv(const char *start)
 {
 	int		i;
 
@@ -31,7 +20,7 @@ static char		*extract_conv(char *start)
 	while (start[i])
 	{
 		if (ft_isconv(start[i]))
-			return (ft_strsub(start, 0, i));
+			return (ft_strsub(start, 0, i + 1));
 		i++;
 	}
 	return (NULL);
@@ -42,6 +31,9 @@ static char		*get_conv(char *conv, va_list ap)
 	char			*ret;
 	int				lm;
 
+	ret = NULL;
+	if (conv == NULL)
+		return (NULL);
 /*
 **	if (ft_isconvc(conv[ft_strlen(conv) - 1]))
 **	{
@@ -64,31 +56,31 @@ static char		*get_conv(char *conv, va_list ap)
 	return (ret);
 }
 
-static char		*get_opt(const char *fmt, va_list ap)
+static char		*get_opt(const char *fmt, char *opt, va_list ap, int i)
 {
-	char	*opt;
-	int		i;
-	int		start;
-	char	*extr;
+	int		st;
+	int		len;
 
-	i = 0;
-	start = 0;
-	while (fmt[i])
-	{
-		if (fmt[i] == '%' && fmt[i + 1] != '%')
+	st = 0;
+	len = ft_strlen(fmt);
+	while (fmt[++i])
+		if (fmt[i] == '%' && fmt[i + 1] != '%' && check_conv(fmt, i))
 		{
-			if (!(opt = ft_strjoindfree(opt, ft_strsub(fmt, start, i - start))))
+			if (!(opt = ft_strjoindfree(opt, ft_strsub(fmt, st, i - st))))
 				return (NULL);
-			if (!(extr = extract_conv((char *)(fmt + i))))
-				return (NULL);
-			i = after_conv(fmt, i);
-			start = i;
-			if (!(opt = ft_strjoindfree(opt, get_conv(extr, ap))))
+			i = ft_after_conv(fmt, i);
+			st = i + 1;
+			if (!(opt = ft_strjoindfree(opt, get_conv(extcnv((fmt + i)), ap))))
 				return (NULL);
 		}
-		i++;
-	}
-	if (!(opt = ft_strjoindfree(opt, ft_strsub(fmt, start, i))))
+		else if (fmt[i] == '%')
+		{
+			i = ft_after_conv(fmt, i) + 1;
+			if (!(opt = ft_strjoindfree(opt, ft_strsub(fmt, st, i - st))))
+				return (NULL);
+			st = i;
+		}
+	if (!(opt = ft_strjoindfree(opt, ft_strsub(fmt, st, len - st))))
 		return (NULL);
 	return (opt);
 }
@@ -99,11 +91,13 @@ int		ft_printf(const char *format, ...)
 	va_list		ap;
 	int			size;
 
+	opt = NULL;
 	va_start(ap, format);
-	if (!(opt = get_opt(format, ap)))
+	if (!(opt = get_opt(format, opt, ap, -1)))
 		return (0);
 	size = ft_strlen(opt);
 	ft_putstr(opt);
+	ft_memset(opt, 0, ft_strlen(opt));
 	free(opt);
 	return (size);
 }

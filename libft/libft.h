@@ -87,6 +87,7 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoinfree(char *s1, char const *s2);
 char				*ft_strjoindfree(char *s1, char *s2);
+char				*ft_strmidadd(char *tocut, char *toadd, int i);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 

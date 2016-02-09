@@ -68,7 +68,8 @@ PC = ft_memset.c \
 	 ft_strjoindfree.c \
 	 ft_sitoa.c \
 	 ft_sitoabase.c \
-	 ft_strmidadd.c
+	 ft_strmidadd.c \
+	 get_next_line.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -137,7 +138,8 @@ PO = ft_memset.o \
 	 ft_strjoindfree.o \
 	 ft_sitoa.o \
 	 ft_sitoabase.o \
-	 ft_strmidadd.o
+	 ft_strmidadd.o \
+	 get_next_line.o
 
 FLAGS = -Wall -Wextra -Werror
 

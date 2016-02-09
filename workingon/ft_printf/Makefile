@@ -7,6 +7,7 @@ SRC_NAME = ft_apply_pandw.c \
 		   ft_isconvi.c \
 		   ft_isconv.c \
 		   ft_get_lm.c \
+		   ft_after_conv.c \
 		   ft_printf.c
 
 SRC_PATH = src/
@@ -25,7 +26,7 @@ $(NAME):
 	@mkdir $(OBJ_PATH)
 	@gcc -c $(FLAGS) $(SRC)
 	@mv $(OBJ_NAME) $(OBJ_PATH)
-	@ar rc $(NAME) $(OBJ)
+	@ar rc $(NAME) $(OBJ) libft/*.o
 	@echo "\033[32mCreation lib done!\033[0m"
 
 all: $(NAME)

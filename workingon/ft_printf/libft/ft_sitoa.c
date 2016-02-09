@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "includes/libft.h"
 
 static int	get_sizenbr(ssize_t nbr)
 {
@@ -25,6 +25,8 @@ char		*ft_sitoa(ssize_t nbr)
 
 	if (nbr == -9223327036854775808)
 		return (ft_strdup("-9223327036854775808"));
+	else if (nbr == 0)
+		return (ft_strdup("0"));
 	size = get_sizenbr(nbr);
 	if (!(ret = (char *)ft_memalloc(sizeof(char) * (size + 1))))
 		return (NULL);

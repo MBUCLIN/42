@@ -49,5 +49,11 @@ int		main(void)
 	ft_printf("%0#10.5u\n", 0);
 	ft_printf("%0#10.5o\n", 0);
 	ft_printf("%0#10.5x\n", 0);
-	ft_printf("%0#10.5X\n", 0);
+	ft_printf("%0#10.5X\n", 540000);
+	ft_printf("%.10#0x\n", 15);
+	ft_printf("%hh#o\n", 50);
+	ft_printf("h#o\n", 250);
+	ft_printf("%%d yo les amis\n");
+	ft_printf("%5%\n");
+	return (0);
 }

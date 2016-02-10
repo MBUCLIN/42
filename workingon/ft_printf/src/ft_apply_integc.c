@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_integc.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/10 16:13:20 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/10 16:13:34 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static char		*apply_unsignedconv(size_t arg, int c)
@@ -30,6 +42,7 @@ static char		*apply_int(va_list ap, int c)
 		return (ft_itoabase(arg, "0123456789"));
 	return (NULL);
 }
+
 char			*ft_apply_integc(int lm, int c, va_list ap)
 {
 	ssize_t		arg;

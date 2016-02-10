@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 15:17:01 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/13 14:33:16 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/10 16:20:45 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ char		*ft_itoabase(unsigned int nbr, char *base)
 		return (NULL);
 	while (--i >= 0)
 	{
-			convert[i] = base[nbr % sbase];
-			nbr = nbr / sbase;
+		convert[i] = base[nbr % sbase];
+		nbr = nbr / sbase;
 	}
 	return (convert);
 }

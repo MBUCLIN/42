@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_pandw.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/10 16:01:06 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/10 16:29:20 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static int		get_width(char *info)
@@ -25,9 +37,15 @@ static int		get_preci(char *info)
 	while (info[i])
 	{
 		if (info[i] == '.')
+		{
+			free(info);
+			info = NULL;
 			return (ft_atoi((info + i + 1)));
+		}
 		i++;
 	}
+	free(info);
+	info = NULL;
 	return (-1);
 }
 
@@ -35,7 +53,6 @@ static char		*apply_preci(int preci, char *conv, int cut)
 {
 	char		*add;
 
-	add = NULL;
 	if (!(add = (char *)ft_memalloc(sizeof(char) * (preci + 1))))
 	{
 		free(conv);
@@ -51,8 +68,7 @@ static char		*apply_width(int adj, int width, int preci, char *conv)
 {
 	char		*add;
 
-	add = NULL;
-	if (!(add = (char *)ft_memalloc(sizeof(char) * (width - preci + 1))))
+	if (!(add = (char *)ft_memalloc(sizeof(char) * (width + 1))))
 	{
 		free(conv);
 		return (NULL);
@@ -83,13 +99,12 @@ char			*ft_apply_pandw(int adj, char *info, char *conv)
 	minus = 0;
 	width = get_width(info);
 	preci = get_preci(info);
-	free(info);
-		if (conv[0] == '0' && (conv[1] == 'x' || conv[1] == 'X') &&\
-			size != 1)
-			minus = 2;
-		else if ((conv[0] == '0' || conv[0] == ' ' || conv[0] == '+') &&\
-				size != 1)
-			minus = 1;
+	if (conv && (conv[0] == '0' && (conv[1] == 'x' || conv[1] == 'X') &&\
+		size != 1))
+		minus = 2;
+	else if (conv && ((conv[0] == '0' || conv[0] == ' ' || conv[0] == '+') &&\
+			size != 1))
+		minus = 1;
 	if (preci > size - minus)
 	{
 		preci = preci - (size - minus);
@@ -97,10 +112,7 @@ char			*ft_apply_pandw(int adj, char *info, char *conv)
 			return (NULL);
 		size = ft_strlen(conv);
 	}
-	if (minus)
-		minus = 1;
 	if (width > size)
-		if (!(conv = apply_width(adj, width - size, preci, conv)))
-			return (NULL);
+		return (apply_width(adj, width - size, preci, conv));
 	return (conv);
 }

@@ -6,8 +6,12 @@ SRC_NAME = ft_apply_pandw.c \
 		   ft_isconvc.c \
 		   ft_isconvi.c \
 		   ft_isconv.c \
+		   ft_isflag.c \
+		   ft_iswidth.c \
+		   ft_ispreci.c \
+		   ft_islm.c \
 		   ft_get_lm.c \
-		   ft_after_conv.c \
+		   ft_check_conv.c \
 		   ft_printf.c
 
 SRC_PATH = src/

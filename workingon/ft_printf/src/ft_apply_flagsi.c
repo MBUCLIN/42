@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_flagsi.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/09 15:28:32 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/10 16:13:03 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static char		*apply_unsignedflags(int c, char *info)
@@ -67,12 +79,14 @@ static int		get_adj(char *info)
 	}
 	return (adj);
 }
+
 char			*ft_apply_flagsi(char *info, char *conv)
 {
 	int		c;
 	int		adjustment;
 
 	c = info[ft_strlen(info) - 1];
+	if (c != '%')
 		if (!(conv = ft_strjoindfree(apply_flags(c, info, conv), conv)))
 			return (NULL);
 	adjustment = get_adj(info);

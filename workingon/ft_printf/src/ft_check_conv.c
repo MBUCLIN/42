@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iswidth.c                                       :+:      :+:    :+:   */
+/*   ft_checkconv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/10 16:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/10 16:18:35 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/02/10 14:40:17 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/10 15:47:35 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_iswidth(const char *fmt, int i)
+#include "../includes/ft_printf.h"
+
+int		ft_chkcv(const char *fmt, int i)
 {
-	if ((fmt[i] > '0' && fmt[i] <= '9') && fmt[i - 1] != '.')
-		return (1);
+	while (fmt[++i])
+	{
+		if (fmt[i] == '%' || ft_isconv(fmt[i]))
+			return (1);
+		else if (!(ft_isflag(fmt[i])) && !(ft_iswidth(fmt, i)) &&\
+				!(ft_ispreci(fmt[i])) && !(ft_islm((char *)(fmt + i))))
+		{
+			ft_putchar(fmt[i]);
+			ft_putendl("	= fmt[i]");
+			return (0);
+		}
+	}
 	return (0);
 }

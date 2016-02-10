@@ -47,5 +47,11 @@ int		main(void)
 	printf("%0#10.5u\n", 0);
 	printf("%0#10.5o\n", 0);
 	printf("%0#10.5x\n", 0);
-	printf("%0#10.5X\n", 0);
+	printf("%0#10.5X\n", 540000);
+	printf("%.10#0x\n", 15);
+	printf("%hh#o\n", 50);
+	printf("h#o\n", 250);
+	printf("%%d yo les amis\n");
+	printf("%5%\n");
+	return (0);
 }

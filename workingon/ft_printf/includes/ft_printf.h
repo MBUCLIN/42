@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 13:53:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/03 16:30:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/10 16:15:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ char				*ft_apply_integc(int lm, int c, va_list ap);
 int					ft_isconvc(int c);
 int					ft_isconvi(int c);
 int					ft_isconv(int c);
-int					ft_after_conv(const char *fmt, int pos);
+int					ft_isflag(int c);
+int					ft_iswidth(const char *fmt, int i);
+int					ft_ispreci(int i);
+int					ft_islm(char *str);
+int					ft_chkcv(const char *fmt, int i);
 int					ft_get_lm(char *conv);
-int					ft_extract_conv(char *start);
 int					ft_printf(const char *format, ...);
 
 #endif

@@ -42,18 +42,21 @@ static char		*get_conv(char *conv, va_list ap)
 {
 	char			*ret;
 	int				lm;
+	int				len;
 
+	len = ft_strlen(conv) - 1;
 	ret = NULL;
 	if (conv == NULL)
 		return (NULL);
+	ft_putendl(conv);
 	lm = ft_get_lm(conv);
-	if (conv[ft_strlen(conv) - 1] != '%')
-		if (!(ret = ft_apply_integc(lm, conv[ft_strlen(conv) - 1], ap)))
+	if (ft_isconvc(conv[len] || conv[len] == '%'))
+		return (ft_apply_conv(conv, ap, lm));
+	if (ft_isconvi(conv[len]))
+		if (!(ret = ft_apply_integc(lm, conv[len], ap)))
 			return (NULL);
-	ft_putendl("A");
 	if (!(ret = ft_apply_flagsi(conv, ret)))
 		return (NULL);
-	ft_putendl("B");
 	return (ret);
 }
 
@@ -61,13 +64,11 @@ static char		*get_opt(const char *fmt, char *opt, va_list ap, int i)
 {
 	int				st;
 	int				len;
-	int				n;
 
 	st = 0;
-	n = 0;
 	len = ft_strlen(fmt);
 	while (fmt[++i])
-		if (fmt[i] == '%' && fmt[i + 1] != '%' && (n = ft_chkcv(fmt, i)) > 0)
+		if (fmt[i] == '%' && fmt[i + 1] != '%' && ft_chkcv(fmt, i))
 		{
 			if (!(opt = ft_strjoindfree(opt, ft_strsub(fmt, st, i - st))))
 				return (NULL);

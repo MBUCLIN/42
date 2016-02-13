@@ -24,6 +24,7 @@ typedef struct		s_info
 	int				lm;
 }					t_info;
 
+int					ft_getadj(char *info);
 char				*ft_apply_pandw(int adj, char *info, char *conv);
 char				*ft_apply_flagsi(char *info, char *conv);
 char				*ft_apply_integc(int lm, int c, va_list ap);

@@ -62,24 +62,6 @@ static char		*apply_flags(int c, char *info, char *conv)
 	return (NULL);
 }
 
-static int		get_adj(char *info)
-{
-	int		i;
-	int		adj;
-
-	i = 0;
-	adj = 0;
-	while (info[i])
-	{
-		if (info[i] == '-')
-			return ('r');
-		else if (info[i] == '0')
-			adj = 'l';
-		i++;
-	}
-	return (adj);
-}
-
 char			*ft_apply_flagsi(char *info, char *conv)
 {
 	int		c;
@@ -89,7 +71,7 @@ char			*ft_apply_flagsi(char *info, char *conv)
 	if (c != '%')
 		if (!(conv = ft_strjoindfree(apply_flags(c, info, conv), conv)))
 			return (NULL);
-	adjustment = get_adj(info);
+	adjustment = ft_getadj(info);
 	if (!(conv = ft_apply_pandw(adjustment, info, conv)))
 		return (NULL);
 	return (conv);

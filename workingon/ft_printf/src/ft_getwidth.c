@@ -1,3 +1,5 @@
+#include "../includes/ft_printf.h"
+
 int		ft_getwidth(char *info)
 {
 	int		i;

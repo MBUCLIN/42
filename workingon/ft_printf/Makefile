@@ -3,6 +3,7 @@ NAME = libftprintf.a
 SRC_NAME = ft_apply_pandw.c \
 		   ft_apply_flagsi.c \
 		   ft_apply_integc.c \
+		   ft_apply_conv.c \
 		   ft_isconvc.c \
 		   ft_isconvi.c \
 		   ft_isconv.c \
@@ -10,6 +11,9 @@ SRC_NAME = ft_apply_pandw.c \
 		   ft_iswidth.c \
 		   ft_ispreci.c \
 		   ft_islm.c \
+		   ft_getpreci.c \
+		   ft_getwidth.c \
+		   ft_getadj.c \
 		   ft_get_lm.c \
 		   ft_check_conv.c \
 		   ft_printf.c

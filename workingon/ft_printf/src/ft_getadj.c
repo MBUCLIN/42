@@ -1,3 +1,5 @@
+#include "../includes/ft_printf.h"
+
 int		ft_getadj(char *info)
 {
 	int		i;

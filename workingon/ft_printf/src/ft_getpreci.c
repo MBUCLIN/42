@@ -1,3 +1,5 @@
+#include "../includes/ft_printf.h"
+
 int		ft_getpreci(char *info)
 {
 	int		i;

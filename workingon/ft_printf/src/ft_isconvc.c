@@ -14,7 +14,7 @@
 
 int		ft_isconvc(int c)
 {
-	if (c == 'c' || c == 's' || c == 'S' || c == 'C')
+	if (c == 'c' || c == 's')
 		return (c);
 	return (0);
 }

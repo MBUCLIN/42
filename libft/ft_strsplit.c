@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/26 14:54:37 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/02 17:38:33 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/02/10 16:11:33 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/10 16:11:38 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 static int		find_nword(const char *s, char c)
 {

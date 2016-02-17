@@ -10,26 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strjoindfree(char *s1, char *s2)
 {
 	char		*output;
-	int			size;
 
-	if (s1 == NULL && s2 == NULL)
+	if (!s1 && !s2)
 		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2);
-	if (!(output = (char *)ft_memalloc(sizeof(char) * size + 1)))
-		return (NULL);
+	output = ft_strjoin(s1, s2);
 	if (s1)
-		ft_strcpy(output, s1);
-	if (s2)
-		ft_strcpy((output + ft_strlen(s1)), s2);
-	output[size] = '\0';
-	free(s1);
+		free(s1);
 	s1 = NULL;
-	free(s2);
+	if (s2)
+		free(s2);
 	s2 = NULL;
 	return (output);
 }

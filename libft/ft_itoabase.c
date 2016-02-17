@@ -6,11 +6,11 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 15:17:01 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/13 14:33:16 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/10 16:20:45 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 static int	check_base(char *base)
 {
@@ -42,12 +42,12 @@ static int	get_size(unsigned int nbr, char *base)
 
 	size = ft_strlen(base);
 	len = 0;
-	while (nbr / size)
+	while (nbr)
 	{
-		len++;
 		nbr = nbr / size;
+		len++;
 	}
-	return (len + 1);
+	return (len);
 }
 
 char		*ft_itoabase(unsigned int nbr, char *base)
@@ -58,22 +58,16 @@ char		*ft_itoabase(unsigned int nbr, char *base)
 
 	if (!(check_base(base)))
 		return (NULL);
+	else if (nbr == 0)
+		return (ft_strdup("0"));
 	sbase = ft_strlen(base);
-	if (sbase != 2)
-		i = get_size(nbr, base);
-	else
-		i = 31;
-	if (!(convert = (char *)ft_memalloc(sizeof(char) * i)))
+	i = get_size(nbr, base);
+	if (!(convert = (char *)ft_memalloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	while (--i >= 0)
 	{
-		if (nbr)
-		{
-			convert[i] = base[nbr % sbase];
-			nbr = nbr / sbase;
-		}
-		else
-			convert[i] = '0';
+		convert[i] = base[nbr % sbase];
+		nbr = nbr / sbase;
 	}
 	return (convert);
 }

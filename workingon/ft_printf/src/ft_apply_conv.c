@@ -1,77 +1,75 @@
 #include "../includes/ft_printf.h"
 
-static char		*apply_mod(int adj, int sizew, int sizep)
+static int		string_len(char *s)
 {
-	char	*width;
-	char	*preci;
+	int		i;
 
+	i = 0;
+	while (*(s + i) != 0)
+		i++;
+	return (i);
+}
+
+static char		*get_s(char *s, int len)
+{
+	char	*ret;
+	int		i;
+
+	ret = NULL;
+	if (!(ret = (char *)ft_memalloc(sizeof(char) * len + 1)))
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		ret[i] = *(s + i);
+	return (ret);
+}
+
+static char		*get_convs(int len, int sizew, int sizep, int adj, char *s)
+{
+	char	*preci;
+	char	*width;
+
+	if (s == NULL)
+		return (NULL);
 	preci = NULL;
 	width = NULL;
-	if (sizep > 1)
-		if (!(preci = (char *)ft_memalloc(sizeof(char) * sizep - 1)))
+	if (sizep > len)
+		if (!(preci = (char *)ft_memalloc(sizeof(char) * (sizep - len))))
 			return (NULL);
 	if (preci != NULL)
-		ft_memset(preci, ' ', sizep - 1);
-	if (!(preci = ft_strjoindfree(preci, ft_strdup("%"))))
+		ft_memset(preci, ' ', sizep - len);
+	if (!(s = ft_strjoindfree(preci, s)))
 		return (NULL);
-	if (sizew > (int)ft_strlen(preci))
+	if (sizew > (int)ft_strlen(s))
 	{
-		sizew = sizew - ft_strlen(preci);
+		sizew -= ft_strlen(s);
 		if (!(width = (char *)ft_memalloc(sizeof(char) * sizew)))
 			return (NULL);
 	}
 	if (width)
 		ft_memset(width, ' ', sizew);
 	if (adj == 'r')
-		return (ft_strjoindfree(preci, width));
-	return (ft_strjoindfree(width, preci));
+		return (ft_strjoindfree(s, width));
+	return (ft_strjoindfree(width, s));
 }
 
-static char		*apply_c(int adj, int sizew, int sizep, va_list ap)
+static char		*apply_convs(char *info, int adj, va_list ap)
 {
-	char		*width;
-	char		c;
-	char		*preci;
-
-	width = NULL;
-	preci = NULL;
-	c = (char)va_arg(ap, int);
-	if (sizep > 1)
-		if (!(preci = (char *)ft_memalloc(sizeof(char) * sizep - 1)))
-			return (NULL);
-	if (preci)
-		ft_memset(preci, ' ', sizep - 1);
-	if (!(preci = ft_strjoindfree(preci, ft_strdup(&c))))
-		return (NULL);
-	if (sizew > (int)ft_strlen(preci))
-	{
-		sizew = sizew - (int)ft_strlen(preci);
-		if (!(width = (char *)ft_memalloc(sizeof(char) * sizew)))
-			return (NULL);
-	}
-	if (width)
-		ft_memset(width, ' ', sizew);
-	if (adj == 'r')
-		return (ft_strjoindfree(preci, width));
-	return (ft_strjoindfree(width, preci));
-}
-
-static char		*apply_convc(char *info, int adj, va_list ap)
-{
+	char	*s;
 	int		width;
 	int		preci;
-	int		c;
+	int		len;
 
-	c = info[ft_strlen(info) - 1];
-	width = ft_getwidth(info);
+	s = NULL;
+	s = va_arg(ap, char *);
 	preci = ft_getpreci(info);
-	if (c == '%')
-		return (apply_mod(adj, width, preci));
-	else if (c == 'c')
-		return (apply_c(adj, width, preci, ap));
-	return (NULL);
+	width = ft_getwidth(info);
+	free(info);
+	if (s == NULL)
+		return (get_convs(5 , width, preci, adj, ft_strdup("(nul)")));
+	len = string_len(s);
+	return (get_convs(len, width, preci, adj, get_s(s, len)));
 }
-
 char			*ft_apply_conv(char *info, va_list ap, int lm)
 {
 	int		c;
@@ -80,8 +78,10 @@ char			*ft_apply_conv(char *info, va_list ap, int lm)
 	adj = ft_getadj(info);
 	c = info[ft_strlen(info) - 1];
 	if ((c == 'c' || c == '%') && lm != 'l')
-		return (apply_convc(info, adj, ap));
-//	else if (c == 's' && lm != 'l')
-//		return (apply_convs(info, adj, ap));
+		return (ft_apply_charc(info, adj, ap));
+	else if (c == 's' && lm != 'l')
+		return (apply_convs(info, adj, ap));
+	else if (c == 'p' || c == 'P')
+		return (ft_apply_convp(info, adj, ap));
 	return (NULL);
 }

@@ -17,7 +17,7 @@ static int		after_conv(const char *fmt, int pos)
 	while (fmt[++pos])
 	{
 		if (ft_isconv(fmt[pos]) || fmt[pos] == '%')
-			return (pos + 1);
+			return (pos);
 	}
 	return (pos);
 }
@@ -66,6 +66,8 @@ static char		*get_opt(const char *fmt, char *opt, va_list ap, int i)
 	while (fmt[++i])
 		if (fmt[i] == '%' && ft_chkcv(fmt, i))
 		{
+			if (st)
+				st += 1;
 			if (!(opt = ft_strjoindfree(opt, ft_strsub(fmt, st, i - st))))
 				return (NULL);
 			st = after_conv(fmt, i);
@@ -73,6 +75,7 @@ static char		*get_opt(const char *fmt, char *opt, va_list ap, int i)
 				return (NULL);
 			i = st;
 		}
+	st += 1;
 	if (!(opt = ft_strjoindfree(opt, ft_strsub(fmt, st, len - st))))
 		return (NULL);
 	return (opt);

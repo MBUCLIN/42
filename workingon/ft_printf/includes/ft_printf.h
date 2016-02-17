@@ -39,6 +39,7 @@ int					ft_get_lm(char *conv);
 char				*ft_apply_pandw(int adj, char *info, char *conv);
 char				*ft_apply_flagsi(char *info, char *conv);
 char				*ft_apply_integc(int lm, int c, va_list ap);
+char				*ft_apply_charc(char *info, int adj, va_list ap);
 char				*ft_apply_conv(char *info, va_list ap, int lm);
 int					ft_printf(const char *format, ...);
 

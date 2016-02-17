@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_bzero(void *b, size_t len)
 {
-	ft_memset(b, '\0', len);
+	ft_memset(b, '\0', len + 1);
 }

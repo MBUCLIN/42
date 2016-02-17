@@ -1,6 +1,7 @@
 NAME = libftprintf.a
 
 SRC_NAME = ft_apply_pandw.c \
+		   ft_apply_convp.c \
 		   ft_apply_flagsi.c \
 		   ft_apply_integc.c \
 		   ft_apply_charc.c \

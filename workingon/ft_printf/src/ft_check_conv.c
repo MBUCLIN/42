@@ -20,11 +20,7 @@ int		ft_chkcv(const char *fmt, int i)
 			return (1);
 		else if (!(ft_isflag(fmt[i])) && !(ft_iswidth(fmt, i)) &&\
 				!(ft_ispreci(fmt[i])) && !(ft_islm((char *)(fmt + i))))
-		{
-			ft_putchar(fmt[i]);
-			ft_putendl("	= fmt[i]");
 			return (0);
-		}
 	}
 	return (0);
 }

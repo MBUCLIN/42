@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/02 17:56:29 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/01/19 14:30:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "get_next_line.h"
 
 typedef	struct		s_list
 {
@@ -70,7 +71,9 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 
 char				*ft_itoa(int nbr);
+char				*ft_sitoa(ssize_t nbr);
 char				*ft_itoabase(unsigned int nbr, char *base);
+char				*ft_sitoabase(size_t nbr, char *base);
 char				*ft_strnew(size_t size);
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strncat(char *dest, const char *src, size_t n);
@@ -86,6 +89,8 @@ char				*ft_strmap(char *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoinfree(char *s1, char const *s2);
+char				*ft_strjoindfree(char *s1, char *s2);
+char				*ft_strmidadd(char *tocut, char *toadd, int i);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 

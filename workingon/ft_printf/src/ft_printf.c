@@ -46,7 +46,7 @@ static char		*get_conv(char *conv, va_list ap)
 	if (conv == NULL)
 		return (NULL);
 	lm = ft_get_lm(conv);
-	if (ft_isconvc(conv[len]) || conv[len] == '%')
+	if (ft_isconvc(conv[len]) || conv[len] == '%' || conv[len] == 'p')
 		return (ft_apply_conv(conv, ap, lm));
 	if (ft_isconvi(conv[len]))
 		if (!(ret = ft_apply_integc(lm, conv[len], ap)))

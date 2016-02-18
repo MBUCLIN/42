@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 15:28:32 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/10 16:13:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/18 15:38:56 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ char			*ft_apply_flagsi(char *info, char *conv)
 	int		adjustment;
 
 	c = info[ft_strlen(info) - 1];
-	if (c != '%')
-		if (!(conv = ft_strjoindfree(apply_flags(c, info, conv), conv)))
-			return (NULL);
+	if (!(conv = ft_strjoindfree(apply_flags(c, info, conv), conv)))
+		return (NULL);
 	adjustment = ft_getadj(info);
 	if (!(conv = ft_apply_pandw(adjustment, info, conv)))
 		return (NULL);

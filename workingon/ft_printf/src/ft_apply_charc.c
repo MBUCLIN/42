@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_charc.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/18 16:52:41 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/18 16:53:03 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static char		*apply_mod(int adj, int sizew, int sizep)
@@ -46,7 +58,7 @@ static char		*apply_c(int adj, int sizew, int sizep, va_list ap)
 	if (sizew > (int)ft_strlen(preci))
 	{
 		sizew -= (int)ft_strlen(preci);
-		if (!(width = (char *) ft_memalloc(sizeof(char) * sizew)))
+		if (!(width = (char *)ft_memalloc(sizeof(char) * sizew)))
 			return (NULL);
 	}
 	if (width)

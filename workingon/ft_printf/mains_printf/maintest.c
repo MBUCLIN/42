@@ -9,7 +9,9 @@ int		main(int argc, char **argv)
 	char *linep;
 	char *linemp;
 	int n;
+	int	i;
 
+	 i = 1;
 	if (argc != 3)
 		return (0);
 	n = 1;
@@ -43,6 +45,8 @@ int		main(int argc, char **argv)
 			ft_putendl("	: Line printf");
 			ft_putstr(linemp);
 			ft_putendl("	: Line your printf");
+			ft_putnbr(i);
+			ft_putendl("");
 			ft_putstr("\033[0m");
 			free(linep);
 			free(linemp);
@@ -50,11 +54,17 @@ int		main(int argc, char **argv)
 			linemp = NULL;
 		}
 		else
-			ft_putendl("\033[32mOK\033[0m");
+		{
+			ft_putstr("\033[32m");
+			ft_putnbr(i);
+			ft_putstr(" = ");
+			ft_putendl("OK\033[0m");
+		}
 		free(linep);
 		linep = NULL;
 		free(linemp);
 		linemp = NULL;
+		i++;
 	}
 	return (0);
 }

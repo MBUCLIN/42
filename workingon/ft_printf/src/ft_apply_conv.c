@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_conv.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/18 16:55:22 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/18 17:05:07 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static int		string_len(char *s)
@@ -24,21 +36,20 @@ static char		*get_s(char *s, int len)
 	return (ret);
 }
 
-static char		*get_convs(int len, int sizew, int sizep, int adj, char *s)
+static char		*get_convs(int sizew, int sizep, int adj, char *s)
 {
 	char	*preci;
 	char	*width;
+	int		len;
 
-	if (s == NULL)
-		return (NULL);
-	preci = NULL;
+	len = ft_strlen(s);
 	width = NULL;
-	if (sizep > len)
+	if (sizep > len && len != 0)
 		if (!(preci = (char *)ft_memalloc(sizeof(char) * (sizep - len))))
 			return (NULL);
-	if (preci != NULL)
+	if (sizep > len && len != 0)
 		ft_memset(preci, ' ', sizep - len);
-	if (!(s = ft_strjoindfree(preci, s)))
+	if (len == 0 || !(s = ft_strjoindfree(preci, s)))
 		return (NULL);
 	if (sizew > (int)ft_strlen(s))
 	{
@@ -66,10 +77,11 @@ static char		*apply_convs(char *info, int adj, va_list ap)
 	width = ft_getwidth(info);
 	free(info);
 	if (s == NULL)
-		return (get_convs(5 , width, preci, adj, ft_strdup("(nul)")));
+		return (get_convs(5, width, preci, adj, ft_strdup("(nul)")));
 	len = string_len(s);
-	return (get_convs(len, width, preci, adj, get_s(s, len)));
+	return (get_convs(width, preci, adj, get_s(s, len)));
 }
+
 char			*ft_apply_conv(char *info, va_list ap, int lm)
 {
 	int		c;

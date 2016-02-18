@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 13:52:09 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/10 16:25:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/18 15:48:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,12 @@ static char		*get_opt(const char *fmt, char *opt, va_list ap, int i)
 	int				st;
 	int				len;
 
-	st = 0;
+	st = -1;
 	len = ft_strlen(fmt);
 	while (fmt[++i])
 		if (fmt[i] == '%' && ft_chkcv(fmt, i))
 		{
-			if (st)
-				st += 1;
+			st += 1;
 			if (!(opt = ft_strjoindfree(opt, ft_strsub(fmt, st, i - st))))
 				return (NULL);
 			st = after_conv(fmt, i);

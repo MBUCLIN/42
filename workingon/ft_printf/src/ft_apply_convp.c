@@ -1,10 +1,21 @@
-#include "../includes/ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_convp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/18 16:53:18 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/18 16:54:38 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../includes/ft_printf.h"
 
 static char		*apply_widthp(int adj, int sizew, int sizep, char *adr)
 {
 	char		c;
-	char 		*width;
+	char		*width;
 
 	c = ' ';
 	width = NULL;
@@ -24,6 +35,8 @@ static char		*apply_widthp(int adj, int sizew, int sizep, char *adr)
 			return (NULL);
 		return (adr);
 	}
+	else if (c == '0')
+		return (ft_strmidadd(adr, width, 2));
 	return (ft_strjoindfree(width, adr));
 }
 
@@ -33,9 +46,9 @@ static char		*get_p(int adj, char *adr, int sizew, int sizep)
 	int		len;
 
 	preci = NULL;
+	len = ft_strlen(adr);
 	if (!(adr = ft_strjoindfree(ft_strdup("0x"), adr)))
 		return (NULL);
-	len = ft_strlen(adr);
 	if (sizep > len)
 		if (!(preci = (char *)ft_memalloc(sizeof(char) * (sizep - len))))
 			return (NULL);
@@ -60,5 +73,5 @@ char			*ft_apply_convp(char *info, int adj, va_list ap)
 	wi = ft_getwidth(info);
 	pr = ft_getpreci(info);
 	free(info);
-	return (get_p(adj, ft_sitoabase(adr, "0123456789abcdef"),wi , pr));
+	return (get_p(adj, ft_sitoabase(adr, "0123456789abcdef"), wi, pr));
 }

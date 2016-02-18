@@ -2,13 +2,19 @@
 
 int		main(void)
 {
-	int		c;
+	void *p1;
+	void *p2;
+	void *p3;
+	int	i1;
+	int	i2;
+	int	i3;
 
-	c = 4;
-	ft_printf("%-5.3c\n", 'c');
-	ft_printf("%s\n", "salut");
-	ft_printf("%-12.8s\n", NULL);
-	ft_printf("%p\n", &c);
-	ft_printf("%-20.15p\n", &c);
+	p1 = &i1;
+	p2 = &i2;
+	p3 = &i3;
+	ft_printf("%s = %p de i1\n", "adr", p1);
+	ft_printf("%s = %p de i2\n", "adr", p2);
+	ft_printf("%s = %p de i3\n", "adr", p3);
+	ft_printf("%15p\n", p1);
 	return (0);
 }

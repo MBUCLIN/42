@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 16:17:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/10 16:17:37 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/18 15:41:04 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int		ft_isconv(int c)
 {
 	if (ft_isconvi(c) || ft_isconvc(c))
-		return (c);
+		return (1);
 	return (0);
 }

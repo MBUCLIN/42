@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 16:01:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/10 16:29:20 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/18 15:37:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 static int		get_preci(char *info)
 {
 	int		i;
+	int		nbr;
 
 	i = 0;
 	while (info[i])
 	{
 		if (info[i] == '.')
 		{
+			nbr = ft_atoi((info + (i + 1)));
 			free(info);
-			info = NULL;
-			return (ft_atoi((info + i + 1)));
+			return (nbr);
 		}
 		i++;
 	}

@@ -33,7 +33,7 @@ static char		*apply_unsignedflags(int c, char *info)
 	return (NULL);
 }
 
-static char		*apply_signedflags(char *info)
+static char		*apply_signedflags(char *info, char *conv)
 {
 	int		i;
 	int		space;
@@ -42,9 +42,9 @@ static char		*apply_signedflags(char *info)
 	i = 0;
 	while (info[i])
 	{
-		if (info[i] == '+')
+		if (info[i] == '+' && conv[0] != '-')
 			return (ft_strdup("+"));
-		else if (info[i] == ' ')
+		else if (info[i] == ' ' && conv[0] != '-')
 			space = 1;
 		i++;
 	}
@@ -58,7 +58,7 @@ static char		*apply_flags(int c, char *info, char *conv)
 	if (conv[0] != '0' && (c == 'x' || c == 'X' || c == 'o' || c == 'O'))
 		return (apply_unsignedflags(c, info));
 	else if (c == 'd' || c == 'i')
-		return (apply_signedflags(info));
+		return (apply_signedflags(info, conv));
 	return (NULL);
 }
 

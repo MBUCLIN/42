@@ -46,6 +46,7 @@ void				ft_putnbr(int nbr);
 void				ft_putnbr_fd(int nbr, int fd);
 void				ft_putnbrbase(int nbr, char *base);
 void				ft_puttab(char **tab);
+void				ft_strrev(char *s);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));

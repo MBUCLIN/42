@@ -61,7 +61,7 @@ static char		*get_opt(const char *fmt, char *opt, va_list ap, int i)
 	int				st;
 	int				len;
 
-	st = 0;
+	st = -1;
 	len = ft_strlen(fmt);
 	while (fmt[++i])
 		if (fmt[i] == '%' && ft_chkcv(fmt, i))

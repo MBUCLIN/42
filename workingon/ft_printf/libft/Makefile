@@ -21,6 +21,7 @@ PC = ft_memset.c \
 	 ft_striter.c \
 	 ft_striteri.c \
 	 ft_strlen.c \
+	 ft_strrev.c \
 	 ft_tolower.c \
 	 ft_toupper.c \
 	 ft_isalpha.c \
@@ -92,6 +93,7 @@ PO = ft_memset.o \
 	 ft_striter.o \
 	 ft_striteri.o \
 	 ft_strlen.o \
+	 ft_strrev.o \
 	 ft_tolower.o \
 	 ft_toupper.o \
 	 ft_isalpha.o \

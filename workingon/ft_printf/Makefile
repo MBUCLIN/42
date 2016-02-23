@@ -1,11 +1,14 @@
 NAME = libftprintf.a
 
 SRC_NAME = ft_apply_pandw.c \
+		   ft_apply_widtchar.c \
 		   ft_apply_convp.c \
 		   ft_apply_flagsi.c \
 		   ft_apply_integc.c \
 		   ft_apply_charc.c \
+		   ft_apply_wint.c \
 		   ft_apply_conv.c \
+		   ft_apply_wchar.c \
 		   ft_isconvc.c \
 		   ft_isconvi.c \
 		   ft_isconv.c \
@@ -13,11 +16,17 @@ SRC_NAME = ft_apply_pandw.c \
 		   ft_iswidth.c \
 		   ft_ispreci.c \
 		   ft_islm.c \
+		   ft_getnbits.c \
+		   ft_getoct.c \
 		   ft_getpreci.c \
 		   ft_getwidth.c \
 		   ft_getadj.c \
 		   ft_get_lm.c \
+		   ft_getmask.c \
+		   ft_convoct.c \
 		   ft_check_conv.c \
+		   ft_string_len.c \
+		   ft_get_noct.c \
 		   ft_printf.c
 
 SRC_PATH = src/

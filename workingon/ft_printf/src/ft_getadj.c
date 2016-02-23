@@ -11,7 +11,7 @@ int		ft_getadj(char *info)
 	{
 		if (info[i] == '-')
 			return ('r');
-		else if (info[i] == '0')
+		else if (info[i] == '0' && !ft_isdigit(info[i - 1]))
 			adj = 'l';
 		i++;
 	}

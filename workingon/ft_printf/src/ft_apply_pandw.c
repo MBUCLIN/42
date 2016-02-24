@@ -42,6 +42,8 @@ static char		*apply_preci(int preci, char *conv, int cut)
 		free(conv);
 		return (NULL);
 	}
+	if (conv[0] == '-')
+		cut = 1;
 	ft_memset(add, '0', preci);
 	if (!(add = ft_strmidadd(conv, add, cut)))
 		return (NULL);
@@ -57,7 +59,7 @@ static char		*apply_width(int adj, int width, int preci, char *conv)
 		free(conv);
 		return (NULL);
 	}
-	if (preci == -1 && adj == 'l')
+	if (preci == -1 && adj == 'l' && conv[0] == '-')
 		ft_memset(add, '0', width);
 	else
 		ft_memset(add, ' ', width);
@@ -66,6 +68,8 @@ static char		*apply_width(int adj, int width, int preci, char *conv)
 	else if (((conv[1] == 'x' || conv[1] == 'X') && conv[0] == '0') &&\
 			add[0] == '0')
 		return (ft_strmidadd(conv, add, 2));
+	else if (conv[0] == '-' && add[0] == '0')
+		return (ft_strmidadd(conv, add, 1));
 	else if (add[0] == '0' && (conv[0] == ' ' ||\
 			conv[0] == '+' || conv[0] == '0'))
 		return (ft_strmidadd(conv, add, 1));

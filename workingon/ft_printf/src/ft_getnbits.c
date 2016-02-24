@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getadj.c                                        :+:      :+:    :+:   */
+/*   ft_getnbits.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/18 16:54:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/18 16:54:59 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/02/24 15:20:40 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/24 15:20:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_getadj(char *info)
+int		ft_get_nbits(int wint)
 {
-	int		i;
-	int		adj;
+	int				n;
+	unsigned int	mask;
 
-	i = 0;
-	adj = 0;
-	while (info[i])
+	n = 32;
+	mask = 0x80000000;
+	while (n)
 	{
-		if (info[i] == '-')
-			return ('r');
-		else if (info[i] == '0' && !ft_isdigit(info[i - 1]))
-			adj = 'l';
-		i++;
+		if (mask & wint)
+			return (n);
+		mask >>= 1;
+		n--;
 	}
-	return (adj);
+	return (0);
 }

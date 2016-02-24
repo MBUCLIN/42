@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getadj.c                                        :+:      :+:    :+:   */
+/*   ft_getoct.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/18 16:54:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/18 16:54:59 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/02/24 15:18:41 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/24 15:20:58 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_getadj(char *info)
+char				*ft_getoct(int wint, char *mask)
 {
-	int		i;
-	int		adj;
+	int				len;
+	unsigned int	mkfield;
 
-	i = 0;
-	adj = 0;
-	while (info[i])
+	mkfield = 0x1;
+	len = ft_strlen(mask);
+	len -= 1;
+	while (len >= 0)
 	{
-		if (info[i] == '-')
-			return ('r');
-		else if (info[i] == '0' && !ft_isdigit(info[i - 1]))
-			adj = 'l';
-		i++;
+		if (mask[len] == 'x')
+		{
+			if (mkfield & wint)
+				mask[len] = '1';
+			else
+				mask[len] = '0';
+			mkfield <<= 1;
+		}
+		len--;
 	}
-	return (adj);
+	return (mask);
 }

@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getadj.c                                        :+:      :+:    :+:   */
+/*   ft_apply_wint.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/18 16:54:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/18 16:54:59 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/02/24 15:18:26 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/24 15:18:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_getadj(char *info)
+char			*ft_apply_wint(char *info, int adj, va_list ap)
 {
-	int		i;
-	int		adj;
+	int		wint;
+	int		n;
+	char	*oct;
 
-	i = 0;
-	adj = 0;
-	while (info[i])
-	{
-		if (info[i] == '-')
-			return ('r');
-		else if (info[i] == '0' && !ft_isdigit(info[i - 1]))
-			adj = 'l';
-		i++;
-	}
-	return (adj);
+	oct = NULL;
+	wint = va_arg(ap, int);
+	n = ft_get_nbits(wint);
+	if (!(oct = ft_getoct(wint, ft_getmask(n))))
+		return (NULL);
+	n = ft_get_noct(n);
+	if (!(oct = ft_convoct(oct, n)))
+		return (NULL);
+	return (ft_apply_widtchar(info, oct, adj));
 }

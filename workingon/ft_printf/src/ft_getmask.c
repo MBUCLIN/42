@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getadj.c                                        :+:      :+:    :+:   */
+/*   ft_getmask.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/18 16:54:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/18 16:54:59 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/02/24 15:20:29 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/24 15:20:32 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_getadj(char *info)
+char		*ft_getmask(int n)
 {
-	int		i;
-	int		adj;
-
-	i = 0;
-	adj = 0;
-	while (info[i])
-	{
-		if (info[i] == '-')
-			return ('r');
-		else if (info[i] == '0' && !ft_isdigit(info[i - 1]))
-			adj = 'l';
-		i++;
-	}
-	return (adj);
+	if (n <= 7)
+		return (ft_strdup("0xxxxxxx"));
+	else if (n <= 11)
+		return (ft_strdup("110xxxxx10xxxxxx"));
+	else if (n <= 16)
+		return (ft_strdup("110xxxxx10xxxxxx10xxxxxx"));
+	return (ft_strdup("110xxxxx10xxxxxx10xxxxxx10xxxxxx"));
 }

@@ -79,7 +79,7 @@ static int		ft_get_number(char *nbr_b, char *base)
 
 int				ft_atoibase(char *nbr_b, char *base)
 {
-	int			nbr;
+	unsigned int		nbr;
 
 	nbr = 0;
 	if (nbr_b == NULL || base == NULL)
@@ -87,7 +87,5 @@ int				ft_atoibase(char *nbr_b, char *base)
 	if (check_nbr(nbr_b, base) == 0 || check_base(base) == 0)
 		return (0);
 	nbr = ft_get_number(nbr_b, base);
-	if (nbr_b[0] == '-')
-		nbr = -nbr;
 	return (nbr);
 }

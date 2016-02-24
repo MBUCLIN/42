@@ -1,20 +1,32 @@
 #include "../includes/ft_printf.h"
+#include "locale.h"
 
 int		main(void)
 {
-	void *p1;
-	void *p2;
-	void *p3;
-	int	i1;
-	int	i2;
-	int	i3;
+	int		c;
+	unsigned int		n;
+	char		*bin;
 
-	p1 = &i1;
-	p2 = &i2;
-	p3 = &i3;
-	ft_printf("%s = %p de i1\n", "adr", p1);
-	ft_printf("%s = %p de i2\n", "adr", p2);
-	ft_printf("%s = %p de i3\n", "adr", p3);
-	ft_printf("%15p\n", p1);
+	c = 4;
+	ft_printf("%-5.3c\n", 'c');
+	ft_printf("%s\n", "salut");
+	ft_printf("%-12.8s\n", NULL);
+	ft_printf("%p\n", &c);
+	ft_printf("%-20.15p\n", &c);
+	ft_printf("%.5s\n", "abcdefghijklmnopqrstuvwxyz");
+
+	if (!setlocale(LC_ALL, "en_US.UTF-8"))
+		return (0);
+	ft_printf("%lc\n", L'ù');
+	ft_printf("%C\n", L'µ');
+	ft_printf("%5lc\n", L'ù');
+	ft_printf("%-5Ci\n", L'ۯ');
+	ft_printf("%C%C%C%C\n", L'£', L'^', L'é', L'à');
+	ft_putnbr(ft_printf("%.5ls\n", L"£$^ùµéà"));
+	ft_putendl("");
+	ft_putnbr(ft_printf("%.5s\n", "Hellow wordl"));
+	ft_putendl("");
+	ft_printf("%8ls\n", L"£µ¨ùµàç");
+	ft_printf("%020d\n", -123456789);
 	return (0);
 }

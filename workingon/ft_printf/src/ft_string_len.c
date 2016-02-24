@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getadj.c                                        :+:      :+:    :+:   */
+/*   ft_string_len.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/18 16:54:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/18 16:54:59 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/02/24 15:21:07 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/24 15:21:09 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_getadj(char *info)
+int		ft_string_len(char *s)
 {
 	int		i;
-	int		adj;
 
 	i = 0;
-	adj = 0;
-	while (info[i])
-	{
-		if (info[i] == '-')
-			return ('r');
-		else if (info[i] == '0' && !ft_isdigit(info[i - 1]))
-			adj = 'l';
+	while (*(s + i) != 0)
 		i++;
-	}
-	return (adj);
+	return (i);
 }

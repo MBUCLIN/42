@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getadj.c                                        :+:      :+:    :+:   */
+/*   ft_apply_widtchar.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/18 16:54:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/18 16:54:59 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/02/24 15:17:26 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/02/24 15:17:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_getadj(char *info)
+char		*ft_apply_widtchar(char *info, char *conv, int adj)
 {
-	int		i;
-	int		adj;
+	int		sizew;
+	char	*width;
+	int		len;
 
-	i = 0;
-	adj = 0;
-	while (info[i])
-	{
-		if (info[i] == '-')
-			return ('r');
-		else if (info[i] == '0' && !ft_isdigit(info[i - 1]))
-			adj = 'l';
-		i++;
-	}
-	return (adj);
+	len = ft_strlen(conv);
+	width = NULL;
+	sizew = ft_getwidth(info);
+	free(info);
+	if (sizew > len)
+		if (!(width = (char *)ft_memalloc(sizeof(char) * (sizew - len))))
+			return (NULL);
+	if (!width)
+		return (conv);
+	ft_memset(width, ' ', sizew - len);
+	if (adj == 'r')
+		return (ft_strjoindfree(conv, width));
+	return (ft_strjoindfree(width, conv));
 }

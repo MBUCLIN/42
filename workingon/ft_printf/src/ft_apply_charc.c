@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 16:52:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/18 16:53:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/24 16:59:26 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char		*apply_c(int adj, int sizew, int sizep, va_list ap)
 	width = NULL;
 	preci = NULL;
 	c = (char)va_arg(ap, int);
-	if (sizep > 1)
+	if (sizep > 1 && c != 0)
 		if (!(preci = (char *)ft_memalloc(sizeof(char) * (sizep - 1))))
 			return (NULL);
 	if (preci)

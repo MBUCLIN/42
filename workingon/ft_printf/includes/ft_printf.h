@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 13:53:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/10 16:15:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/24 17:22:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char				*ft_apply_wint(char *info, int adj, va_list ap);
 char				*ft_apply_convp(char *info, int adj, va_list ap);
 char				*ft_apply_pandw(int adj, char *info, char *conv);
 char				*ft_apply_flagsi(char *info, char *conv);
-char				*ft_apply_integc(int lm, int c, va_list ap);
+char				*ft_apply_integc(char *info, int lm, int c, va_list ap);
 char				*ft_apply_charc(char *info, int adj, va_list ap);
 char				*ft_apply_conv(char *info, va_list ap, int lm);
 int					ft_printf(const char *format, ...);

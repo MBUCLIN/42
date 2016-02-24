@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 13:52:09 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/18 15:48:18 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/24 17:19:25 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char		*get_conv(char *conv, va_list ap)
 	if (ft_isconvc(conv[len]) || conv[len] == '%' || conv[len] == 'p')
 		return (ft_apply_conv(conv, ap, lm));
 	if (ft_isconvi(conv[len]))
-		if (!(ret = ft_apply_integc(lm, conv[len], ap)))
+		if (!(ret = ft_apply_integc(conv, lm, conv[len], ap)))
 			return (NULL);
 	if (!(ret = ft_apply_flagsi(conv, ret)))
 		return (NULL);

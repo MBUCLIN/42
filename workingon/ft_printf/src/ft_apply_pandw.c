@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 16:01:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/18 15:37:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/02/24 17:15:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,14 @@ static int		get_preci(char *info)
 static char		*apply_preci(int preci, char *conv, int cut)
 {
 	char		*add;
+	int			size;
 
+	size = ft_strlen(conv);
+	if (size == 1 && preci != -1 && conv[0] == 0)
+		return (ft_strdup(""));
+	else if (preci < size - cut)
+		return (conv);
+	preci = preci - size - cut;
 	if (!(add = (char *)ft_memalloc(sizeof(char) * (preci + 1))))
 	{
 		free(conv);
@@ -59,7 +66,7 @@ static char		*apply_width(int adj, int width, int preci, char *conv)
 		free(conv);
 		return (NULL);
 	}
-	if (preci == -1 && adj == 'l' && conv[0] == '-')
+	if (preci == -1 && adj == 'l' && conv[0] != '-')
 		ft_memset(add, '0', width);
 	else
 		ft_memset(add, ' ', width);
@@ -93,13 +100,9 @@ char			*ft_apply_pandw(int adj, char *info, char *conv)
 	else if (conv && ((conv[0] == '0' || conv[0] == ' ' || conv[0] == '+') &&\
 			size != 1))
 		minus = 1;
-	if (preci > size - minus)
-	{
-		preci = preci - (size - minus);
-		if (!(conv = apply_preci(preci, conv, minus)))
-			return (NULL);
-		size = ft_strlen(conv);
-	}
+	if (!(conv = apply_preci(preci, conv, minus)))
+		return (NULL);
+	size = ft_strlen(conv);
 	if (width > size)
 		return (apply_width(adj, width - size, preci, conv));
 	return (conv);

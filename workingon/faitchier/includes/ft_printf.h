@@ -1,0 +1,56 @@
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
+# include <unistd.h>
+# include <inttypes.h>
+# include <stdarg.h>
+# include <stdlib.h>
+
+int			ft_strlen(const char *str);
+void		ft_memset(void *p, int c, int len);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
+char		*ft_strjoin(const char *s1, const char *s2);
+char		*ft_strsub(const char *tosub, int sta, int size);
+char		*ft_strdup(const char *s);
+char		*ft_strsubfree(char *tosub, int sta, int size);
+char		*ft_strmidadd(char *tocut, char *toadd, int i);
+char		*ft_strjoinprintf(char *s1, char *s2, int size1);
+char		*ft_strjoindfree(char *s1, char *s2);
+char		*ft_strdupfree(char *s);
+void		ft_strrev(char *s);
+void		ft_print_opt(char *opt, int size);
+char		*ft_sitoabase(size_t nbr, const char *base);
+char		*ft_sitoa(ssize_t nbr);
+int			ft_atoibase(char *nbr_b, char *base);
+int			ft_atoi(char *str);
+int			ft_string_len(char *s);
+void		ft_printf_opt(char *opt, int size);
+char		*ft_convoct(char *bits, int olen);
+int			ft_isunsigned(int c);
+int			ft_isdigit(int c);
+int			ft_isconvi(int c);
+int			ft_isconvc(int c);
+int			ft_isconv(int c);
+char		*ft_getoct(int wint, char *mask);
+int			ft_get_nbits(int wint);
+int			ft_get_noct(int n);
+char		*ft_getmask(int n);
+int			ft_getwidth(char *info);
+int			ft_getpreci(char *info);
+int			ft_get_lm(char *info);
+int			ft_getlen(const char *fmt);
+int			ft_getadj(char *info);
+int			ft_checkconv(const char *fmt, int i);
+int			ft_apply_widtchar(char *info, char **conv, int adj, int len);
+char		*ft_apply_pandw(int adj, char *info, char *conv);
+int			ft_apply_flagsi(char **conv, char *info);
+int			ft_apply_integ(char **conv, char *info, va_list ap, int lm);
+int			ft_apply_wchar(char *info, int adj, char **conv, va_list ap);
+int			ft_apply_wint(char *info, int adj, char **conv, va_list ap);
+int			ft_apply_convp(char *info, int adj, char **conv, va_list ap);
+int			ft_apply_charc(char *info, int adj, char **conv, va_list ap);
+int			ft_apply_conv(char **conv, char *info, int lm, va_list ap);
+int			ft_printf(const char *format, ...);
+
+#endif
+

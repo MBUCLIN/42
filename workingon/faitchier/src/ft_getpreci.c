@@ -9,6 +9,7 @@ int		ft_getpreci(char *info)
 	{
 		if (info[i] == '.')
 			return (ft_atoi((info + i + 1)));
+		i++;
 	}
 	return (-1);
 

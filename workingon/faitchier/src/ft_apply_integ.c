@@ -1,18 +1,19 @@
 #include "../includes/ft_printf.h"
 
-static int		apply_unsignedconv(char **cv, size_t arg, char c)
+static t_printf		*apply_unsignedconv(t_printf *conv, size_t arg, char c)
 {
 	if (c == 'o' || c == 'O')
-		*cv = ft_sitoabase(arg, "01234567");
+		conv->opt = ft_sitoabase(arg, "01234567");
 	else if (c == 'x')
-		*cv = ft_sitoabase(arg, "0123456789abcdef");
+		conv->opt = ft_sitoabase(arg, "0123456789abcdef");
 	else if (c == 'X')
-		*cv = ft_sitoabase(arg, "0123456789ABCDEF");
+		conv->opt = ft_sitoabase(arg, "0123456789ABCDEF");
 	else
-		*cv = ft_sitoabase(arg, "0123456789");
-	if (*cv == NULL)
-		return (0);
-	return (ft_strlen(*cv));
+		conv->opt = ft_sitoabase(arg, "0123456789");
+	if (conv->opt == NULL)
+		return (NULL);
+	conv->size = ft_strlen(conv->opt);
+	return (conv);
 }
 
 static ssize_t	get_arg(int lm, char c, va_list ap)
@@ -37,24 +38,30 @@ static ssize_t	get_arg(int lm, char c, va_list ap)
 	return (arg);
 }
 
-int				ft_apply_integ(char **conv, char *info, va_list ap, int lm)
+t_printf				*ft_apply_integ(char *info, va_list ap, int lm)
 {
 	ssize_t		arg;
 	int			c;
 	int			preci;
+	t_printf	*conv;
 
+	if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))
+		return (NULL);
 	preci = ft_getpreci(info);
 	c = info[ft_strlen(info) - 1];
 	arg = get_arg(lm, c, ap);
-	if (arg == 0 && preci == 0)
+	if (preci == 0 && arg == 0)
 	{
-		if (!(*conv = ft_strdup("")))
-			return (0);
-		return (1);
+		if (!(conv->opt = ft_strdup("")))
+			return (NULL);
+		conv->size = 1;
+		return (conv);
 	}
 	if (c == 'o' || c == '0' || c == 'x' || c == 'u' || c == 'U')
 		return (apply_unsignedconv(conv, arg, c));
-	if (!(*conv = ft_sitoa(arg)))
-		return (0);
-	return (ft_strlen(*conv));
+	if (!(conv->opt = ft_sitoa(arg)))
+		return (NULL);
+	ft_putendl(conv->opt);
+	conv->size = ft_strlen(conv->opt);
+	return (conv);
 }

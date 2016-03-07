@@ -14,6 +14,7 @@ int			ft_get_lm(char *info)
 		else if (info[i] == 'l' || info[i] == 'h' || info[i] == 'j' ||\
 				info[i] == 'z')
 			return (info[i]);
+		i++;
 	}
 	return (0);
 }

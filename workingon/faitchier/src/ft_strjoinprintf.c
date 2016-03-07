@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-int			cpy_stringfree(char *dest, char *src, int lsrc)
+static void			cpy_stringfree(char *dest, char * src, int lsrc)
 {
 	int		i;
 
@@ -13,21 +13,25 @@ int			cpy_stringfree(char *dest, char *src, int lsrc)
 	dest[i] = '\0';
 	free(src);
 	src = NULL;
-	return (i);
 }
 
-char		*ft_strjoinprintf(char *s1, char *s2, int size1)
+t_printf		*ft_strjoinprintf(t_printf *print, char *s2, int len2)
 {
 	char		*join;
 	int			size;
-	int			n;
 
-	size = size1 + ft_strlen(s2) + 1;
+	size = print->size + len2;
 	join = NULL;
-	if (!(join = (char *)malloc(sizeof(char) * size)))
+	if (!(join = (char *)malloc(sizeof(char) * size + 1)))
 		return (NULL);
-	join[size - 1] = '\0';
-	n = cpy_stringfree(join, s1, size1);
-	cpy_stringfree((join + n), s2, ft_strlen(s2));
-	return (join);
+	join[size] = '\0';
+	cpy_stringfree(join, print->opt, print->size);
+	cpy_stringfree((join + print->size), s2, len2);
+	if (!(print->opt = (char *)malloc(sizeof(char) * size + 1)))
+		return (NULL);
+	print->opt[size] = 0;
+	ft_memcpy(print->opt, join, size);
+	print->size = size;
+	free(join);
+	return (print);
 }

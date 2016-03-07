@@ -2,7 +2,7 @@
 
 int		ft_checkconv(const char *fmt, int i)
 {
-	while (fmt[i])
+	while (fmt[++i])
 		if (ft_isconv(fmt[i]))
 			return (1);
 	return (0);

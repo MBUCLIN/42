@@ -11,6 +11,7 @@ char		*ft_strsub(const char *tosub, int sta, int size)
 		size = ft_strlen(tosub) - sta;
 	else if (!(sub = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
+	sub[size] = 0;
 	while (i < size && tosub[sta])
 	{
 		sub[i] = tosub[sta];

@@ -51,14 +51,18 @@ static char		*apply_flags(char *info, char *conv)
 	return (apply_signedflags(info, conv));
 }
 
-int				ft_apply_flagsi(char **conv, char *info)
+t_printf		*ft_apply_flagsi(char *info, t_printf *conv)
 {
 	int		adj;
+	char	*flags;
 
-	if (!(*conv = ft_strjoindfree(apply_flags(info, *conv), *conv)))
-		return (0);
+	if (!(flags = apply_flags(info, conv->opt)))
+		return (NULL);
+	if (!(conv->opt = ft_strjoindfree(flags, conv->opt)))
+		return (NULL);
 	adj = ft_getadj(info);
-	if (!(*conv = ft_apply_pandw(adj, info, *conv)))
-		return (0);
-	return (ft_strlen(*conv));
+	if (!(conv->opt = ft_apply_pandw(adj, info, conv->opt)))
+		return (NULL);
+	conv->size = ft_strlen(conv->opt);
+	return (conv);
 }

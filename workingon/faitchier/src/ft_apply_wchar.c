@@ -35,37 +35,49 @@ static char		*apply_wchar(int ncar, int *wchar)
 	return (wconv);
 }
 
-static char		*apply_preci(char *conv, char *info, int len)
+static t_printf		*apply_preci(t_printf *conv, char *info)
 {
-	int		sizep;
+	int		size;
 	char	*preci;
+	int		len;
 
+	len = conv->size;
 	preci = NULL;
-	sizep = ft_getpreci(info);
-	if (sizep > len)
+	size = ft_getpreci(info);
+	if (size > conv->size)
 	{
-		if (!(preci = (char *)malloc(sizeof(char) * (sizep - len))))
+		if (!(preci = (char *)malloc(sizeof(char) * ((size - len) + 1))))
 			return (NULL);
 	}
-	else if (sizep != -1)
-		return (ft_strsubfree(conv, 0, sizep - 1));
+	else if (size != -1)
+	{
+		if (!(conv->opt = ft_strsubfree(conv->opt, 0, size)))
+			return (NULL);
+		conv->size = size;
+	}
 	if (!preci)
 		return (conv);
-	return (ft_strjoinprintf(preci, conv, sizep - len));
+	if (!(conv->opt = ft_strjoindfree(preci, conv->opt)))
+		return (NULL);
+	conv->size = ft_strlen(conv->opt);
+	return (conv);
 }
 
-int				ft_apply_wchar(char *info, int adj, char **conv, va_list ap)
+t_printf			*ft_apply_wchar(char *info, int adj, va_list ap)
 {
 	int		*wchar;
 	int		ncar;
-	int		len;
+	t_printf	*conv;
 
+	if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))
+		return (NULL);
+	conv->opt = NULL;
 	wchar = va_arg(ap, int *);
 	ncar = get_ncar(wchar);
-	if (!(*conv = apply_wchar(ncar, wchar)))
-		return (0);
-	len = ft_strlen(*conv);
-	if (!(*conv = apply_preci(*conv, info, len)))
-		return (0);
-	return (ft_apply_widtchar(info, conv, adj, ft_strlen(*conv)));
+	if (!(conv->opt = apply_wchar(ncar, wchar)))
+		return (NULL);
+	conv->size = ft_strlen(conv->opt);
+	if (!(conv = apply_preci(conv, info)))
+		return (NULL);
+	return (ft_apply_widtchar(info, conv, adj));
 }

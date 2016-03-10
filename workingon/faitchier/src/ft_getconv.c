@@ -6,7 +6,6 @@ t_printf		*ft_getconv(char *info, va_list ap)
 	int			c;
 	t_printf	*conv;
 
-	ft_putendl(info);
 	if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))
 		return (NULL);
 	conv->opt = NULL;
@@ -16,7 +15,9 @@ t_printf		*ft_getconv(char *info, va_list ap)
 	lm = ft_get_lm(info);
 	if (ft_isconvc(info[c]))
 		return (ft_apply_conv(info, lm, ap));
-	if (!(conv = ft_apply_integ(info, ap, lm)))
+	if (!(conv = ft_apply_number(info, ap, lm)))
 		return (NULL);
-	return (ft_apply_flagsi(info, conv));
+	if (!(conv = ft_apply_flagsi(info, conv)))
+		return (NULL);
+	return (conv);
 }

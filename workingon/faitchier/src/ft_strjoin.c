@@ -25,14 +25,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!(toret = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
 		return (NULL);
 	toret[ft_strlen(s1) + ft_strlen(s2)] = '\0';
-	if (s1)
+	if (s1 != NULL)
 		while (s1[++i])
 		{
 			toret[j] = s1[i];
 			j++;
 		}
 	i = -1;
-	if (s2)
+	if (s2 != NULL)
 		while (s2[++i])
 		{
 			toret[j] = s2[i];

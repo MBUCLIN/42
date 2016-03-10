@@ -10,17 +10,15 @@ static char		*apply_preci(char *conv, int minus, int size, char *info)
 	if (size == 1 && sizep != -1 && conv[0] == '0')
 		return (ft_strdup(""));
 	sizep = sizep - (size - minus);
-	if (!(preci = (char *)malloc(sizeof(char) * (sizep + 1))))
-	{
-		free(conv);
-		return (NULL);
-	}
+	if (sizep > size)
+		if (!(preci = (char *)malloc(sizeof(char) * ((sizep - size) + 1))))
+			return (NULL);
+	sizep -= size;
+	if (!preci)
+		return (conv);
+	ft_memset(preci, '0', sizep);
 	preci[sizep] = 0;
-	if (preci)
-		ft_memset(preci, '0', sizep);
-	if (!(conv = ft_strmidadd(conv, preci, minus)))
-		return (NULL);
-	return (conv);
+	return (ft_strmidadd(conv, preci, minus));
 }
 
 static char		*get_width(char *conv, char *width, int minus, int adj)
@@ -39,16 +37,17 @@ static char		*apply_width(int adj, char *conv, char *info, int minus)
 	char	*width;
 	int		sizew;
 
+	width = NULL;
 	sizew = ft_getwidth(info) - ft_strlen(conv);
-	if (sizew > 0)
+	if (sizew >= 1)
 		if (!(width = (char *)malloc(sizeof(char) * (sizew + 1))))
 		{
 			free(conv);
 			return (NULL);
 		}
-	if (!width)
+	if (width == NULL)
 		return (conv);
-	if (ft_getpreci(info) == -1 && adj == 'l')
+	if (ft_getpreci(info) == -1 && adj == 'l' && conv[0] != '-')
 		ft_memset(width, '0', sizew);
 	else
 		ft_memset(width, ' ', sizew);

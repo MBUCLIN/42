@@ -4,7 +4,7 @@ static int		after_conv(const char *fmt, int pos)
 {
 	while (fmt[++pos])
 		if (ft_isconv(fmt[pos]))
-			return (pos);
+			return (pos + 1);
 	return (pos);
 }
 
@@ -44,12 +44,11 @@ static t_printf		*big_loop(const char *fmt, t_printf *p, va_list ap, int i)
 	int			len;
 	char		*sub;
 
-	st = -1;
+	st = 0;
 	len = ft_strlen(fmt);
 	while (fmt[++i])
 		if (fmt[i] == '%' && ft_checkconv(fmt, i))
 		{
-			st += 1;
 			if (!(p = ft_strjoinprintf(p,\
 				ft_strsub(fmt, st, i - st), i - st)))
 				return (NULL);
@@ -58,7 +57,6 @@ static t_printf		*big_loop(const char *fmt, t_printf *p, va_list ap, int i)
 			st = after_conv(fmt, i);
 			i = st;
 		}
-	st += 1;
 	if (!(sub = ft_strsub(fmt, st, len - st)))
 		return (NULL);
 	if (!(p = ft_strjoinprintf(p, sub, len - st)))

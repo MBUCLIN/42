@@ -13,6 +13,7 @@ typedef struct	s_printf
 }				t_printf;
 
 int				ft_strlen(const char *str);
+void			ft_putendlfree(char *s);
 void			ft_putendl(char *s);
 void			ft_memset(void *p, int c, int len);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
@@ -28,6 +29,8 @@ char			*ft_strdupprintf(const char *src, int size);
 void			ft_strrev(char *s);
 char			*ft_sitoabase(size_t nbr, const char *base);
 char			*ft_sitoa(ssize_t nbr);
+char			*ft_itoa(int nbr);
+char			*ft_itoabase(unsigned int nbr, const char *base);
 int				ft_atoibase(char *nbr_b, char *base);
 int				ft_atoi(char *str);
 int				ft_string_len(char *s);
@@ -49,8 +52,9 @@ int				ft_getadj(char *info);
 int				ft_checkconv(const char *fmt, int i);
 t_printf		*ft_apply_widtchar(char *info, t_printf *conv, int adj);
 char			*ft_apply_pandw(int adj, char *info, char *conv);
+t_printf		*ft_apply_int(t_printf *conv, char *info, va_list ap, int lm);
 t_printf		*ft_apply_flagsi(char *info, t_printf *conv);
-t_printf		*ft_apply_integ(char *info, va_list ap, int lm);
+t_printf		*ft_apply_number(char *info, va_list ap, int lm);
 t_printf		*ft_apply_wchar(char *info, int adj, va_list ap);
 t_printf		*ft_apply_wint(char *info, int adj, va_list ap);
 t_printf		*ft_apply_convp(char *info, int adj, va_list ap);

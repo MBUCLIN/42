@@ -44,11 +44,19 @@ static char		*apply_signedflags(char *info, char *conv)
 static char		*apply_flags(char *info, char *conv)
 {
 	int		c;
+	char	*flag;
 
+	flag = NULL;
 	c = info[ft_strlen(info) - 1];
 	if (conv[0] != '0' && ft_isunsigned(c))
-		return (apply_unsignedflags(c, info));
-	return (apply_signedflags(info, conv));
+	{
+		if (!(flag = apply_unsignedflags(c, info)))
+			return (NULL);
+	}
+	else
+		if (!(flag = apply_signedflags(info, conv)))
+			return (NULL);
+	return (flag);
 }
 
 t_printf		*ft_apply_flagsi(char *info, t_printf *conv)
@@ -56,10 +64,10 @@ t_printf		*ft_apply_flagsi(char *info, t_printf *conv)
 	int		adj;
 	char	*flags;
 
-	if (!(flags = apply_flags(info, conv->opt)))
-		return (NULL);
+	flags = apply_flags(info, conv->opt);
 	if (!(conv->opt = ft_strjoindfree(flags, conv->opt)))
 		return (NULL);
+	conv->size = ft_strlen(conv->opt);
 	adj = ft_getadj(info);
 	if (!(conv->opt = ft_apply_pandw(adj, info, conv->opt)))
 		return (NULL);

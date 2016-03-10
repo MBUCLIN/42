@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_charc.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:22:48 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 15:51:04 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static t_printf		*joinprecileft(t_printf *conv, char *preci, int size)
@@ -29,10 +41,10 @@ static t_printf		*apply_c(int adj, t_printf *conv, char *info)
 
 	preci = NULL;
 	size = ft_getpreci(info) - conv->size;
-	if (size >= 1)
+	if (size >= 1 && conv->opt[0] != 0)
 		if (!(preci = (char *)malloc(sizeof(char) * (size + 1))))
 			return (NULL);
-	if (size < 1)
+	if (size < 1 || conv->opt[0] == 0)
 		return (ft_apply_widtchar(info, conv, adj));
 	preci[size] = 0;
 	ft_memset(preci, ' ', size);
@@ -57,8 +69,10 @@ t_printf			*ft_apply_charc(char *info, int adj, va_list ap)
 		conv->opt[1] = 0;
 	}
 	else
+	{
 		if (!(conv->opt = ft_strdup("%")))
 			return (NULL);
+	}
 	conv->size = 1;
 	return (apply_c(adj, conv, info));
 }

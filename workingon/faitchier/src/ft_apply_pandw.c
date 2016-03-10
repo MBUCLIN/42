@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_pandw.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:18:36 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 14:55:45 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static char		*apply_preci(char *conv, int minus, int size, char *info)
@@ -47,6 +59,7 @@ static char		*apply_width(int adj, char *conv, char *info, int minus)
 		}
 	if (width == NULL)
 		return (conv);
+	width[sizew] = 0;
 	if (ft_getpreci(info) == -1 && adj == 'l' && conv[0] != '-')
 		ft_memset(width, '0', sizew);
 	else
@@ -64,7 +77,7 @@ char			*ft_apply_pandw(int adj, char *info, char *conv)
 	if (conv && (conv[0] == '0' && (conv[1] == 'x' || conv[1] == 'X')))
 		minus = 2;
 	else if (conv && size > 1 && (conv[0] == '0' ||\
-			 conv[0] == ' ' || conv[0] == '+' || conv[0] == '-'))
+			conv[0] == ' ' || conv[0] == '+' || conv[0] == '-'))
 		minus = 1;
 	if (!(conv = apply_preci(conv, minus, size, info)))
 		return (NULL);

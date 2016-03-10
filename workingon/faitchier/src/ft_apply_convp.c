@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_convp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:08:20 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 16:06:36 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static t_printf		*get_convetwidth(t_printf *conv, char *width, int adj)
@@ -32,7 +44,6 @@ static t_printf		*apply_widthp(int adj, char *info, t_printf *conv)
 	width[size] = '\0';
 	if (ft_getpreci(info) == -1 && adj == 'l')
 		c = '0';
-	free(info);
 	ft_memset(width, c, size);
 	return (get_convetwidth(conv, width, adj));
 }
@@ -42,10 +53,11 @@ static t_printf		*get_p(int adj, char *info, t_printf *conv)
 	char		*preci;
 	int			size;
 
+	preci = NULL;
 	size = ft_getpreci(info) - conv->size;
 	if (!(conv->opt = ft_strjoindfree(ft_strdup("0x"), conv->opt)))
 		return (NULL);
-	if (size)
+	if (size > 1)
 		if (!(preci = (char *)malloc(sizeof(char) * (size + 1))))
 			return (NULL);
 	if (!preci)
@@ -60,7 +72,7 @@ static t_printf		*get_p(int adj, char *info, t_printf *conv)
 
 t_printf			*ft_apply_convp(char *info, int adj, va_list ap)
 {
-	long 		adr;
+	long		adr;
 	void		*p;
 	t_printf	*conv;
 

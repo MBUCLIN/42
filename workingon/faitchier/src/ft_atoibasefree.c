@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoibase.c                                      :+:      :+:    :+:   */
+/*   ft_atoibasefree.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 15:13:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/13 13:56:04 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/03/10 15:56:57 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 15:57:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int		get_number(char *nbr_b, char *base)
 	return (nbr);
 }
 
-int				ft_atoibase(char *nbr_b, char *base)
+int				ft_atoibasefree(char *nbr_b, char *base)
 {
 	unsigned int		nbr;
 
@@ -87,5 +87,6 @@ int				ft_atoibase(char *nbr_b, char *base)
 	if (check_nbr(nbr_b, base) == 0 || check_base(base) == 0)
 		return (0);
 	nbr = get_number(nbr_b, base);
+	free(nbr_b);
 	return (nbr);
 }

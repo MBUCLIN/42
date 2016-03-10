@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_wchar.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:17:40 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 12:19:05 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
-static int		get_ncar(int *wchar)
+
+static int			get_ncar(int *wchar)
 {
 	int		i;
 
@@ -9,7 +22,7 @@ static int		get_ncar(int *wchar)
 	return (i);
 }
 
-static char		*apply_wchar(int ncar, int *wchar)
+static char			*apply_wchar(int ncar, int *wchar)
 {
 	char	*oct;
 	int		n;
@@ -23,7 +36,7 @@ static char		*apply_wchar(int ncar, int *wchar)
 	{
 		n = ft_get_nbits(*(wchar + i));
 		if (!(oct = ft_getoct(*(wchar + i), ft_getmask(n))))
-			return	(NULL);
+			return (NULL);
 		n = ft_get_noct(n);
 		if (!(oct = ft_convoct(oct, n)))
 			return (NULL);
@@ -65,8 +78,8 @@ static t_printf		*apply_preci(t_printf *conv, char *info)
 
 t_printf			*ft_apply_wchar(char *info, int adj, va_list ap)
 {
-	int		*wchar;
-	int		ncar;
+	int			*wchar;
+	int			ncar;
 	t_printf	*conv;
 
 	if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))

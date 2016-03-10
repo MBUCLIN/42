@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoinprintf.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:11:53 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 15:03:13 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
-static void			cpy_stringfree(char *dest, char * src, int lsrc)
+static void			cpy_stringfree(char *dest, char *src, int lsrc)
 {
 	int		i;
 
@@ -15,7 +27,7 @@ static void			cpy_stringfree(char *dest, char * src, int lsrc)
 	src = NULL;
 }
 
-t_printf		*ft_strjoinprintf(t_printf *print, char *s2, int len2)
+t_printf			*ft_strjoinprintf(t_printf *print, char *s2, int len2)
 {
 	char		*join;
 	int			size;
@@ -25,8 +37,10 @@ t_printf		*ft_strjoinprintf(t_printf *print, char *s2, int len2)
 	if (!(join = (char *)malloc(sizeof(char) * size + 1)))
 		return (NULL);
 	join[size] = '\0';
-	cpy_stringfree(join, print->opt, print->size);
-	cpy_stringfree((join + print->size), s2, len2);
+	if (print->opt)
+		cpy_stringfree(join, print->opt, print->size);
+	if (s2)
+		cpy_stringfree((join + print->size), s2, len2);
 	if (!(print->opt = (char *)malloc(sizeof(char) * size + 1)))
 		return (NULL);
 	print->opt[size] = 0;

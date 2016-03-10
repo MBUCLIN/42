@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:12:57 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 15:46:49 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
-static int		after_conv(const char *fmt, int pos)
+static int			after_conv(const char *fmt, int pos)
 {
 	while (fmt[++pos])
 		if (ft_isconv(fmt[pos]))
@@ -8,7 +20,7 @@ static int		after_conv(const char *fmt, int pos)
 	return (pos);
 }
 
-static char		*extract_info(const char *fmt)
+static char			*extract_info(const char *fmt)
 {
 	int		i;
 
@@ -55,7 +67,7 @@ static t_printf		*big_loop(const char *fmt, t_printf *p, va_list ap, int i)
 			if (!(p = get_opt((fmt + i), p, ap)))
 				return (NULL);
 			st = after_conv(fmt, i);
-			i = st;
+			i = st - 1;
 		}
 	if (!(sub = ft_strsub(fmt, st, len - st)))
 		return (NULL);
@@ -64,7 +76,7 @@ static t_printf		*big_loop(const char *fmt, t_printf *p, va_list ap, int i)
 	return (p);
 }
 
-int				ft_printf(const char *format, ...)
+int					ft_printf(const char *format, ...)
 {
 	t_printf	*print;
 	va_list		ap;

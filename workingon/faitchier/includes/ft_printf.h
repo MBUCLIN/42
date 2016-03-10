@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:23:44 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 15:57:39 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -31,7 +43,7 @@ char			*ft_sitoabase(size_t nbr, const char *base);
 char			*ft_sitoa(ssize_t nbr);
 char			*ft_itoa(int nbr);
 char			*ft_itoabase(unsigned int nbr, const char *base);
-int				ft_atoibase(char *nbr_b, char *base);
+int				ft_atoibasefree(char *nbr_b, char *base);
 int				ft_atoi(char *str);
 int				ft_string_len(char *s);
 char			*ft_convoct(char *bits, int olen);
@@ -64,4 +76,3 @@ t_printf		*ft_getconv(char *info, va_list ap);
 int				ft_printf(const char *format, ...);
 
 #endif
-

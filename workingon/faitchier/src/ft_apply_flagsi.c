@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_flagsi.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:22:24 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 14:59:12 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static char		*apply_unsignedflags(int c, char *info)
@@ -48,14 +60,16 @@ static char		*apply_flags(char *info, char *conv)
 
 	flag = NULL;
 	c = info[ft_strlen(info) - 1];
-	if (conv[0] != '0' && ft_isunsigned(c))
+	if (conv[0] != '0' && conv[0] != 0 && ft_isunsigned(c))
 	{
 		if (!(flag = apply_unsignedflags(c, info)))
 			return (NULL);
 	}
 	else
+	{
 		if (!(flag = apply_signedflags(info, conv)))
 			return (NULL);
+	}
 	return (flag);
 }
 

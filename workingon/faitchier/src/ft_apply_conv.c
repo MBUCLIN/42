@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_conv.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:20:48 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 16:05:03 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static t_printf		*cpy_conv(char *arg, int len)
@@ -7,13 +19,24 @@ static t_printf		*cpy_conv(char *arg, int len)
 
 	if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))
 		return (NULL);
-	if (!(conv->opt = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
+	if (len >= 0)
+	{
+		if (!(conv->opt = (char *)malloc(sizeof(char) * (len + 1))))
+			return (NULL);
+		conv->opt[len] = '\0';
+	}
 	i = -1;
 	while (++i < len)
 		conv->opt[i] = *(arg + i);
-	conv->opt[i] = '\0';
 	conv->size = len;
+	return (conv);
+}
+
+static t_printf		*preciislessthansize(t_printf *conv, int size)
+{
+	if (!(conv->opt = ft_strsubfree(conv->opt, 0, size)))
+		return (NULL);
+	conv->size = size;
 	return (conv);
 }
 
@@ -25,12 +48,18 @@ static t_printf		*get_convs(int adj, t_printf *conv, char *info)
 	size = ft_getpreci(info);
 	preci = NULL;
 	if (size > conv->size && conv->size > 0)
+	{
 		if (!(preci = (char *)malloc(sizeof(char) * ((size - conv->size) + 1))))
 			return (NULL);
-	if (size == -1)
+	}
+	else
+	{
+
+		if (size != -1 && conv->opt[0] != 0)
+			if (!(conv = preciislessthansize(conv, size)))
+				return (NULL);
 		return (ft_apply_widtchar(info, conv, adj));
-	if (preci == NULL)
-		return (NULL);
+	}
 	preci[size - conv->size] = '\0';
 	ft_memset(preci, ' ', size - conv->size);
 	if (!(conv->opt = ft_strjoindfree(preci, conv->opt)))
@@ -54,6 +83,7 @@ static t_printf		*apply_convs(char *info, int adj, va_list ap)
 			return (NULL);
 		if (!(conv->opt = ft_strdup("(null)")))
 			return (NULL);
+		conv->size = 6;
 		return (get_convs(adj, conv, info));
 	}
 	len = ft_strlen(s);
@@ -62,7 +92,7 @@ static t_printf		*apply_convs(char *info, int adj, va_list ap)
 	return (get_convs(adj, conv, info));
 }
 
-t_printf		*ft_apply_conv(char *info, int lm, va_list ap)
+t_printf			*ft_apply_conv(char *info, int lm, va_list ap)
 {
 	int		c;
 	int		adj;

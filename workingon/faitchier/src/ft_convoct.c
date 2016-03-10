@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:19:48 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/24 15:19:49 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/10 15:55:38 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ char		*ft_convoct(char *bits, int olen)
 		return (NULL);
 	oct[olen] = '\0';
 	ft_memset(oct, ' ', olen);
-	oct[0] = ft_atoibase(ft_strdup((bits + blen - 8)), "01");
+	oct[0] = ft_atoibasefree(ft_strdup((bits + blen - 8)), "01");
 	if (oct[1])
-		oct[1] = ft_atoibase(ft_strsub(bits, blen - 16, blen - 8), "01");
+		oct[1] = ft_atoibasefree(ft_strsub(bits, blen - 16, blen - 8), "01");
 	if (oct[2])
-		oct[2] = ft_atoibase(ft_strsub(bits, blen - 24, blen - 16), "01");
+		oct[2] = ft_atoibasefree(ft_strsub(bits, blen - 24, blen - 16), "01");
 	if (oct[3])
-		oct[3] = ft_atoibase(ft_strsub(bits, 0, blen - 24), "01");
+		oct[3] = ft_atoibasefree(ft_strsub(bits, 0, blen - 24), "01");
 	free(bits);
 	ft_strrev(oct);
 	return (oct);

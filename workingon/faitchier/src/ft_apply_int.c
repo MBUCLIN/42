@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_int.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 12:20:02 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/10 14:53:42 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static t_printf	*apply_hconv(t_printf *conv, int a, char c)
@@ -18,13 +30,13 @@ static t_printf	*apply_unsignedconv(t_printf *conv, int a, char c, int lm)
 	if (lm == 'h')
 		return (apply_hconv(conv, a, c));
 	else if (c == 'o')
-		conv->opt = ft_itoabase(a, "01234567");
+		conv->opt = ft_sitoabase((unsigned int)a, "01234567");
 	else if (c == 'x')
-		conv->opt = ft_itoabase(a, "0123456789abcdef");
+		conv->opt = ft_sitoabase((unsigned int)a, "0123456789abcdef");
 	else if (c == 'X')
-		conv->opt = ft_itoabase(a, "0123456789ABCDEF");
+		conv->opt = ft_sitoabase((unsigned int)a, "0123456789ABCDEF");
 	else
-		conv->opt = ft_itoabase(a, "0123456789");
+		conv->opt = ft_sitoabase((unsigned int)a, "0123456789");
 	return (conv);
 }
 
@@ -60,7 +72,7 @@ t_printf		*ft_apply_int(t_printf *conv, char *info, va_list ap, int lm)
 	}
 	if (c == 'o' || c == 'x' || c == 'X' || c == 'u')
 		return (apply_unsignedconv(conv, arg, c, lm));
-	if (!(conv->opt = ft_itoa(arg)))
+	if (!(conv->opt = ft_sitoa((int)arg)))
 		return (NULL);
 	conv->size = ft_strlen(conv->opt);
 	return (conv);

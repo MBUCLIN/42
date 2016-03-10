@@ -7,7 +7,7 @@ SRC_PATH = src/
 SRC_NAME = ft_apply_charc.c ft_apply_conv.c ft_apply_convp.c \
 		   ft_apply_flagsi.c ft_apply_number.c ft_apply_pandw.c \
 		   ft_apply_wchar.c ft_apply_widtchar.c ft_apply_wint.c \
-		   ft_atoibase.c ft_atoi.c ft_checkconv.c ft_convoct.c \
+		   ft_atoibasefree.c ft_atoi.c ft_checkconv.c ft_convoct.c \
 		   ft_getadj.c ft_getlen.c ft_get_lm.c ft_getmask.c ft_putendl.c\
 		   ft_get_nbits.c ft_get_noct.c ft_getoct.c ft_getpreci.c ft_putendlfree.c\
 		   ft_getwidth.c ft_isconv.c ft_isconvc.c ft_isconvi.c ft_isdigit.c \

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:18:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 14:55:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/14 18:28:13 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ static char		*apply_preci(char *conv, int minus, int size, char *info)
 
 	sizep = ft_getpreci(info);
 	preci = NULL;
-	if (size == 1 && sizep != -1 && conv[0] == '0')
+	if (size == 1 && sizep != -1 && conv[0] == 0 && !ft_carchr('#', info))
 		return (ft_strdup(""));
 	sizep = sizep - (size - minus);
-	if (sizep > size)
-		if (!(preci = (char *)malloc(sizeof(char) * ((sizep - size) + 1))))
+	if (sizep >= 1)
+		if (!(preci = (char *)malloc(sizeof(char) * (sizep + 1))))
 			return (NULL);
-	sizep -= size;
 	if (!preci)
 		return (conv);
 	ft_memset(preci, '0', sizep);
@@ -60,7 +59,7 @@ static char		*apply_width(int adj, char *conv, char *info, int minus)
 	if (width == NULL)
 		return (conv);
 	width[sizew] = 0;
-	if (ft_getpreci(info) == -1 && adj == 'l' && conv[0] != '-')
+	if (ft_getpreci(info) == -1 && adj == 'l')
 		ft_memset(width, '0', sizew);
 	else
 		ft_memset(width, ' ', sizew);

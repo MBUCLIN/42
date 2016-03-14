@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:22:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 14:59:12 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/14 18:33:53 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static char		*apply_unsignedflags(int c, char *info)
+static char		*apply_unsignedflags(int c, char *info, char *conv)
 {
 	int		i;
 
@@ -21,11 +21,11 @@ static char		*apply_unsignedflags(int c, char *info)
 	{
 		if (info[i] == '#')
 		{
-			if (c == 'x')
+			if (c == 'x' && conv[0] != '0' && conv[0] != 0)
 				return (ft_strdup("0x"));
-			else if (c == 'X')
+			else if (c == 'X' && conv[0] != '0' && conv[0] != 0)
 				return (ft_strdup("0X"));
-			else
+			else if (c == 'o' || c == 'O')
 				return (ft_strdup("0"));
 		}
 		i++;
@@ -60,9 +60,9 @@ static char		*apply_flags(char *info, char *conv)
 
 	flag = NULL;
 	c = info[ft_strlen(info) - 1];
-	if (conv[0] != '0' && conv[0] != 0 && ft_isunsigned(c))
+	if (ft_isunsigned(c))
 	{
-		if (!(flag = apply_unsignedflags(c, info)))
+		if (!(flag = apply_unsignedflags(c, info, conv)))
 			return (NULL);
 	}
 	else

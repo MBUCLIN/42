@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:23:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 15:57:39 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/14 18:27:59 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_printf
 }				t_printf;
 
 int				ft_strlen(const char *str);
+int				ft_carchr(int c, char *s);
 void			ft_putendlfree(char *s);
 void			ft_putendl(char *s);
 void			ft_memset(void *p, int c, int len);

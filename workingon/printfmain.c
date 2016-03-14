@@ -10,5 +10,6 @@ int		main(void)
 	free(n);
 	printf("%d\n", 0);
 	printf("%i\n", 0);
+	printf("%03.2d", 0);
 	return (0);
 }

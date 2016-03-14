@@ -6,11 +6,12 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:19:55 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 16:01:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/14 16:32:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 t_printf		*ft_apply_wint(char *info, int adj, va_list ap)
 {

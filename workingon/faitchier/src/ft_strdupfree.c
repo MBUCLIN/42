@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:13:43 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 12:13:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/14 15:58:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strdupfree(char *s)
 	if (!(dest = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	dest[len] = '\0';
-	dest = ft_memcpy(dest, s, len);
+	ft_memcpy(dest, s, len);
 	free(s);
 	s = NULL;
 	return (dest);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:17:40 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 12:19:05 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/14 16:19:32 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char			*apply_wchar(int ncar, int *wchar)
 		n = ft_get_noct(n);
 		if (!(oct = ft_convoct(oct, n)))
 			return (NULL);
-		if (!(wconv = ft_strdupfree(oct)))
+		if (!(wconv = ft_strjoindfree(wconv, oct)))
 			return (NULL);
 		i++;
 		ncar--;

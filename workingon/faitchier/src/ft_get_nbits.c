@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:16:35 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 12:16:37 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/14 16:30:27 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_get_nbits(int wint)
 
 	n = 32;
 	mask = 0x80000000;
-	while (!(mask & wint))
+	while ((mask & wint) == 0)
 	{
 		n--;
 		mask = mask >> 1;

@@ -1,10 +1,14 @@
 #include "faitchier/includes/ft_printf.h"
+#include <locale.h>
+#include <stdio.h>
 
 int		main(void)
 {
-	ft_printf("%.2s is a string\n", "");
-	ft_printf("%s\n", NULL);
-	ft_printf("%s%s%s%s%s\n", "This", "is", "a", "multi", "string");
-	ft_printf("%.2c\n", NULL);
-	return (0);
+//	ft_printf("%-5.10o\n", 2500);
+//	ft_printf("%-10.5o\n", 2500);
+//	ft_printf("%.10o\n", 42);
+	ft_printf("%05d\n", -42);
+	ft_printf("%0+5d\n", -42);
+	ft_printf("%#.o, %#.0o\n", 0, 0);
+	return (1);
 }

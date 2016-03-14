@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getoct.c                                        :+:      :+:    :+:   */
+/*   ft_carchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/24 15:18:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/14 16:32:39 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/03/14 18:26:12 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/14 18:28:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
-
-char				*ft_getoct(int wint, char *mask)
+int		ft_carchr(int c, char *s)
 {
-	int				len;
-	unsigned int	mkfield;
+	int		i;
 
-	mkfield = 0x1;
-	len = ft_strlen(mask);
-	len -= 1;
-	while (len >= 0)
-	{
-		if (mask[len] == 'x')
-		{
-			if (mkfield & wint)
-				mask[len] = '1';
-			else
-				mask[len] = '0';
-			mkfield <<= 1;
-		}
-		len--;
-	}
-	return (mask);
+	i = -1;
+	while (s[++i])
+		if (s[i] == c)
+			return (1);
+	return (0);
 }

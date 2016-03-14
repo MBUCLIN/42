@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:19:48 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 15:55:38 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/14 16:26:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@ char		*ft_convoct(char *bits, int olen)
 	int		blen;
 
 	blen = ft_strlen(bits);
+	ft_putendl(bits);
 	if (!(oct = (char *)malloc(sizeof(char) * (olen + 1))))
 		return (NULL);
 	oct[olen] = '\0';
 	ft_memset(oct, ' ', olen);
-	oct[0] = ft_atoibasefree(ft_strdup((bits + blen - 8)), "01");
-	if (oct[1])
+	ft_putendlfree(ft_sitoa(olen));
+	if (oct[0] != 0)
+		oct[0] = ft_atoibasefree(ft_strdup((bits + (blen - 8))), "01");
+	if (oct[1] != 0)
 		oct[1] = ft_atoibasefree(ft_strsub(bits, blen - 16, blen - 8), "01");
-	if (oct[2])
+	if (oct[2] != 0)
 		oct[2] = ft_atoibasefree(ft_strsub(bits, blen - 24, blen - 16), "01");
-	if (oct[3])
+	if (oct[3] != 0)
 		oct[3] = ft_atoibasefree(ft_strsub(bits, 0, blen - 24), "01");
 	free(bits);
 	ft_strrev(oct);

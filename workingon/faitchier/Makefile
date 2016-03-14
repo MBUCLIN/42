@@ -15,7 +15,7 @@ SRC_NAME = ft_apply_charc.c ft_apply_conv.c ft_apply_convp.c \
 		   ft_sitoa.c ft_strdup.c ft_strdupfree.c ft_string_len.c ft_strjoin.c \
 		   ft_strjoindfree.c ft_strjoinprintf.c ft_strlen.c ft_strmidadd.c \
 		   ft_strrev.c ft_strsub.c ft_strsubfree.c ft_isunsigned.c ft_strdupprintf.c \
-		   ft_itoa.c ft_itoabase.c ft_apply_int.c
+		   ft_itoa.c ft_itoabase.c ft_apply_int.c ft_carchr.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

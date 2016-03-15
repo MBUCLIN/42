@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:23:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/14 18:27:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/15 13:51:15 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ typedef struct	s_printf
 
 int				ft_strlen(const char *str);
 int				ft_carchr(int c, char *s);
-void			ft_putendlfree(char *s);
-void			ft_putendl(char *s);
 void			ft_memset(void *p, int c, int len);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
 char			*ft_strjoin(const char *s1, const char *s2);
@@ -53,6 +51,7 @@ int				ft_isdigit(int c);
 int				ft_isconvi(int c);
 int				ft_isconvc(int c);
 int				ft_isconv(int c);
+int				ft_isgoodcar(int c);
 char			*ft_getoct(int wint, char *mask);
 int				ft_get_nbits(int wint);
 int				ft_get_noct(int n);

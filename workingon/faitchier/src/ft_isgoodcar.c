@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getoct.c                                        :+:      :+:    :+:   */
+/*   ft_isgoodcar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/24 15:18:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/15 13:36:59 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/03/15 13:41:26 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/03/15 13:41:27 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char				*ft_getoct(int wint, char *mask)
+int		ft_isgoodcar(int c)
 {
-	int				len;
-	unsigned int	mkfield;
-
-	mkfield = 0x1;
-	len = ft_strlen(mask);
-	len -= 1;
-	if (mask == NULL)
-		return (NULL);
-	while (len >= 0)
-	{
-		if (mask[len] == 'x')
-		{
-			if (mkfield & wint)
-				mask[len] = '1';
-			else
-				mask[len] = '0';
-			mkfield <<= 1;
-		}
-		len--;
-	}
-	return (mask);
+	if (c == '#' || c == '0' || c == '-' || c == '+' || c == ' ' ||\
+		c == '.' || c == 'l' || c == 'h' || c == 'z' || c == 'j' ||\
+		ft_isconv(c))
+		return (1);
+	else if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

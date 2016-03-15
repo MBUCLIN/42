@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:19:55 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/14 16:32:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/15 13:49:56 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,24 @@ t_printf		*ft_apply_wint(char *info, int adj, va_list ap)
 	char		*oct;
 	t_printf	*conv;
 
-	oct = NULL;
 	if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))
-		return (0);
-	conv->opt = NULL;
+		return (NULL);
 	wint = va_arg(ap, int);
-	n = ft_get_nbits(wint);
-	if (!(oct = ft_getoct(wint, ft_getmask(n))))
-		return (0);
-	n = ft_get_noct(n);
-	conv->size = n;
-	if (!(conv->opt = ft_convoct(oct, n)))
-		return (0);
+	if (wint == 0)
+	{
+		if (!(conv->opt = ft_strdup("")))
+			return (NULL);
+		conv->size = 1;
+	}
+	else
+	{
+		n = ft_get_nbits(wint);
+		if (!(oct = ft_getoct(wint, ft_getmask(n))))
+			return (NULL);
+		n = ft_get_noct(n);
+		conv->size = n;
+		if (!(conv->opt = ft_convoct(oct, n)))
+			return (NULL);
+	}
 	return (ft_apply_widtchar(info, conv, adj));
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:17:40 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/14 16:19:32 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/15 13:40:29 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,20 @@ t_printf			*ft_apply_wchar(char *info, int adj, va_list ap)
 
 	if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))
 		return (NULL);
-	conv->opt = NULL;
 	wchar = va_arg(ap, int *);
-	ncar = get_ncar(wchar);
-	if (!(conv->opt = apply_wchar(ncar, wchar)))
-		return (NULL);
-	conv->size = ft_strlen(conv->opt);
+	if (wchar == NULL)
+	{
+		if (!(conv->opt = ft_strdup("")))
+			return (NULL);
+		conv->size = 1;
+	}
+	else
+	{
+		ncar = get_ncar(wchar);
+		if (!(conv->opt = apply_wchar(ncar, wchar)))
+			return (NULL);
+		conv->size = ft_strlen(conv->opt);
+	}
 	if (!(conv = apply_preci(conv, info)))
 		return (NULL);
 	return (ft_apply_widtchar(info, conv, adj));

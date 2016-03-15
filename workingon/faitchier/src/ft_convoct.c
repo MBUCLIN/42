@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:19:48 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/14 16:26:34 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/15 13:51:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ char		*ft_convoct(char *bits, int olen)
 	int		blen;
 
 	blen = ft_strlen(bits);
-	ft_putendl(bits);
 	if (!(oct = (char *)malloc(sizeof(char) * (olen + 1))))
 		return (NULL);
 	oct[olen] = '\0';
 	ft_memset(oct, ' ', olen);
-	ft_putendlfree(ft_sitoa(olen));
 	if (oct[0] != 0)
 		oct[0] = ft_atoibasefree(ft_strdup((bits + (blen - 8))), "01");
 	if (oct[1] != 0)

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:20:48 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 16:05:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/15 13:41:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static t_printf		*get_convs(int adj, t_printf *conv, char *info)
 	}
 	else
 	{
-
 		if (size != -1 && conv->opt[0] != 0)
 			if (!(conv = preciislessthansize(conv, size)))
 				return (NULL);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:08:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 16:06:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/03/15 15:09:21 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static t_printf		*get_p(int adj, char *info, t_printf *conv)
 	size = ft_getpreci(info) - conv->size;
 	if (!(conv->opt = ft_strjoindfree(ft_strdup("0x"), conv->opt)))
 		return (NULL);
+	conv->size = ft_strlen(conv->opt);
 	if (size > 1)
 		if (!(preci = (char *)malloc(sizeof(char) * (size + 1))))
 			return (NULL);

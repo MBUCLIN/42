@@ -74,7 +74,10 @@ PC = ft_memset.c \
 	 get_next_line.c \
 	 ft_satoi.c \
 	 ft_chrnotoption.c \
-	 ft_deltabstr.c
+	 ft_deltabstr.c \
+	 ft_strncadd.c \
+	 ft_nlen.c \
+	 ft_strsubfree.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -149,7 +152,10 @@ PO = ft_memset.o \
 	 get_next_line.o \
 	 ft_satoi.o \
 	 ft_chrnotoption.o \
-	 ft_deltabstr.o
+	 ft_deltabstr.o \
+	 ft_strncadd.o \
+	 ft_nlen.o \
+	 ft_strsubfree.o
 
 FLAGS = -Wall -Wextra -Werror
 

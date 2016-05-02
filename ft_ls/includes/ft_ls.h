@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 16:10:19 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/02 17:21:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char		*get_line_mode(int mode);
 int			get_time(struct stat buf, int time);
 char		*get_group_name(gid_t gid);
 char		*get_user_name(uid_t uid);
+char		*get_grus_name(t_info *node);
+char		*get_line_print(t_all *node, int sizelenm);
 int			check_times_option(int option);
 int			error_option(char *arg_er);
 int			check_option(char *arg);

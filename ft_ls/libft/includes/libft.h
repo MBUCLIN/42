@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 13:45:56 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/02 17:57:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 
 size_t				ft_strlen(char const *str);
+int					ft_nlen(int n);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_isalpha(int c);
@@ -90,6 +91,7 @@ char				*ft_strdup(const char *s);
 char				*ft_strstr(const char *s1, const char *s2);
 char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
+char				*ft_strsubfree(char *str, int n, int len);
 char				*ft_strmap(char *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strjoin(char const *s1, char const *s2);
@@ -97,6 +99,7 @@ char				*ft_strjoinfree(char *s1, char const *s2);
 char				*ft_strjoindfree(char *s1, char *s2);
 char				*ft_strmidadd(char *tocut, char *toadd, int i);
 char				*ft_strtrim(char const *s);
+char				*ft_strncadd(char *str, int n, int c);
 char				**ft_strsplit(char const *s, char c);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);

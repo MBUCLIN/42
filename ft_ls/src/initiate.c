@@ -6,11 +6,27 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:55:33 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/04/27 18:46:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/02 16:36:44 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+
+t_all		*recup_info(t_all *all, int option)
+{
+	t_all		*tmp;
+	int			time;
+
+	tmp = all;
+	time = check_times_option(option);
+	while (tmp)
+	{
+		if (!(tmp->info = new_info(tmp->name, time)))
+			return (NULL);
+		tmp = tmp->next;
+	}
+	return (all);
+}
 
 t_all		*recup_args(int ac, char **av)
 {
@@ -18,7 +34,7 @@ t_all		*recup_args(int ac, char **av)
 	t_all		*tmp;
 	int			i;
 
-	i = after_option(av, "lRrat");
+	i = after_option(av, "lRratuU");
 	if (i == ac)
 		return (new_node_all(new_name(".", "."), NULL));
 	if (!(head = new_node_all(new_name(av[i], av[i]), NULL)))
@@ -39,7 +55,7 @@ int			init_option(int ac, char **av)
 	int		tmp;
 	int		opt;
 
-	i = 1;
+	i = 0;
 	opt = 0;
 	if (ac == 1)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:28:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/04/27 18:52:14 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/02 16:40:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define OPT_R 4
 # define OPT_A 8
 # define OPT_T 16
+# define OPT_U 32
+# define OPT_MU 64
 
 typedef struct		s_name
 {
@@ -30,7 +32,7 @@ typedef struct		s_info
 	char			*gr_name;
 	char			*us_name;
 	int				mode;
-	long long		time;
+	size_t			time;
 	int				size;
 	int				hardl;
 }					t_info;
@@ -39,6 +41,7 @@ typedef struct		s_all
 {
 	t_name			*name;
 	t_info			*info;
+	struct s_all	*son;
 	struct s_all	*next;
 }					t_all;
 

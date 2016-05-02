@@ -1,6 +1,7 @@
 NAME = ft_ls
 
-SRC_NAME = alloc.c check.c debug.c del.c error.c initiate.c option.c
+SRC_NAME = alloc.c check.c debug.c del.c error.c initiate.c option.c \
+		   get_info.c get.c
 
 SRC_PATH = src/
 

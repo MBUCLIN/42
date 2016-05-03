@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:24:32 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 14:45:18 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/03 17:09:19 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ void		*del_all(t_all *head)
 {
 	t_all		*tmp;
 
-	tmp = head;
 	while (head)
 	{
+		tmp = head;
 		head = head->next;
 		if (tmp->name)
 			del_name(tmp->name);
 		if (tmp->info)
 			del_info(tmp->info);
-		free(tmp);
-		tmp = head;
+		if (tmp)
+			free(tmp);
 	}
 	return (NULL);
 }

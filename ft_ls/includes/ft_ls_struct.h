@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:28:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 17:12:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/03 17:30:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 # define OPT_T 16
 # define OPT_U 32
 # define OPT_MU 64
+# define SX_M 15724800
+
+typedef struct		s_maxl
+{
+	int				hlen_m;
+	int				ulen_m;
+	int				glen_m;
+	int				slen_m;
+}					t_maxl;
 
 typedef struct		s_name
 {
@@ -32,7 +41,10 @@ typedef struct		s_info
 	char			*gr_name;
 	char			*us_name;
 	int				mode;
-	size_t			time;
+	long			time;
+	long			ntime;
+	int				maj;
+	int				min;
 	int				size;
 	int				hardl;
 }					t_info;

@@ -6,11 +6,34 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 15:55:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 16:47:39 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/03 17:16:48 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+
+char		*get_date_year(time_t tfile)
+{
+	char		*timec;
+	char		*ret;
+
+	if (!(timec = ctime(&tfile)))
+		return (NULL);
+	if (!(ret = ft_strsub(timec, 4, 6)))
+		return (NULL);
+	if (!(ret = ft_strncadd(ret, 2, ' ')))
+		return (NULL);
+	return (ft_strjoindfree(ret, ft_strsub(timec, 20, 4)));
+}
+
+char		*get_date(time_t tfile)
+{
+	char		*timec;
+
+	if (!(timec = ctime(&tfile)))
+		return (NULL);
+	return (ft_strsub(timec, 4, 12));
+}
 
 char		get_filetype(int mode)
 {

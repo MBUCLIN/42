@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:24:22 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 15:08:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/03 17:29:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_name		*new_name(char *name, char *path)
 {
 	t_name		*new;
 
+	new = NULL;
 	if (!(new = (t_name *)malloc(sizeof(t_name))))
 		return (NULL);
 	if (!name)
@@ -40,13 +41,21 @@ t_info		*new_info(t_name *name, int time)
 	t_info			*new;
 	struct stat		buf;
 
+	new = NULL;
 	if (!(new = (t_info *)malloc(sizeof(t_info))))
 		return (NULL);
+	new->gr_name = NULL;
+	new->us_name = NULL;
 	if (stat(name->path, &buf))
+	{
+		perror(name->name);
 		return (del_info(new));
+	}
 	new->mode = buf.st_mode;
 	new->time = get_time(buf, time);
 	new->size = buf.st_size;
+	new->maj = need_maj(buf, new->mode);
+	mew->min = need_min(buf, new->mode);
 	new->hardl = buf.st_nlink;
 	if (!(new->gr_name = get_group_name(buf.st_gid)))
 		return (del_info(new));

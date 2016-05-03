@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 17:21:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/03 17:06:53 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LS_H
 
 # include <dirent.h>
+# include <stdio.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <pwd.h>
@@ -37,14 +38,18 @@ t_name		*new_name(char *name, char *path);
 t_info		*new_info(t_name *name, int option);
 t_all		*new_node_all(t_name *name, t_info *info);
 int			ft_puterror(char *msg);
+t_maxl		*get_len_max(t_all *head);
 char		get_filetype(int mode);
 char		*get_right(char *line, int mode, int mult);
 char		*get_line_mode(int mode);
 int			get_time(struct stat buf, int time);
+char		*get_str_time(char *line, t_all *node);
+char		*get_date_year(time_t tfile);
+char		*get_date(time_t tfile);
 char		*get_group_name(gid_t gid);
 char		*get_user_name(uid_t uid);
 char		*get_grus_name(t_info *node);
-char		*get_line_print(t_all *node, int sizelenm);
+char		*get_line_print(t_all *node, t_maxl *max);
 int			check_times_option(int option);
 int			error_option(char *arg_er);
 int			check_option(char *arg);

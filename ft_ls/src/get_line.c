@@ -6,53 +6,82 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 16:45:59 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 17:21:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/03 17:29:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-char		*get_str_time(time_t temps)
+char		*get_str_time(char *line, t_all *node)
 {
-	char	*str_time;
+	long	tact;
+	long	tfile;
+	char	*date;
+
+	tact = time(&tact);
+	tfile = node->info->time;
+	if (!(line = ft_strncadd(line, 1, ' ')))
+		return (NULL);
+	if (tfile > tact || tfile < tact - SX_M)
+	{
+		if (!(date = get_date_year(tfile)))
+		{
+			free(line);
+			return (NULL);
+		}
+	}
+	else
+	{
+		if (!(date = get_date(tfile)))
+		{
+			free(line);
+			return (NULL);
+		}
+	}
+	return (ft_strjoindfree(line, date));
 }
 
-char		*get_line_grus_name(t_info *node)
+char		*get_line_grus_name(t_info *node, t_maxl *max)
 {
 	char		*grus;
 
 	grus = NULL;
 	if (!(grus = ft_strdup(node->us_name)))
 		return (NULL);
-	if (!(grus = ft_strncadd(grus, 2, ' ')))
+	if (!(grus = ft_strncadd(grus, 2 +\
+		(max->ulen_m - ft_strlen(node->us_name)), ' ')))
 		return (NULL);
-	return (ft_strjoindfree(grus, node->gr_name));
+	if (!(grus = ft_strjoindfree(grus, ft_strdup(node->gr_name))))
+		return (NULL);
+	if (!(grus = ft_strncadd(grus, 2 +\
+		(max->glen_m - ft_strlen(node->gr_name)), ' ')))
+		return (NULL);
+	return (grus);
 }
 
-char		*get_line_print(t_all *node, int sizelenm)
+char		*get_line_print(t_all *node, t_maxl *max)
 {
 	char		*line;
 
 	line = NULL;
 	if (!(line = get_line_mode(node->info->mode)))
 		return (NULL);
-	if (!(line = ft_strncadd(line, 2, ' ')))
+	if (!(line = ft_strncadd(line, 2 +\
+		(max->hlen_m - ft_nlen(node->info->hardl)), ' ')))
 		return (NULL);
 	if (!(line = ft_strjoindfree(line, ft_itoa(node->info->hardl))))
 		return (NULL);
 	if (!(line = ft_strncadd(line, 1, ' ')))
 		return (NULL);
-	if (!(line = ft_strjoindfree(line, get_line_grus_name(node->info))))
+	if (!(line = ft_strjoindfree(line, get_line_grus_name(node->info, max))))
 		return (NULL);
-	if (!(line = ft_strncadd(line, sizelenm - ft_nlen(node->info->size, ' '))))
+	if (!(line = get_size_or_majmin(line, node, max)))
 		return (NULL);
-	if (!(line = ft_strjoindfree(line, ft_itoa(node->info->size))))
-		return (NULL);
-	if (!(line = ft_strjoindfree(line, get_strtime(node->info->time))))
+	if (!(line = get_str_time(line, node)))
 		return (NULL);
 	if (!(line = ft_strncadd(line, 1, ' ')))
 		return (NULL);
-	if (!(line = ft_strjoindfree(line, node->name->name)))
+	if (!(line = ft_strjoindfree(line, ft_strdup(node->name->name))))
 		return (NULL);
 	return (line);
 }

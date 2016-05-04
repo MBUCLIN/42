@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/03 17:06:53 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/04 17:13:13 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,20 @@ int			ft_puterror(char *msg);
 t_maxl		*get_len_max(t_all *head);
 char		get_filetype(int mode);
 char		*get_right(char *line, int mode, int mult);
+int			need_minor(struct stat buf, int mode);
+int			need_major(struct stat buf, int mode);
 char		*get_line_mode(int mode);
-int			get_time(struct stat buf, int time);
+int			get_time(struct stat buf, int time, int t);
 char		*get_str_time(char *line, t_all *node);
 char		*get_date_year(time_t tfile);
 char		*get_date(time_t tfile);
 char		*get_group_name(gid_t gid);
 char		*get_user_name(uid_t uid);
 char		*get_grus_name(t_info *node);
+char		*get_line_minmaj(char *line, t_info *node, t_maxl *max);
+char		*get_size_or_minmaj(char *line, t_info *node, t_maxl *max);
 char		*get_line_print(t_all *node, t_maxl *max);
+t_all		*sort_list(t_all *all, int option);
 int			check_times_option(int option);
 int			error_option(char *arg_er);
 int			check_option(char *arg);

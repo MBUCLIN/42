@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_chrnotoption.c                                  :+:      :+:    :+:   */
+/*   main_sort_test.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/27 15:44:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 17:11:02 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/04 16:42:34 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/04 16:47:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "../includes/ft_ls.h"
 
-int		ft_chrnotoption(char *chr, char *option)
+int		main(int ac, char **av)
 {
-	int		i;
-
-	i = 0;
-	while (chr[i])
-	{
-		if (!ft_isoption(chr[i], option))
-			return (chr[i]);
-		i++;
-	}
-	return (0);
+	if (ac < 3)
+		return (0);
+	if (!ft_islexisort(av[1], av[2]))
+		ft_printf("%s, [s1] est lexicographicalement avant [s2] %s\n", av[1], av[2]);
+	else
+		ft_printf("%s, [s2] est lexicographicalement avant [s1] %s\n", av[2], av[1]);
+	return (1);
 }

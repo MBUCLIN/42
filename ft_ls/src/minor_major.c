@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_chrnotoption.c                                  :+:      :+:    :+:   */
+/*   minor_major.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/27 15:44:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 17:11:02 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/04 11:14:56 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/04 14:53:37 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "../includes/ft_ls.h"
 
-int		ft_chrnotoption(char *chr, char *option)
+int		need_major(struct stat buf, int mode)
 {
-	int		i;
+	if ((!(mode & 020000) && !(mode & 060000)) || mode & 040000)
+		return (0);
+	return (major(buf.st_rdev));
+}
 
-	i = 0;
-	while (chr[i])
-	{
-		if (!ft_isoption(chr[i], option))
-			return (chr[i]);
-		i++;
-	}
-	return (0);
+int		need_minor(struct stat buf, int mode)
+{
+	if ((!(mode & 020000) && !(mode & 060000)) || mode & 040000)
+		return (0);
+	return (minor(buf.st_rdev));
 }

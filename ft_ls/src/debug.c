@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:26:51 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 16:10:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/04 17:25:21 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char		*print_mode(int mode)
 void		print_node(t_all *node)
 {
 	print_name(node);
-	print_info(node);
-	print_mode(node->info->mode);
+//	print_info(node);
+//	print_mode(node->info->mode);
 }
 
 void		print_all(t_all *head)

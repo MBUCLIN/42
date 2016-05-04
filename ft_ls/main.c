@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:23:55 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/03 17:04:43 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/04 17:16:06 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int		main(int ac, char **av)
 		return (0);
 	if (!(arg = recup_info(arg, opt)))
 		return (0);
-	print_all(arg);
 	tmp = arg;
 	lenmax = get_len_max(arg);
+	arg = sort_list(arg, opt);
 	while (tmp)
 	{
 		if (!(line = get_line_print(tmp, lenmax)))

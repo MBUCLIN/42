@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 14:46:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/03 15:18:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/04 13:53:43 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static t_maxl		*set_maxl(t_maxl *max)
 	max->ulen_m = 0;
 	max->glen_m = 0;
 	max->slen_m = 0;
+	max->max_min = 0;
+	max->max_maj = 0;
 	return (max);
 }
 t_maxl				*get_len_max(t_all *head)
@@ -40,6 +42,16 @@ t_maxl				*get_len_max(t_all *head)
 			ret->glen_m = len;
 		if (ret->slen_m < (len = ft_nlen(tmp->info->size)))
 			ret->slen_m = len;
+		if (tmp->info->min || tmp->info->maj)
+		{
+			if (ret->max_min < (len = ft_nlen(tmp->info->min)))
+				ret->max_min = len;
+			if (ret->max_maj < (len = ft_nlen(tmp->info->maj)))
+				ret->max_maj = len;
+			if (ret->slen_m <\
+				(len = ft_nlen(tmp->info->maj) + 2 + ft_nlen(tmp->info->min)))
+				ret->slen_m = len;
+		}
 		tmp = tmp->next;
 	}
 	return (ret);

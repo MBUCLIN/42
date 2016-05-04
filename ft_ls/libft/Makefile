@@ -77,7 +77,8 @@ PC = ft_memset.c \
 	 ft_deltabstr.c \
 	 ft_strncadd.c \
 	 ft_nlen.c \
-	 ft_strsubfree.c
+	 ft_strsubfree.c \
+	 ft_islexisort.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -155,7 +156,8 @@ PO = ft_memset.o \
 	 ft_deltabstr.o \
 	 ft_strncadd.o \
 	 ft_nlen.o \
-	 ft_strsubfree.o
+	 ft_strsubfree.o \
+	 ft_islexisort.o
 
 FLAGS = -Wall -Wextra -Werror
 

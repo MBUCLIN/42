@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:28:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/03 17:30:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/04 17:32:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct		s_maxl
 	int				ulen_m;
 	int				glen_m;
 	int				slen_m;
+	int				max_min;
+	int				max_maj;
 }					t_maxl;
 
 typedef struct		s_name

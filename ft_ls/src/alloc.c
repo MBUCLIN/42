@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:24:22 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/03 17:29:16 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/04 17:07:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ t_info		*new_info(t_name *name, int time)
 		return (del_info(new));
 	}
 	new->mode = buf.st_mode;
-	new->time = get_time(buf, time);
+	new->time = get_time(buf, time, 0);
+	new->ntime = get_time(buf, time, 1);
 	new->size = buf.st_size;
-	new->maj = need_maj(buf, new->mode);
-	mew->min = need_min(buf, new->mode);
+	new->maj = need_major(buf, new->mode);
+	new->min = need_minor(buf, new->mode);
 	new->hardl = buf.st_nlink;
 	if (!(new->gr_name = get_group_name(buf.st_gid)))
 		return (del_info(new));

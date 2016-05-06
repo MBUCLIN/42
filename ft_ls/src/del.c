@@ -61,18 +61,18 @@ void		*del_only_file(t_all *head)
 	t_all		*del;
 	t_all		*tmp;
 
-	if (head->info->mode & 010000)
+	if (head->info->mode & 0100000)
 	{
-		del = head->next;;
+		del = head->next;
 		free(head);
 		head = del;
 		return (del_only_file(head));
 	}
 	del = head->next;
-	tmp = head
+	tmp = head;
 	while (del)
 	{
-		if (del->info->mode & 010000)
+		if (del->info->mode & 0100000)
 		{
 			tmp->next = del->next;
 			free(del);

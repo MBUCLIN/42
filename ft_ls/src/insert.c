@@ -17,18 +17,18 @@ t_all		*insert(t_all *head, t_all *new, t_all *node)
 	return (head);
 }
 
-t_all		*import_from_else(t_all *head, t_all new, t_all *node)
+t_all		*import_from_else(t_all *head, t_all *new, t_all *node)
 {
 	int		ntt;
 	int		ntn;
 
 	ntn = new->info->ntime;
-	ntt = node->info->ntime
+	ntt = node->info->ntime;
 	if (ntn > ntt)
 		return (insert(head, new, node));
 	else if (ntn == ntt)
 	{
-		if (ft_islexisort(new->name->name, node->name->name))
+		if (!ft_islexisort(new->name->name, node->name->name))
 			return (insert(head, new, node));
 	}
 	if (!node->next)
@@ -36,25 +36,30 @@ t_all		*import_from_else(t_all *head, t_all new, t_all *node)
 	return (head);
 }
 
-t_all		*import_from_time(t_all *head, int node)
+t_all		*import_from_time(t_all *head, t_all *node)
 {
 	t_all		*tmp;
 	int			tt;
 	int			tn;
 
 	tmp = head;
+	if (head == node)
+		return (head);
 	while (tmp)
 	{
-		tn = node->info->time;;
+		tn = node->info->time;
 		tt = tmp->info->time;
 		if (tn > tt)
+		{
 			return (insert(head, node, tmp));
+		}
 		else if (tn == tt)
-			return (import_from_ntime(head, node, tmp));
+			return (import_from_else(head, node, tmp));
 		tmp = tmp->next;
 	}
 	tmp = last_node(head);
 	tmp->next = node;
+	node->next = NULL;
 	return (head);
 }
 
@@ -67,7 +72,7 @@ t_all		*import(t_all *head, t_all *node, int option)
 	tmp = head;
 	while (tmp)
 	{
-		if ((ft_islexisort(node->name->name, tmp->name->name)))
+		if (!(ft_islexisort(node->name->name, tmp->name->name)))
 		{
 			head = insert(head, node, tmp);
 			return (head);
@@ -76,5 +81,6 @@ t_all		*import(t_all *head, t_all *node, int option)
 	}
 	tmp = last_node(head);
 	tmp->next = node;
+	node->next = NULL;
 	return (head);
 }

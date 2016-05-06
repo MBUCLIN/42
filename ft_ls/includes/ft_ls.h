@@ -19,7 +19,7 @@
 # include <sys/types.h>
 # include <pwd.h>
 # include <grp.h>
-# include <uuid/uuid.h>
+//# include <uuid/uuid.h>
 # include <time.h>
 # include <inttypes.h>
 # include "../libft/includes/libft.h"
@@ -29,15 +29,19 @@
 void		*del_name(t_name *head);
 void		*del_info(t_info *info);
 void		*del_all(t_all *head);
+void		*del_only_file(t_all *head);
 void		print_info(t_all *node);
 void		print_name(t_all *node);
 char		*print_mode(int mode);
 void		print_node(t_all *node);
 void		print_all(t_all *head);
+t_all		*print_dir(t_all *head, t_maxl *max, int option);
+char		*create_path(char *last_path, char *name);
 t_name		*new_name(char *name, char *path);
 t_info		*new_info(t_name *name, int option);
 t_all		*new_node_all(t_name *name, int option);
 int			ft_puterror(char *msg);
+int		total_size(t_all *head, int option);
 t_all		*last_node(t_all *head);
 t_maxl		*get_len_max(t_all *head);
 char		get_filetype(int mode);
@@ -57,7 +61,7 @@ char		*get_size_or_minmaj(char *line, t_info *node, t_maxl *max);
 char		*get_line_print(t_all *node, t_maxl *max);
 t_all		*sort_list(t_all *all, int option);
 int			check_times_option(int option);
-char		*choose_line(t_all *node, t_maxl max, int option);
+char		*choose_line(t_all *node, t_maxl *max, int option);
 t_all		*print_file(t_all *head, int option);
 int			error_option(char *arg_er);
 int			check_option(char *arg);
@@ -65,9 +69,10 @@ int			after_option(char **arg, char *option);
 int			init_option(int ac, char **av);
 t_all		*insert(t_all *head, t_all *new, t_all *node);
 t_all		*import_from_else(t_all *head, t_all *new, t_all *node);
-t_all		*import_from_time(t_all *head, int node);
+t_all		*import_from_time(t_all *head, t_all *node);
 t_all		*import(t_all *head, t_all *node, int option);
-t_all		*recup_info(t_all *all, int time);
-t_all		*recup_args(int ac, char **av);
+t_all		*read_dir(t_all *node, DIR *dir, int option);
+t_all		*read_dir_arg(t_all *head, int option);
+t_all		*recup_args(int ac, char **av, int option);
 
 #endif

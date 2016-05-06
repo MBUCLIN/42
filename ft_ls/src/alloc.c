@@ -12,6 +12,18 @@
 
 #include "../includes/ft_ls.h"
 
+char		*create_path(char *last_path, char *name)
+{
+	char	*path;
+
+	path = NULL;
+	if (!(path = ft_strjoin(last_path, "/")))
+		return (NULL);
+	if (!(path = ft_strjoindfree(path, ft_strdup(name))))
+		return (NULL);
+	return (path);
+}
+
 t_name		*new_name(char *name, char *path)
 {
 	t_name		*new;

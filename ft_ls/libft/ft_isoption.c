@@ -15,9 +15,7 @@
 int		ft_isoption(int c, char *option)
 {
 	int		i;
-	int		len;
 
-	len = ft_strlen(option);
 	i = 0;
 	while (option[i])
 	{

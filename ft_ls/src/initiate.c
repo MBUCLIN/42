@@ -12,7 +12,7 @@
 
 #include "../includes/ft_ls.h"
 
-t_all		*recup_args(int ac, char **av)
+t_all		*recup_args(int ac, char **av, int option)
 {
 	t_all		*head;
 	t_all		*tmp;
@@ -27,7 +27,7 @@ t_all		*recup_args(int ac, char **av)
 	{
 		if (!(tmp = new_node_all(new_name(av[i], av[i]), option)))
 			return (del_all(head));
-		if (!(head = inser(head, tmp, option)))
+		if (!(head = import(head, tmp, option)))
 			return (NULL);
 	}
 	return (head);

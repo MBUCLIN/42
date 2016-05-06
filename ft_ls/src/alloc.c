@@ -63,19 +63,20 @@ t_info		*new_info(t_name *name, int time)
 	if (!(new->us_name = get_user_name(buf.st_uid)))
 		return (del_info(new));
 	return (new);
-	
 }
 
-t_all		*new_node_all(t_name *name, t_info *info)
+t_all		*new_node_all(t_name *name, int option)
 {
 	t_all			*new;
+	int				time;
 
 	new = NULL;
+	time = check_times_option(option);
 	if (!(new = (t_all *)malloc(sizeof(t_all))))
 		return (NULL);
 	new->next = NULL;
 	new->son = NULL;
 	new->name = name;
-	new->info = info;
+	new->info = new_info(name, time);
 	return (new);
 }

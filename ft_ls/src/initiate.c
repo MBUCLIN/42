@@ -12,22 +12,6 @@
 
 #include "../includes/ft_ls.h"
 
-t_all		*recup_info(t_all *all, int option)
-{
-	t_all		*tmp;
-	int			time;
-
-	tmp = all;
-	time = check_times_option(option);
-	while (tmp)
-	{
-		if (!(tmp->info = new_info(tmp->name, time)))
-			return (NULL);
-		tmp = tmp->next;
-	}
-	return (all);
-}
-
 t_all		*recup_args(int ac, char **av)
 {
 	t_all		*head;
@@ -36,15 +20,15 @@ t_all		*recup_args(int ac, char **av)
 
 	i = after_option(av, "lRratuU");
 	if (i == ac)
-		return (new_node_all(new_name(".", "."), NULL));
-	if (!(head = new_node_all(new_name(av[i], av[i]), NULL)))
+		return (new_node_all(new_name("./", "./"), option));
+	if (!(head = new_node_all(new_name(av[i], av[i]), option)))
 		return (NULL);
-	tmp = head;
 	while (av[++i])
 	{
-		if (!(tmp->next = new_node_all(new_name(av[i], av[i]), NULL)))
+		if (!(tmp = new_node_all(new_name(av[i], av[i]), option)))
 			return (del_all(head));
-		tmp = tmp->next;
+		if (!(head = inser(head, tmp, option)))
+			return (NULL);
 	}
 	return (head);
 }

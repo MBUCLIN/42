@@ -12,6 +12,13 @@
 
 #include "../includes/ft_ls.h"
 
+char	*choose_line(t_all *node, t_maxl *max, int option)
+{
+	if (option & OPT_L)
+		return (get_line_print(node, max));
+	return (ft_strdup(node->name->name));
+}
+
 int		after_option(char **arg, char *option)
 {
 	int		i;

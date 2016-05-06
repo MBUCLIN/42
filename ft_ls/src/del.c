@@ -55,3 +55,30 @@ void		*del_all(t_all *head)
 	}
 	return (NULL);
 }
+
+void		*del_only_file(t_all *head)
+{
+	t_all		*del;
+	t_all		*tmp;
+
+	if (head->info->mode & 010000)
+	{
+		del = head->next;;
+		free(head);
+		head = del;
+		return (del_only_file(head));
+	}
+	del = head->next;
+	tmp = head
+	while (del)
+	{
+		if (del->info->mode & 010000)
+		{
+			tmp->next = del->next;
+			free(del);
+		}
+		tmp = tmp->next;
+		del = tmp->next;
+	}
+	return (head);
+}

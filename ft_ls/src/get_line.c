@@ -114,3 +114,4 @@ char		*get_line_print(t_all *node, t_maxl *max)
 		return (NULL);
 	return (line);
 }
+		return (new_node_all(new_name(".", "."), NULL));

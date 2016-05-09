@@ -10,19 +10,19 @@ int		main(int argc, char **argv)
 		return (0);
 	if (!(arg = recup_args(argc - 1, argv + 1, opt)))
 		return (0);
-	print_file(arg, opt);
-	arg = del_only_file(arg);
 	if (arg && (opt & OPT_MR))
 	{
-		del_all(arg);
-//		if (!(arg = recursive(arg, opt)))
-//			return (0);
+		if (!(arg = recursive(arg, opt)))
+			return (0);
 	}
 	else if (arg)
 	{
-		ft_putendl("");
-		arg = read_dir_arg(arg, opt);
+		print_file(arg, opt);
+		arg = del_only_file(arg);
+		if (arg)
+			arg = read_dir_arg(arg, opt);
 	}
 	del_all(arg);
+		sleep(10);
 	return (1);
 }

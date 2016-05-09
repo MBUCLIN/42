@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 16:16:42 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 17:11:05 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 18:57:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 char	*choose_line(t_all *node, t_maxl *max, int option)
 {
 	if (option & OPT_L)
+	{
 		return (get_line_print(node, max));
+	}
 	return (ft_strdup(node->name->name));
 }
 

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 16:19:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/24 17:03:19 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 17:54:43 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ char		*ft_sitoa(ssize_t nbr)
 	char	*ret;
 
 	if (nbr * -1 - 1 == 9223372036854775807)
-		return (ft_strdup("-9223372036854775808"));
+		return (ft_strdupp("-9223372036854775808"));
 	else if (nbr == 0)
-		return (ft_strdup("0"));
+		return (ft_strdupp("0"));
 	size = get_sizenbr(nbr);
 	if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);

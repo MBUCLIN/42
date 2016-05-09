@@ -25,7 +25,7 @@ t_printf		*ft_apply_wint(char *info, int adj, va_list ap)
 	wint = va_arg(ap, int);
 	if (wint == 0)
 	{
-		if (!(conv->opt = ft_strdup("")))
+		if (!(conv->opt = ft_strdupp("")))
 			return (NULL);
 		conv->size = 1;
 	}

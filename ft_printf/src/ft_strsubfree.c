@@ -19,8 +19,8 @@ char		*ft_strsubfree(char *tosub, int sta, int size)
 
 	i = 0;
 	sub = NULL;
-	if (size > ft_strlen(tosub) - sta)
-		size = ft_strlen(tosub) - sta;
+	if (size > ft_strlenp(tosub) - sta)
+		size = ft_strlenp(tosub) - sta;
 	else if (!(sub = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	sub[size] = 0;

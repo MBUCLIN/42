@@ -15,16 +15,16 @@
 static t_printf	*apply_unsignedconv(t_printf *conv, size_t arg, char c)
 {
 	if (c == 'o' || c == 'O')
-		conv->opt = ft_sitoabase(arg, "01234567");
+		conv->opt = ft_sitoabasep(arg, "01234567");
 	else if (c == 'x')
-		conv->opt = ft_sitoabase(arg, "0123456789abcdef");
+		conv->opt = ft_sitoabasep(arg, "0123456789abcdef");
 	else if (c == 'X')
-		conv->opt = ft_sitoabase(arg, "0123456789ABCDEF");
+		conv->opt = ft_sitoabasep(arg, "0123456789ABCDEF");
 	else
-		conv->opt = ft_sitoabase(arg, "0123456789");
+		conv->opt = ft_sitoabasep(arg, "0123456789");
 	if (conv->opt == NULL)
 		return (NULL);
-	conv->size = ft_strlen(conv->opt);
+	conv->size = ft_strlenp(conv->opt);
 	return (conv);
 }
 
@@ -50,12 +50,12 @@ t_printf		*apply_ssize_t(t_printf *conv, char *info, va_list ap, int lm)
 	int			preci;
 	int			c;
 
-	c = info[ft_strlen(info) - 1];
+	c = info[ft_strlenp(info) - 1];
 	arg = get_arg(lm, c, ap);
 	preci = ft_getpreci(info);
 	if (preci == 0 && arg == 0)
 	{
-		if (!(conv->opt = ft_strdup("")))
+		if (!(conv->opt = ft_strdupp("")))
 			return (NULL);
 		conv->size = 1;
 		return (conv);
@@ -64,7 +64,7 @@ t_printf		*apply_ssize_t(t_printf *conv, char *info, va_list ap, int lm)
 		return (apply_unsignedconv(conv, arg, c));
 	if (!(conv->opt = ft_sitoa(arg)))
 		return (NULL);
-	conv->size = ft_strlen(conv->opt);
+	conv->size = ft_strlenp(conv->opt);
 	return (conv);
 }
 
@@ -73,7 +73,7 @@ t_printf		*ft_apply_number(char *info, va_list ap, int lm)
 	t_printf	*conv;
 	int			c;
 
-	c = info[ft_strlen(info) - 1];
+	c = info[ft_strlenp(info) - 1];
 	if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))
 		return (NULL);
 	if ((c == 'D' || c == 'U' || c == 'O') ||\

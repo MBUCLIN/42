@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 16:42:18 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 14:24:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int					ft_isprint(int c);
 int					ft_isblank(int c);
 int					ft_isoption(int c, char *option);
 int					ft_islexisort(const char *s1, const char *s2);
+int					ft_isrevlexisort(char *s1, char *s2);
 int					ft_chrnotoption(char *chr, char *option);
 int					ft_atoi(char *str);
 int					ft_atoibase(char *nbr_b, char *base);

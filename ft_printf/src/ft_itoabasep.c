@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoabase.c                                      :+:      :+:    :+:   */
+/*   ft_itoabasep.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,7 @@ static int	check_base(const char *base)
 	int			match;
 
 	i = -1;
-	if (base == NULL || ft_strlen(base) == 0)
+	if (base == NULL || ft_strlenp(base) == 0)
 		return (0);
 	match = 0;
 	while (base[++i])
@@ -40,7 +40,7 @@ static int	get_size(unsigned int nbr, const char *base)
 	size_t		size;
 	size_t		len;
 
-	size = ft_strlen(base);
+	size = ft_strlenp(base);
 	len = 0;
 	while (nbr)
 	{
@@ -50,7 +50,7 @@ static int	get_size(unsigned int nbr, const char *base)
 	return (len);
 }
 
-char		*ft_itoabase(unsigned int nbr, const char *base)
+char		*ft_itoabasep(unsigned int nbr, const char *base)
 {
 	char		*convert;
 	size_t		sbase;
@@ -59,8 +59,8 @@ char		*ft_itoabase(unsigned int nbr, const char *base)
 	if (!(check_base(base)))
 		return (NULL);
 	else if (nbr == 0)
-		return (ft_strdup("0"));
-	sbase = ft_strlen(base);
+		return (ft_strdupp("0"));
+	sbase = ft_strlenp(base);
 	i = get_size(nbr, base);
 	if (!(convert = (char *)malloc(sizeof(char) * (i + 1))))
 		return (NULL);

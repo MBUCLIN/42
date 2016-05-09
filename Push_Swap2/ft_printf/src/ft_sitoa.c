@@ -36,9 +36,9 @@ char		*ft_sitoa(ssize_t nbr)
 	char	*ret;
 
 	if (nbr * -1 - 1 == 9223372036854775807)
-		return (ft_strdup("-9223372036854775808"));
+		return (ft_strdupp("-9223372036854775808"));
 	else if (nbr == 0)
-		return (ft_strdup("0"));
+		return (ft_strdupp("0"));
 	size = get_sizenbr(nbr);
 	if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);

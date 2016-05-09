@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:28:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 17:32:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 17:30:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct		s_info
 	int				maj;
 	int				min;
 	int				size;
+	int				blck;
 	int				hardl;
 }					t_info;
 

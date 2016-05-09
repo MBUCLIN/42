@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 17:13:13 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 15:10:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_name		*new_name(char *name, char *path);
 t_info		*new_info(t_name *name, int option);
 t_all		*new_node_all(t_name *name, int option);
 int			ft_puterror(char *msg);
-int		total_size(t_all *head, int option);
+int			total_size(t_all *head, int option);
 t_all		*last_node(t_all *head);
 t_maxl		*get_len_max(t_all *head);
 char		get_filetype(int mode);
@@ -68,11 +68,12 @@ int			check_option(char *arg);
 int			after_option(char **arg, char *option);
 int			init_option(int ac, char **av);
 t_all		*insert(t_all *head, t_all *new, t_all *node);
-t_all		*import_from_else(t_all *head, t_all *new, t_all *node);
-t_all		*import_from_time(t_all *head, t_all *node);
+t_all		*import_from_else(t_all *head, t_all *new, t_all *node, int opt);
+t_all		*import_from_time(t_all *head, t_all *nodei, int option);
 t_all		*import(t_all *head, t_all *node, int option);
 t_all		*read_dir(t_all *node, DIR *dir, int option);
 t_all		*read_dir_arg(t_all *head, int option);
+t_all		*recursive(t_all *head, int option);
 t_all		*recup_args(int ac, char **av, int option);
 
 #endif

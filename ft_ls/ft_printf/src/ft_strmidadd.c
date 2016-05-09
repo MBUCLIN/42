@@ -19,9 +19,9 @@ char		*ft_strmidadd(char *tocut, char *toadd, int i)
 
 	if (i == 0)
 		return (ft_strjoindfree(toadd, tocut));
-	if (!(p1 = ft_strsub(tocut, 0, i)))
+	if (!(p1 = ft_strsubp(tocut, 0, i)))
 		return (NULL);
-	if (!(p2 = ft_strsub(tocut, i, ft_strlen(tocut) - i)))
+	if (!(p2 = ft_strsubp(tocut, i, ft_strlenp(tocut) - i)))
 		return (NULL);
 	free(tocut);
 	tocut = NULL;

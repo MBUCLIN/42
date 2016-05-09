@@ -47,7 +47,7 @@ t_printf			*ft_apply_widtchar(char *info, t_printf *conv, int adj)
 	if (!width)
 		return (conv);
 	width[size] = '\0';
-	ft_memset(width, ' ', size);
+	ft_memsetp(width, ' ', size);
 	if (adj == 'r')
 		return (ft_strjoinprintf(conv, width, size));
 	return (joinwidthleft(conv, width, size));

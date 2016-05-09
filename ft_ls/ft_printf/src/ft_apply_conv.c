@@ -64,12 +64,12 @@ static t_printf		*apply_convs(char *info, int adj, va_list ap)
 	{
 		if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))
 			return (NULL);
-		if (!(conv->opt = ft_strdup("(null)")))
+		if (!(conv->opt = ft_strdupp("(null)")))
 			return (NULL);
 		conv->size = 6;
 		return (get_convs(adj, conv, info));
 	}
-	len = ft_strlen(s);
+	len = ft_strlenp(s);
 	if (!(conv = cpy_conv(s, len)))
 		return (NULL);
 	return (get_convs(adj, conv, info));
@@ -81,7 +81,7 @@ t_printf			*ft_apply_conv(char *info, int lm, va_list ap)
 	int		adj;
 
 	adj = ft_getadj(info);
-	c = info[ft_strlen(info) - 1];
+	c = info[ft_strlenp(info) - 1];
 	if ((c == 'c' && lm != 'l') || c == '%')
 		return (ft_apply_charc(info, adj, ap));
 	else if (c == 's' && lm != 'l')

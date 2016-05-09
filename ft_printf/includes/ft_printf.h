@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:23:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/17 14:50:07 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 14:02:24 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ typedef struct	s_printf
 	char		*opt;
 }				t_printf;
 
-int				ft_strlen(const char *str);
+int				ft_strlenp(const char *str);
 int				ft_get_ncar(int *wchar);
 int				ft_carchr(int c, char *s);
 void			ft_putnbr(int nbr);
-void			ft_memset(void *p, int c, int len);
+void			ft_memsetp(void *p, int c, int len);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
 char			*ft_strjoin(const char *s1, const char *s2);
-char			*ft_strsub(const char *tosub, int sta, int size);
-char			*ft_strdup(const char *s);
+char			*ft_strsubp(const char *tosub, int sta, int size);
+char			*ft_strdupp(const char *s);
 char			*ft_strsubfree(char *tosub, int sta, int size);
 char			*ft_strmidadd(char *tocut, char *toadd, int i);
 t_printf		*ft_strjoinprintf(t_printf *print, char *s2, int len2);
@@ -40,10 +40,10 @@ char			*ft_strjoindfree(char *s1, char *s2);
 char			*ft_strdupfree(char *s);
 char			*ft_strdupprintf(const char *src, int size);
 void			ft_strrev(char *s);
-char			*ft_sitoabase(size_t nbr, const char *base);
+char			*ft_sitoabasep(size_t nbr, const char *base);
 char			*ft_sitoa(ssize_t nbr);
 char			*ft_itoa(int nbr);
-char			*ft_itoabase(unsigned int nbr, const char *base);
+char			*ft_itoabasep(unsigned int nbr, const char *base);
 int				ft_atoibasefree(char *nbr_b, char *base);
 int				ft_atoi(char *str);
 int				ft_string_len(char *s);

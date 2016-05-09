@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 16:45:15 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/03 13:42:12 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 19:04:03 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,11 @@ int		total_size(t_all *head, int option)
 	total = 0;
 	while (tmp)
 	{
-		ft_putendl(tmp->name->name);
 		if (tmp->name->name[0] != '.' || (option & OPT_A))
-		{
-			ft_printf("tmp name : %s\n", tmp->name->name);
-			total += tmp->info->size;
-		}
+			total += tmp->info->blck;
 		tmp = tmp->next;
 	}
-	return (total / 512);
+	return (total);
 }
 
 t_all		*print_file(t_all *head, int option)
@@ -53,6 +49,8 @@ t_all		*print_file(t_all *head, int option)
 		}
 		tmp = tmp->next;
 	}
+	ft_putendl("");
+	free(max);
 	return (head);
 }
 
@@ -74,5 +72,6 @@ t_all		*print_dir(t_all *head, t_maxl *max, int option)
 		}
 		tmp = tmp->next;
 	}
+	free(max);
 	return (head);
 }

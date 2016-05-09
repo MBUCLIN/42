@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strlenp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/10 12:14:16 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/03/10 12:14:19 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/03/10 12:12:10 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/09 13:51:43 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void		ft_memset(void *p, int c, int len)
+int		ft_strlenp(const char *str)
 {
 	int		i;
 
-	i = -1;
-	while (++i < len)
-		*(unsigned char *)(p + i) = c;
+	i = 0;
+	if (str)
+		while (str[i])
+			i++;
+	return (i);
 }

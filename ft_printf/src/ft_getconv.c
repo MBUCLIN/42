@@ -32,7 +32,7 @@ t_printf			*ft_getconv(char *info, va_list ap)
 	conv = NULL;
 	if (info == NULL)
 		return (NULL);
-	c = ft_strlen(info) - 1;
+	c = ft_strlenp(info) - 1;
 	lm = ft_get_lm(info);
 	if (ft_isconvc(info[c]))
 		return (apply_conv(conv, info, lm, ap));

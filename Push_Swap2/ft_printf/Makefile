@@ -11,11 +11,11 @@ SRC_NAME = ft_apply_charc.c ft_apply_conv.c ft_apply_convp.c \
 		   ft_getadj.c ft_getlen.c ft_get_lm.c ft_getmask.c ft_putnbr.c\
 		   ft_get_nbits.c ft_get_noct.c ft_getoct.c ft_getpreci.c ft_get_ncar.c\
 		   ft_getwidth.c ft_isconv.c ft_isconvc.c ft_isconvi.c ft_isdigit.c \
-		   ft_memcpy.c ft_memset.c ft_printf.c ft_sitoabase.c ft_getconv.c\
+		   ft_memcpy.c ft_memsetp.c ft_printf.c ft_sitoabasep.c ft_getconv.c\
 		   ft_sitoa.c ft_strdup.c ft_strdupfree.c ft_string_len.c ft_strjoin.c \
-		   ft_strjoindfree.c ft_strjoinprintf.c ft_strlen.c ft_strmidadd.c \
-		   ft_strrev.c ft_strsub.c ft_strsubfree.c ft_isunsigned.c ft_strdupprintf.c \
-		   ft_itoa.c ft_itoabase.c ft_apply_int.c ft_carchr.c ft_isgoodcar.c
+		   ft_strjoindfree.c ft_strjoinprintf.c ft_strlenp.c ft_strmidadd.c \
+		   ft_strrev.c ft_strsubp.c ft_strsubfree.c ft_isunsigned.c ft_strdupprintf.c \
+		   ft_itoa.c ft_itoabasep.c ft_apply_int.c ft_carchr.c ft_isgoodcar.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

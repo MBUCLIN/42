@@ -19,7 +19,7 @@ t_printf			*ft_apply_charc(char *info, int adj, va_list ap)
 
 	if (!(conv = (t_printf *)malloc(sizeof(t_printf) * 1)))
 		return (NULL);
-	if (info[ft_strlen(info) - 1] != '%')
+	if (info[ft_strlenp(info) - 1] != '%')
 	{
 		c = (char)va_arg(ap, int);
 		if (!(conv->opt = (char *)malloc(sizeof(char) * 2)))
@@ -29,7 +29,7 @@ t_printf			*ft_apply_charc(char *info, int adj, va_list ap)
 	}
 	else
 	{
-		if (!(conv->opt = ft_strdup("%")))
+		if (!(conv->opt = ft_strdupp("%")))
 			return (NULL);
 	}
 	conv->size = 1;

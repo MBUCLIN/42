@@ -22,9 +22,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	if (s1 == NULL && s2 == NULL)
 		return (NULL);
-	if (!(toret = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
+	if (!(toret = (char *)malloc(ft_strlenp(s1) + ft_strlenp(s2) + 1)))
 		return (NULL);
-	toret[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	toret[ft_strlenp(s1) + ft_strlenp(s2)] = '\0';
 	if (s1 != NULL)
 		while (s1[++i])
 		{

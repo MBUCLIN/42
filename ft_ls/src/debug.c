@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:26:51 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 17:25:21 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 15:20:45 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void		print_all(t_all *head)
 	while (tmp)
 	{
 		print_node(tmp);
-		ft_putendl("next\n");
+		if (tmp->next)
+			ft_putendl("next\n");
 		tmp = tmp->next;
 	}
 }

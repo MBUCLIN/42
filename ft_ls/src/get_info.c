@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 14:35:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 16:34:33 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 14:06:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ int		get_time(struct stat buf, int timeopt, int t)
 	if (timeopt == 1)
 	{
 		if (t == 0)
-			return (buf.st_atim.tv_sec);
+			return (buf.st_atimespec.tv_sec);
 		else
-			return (buf.st_atim.tv_nsec);
+			return (buf.st_atimespec.tv_nsec);
 	}
 	else if (timeopt == 2)
 		return (0);
 	if (t == 0)
-		return (buf.st_mtim.tv_sec);
-	return (buf.st_mtim.tv_nsec);
+		return (buf.st_mtimespec.tv_sec);
+	return (buf.st_mtimespec.tv_nsec);
 }
 
 char	*get_group_name(gid_t gid)

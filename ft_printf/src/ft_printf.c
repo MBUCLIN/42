@@ -28,7 +28,7 @@ static char			*extract_info(const char *fmt)
 	while (fmt[++i])
 	{
 		if (ft_isconv(fmt[i]))
-			return (ft_strsub(fmt, 0, i + 1));
+			return (ft_strsubp(fmt, 0, i + 1));
 	}
 	return (NULL);
 }
@@ -57,19 +57,19 @@ static t_printf		*big_loop(const char *fmt, t_printf *p, va_list ap, int i)
 	char		*sub;
 
 	st = 0;
-	len = ft_strlen(fmt);
+	len = ft_strlenp(fmt);
 	while (fmt[++i])
 		if (fmt[i] == '%' && ft_checkconv(fmt, i))
 		{
 			if (!(p = ft_strjoinprintf(p,\
-				ft_strsub(fmt, st, i - st), i - st)))
+				ft_strsubp(fmt, st, i - st), i - st)))
 				return (NULL);
 			if (!(p = get_opt((fmt + i), p, ap)))
 				return (NULL);
 			st = after_conv(fmt, i);
 			i = st - 1;
 		}
-	if (!(sub = ft_strsub(fmt, st, len - st)))
+	if (!(sub = ft_strsubp(fmt, st, len - st)))
 		return (NULL);
 	if (!(p = ft_strjoinprintf(p, sub, len - st)))
 		return (NULL);

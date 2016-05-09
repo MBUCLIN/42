@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sitoabase.c                                     :+:      :+:    :+:   */
+/*   ft_sitoabasep.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,7 +18,7 @@ static int		check_base(const char *base)
 	int		j;
 
 	i = 0;
-	if (ft_strlen(base) < 2)
+	if (ft_strlenp(base) < 2)
 		return (0);
 	while (base[i])
 	{
@@ -47,7 +47,7 @@ static int		get_size(size_t nbr, int base)
 	return (size);
 }
 
-char			*ft_sitoabase(size_t nbr, const char *base)
+char			*ft_sitoabasep(size_t nbr, const char *base)
 {
 	int		size;
 	char	*ret;
@@ -56,8 +56,8 @@ char			*ft_sitoabase(size_t nbr, const char *base)
 	if (!(check_base(base)))
 		return (NULL);
 	else if (nbr == 0)
-		return (ft_strdup("0"));
-	div = ft_strlen(base);
+		return (ft_strdupp("0"));
+	div = ft_strlenp(base);
 	size = get_size(nbr, div);
 	if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   insert.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/09 14:12:12 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/09 15:26:36 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_ls.h"
 
 t_all		*insert(t_all *head, t_all *new, t_all *node)
@@ -17,18 +29,21 @@ t_all		*insert(t_all *head, t_all *new, t_all *node)
 	return (head);
 }
 
-t_all		*import_from_else(t_all *head, t_all *new, t_all *node)
+t_all		*import_from_else(t_all *head, t_all *new, t_all *node, int opt)
 {
 	int		ntt;
 	int		ntn;
 
 	ntn = new->info->ntime;
 	ntt = node->info->ntime;
-	if (ntn > ntt)
+	if ((ntn > ntt && (opt ^ OPT_R)) || (ntn < ntt && (opt & OPT_R)))
 		return (insert(head, new, node));
 	else if (ntn == ntt)
 	{
-		if (!ft_islexisort(new->name->name, node->name->name))
+		if ((!ft_islexisort(new->name->name, node->name->name) &&\
+			!(opt & OPT_R)) ||\
+			(!ft_isrevlexisort(new->name->name, node->name->name) &&\
+			 (opt & OPT_R)))
 			return (insert(head, new, node));
 	}
 	if (!node->next)
@@ -36,7 +51,7 @@ t_all		*import_from_else(t_all *head, t_all *new, t_all *node)
 	return (head);
 }
 
-t_all		*import_from_time(t_all *head, t_all *node)
+t_all		*import_from_time(t_all *head, t_all *node, int option)
 {
 	t_all		*tmp;
 	int			tt;
@@ -49,12 +64,12 @@ t_all		*import_from_time(t_all *head, t_all *node)
 	{
 		tn = node->info->time;
 		tt = tmp->info->time;
-		if (tn > tt)
+		if ((tn > tt && (option ^ OPT_R))|| (tn < tt && (option & OPT_R)))
 		{
 			return (insert(head, node, tmp));
 		}
 		else if (tn == tt)
-			return (import_from_else(head, node, tmp));
+			return (import_from_else(head, node, tmp, option));
 		tmp = tmp->next;
 	}
 	tmp = last_node(head);
@@ -68,11 +83,14 @@ t_all		*import(t_all *head, t_all *node, int option)
 	t_all		*tmp;
 
 	if (option & OPT_T)
-		return (import_from_time(head, node));
+		return (import_from_time(head, node, option));
 	tmp = head;
 	while (tmp)
 	{
-		if (!(ft_islexisort(node->name->name, tmp->name->name)))
+		if ((!(ft_islexisort(node->name->name, tmp->name->name)) &&\
+			(option ^ OPT_R)) ||\
+			(!ft_isrevlexisort(node->name->name, tmp->name->name) &&\
+			(option & OPT_R)))
 		{
 			head = insert(head, node, tmp);
 			return (head);

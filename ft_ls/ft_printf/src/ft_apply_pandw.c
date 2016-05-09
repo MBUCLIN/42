@@ -20,14 +20,14 @@ static char		*apply_preci(char *conv, int minus, int size, char *info)
 	sizep = ft_getpreci(info);
 	preci = NULL;
 	if (size == 1 && sizep != -1 && conv[0] == 0 && !ft_carchr('#', info))
-		return (ft_strdup(""));
+		return (ft_strdupp(""));
 	sizep = sizep - (size - minus);
 	if (sizep >= 1)
 		if (!(preci = (char *)malloc(sizeof(char) * (sizep + 1))))
 			return (NULL);
 	if (!preci)
 		return (conv);
-	ft_memset(preci, '0', sizep);
+	ft_memsetp(preci, '0', sizep);
 	preci[sizep] = 0;
 	return (ft_strmidadd(conv, preci, minus));
 }
@@ -49,7 +49,7 @@ static char		*apply_width(int adj, char *conv, char *info, int minus)
 	int		sizew;
 
 	width = NULL;
-	sizew = ft_getwidth(info) - ft_strlen(conv);
+	sizew = ft_getwidth(info) - ft_strlenp(conv);
 	if (sizew >= 1)
 		if (!(width = (char *)malloc(sizeof(char) * (sizew + 1))))
 		{
@@ -60,9 +60,9 @@ static char		*apply_width(int adj, char *conv, char *info, int minus)
 		return (conv);
 	width[sizew] = 0;
 	if (ft_getpreci(info) == -1 && adj == 'l')
-		ft_memset(width, '0', sizew);
+		ft_memsetp(width, '0', sizew);
 	else
-		ft_memset(width, ' ', sizew);
+		ft_memsetp(width, ' ', sizew);
 	return (get_width(conv, width, minus, adj));
 }
 
@@ -71,7 +71,7 @@ char			*ft_apply_pandw(int adj, char *info, char *conv)
 	int		minus;
 	int		size;
 
-	size = ft_strlen(conv);
+	size = ft_strlenp(conv);
 	minus = 0;
 	if (conv && (conv[0] == '0' && (conv[1] == 'x' || conv[1] == 'X')))
 		minus = 2;
@@ -80,6 +80,6 @@ char			*ft_apply_pandw(int adj, char *info, char *conv)
 		minus = 1;
 	if (!(conv = apply_preci(conv, minus, size, info)))
 		return (NULL);
-	size = ft_strlen(conv);
+	size = ft_strlenp(conv);
 	return (apply_width(adj, conv, info, minus));
 }

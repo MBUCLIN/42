@@ -64,13 +64,13 @@ static t_printf		*apply_preci(t_printf *conv, char *info)
 		return (conv);
 	if (!(conv->opt = ft_strjoindfree(preci, conv->opt)))
 		return (NULL);
-	conv->size = ft_strlen(conv->opt);
+	conv->size = ft_strlenp(conv->opt);
 	return (conv);
 }
 
 static t_printf		*wcharzero(t_printf *conv)
 {
-	if (!(conv->opt = ft_strdup("")))
+	if (!(conv->opt = ft_strdupp("")))
 		return (NULL);
 	conv->size = 0;
 	return (conv);
@@ -86,7 +86,7 @@ t_printf			*ft_apply_wchar(char *info, int adj, va_list ap)
 	wchar = va_arg(ap, int *);
 	if (wchar == NULL)
 	{
-		if (!(conv->opt = ft_strdup("(null)")))
+		if (!(conv->opt = ft_strdupp("(null)")))
 			return (NULL);
 	}
 	else if (*wchar == 0)
@@ -96,7 +96,7 @@ t_printf			*ft_apply_wchar(char *info, int adj, va_list ap)
 		if (!(conv->opt = apply_wchar(wchar)))
 			return (NULL);
 	}
-	conv->size = ft_strlen(conv->opt);
+	conv->size = ft_strlenp(conv->opt);
 	if (!(conv = apply_preci(conv, info)))
 		return (NULL);
 	return (ft_apply_widtchar(info, conv, adj));

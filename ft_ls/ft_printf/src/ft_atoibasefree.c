@@ -70,7 +70,7 @@ static int		get_number(char *nbr_b, char *base)
 			j++;
 		if (base[j] != '\0')
 		{
-			nbr = nbr * ft_strlen(base) + j;
+			nbr = nbr * ft_strlenp(base) + j;
 		}
 		i++;
 	}

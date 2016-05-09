@@ -38,9 +38,9 @@ char			*ft_itoa(int nbr)
 	int		size;
 
 	if (nbr * -1 - 1 == 2147483647)
-		return (ft_strdup("-2147483648"));
+		return (ft_strdupp("-2147483648"));
 	else if (nbr == 0)
-		return (ft_strdup("0"));
+		return (ft_strdupp("0"));
 	size = check_size(nbr);
 	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);

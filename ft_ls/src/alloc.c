@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:24:22 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 17:07:02 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/09 18:30:37 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ char		*create_path(char *last_path, char *name)
 	char	*path;
 
 	path = NULL;
-	if (!(path = ft_strjoin(last_path, "/")))
+	if (!(path = ft_strdup(last_path)))
 		return (NULL);
-	if (!(path = ft_strjoindfree(path, ft_strdup(name))))
-		return (NULL);
-	return (path);
+	if (path[ft_strlen(path) - 1] != '/')
+		if (!(path = ft_strjoindfree(path, ft_strdup("/"))))
+			return (NULL);
+	return (ft_strjoindfree(path, ft_strdup(name)));
 }
 
 t_name		*new_name(char *name, char *path)
@@ -67,6 +68,7 @@ t_info		*new_info(t_name *name, int time)
 	new->time = get_time(buf, time, 0);
 	new->ntime = get_time(buf, time, 1);
 	new->size = buf.st_size;
+	new->blck = buf.st_blocks;
 	new->maj = need_major(buf, new->mode);
 	new->min = need_minor(buf, new->mode);
 	new->hardl = buf.st_nlink;
@@ -88,7 +90,13 @@ t_all		*new_node_all(t_name *name, int option)
 		return (NULL);
 	new->next = NULL;
 	new->son = NULL;
+	if (!name)
+	{
+		del_name(name);
+		return (del_all(new));
+	}
 	new->name = name;
-	new->info = new_info(name, time);
+	if (!(new->info = new_info(name, time)))
+		return (del_all(new));
 	return (new);
 }

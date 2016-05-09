@@ -23,7 +23,7 @@ static t_printf		*get_convetwidth(t_printf *conv, char *width, int adj)
 		n = conv->size;
 	if (!(conv->opt = ft_strmidadd(conv->opt, width, n)))
 		return (NULL);
-	conv->size = ft_strlen(conv->opt);
+	conv->size = ft_strlenp(conv->opt);
 	return (conv);
 }
 
@@ -44,7 +44,7 @@ static t_printf		*apply_widthp(int adj, char *info, t_printf *conv)
 	width[size] = '\0';
 	if (ft_getpreci(info) == -1 && adj == 'l')
 		c = '0';
-	ft_memset(width, c, size);
+	ft_memsetp(width, c, size);
 	return (get_convetwidth(conv, width, adj));
 }
 
@@ -55,16 +55,16 @@ static t_printf		*get_p(int adj, char *info, t_printf *conv)
 
 	preci = NULL;
 	size = ft_getpreci(info) - conv->size;
-	if (!(conv->opt = ft_strjoindfree(ft_strdup("0x"), conv->opt)))
+	if (!(conv->opt = ft_strjoindfree(ft_strdupp("0x"), conv->opt)))
 		return (NULL);
-	conv->size = ft_strlen(conv->opt);
+	conv->size = ft_strlenp(conv->opt);
 	if (size > 1)
 		if (!(preci = (char *)malloc(sizeof(char) * (size + 1))))
 			return (NULL);
 	if (!preci)
 		return (apply_widthp(adj, info, conv));
 	preci[size] = '\0';
-	ft_memset(preci, '0', size);
+	ft_memsetp(preci, '0', size);
 	if (!(conv->opt = ft_strmidadd(conv->opt, preci, 2)))
 		return (NULL);
 	conv->size += size;
@@ -85,13 +85,13 @@ t_printf			*ft_apply_convp(char *info, int adj, va_list ap)
 	preci = ft_getpreci(info);
 	if (adr == 0 && preci == 0)
 	{
-		if (!(conv->opt = ft_strdup("0x")))
+		if (!(conv->opt = ft_strdupp("0x")))
 			return (NULL);
 		conv->size = 2;
 		return (apply_widthp(adj, info, conv));
 	}
-	if (!(conv->opt = ft_sitoabase(adr, "0123456789abcdef")))
+	if (!(conv->opt = ft_sitoabasep(adr, "0123456789abcdef")))
 		return (NULL);
-	conv->size = ft_strlen(conv->opt);
+	conv->size = ft_strlenp(conv->opt);
 	return (get_p(adj, info, conv));
 }

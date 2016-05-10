@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:58:40 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/09 15:30:11 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 12:36:03 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,30 @@ int			check_option(char *arg)
 		i++;
 	}
 	return (opt);
+}
+
+int			check_dir(t_all *node, int option)
+{
+	int		ret;
+
+	ret = 0;
+	ft_printf("node->name->name : %s\n", node->name->name);
+	if (!ft_strcmp(node->name->name, ".") ||\
+		!ft_strcmp(node->name->name, "./") ||\
+		!ft_strcmp(node->name->name, "..") ||\
+		!ft_strcmp(node->name->name, "../"))
+		ret = 0;
+	else if ((node->info->mode & S_IFDIR) == S_IFDIR)
+	{
+		ft_putendl("dir");
+		ret = 1;
+	}
+	else if ((node->info->mode & S_IFLNK) == S_IFLNK)
+		if (option & OPT_L)
+			ret = 0;
+		else
+			ret = 1;
+	else if ((node->info->mode & S_IFBLK) == S_IFBLK)
+		ret = 0;
+	return (ret);
 }

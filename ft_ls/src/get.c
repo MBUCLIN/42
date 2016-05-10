@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 15:55:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/04 16:05:16 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 12:35:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ char		*get_date(time_t tfile)
 
 char		get_filetype(int mode)
 {
-	if (mode & 010000)
+	if (mode & S_IFIFO)
 		return ('p');
-	else if (mode & 020000)
+	else if (mode & S_IFCHR)
 		return ('c');
-	else if (mode & 040000)
+	else if (mode & S_IFDIR)
 		return ('d');
-	else if (mode & 060000)
+	else if (mode & S_IFBLK)
 		return ('b');
-	else if (mode & 0100000)
+	else if (mode & S_IFREG)
 		return ('-');
-	else if (mode & 0120000)
+	else if (mode & S_IFLNK)
 		return ('l');
-	else if (mode & 0140000)
+	else if (mode & S_IFSOCK)
 		return ('s');
 	return (0);
 }

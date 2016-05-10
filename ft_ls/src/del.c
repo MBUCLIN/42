@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:24:32 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/09 18:58:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 12:13:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		*del_all(t_all *head)
 	return (NULL);
 }
 
-void		*del_only_file(t_all *head)
+void		*del_only_file(t_all *head, int opt)
 {
 	t_all		*del;
 	t_all		*tmp;
@@ -64,15 +64,15 @@ void		*del_only_file(t_all *head)
 	if (!head)
 		return (NULL);
 	del = head->next;
-	if (head->info->mode & 0100000)
+	if (!(check_dir(head, opt)))
 	{
 		del_all(head);
-		return (del_only_file(del));
+		return (del_only_file(del, opt));
 	}
 	tmp = head;
 	while (del)
 	{
-		if (del->info->mode & 0100000)
+		if (!check_dir(del, opt))
 		{
 			tmp->next = del->next;
 			del_all(del);

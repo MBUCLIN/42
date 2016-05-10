@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/09 15:10:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 11:42:30 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@
 void		*del_name(t_name *head);
 void		*del_info(t_info *info);
 void		*del_all(t_all *head);
-void		*del_only_file(t_all *head);
+void		*del_only_file(t_all *head, int option);
 void		print_info(t_all *node);
 void		print_name(t_all *node);
 char		*print_mode(int mode);
 void		print_node(t_all *node);
 void		print_all(t_all *head);
-t_all		*print_dir(t_all *head, t_maxl *max, int option);
 char		*create_path(char *last_path, char *name);
 t_name		*new_name(char *name, char *path);
 t_info		*new_info(t_name *name, int option);
@@ -61,7 +60,9 @@ char		*get_size_or_minmaj(char *line, t_info *node, t_maxl *max);
 char		*get_line_print(t_all *node, t_maxl *max);
 t_all		*sort_list(t_all *all, int option);
 int			check_times_option(int option);
+int			check_dir(t_all *node, int option);
 char		*choose_line(t_all *node, t_maxl *max, int option);
+t_all		*print_dir(t_all *head, t_maxl *max, int option);
 t_all		*print_file(t_all *head, int option);
 int			error_option(char *arg_er);
 int			check_option(char *arg);

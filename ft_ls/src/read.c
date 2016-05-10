@@ -30,18 +30,20 @@ t_all		*read_dir_arg(t_all *head, int option)
 	t_all			*tmp;
 
 	tmp = head;
-	ft_printf("%d : leaks\n", sizeof(t_all));
 	while (tmp)
 	{
 		if (!(dir = opendir(tmp->name->path)))
-			return (del_all(head));
+		{
+			perror(tmp->name->name);
+			tmp = tmp->next;
+		}
 		if (!(tmp->son = read_dir(tmp, dir, option)))
 			return (del_all(head));
 		if (closedir(dir))
 			return (del_all(head));
 		dir = NULL;
-		ft_printf("%s:\n", tmp->name->path);
-		ft_printf("total %d\n", total_size(tmp->son, option));
+		if (option & OPT_MR || !ft_strcmp(tmp->name->name, "."))
+			ft_printf("%s:\n", tmp->name->path);
 		if (!(tmp->son = print_dir(tmp->son, get_len_max(tmp->son), option)))
 			return (del_all(head));
 		ft_putendl("");
@@ -60,18 +62,17 @@ t_all		*recursive(t_all *head, int option)
 	dir = NULL;
 	while (tmp)
 	{
-		if ((tmp->info->mode & 040000) && (ft_strcmp(tmp->name->name, ".") &&\
-			ft_strcmp(tmp->name->name, "..")))
+		if (check_dir(tmp, option))
 		{
+			if (option & OPT_MR || !ft_strcmp(tmp->name->name, "."))
+				ft_printf("%s:\n", tmp->name->path);
 			if (!(dir = opendir(tmp->name->path)))
+				perror(tmp->name->name);
+			else if  (!(tmp->son = read_dir(tmp, dir, option)))
 				return (del_all(head));
-			if (!(tmp->son = read_dir(tmp, dir, option)))
-				return (del_all(head));
-			if (closedir(dir))
+			else if (closedir(dir))
 				return (del_all(head));
 			dir = NULL;
-			ft_printf("%s:\n", tmp->name->path);
-			ft_printf("total %d\n", total_size(tmp->son, option));
 			if (!(tmp->son =\
 				print_dir(tmp->son, get_len_max(tmp->son), option)))
 				return (del_all(head));

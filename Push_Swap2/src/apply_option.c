@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 16:30:58 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/04/22 18:07:40 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 10:15:27 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void		print_command(t_cmd *command, int n)
 		ft_putstr("\033[32m");
 		ft_putstr(tmp->command);
 		ft_putstr("\033[0m");
-		ft_printf(" %d\n", tmp->turn);
+		ft_printf(" = %d\n", tmp->turn);
 		tmp = tmp->next;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 16:45:15 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/09 19:04:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 12:22:40 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,17 @@ t_all		*print_file(t_all *head, int option)
 	t_all		*tmp;
 	char		*line;
 	t_maxl		*max;
+	int			n;
 
 	if (!(max = get_len_max(head)))
 		return(del_all(head));
 	tmp = head;
+	n = 0;
 	while (tmp)
 	{
-		if (tmp->info->mode & 0100000)
+		if (!(check_dir(tmp, option)))
 		{
+			n = 1;
 			if (!(line = choose_line(tmp, max, option)))
 				return (del_all(head));
 			ft_putendl(line);
@@ -49,7 +52,8 @@ t_all		*print_file(t_all *head, int option)
 		}
 		tmp = tmp->next;
 	}
-	ft_putendl("");
+	if (n)
+		ft_putendl("");
 	free(max);
 	return (head);
 }
@@ -60,6 +64,8 @@ t_all		*print_dir(t_all *head, t_maxl *max, int option)
 	char	*line;
 
 	tmp = head;
+	if (option & OPT_L)
+		printf("total %d\n", total_size(head, option));
 	while (tmp)
 	{
 		if (tmp->name->name[0] != '.' || (option & OPT_A))

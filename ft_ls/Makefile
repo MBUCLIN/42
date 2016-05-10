@@ -21,14 +21,20 @@ CFLAGS = -Wall -Wextra -Wall
 CC = gcc
 
 $(NAME): $(OBJ)
+	make -C libft;
+	make -C ft_printf;
 	$(CC) $(CFLAGS) -o $(NAME) main.c $(OBJ) $(LIB) $(LIBFTPRINTF)
 
 all: $(NAME)
 
 clean:
+	make clean -C libft;
+	make clean -C ft_printf;
 	rm -rfv $(OBJ)
 
 fclean: clean
+	make fclean -C libft;
+	make fclean -C ft_printf;
 	rm -rfv $(NAME)
 
 re: fclean all

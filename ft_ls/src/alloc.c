@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:24:22 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/09 18:30:37 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 17:32:09 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-char		*create_path(char *last_path, char *name)
+char				*create_path(char *last_path, char *name)
 {
 	char	*path;
 
@@ -25,7 +25,7 @@ char		*create_path(char *last_path, char *name)
 	return (ft_strjoindfree(path, ft_strdup(name)));
 }
 
-t_name		*new_name(char *name, char *path)
+t_name				*new_name(char *name, char *path)
 {
 	t_name		*new;
 
@@ -49,7 +49,20 @@ t_name		*new_name(char *name, char *path)
 	return (new);
 }
 
-t_info		*new_info(t_name *name, int time)
+static t_info		*set_info(t_info *new)
+{
+	new->mode = 0;
+	new->time = 0;
+	new->ntime = 0;
+	new->size = 0;
+	new->blck = 0;
+	new->maj = 0;
+	new->min = 0;
+	new->hardl = 0;
+	return (new);
+}
+
+t_info				*new_info(t_name *name, int time)
 {
 	t_info			*new;
 	struct stat		buf;
@@ -59,11 +72,8 @@ t_info		*new_info(t_name *name, int time)
 		return (NULL);
 	new->gr_name = NULL;
 	new->us_name = NULL;
-	if (stat(name->path, &buf))
-	{
-		perror(name->name);
-		return (del_info(new));
-	}
+	if (lstat(name->path, &buf))
+		return (set_info(new));
 	new->mode = buf.st_mode;
 	new->time = get_time(buf, time, 0);
 	new->ntime = get_time(buf, time, 1);
@@ -79,7 +89,7 @@ t_info		*new_info(t_name *name, int time)
 	return (new);
 }
 
-t_all		*new_node_all(t_name *name, int option)
+t_all				*new_node_all(t_name *name, int option)
 {
 	t_all			*new;
 	int				time;

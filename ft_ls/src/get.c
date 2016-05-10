@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 15:55:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 12:35:14 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 16:23:20 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ char		*get_date(time_t tfile)
 
 char		get_filetype(int mode)
 {
-	if (mode & S_IFIFO)
+	if (S_ISFIFO(mode))
 		return ('p');
-	else if (mode & S_IFCHR)
+	else if (S_ISCHR(mode))
 		return ('c');
-	else if (mode & S_IFDIR)
+	else if (S_ISDIR(mode))
 		return ('d');
-	else if (mode & S_IFBLK)
+	else if (S_ISBLK(mode))
 		return ('b');
-	else if (mode & S_IFREG)
+	else if (S_ISREG(mode))
 		return ('-');
-	else if (mode & S_IFLNK)
+	else if (S_ISLNK(mode))
 		return ('l');
-	else if (mode & S_IFSOCK)
+	else if (S_ISSOCK(mode))
 		return ('s');
 	return (0);
 }
@@ -77,4 +77,26 @@ char		*get_right(char *line, int mode, int mult)
 		dec++;
 	}
 	return (line);
+}
+
+char		*add_linked_path(t_all *node, char *line)
+{
+	char		buf[256];
+	int			n;
+	char		*path;
+
+	path = NULL;
+	if (!S_ISLNK(node->info->mode))
+		return (line);
+	if (!(line = ft_strjoindfree(line, ft_strdup(" -> "))))
+		return (NULL);
+	if ((n = readlink(node->name->path, buf, 255)) == -1)
+		return (NULL);
+	buf[n] = 0;
+	if (!(path = ft_strdup((const char *)buf)))
+	{
+		free(line);
+		return (NULL);
+	}
+	return (ft_strjoindfree(line, path));
 }

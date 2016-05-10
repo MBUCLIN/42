@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:58:40 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 12:36:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 16:37:48 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,25 @@ int			check_dir(t_all *node, int option)
 	int		ret;
 
 	ret = 0;
-	ft_printf("node->name->name : %s\n", node->name->name);
+	if (node->name->name[0] == '.' && option & OPT_A)
+		return (1);
+	else if (node->name->name[0] == '.')
+		return (0);
 	if (!ft_strcmp(node->name->name, ".") ||\
 		!ft_strcmp(node->name->name, "./") ||\
 		!ft_strcmp(node->name->name, "..") ||\
 		!ft_strcmp(node->name->name, "../"))
-		ret = 0;
-	else if ((node->info->mode & S_IFDIR) == S_IFDIR)
-	{
-		ft_putendl("dir");
+		return (0);
+	if (S_ISDIR(node->info->mode))
 		ret = 1;
-	}
-	else if ((node->info->mode & S_IFLNK) == S_IFLNK)
+	if (S_ISLNK(node->info->mode))
+	{
 		if (option & OPT_L)
 			ret = 0;
 		else
 			ret = 1;
-	else if ((node->info->mode & S_IFBLK) == S_IFBLK)
+	}
+	if (S_ISBLK(node->info->mode))
 		ret = 0;
 	return (ret);
 }

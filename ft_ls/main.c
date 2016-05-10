@@ -6,8 +6,6 @@ int		main(int argc, char **argv)
 	t_all	*arg;
 
 	opt = init_option(argc - 1, argv + 1);
-	ft_printf("opt : %d\n", opt);
-	sleep(2);
 	if (opt == -1)
 		return (0);
 	if (!(arg = recup_args(argc - 1, argv + 1, opt)))

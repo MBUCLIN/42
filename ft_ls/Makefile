@@ -16,7 +16,7 @@ LIBFTPRINTF = ft_printf/libftprintf.a
 
 OBJ = $(addprefix $(SRC_PATH),$(OBJ_NAME))
 
-CFLAGS = -Wall -Wextra -Wall
+CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 11:42:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 17:21:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char		*get_user_name(uid_t uid);
 char		*get_grus_name(t_info *node);
 char		*get_line_minmaj(char *line, t_info *node, t_maxl *max);
 char		*get_size_or_minmaj(char *line, t_info *node, t_maxl *max);
+char		*add_linked_path(t_all *node, char *line);
 char		*get_line_print(t_all *node, t_maxl *max);
 t_all		*sort_list(t_all *all, int option);
 int			check_times_option(int option);
@@ -73,6 +74,7 @@ t_all		*import_from_else(t_all *head, t_all *new, t_all *node, int opt);
 t_all		*import_from_time(t_all *head, t_all *nodei, int option);
 t_all		*import(t_all *head, t_all *node, int option);
 t_all		*read_dir(t_all *node, DIR *dir, int option);
+int			get_dir_content(t_all **node, int option);
 t_all		*read_dir_arg(t_all *head, int option);
 t_all		*recursive(t_all *head, int option);
 t_all		*recup_args(int ac, char **av, int option);

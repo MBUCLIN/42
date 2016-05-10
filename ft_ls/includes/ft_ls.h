@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 17:21:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 18:02:12 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include <sys/types.h>
 # include <pwd.h>
 # include <grp.h>
-//# include <uuid/uuid.h>
+# include <errno.h>
+# include <string.h>
+# include <uuid/uuid.h>
 # include <time.h>
 # include <inttypes.h>
 # include "../libft/includes/libft.h"

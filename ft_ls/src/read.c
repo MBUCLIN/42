@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/10 17:46:21 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/10 18:15:35 by mbuclin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_ls.h"
 
 t_all		*read_dir(t_all *node, DIR *dir, int option)
@@ -34,7 +46,6 @@ int			get_dir_content(t_all **node, int option)
 	DIR		*dir;
 
 	dir = NULL;
-	ft_putendl((*node)->name->path);
 	if (!(dir = opendir((*node)->name->path)))
 	{
 		perror((*node)->name->path);
@@ -47,6 +58,7 @@ int			get_dir_content(t_all **node, int option)
 	dir = NULL;
 	if ((*node)->son->info->mode == 0)
 		return (-1);
+	ft_printf("%s:\n", (*node)->name->path);
 	return (1);
 }
 

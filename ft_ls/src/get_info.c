@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 14:35:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 15:22:07 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 18:14:47 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*get_group_name(gid_t gid)
 	struct group	*group_info;
 
 	if (!(group_info = getgrgid(gid)))
-		return (NULL);
+		return (ft_itoabase(gid, "0123456789"));
 	return (ft_strdup(group_info->gr_name));
 }
 
@@ -73,6 +73,6 @@ char	*get_user_name(uid_t uid)
 	struct passwd		*user_info;
 
 	if (!(user_info = getpwuid(uid)))
-		return (NULL);
+		return (ft_itoabase(uid, "0123456789"));
 	return (ft_strdup(user_info->pw_name));
 }

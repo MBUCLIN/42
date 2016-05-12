@@ -1,7 +1,7 @@
 NAME = ft_ls
 
 SRC_NAME = alloc.c check.c debug.c del.c error.c initiate.c option.c \
-		   get_info.c get.c get_line.c get_max_len.c minor_major.c sort.c \
+		   get_info.c get.c get_line.c get_max_len.c minor_major.c \
 		   get_node.c insert.c print.c read.c
 
 SRC_PATH = src/

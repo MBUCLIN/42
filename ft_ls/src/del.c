@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:24:32 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 12:13:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/12 17:43:58 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ void		*del_info(t_info *info)
 	return (NULL);
 }
 
+void		*del_node(t_all *node)
+{
+	if (node)
+	{
+		if (node->name)
+			node->name = del_name(node->name);
+		if (node->info)
+			node->info = del_info(node->info);
+		free(node);
+	}
+	return (NULL);
+}
+
 void		*del_all(t_all *head)
 {
 	t_all		*tmp;
@@ -46,12 +59,7 @@ void		*del_all(t_all *head)
 	{
 		tmp = head;
 		head = head->next;
-		if (tmp->name)
-			del_name(tmp->name);
-		if (tmp->info)
-			del_info(tmp->info);
-		if (tmp)
-			free(tmp);
+		tmp = del_node(tmp);
 	}
 	return (NULL);
 }
@@ -64,18 +72,18 @@ void		*del_only_file(t_all *head, int opt)
 	if (!head)
 		return (NULL);
 	del = head->next;
-	if (!(check_dir(head, opt)))
+	if ((check_file(head, opt)))
 	{
-		del_all(head);
+		del_node(head);
 		return (del_only_file(del, opt));
 	}
 	tmp = head;
 	while (del)
 	{
-		if (!check_dir(del, opt))
+		if (check_file(del, opt))
 		{
 			tmp->next = del->next;
-			del_all(del);
+			del_node(del);
 			del = NULL;
 		}
 		tmp = tmp->next;

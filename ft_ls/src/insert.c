@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 14:12:12 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/09 15:26:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/12 17:46:48 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ t_all		*import_from_else(t_all *head, t_all *new, t_all *node, int opt)
 
 	ntn = new->info->ntime;
 	ntt = node->info->ntime;
-	if ((ntn > ntt && (opt ^ OPT_R)) || (ntn < ntt && (opt & OPT_R)))
+	if ((ntn > ntt && !(opt & OPT_R)) || (ntn < ntt && (opt & OPT_R)))
 		return (insert(head, new, node));
 	else if (ntn == ntt)
 	{
 		if ((!ft_islexisort(new->name->name, node->name->name) &&\
 			!(opt & OPT_R)) ||\
 			(!ft_isrevlexisort(new->name->name, node->name->name) &&\
-			 (opt & OPT_R)))
+			(opt & OPT_R)))
 			return (insert(head, new, node));
 	}
-	if (!node->next)
-		node->next = new;
+	new->next = node->next;
+	node->next = new;
 	return (head);
 }
 
@@ -58,16 +58,12 @@ t_all		*import_from_time(t_all *head, t_all *node, int option)
 	int			tn;
 
 	tmp = head;
-	if (head == node)
-		return (head);
 	while (tmp)
 	{
 		tn = node->info->time;
 		tt = tmp->info->time;
-		if ((tn > tt && (option ^ OPT_R))|| (tn < tt && (option & OPT_R)))
-		{
+		if ((tn > tt && !(option & OPT_R)) || (tn < tt && (option & OPT_R)))
 			return (insert(head, node, tmp));
-		}
 		else if (tn == tt)
 			return (import_from_else(head, node, tmp, option));
 		tmp = tmp->next;
@@ -82,7 +78,9 @@ t_all		*import(t_all *head, t_all *node, int option)
 {
 	t_all		*tmp;
 
-	if (option & OPT_T)
+	if (node == head)
+		return (head);
+	if (option & OPT_T && !(option & OPT_MU))
 		return (import_from_time(head, node, option));
 	tmp = head;
 	while (tmp)

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 18:02:12 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/12 17:44:49 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 void		*del_name(t_name *head);
 void		*del_info(t_info *info);
 void		*del_all(t_all *head);
+void		*del_node(t_all *node);
 void		*del_only_file(t_all *head, int option);
 void		print_info(t_all *node);
 void		print_name(t_all *node);
@@ -63,7 +64,8 @@ char		*add_linked_path(t_all *node, char *line);
 char		*get_line_print(t_all *node, t_maxl *max);
 t_all		*sort_list(t_all *all, int option);
 int			check_times_option(int option);
-int			check_dir(t_all *node, int option);
+int			check_file(t_all *node, int option);
+int			check_dir(t_all *node, int option, int call);
 char		*choose_line(t_all *node, t_maxl *max, int option);
 t_all		*print_dir(t_all *head, t_maxl *max, int option);
 t_all		*print_file(t_all *head, int option);
@@ -78,7 +80,7 @@ t_all		*import(t_all *head, t_all *node, int option);
 t_all		*read_dir(t_all *node, DIR *dir, int option);
 int			get_dir_content(t_all **node, int option);
 t_all		*read_dir_arg(t_all *head, int option);
-t_all		*recursive(t_all *head, int option);
+t_all		*recursive(t_all *head, int option, int call);
 t_all		*recup_args(int ac, char **av, int option);
 
 #endif

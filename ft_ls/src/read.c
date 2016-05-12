@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:46:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 18:15:35 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/12 17:50:21 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 t_all		*read_dir(t_all *node, DIR *dir, int option)
 {
 	struct dirent		*dirent;
-	char			*path;
-	t_all			*head;
-	t_all			*tmp;
+	char				*path;
+	t_all				*head;
+	t_all				*tmp;
 
 	head = NULL;
 	while ((dirent = readdir(dir)))
@@ -74,7 +74,8 @@ t_all		*read_dir_arg(t_all *head, int option)
 			return (del_all(head));
 		else if (content == 1)
 		{
-			if (!(tmp->son = print_dir(tmp->son, get_len_max(tmp->son), option)))
+			if (!(tmp->son =\
+				print_dir(tmp->son, get_len_max(tmp->son), option)))
 				return (del_all(head));
 			ft_putendl("");
 			tmp->son = del_all(tmp->son);
@@ -84,7 +85,7 @@ t_all		*read_dir_arg(t_all *head, int option)
 	return (head);
 }
 
-t_all		*recursive(t_all *head, int option)
+t_all		*recursive(t_all *head, int option, int call)
 {
 	int			content;
 	t_all		*tmp;
@@ -92,7 +93,7 @@ t_all		*recursive(t_all *head, int option)
 	tmp = head;
 	while (tmp)
 	{
-		if (check_dir(tmp, option))
+		if (check_dir(tmp, option, call))
 		{
 			if (!(content = get_dir_content(&tmp, option)))
 				return (del_all(head));
@@ -102,7 +103,7 @@ t_all		*recursive(t_all *head, int option)
 					print_dir(tmp->son, get_len_max(tmp->son), option)))
 					return (del_all(head));
 				ft_putendl("");
-				if (!(tmp->son = recursive(tmp->son, option)))
+				if (!(tmp->son = recursive(tmp->son, option, call + 1)))
 					return (del_all(head));
 				tmp->son = del_all(tmp->son);
 			}

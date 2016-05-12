@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:26:51 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/09 15:20:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/12 17:51:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		print_info(t_all *node)
 	ft_printf("%d : size\n", node->info->size);
 	ft_printf("%d : hardl\n", node->info->hardl);
 }
+
 void		print_name(t_all *node)
 {
 	ft_printf("%s : name\n", node->name->name);
@@ -41,8 +42,8 @@ char		*print_mode(int mode)
 void		print_node(t_all *node)
 {
 	print_name(node);
-//	print_info(node);
-//	print_mode(node->info->mode);
+	print_info(node);
+	print_mode(node->info->mode);
 }
 
 void		print_all(t_all *head)

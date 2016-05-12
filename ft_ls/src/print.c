@@ -6,15 +6,15 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 16:45:15 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 16:25:39 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/12 17:46:09 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-int		total_size(t_all *head, int option)
+int			total_size(t_all *head, int option)
 {
-	int		total;
+	int			total;
 	t_all		*tmp;
 
 	tmp = head;
@@ -36,12 +36,12 @@ t_all		*print_file(t_all *head, int option)
 	int			n;
 
 	if (!(max = get_len_max(head)))
-		return(del_all(head));
+		return (del_all(head));
 	tmp = head;
 	n = 0;
 	while (tmp)
 	{
-		if (!(check_dir(tmp, option)))
+		if (check_file(tmp, option))
 		{
 			n = 1;
 			if (!(line = choose_line(tmp, max, option)))
@@ -52,8 +52,6 @@ t_all		*print_file(t_all *head, int option)
 		}
 		tmp = tmp->next;
 	}
-	if (n)
-		ft_putendl("");
 	free(max);
 	return (head);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 15:55:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/10 16:23:20 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/12 16:15:35 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ char		*add_linked_path(t_all *node, char *line)
 	if (!(line = ft_strjoindfree(line, ft_strdup(" -> "))))
 		return (NULL);
 	if ((n = readlink(node->name->path, buf, 255)) == -1)
+	{
+		free(line);
 		return (NULL);
+	}
 	buf[n] = 0;
 	if (!(path = ft_strdup((const char *)buf)))
 	{

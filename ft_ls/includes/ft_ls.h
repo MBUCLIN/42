@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 12:29:34 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/13 14:49:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		print_name(t_all *node);
 char		*print_mode(int mode);
 void		print_node(t_all *node);
 void		print_all(t_all *head);
+void		put_error(char *name);
 char		*create_path(char *last_path, char *name);
 t_name		*new_name(char *name, char *path);
 t_info		*new_info(t_name *name, int option);

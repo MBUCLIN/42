@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 15:39:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 12:16:08 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/13 14:50:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,14 @@ int		test_list(t_all *head, int option)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+void	put_error(char *name)
+{
+	char		*erreur;
+
+	erreur = NULL;
+	if (!(erreur = ft_strjoin("ft_ls: ", name)))
+		return ;
+	perror(erreur);
 }

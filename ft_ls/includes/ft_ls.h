@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/12 17:44:49 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/13 12:29:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,12 @@ char		*get_line_minmaj(char *line, t_info *node, t_maxl *max);
 char		*get_size_or_minmaj(char *line, t_info *node, t_maxl *max);
 char		*add_linked_path(t_all *node, char *line);
 char		*get_line_print(t_all *node, t_maxl *max);
-t_all		*sort_list(t_all *all, int option);
 int			check_times_option(int option);
 int			check_file(t_all *node, int option);
 int			check_dir(t_all *node, int option, int call);
 char		*choose_line(t_all *node, t_maxl *max, int option);
+int			test_dir(t_all *node);
+int			test_list(t_all *head, int option);
 t_all		*print_dir(t_all *head, t_maxl *max, int option);
 t_all		*print_file(t_all *head, int option);
 int			error_option(char *arg_er);

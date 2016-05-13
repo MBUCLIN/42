@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 16:45:15 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/12 17:46:09 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/13 11:56:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ t_all		*print_dir(t_all *head, t_maxl *max, int option)
 	char	*line;
 
 	tmp = head;
-	printf("total %d\n", total_size(head, option));
+	if (test_list(head, option))
+		printf("total %d\n", total_size(head, option));
 	while (tmp)
 	{
 		if (tmp->name->name[0] != '.' || (option & OPT_A))

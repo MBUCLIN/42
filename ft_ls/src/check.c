@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:58:40 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/12 17:48:56 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/13 11:22:12 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int				check_file(t_all *node, int option)
 		if (OPT_L & option)
 			ret = 1;
 	}
+	if (node->info->mode == 0)
+		ret = 0;
 	return (ret);
 }
 

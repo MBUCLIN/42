@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:46:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 14:51:07 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/14 12:09:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_all		*read_dir_arg(t_all *head, int option)
 	{
 		if (!(content = get_dir_content(&tmp, option)))
 			return (del_all(head));
-		ft_printf("%d : content\n", content);
+	//	ft_printf("%d : content\n", content);
 		if (content == 1)
 		{
 			if (!(tmp->son =\

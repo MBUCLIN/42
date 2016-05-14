@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:24:22 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 14:51:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/14 12:10:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ t_info				*new_info(t_name *name, int time)
 	new->gr_name = NULL;
 	new->us_name = NULL;
 	if (lstat(name->path, &buf))
-	{
-		ft_putendl(name->path);
 		return (set_info(new));
-	}
 	new->mode = buf.st_mode;
 	new->time = get_time(buf, time, 0);
 	new->ntime = get_time(buf, time, 1);

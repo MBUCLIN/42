@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 17:29:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 11:12:47 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/14 12:43:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int		main(int argc, char **argv)
 	else if (arg)
 		arg = read_dir_arg(arg, opt);
 	del_all(arg);
+	sleep(20);
 	return (1);
 }

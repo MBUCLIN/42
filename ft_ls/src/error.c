@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 15:39:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 14:50:11 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/14 12:44:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	put_error(char *name)
 	if (!(erreur = ft_strjoin("ft_ls: ", name)))
 		return ;
 	perror(erreur);
+	free(erreur);
 }

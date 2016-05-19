@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 17:24:22 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/14 12:10:02 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/18 18:00:53 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_info				*new_info(t_name *name, int time)
 	return (new);
 }
 
-t_all				*new_node_all(t_name *name, int option)
+t_all				*new_node_all(t_name *name, int option, int pn)
 {
 	t_all			*new;
 	int				time;
@@ -99,6 +99,7 @@ t_all				*new_node_all(t_name *name, int option)
 	if (!(new = (t_all *)malloc(sizeof(t_all))))
 		return (NULL);
 	new->next = NULL;
+	new->printname = pn;
 	new->son = NULL;
 	if (!name)
 	{

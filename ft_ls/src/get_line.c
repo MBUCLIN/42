@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 16:45:59 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 12:37:09 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/19 13:55:19 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ char		*get_line_minmaj(char *line, t_info *node, t_maxl *max)
 
 char		*get_size_or_minmaj(char *line, t_info *node, t_maxl *max)
 {
-	if ((S_ISFIFO(node->mode) || S_ISBLK(node->mode)) &&\
-		!S_ISDIR(node->mode))
+	if ((S_ISFIFO(node->mode) || S_ISBLK(node->mode) ||\
+		S_ISCHR(node->mode)) && !S_ISDIR(node->mode))
 		return (get_line_minmaj(line, node, max));
 	if (!(line = ft_strncadd(line, max->slen_m - ft_nlen(node->size), ' ')))
 		return (NULL);

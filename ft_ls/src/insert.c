@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 14:12:12 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 11:41:47 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/19 13:31:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,16 @@ t_all		*import_from_else(t_all *head, t_all *new, t_all *node, int opt)
 		return (insert(head, new, node));
 	else if (ntn == ntt)
 	{
-		if ((!ft_islexisort(new->name->name, node->name->name) &&\
-			!(opt & OPT_R)) ||\
-			(!ft_isrevlexisort(new->name->name, node->name->name) &&\
-			(opt & OPT_R)))
+		if (!(ft_islexisort(new->name->name, node->name->name)) &&\
+			!(opt & OPT_R))
+			return (insert(head, new, node));
+		else if (ft_islexisort(new->name->name, node->name->name) &&\
+			(opt & OPT_R))
 			return (insert(head, new, node));
 	}
+	if (node->next)
+		if (node->next->info->time == new->info->time)
+			return (import_from_else(head, new, node->next, opt));
 	new->next = node->next;
 	node->next = new;
 	return (head);
@@ -85,14 +89,12 @@ t_all		*import(t_all *head, t_all *node, int option)
 	tmp = head;
 	while (tmp)
 	{
-		if ((!(ft_islexisort(node->name->name, tmp->name->name)) &&\
-			(option ^ OPT_R)) ||\
-			(!ft_isrevlexisort(node->name->name, tmp->name->name) &&\
-			(option & OPT_R)))
-		{
-			head = insert(head, node, tmp);
-			return (head);
-		}
+		if (!(ft_islexisort(node->name->name, tmp->name->name)) &&\
+			!(option & OPT_R))
+			return (insert(head, node, tmp));
+		if (ft_islexisort(node->name->name, tmp->name->name) &&\
+			(option & OPT_R))
+			return (insert(head, node, tmp));
 		tmp = tmp->next;
 	}
 	tmp = last_node(head);

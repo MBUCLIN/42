@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 17:29:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/14 12:43:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/19 13:49:01 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ int		main(int argc, char **argv)
 		return (0);
 	print_file(arg, opt);
 	arg = del_only_file(arg, opt);
-	ft_putendl("");
 	if (arg && (opt & OPT_MR))
 	{
+		arg->printname = 1;
 		if (!(arg = recursive(arg, opt, 0)))
 			return (0);
 	}
 	else if (arg)
 		arg = read_dir_arg(arg, opt);
 	del_all(arg);
-	sleep(20);
 	return (1);
 }

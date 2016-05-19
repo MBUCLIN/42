@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:55:33 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 12:23:08 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/18 17:52:05 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ t_all		*recup_args(int ac, char **av, int option)
 
 	i = after_option(av, "lRratuU");
 	if (i == ac)
-		return (new_node_all(new_name("./", "./"), option));
-	if (!(head = new_node_all(new_name(av[i], av[i]), option)))
+		return (new_node_all(new_name("./", "./"), option, 1));
+	if (!(head = new_node_all(new_name(av[i], av[i]), option, 0)))
 		return (NULL);
 	while (av[++i])
 	{
-		if (!(tmp = new_node_all(new_name(av[i], av[i]), option)))
+		if (!(tmp = new_node_all(new_name(av[i], av[i]), option, 0)))
 			return (del_all(head));
 		if (!(head = import(head, tmp, option)))
 			return (NULL);

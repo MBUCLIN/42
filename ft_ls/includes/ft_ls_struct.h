@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:28:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/13 12:43:50 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/18 16:29:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct		s_info
 
 typedef struct		s_all
 {
+	int				printname;
 	t_name			*name;
 	t_info			*info;
 	struct s_all	*son;

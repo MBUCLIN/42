@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:46:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/14 12:09:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/19 12:59:06 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_all		*read_dir(t_all *node, DIR *dir, int option)
 		if (!(path = create_path(node->name->path, dirent->d_name)))
 			return (del_all(head));
 		if (!(tmp =\
-			new_node_all(new_name(dirent->d_name, path), option)))
+			new_node_all(new_name(dirent->d_name, path), option, 0)))
 			return (del_all(head));
 		free(path);
 		path = NULL;
@@ -41,11 +41,13 @@ t_all		*read_dir(t_all *node, DIR *dir, int option)
 	return (head);
 }
 
-int			get_dir_content(t_all **node, int option)
+int			get_dir_content(t_all **node, int option, int call)
 {
 	DIR		*dir;
 
 	dir = NULL;
+	if (call && (*node)->name->name[0] == '.' && !(option & OPT_A))
+		return (-1);
 	if (!(dir = opendir((*node)->name->path)))
 	{
 		put_error((*node)->name->name);
@@ -55,7 +57,8 @@ int			get_dir_content(t_all **node, int option)
 	if (!((*node)->son = read_dir(*node, dir, option)))
 		return (0);
 	closedir(dir);
-	ft_printf("%s:\n", (*node)->name->path);
+	if (!((*node)->printname))
+		ft_printf("%s:\n", (*node)->name->path);
 	return (1);
 }
 
@@ -67,15 +70,15 @@ t_all		*read_dir_arg(t_all *head, int option)
 	tmp = head;
 	while (tmp)
 	{
-		if (!(content = get_dir_content(&tmp, option)))
+		if (!(content = get_dir_content(&tmp, option, 0)))
 			return (del_all(head));
-	//	ft_printf("%d : content\n", content);
 		if (content == 1)
 		{
 			if (!(tmp->son =\
 				print_dir(tmp->son, get_len_max(tmp->son), option)))
 				return (del_all(head));
-			ft_putendl("");
+			if (tmp->next)
+				ft_putendl("");
 			tmp->son = del_all(tmp->son);
 		}
 		tmp = tmp->next;
@@ -93,7 +96,7 @@ t_all		*recursive(t_all *head, int option, int call)
 	{
 		if (check_dir(tmp, option, call))
 		{
-			if (!(content = get_dir_content(&tmp, option)))
+			if (!(content = get_dir_content(&tmp, option, call)))
 				return (del_all(head));
 			if (content == 1)
 			{

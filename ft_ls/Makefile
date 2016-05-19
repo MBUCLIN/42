@@ -1,3 +1,5 @@
+.PHONY: all, clean, lclean, fclean, lfclean, re, lre
+
 NAME = ft_ls
 
 SRC_NAME = alloc.c check.c debug.c del.c error.c initiate.c option.c \
@@ -28,13 +30,19 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 clean:
-	make clean -C libft;
-	make clean -C ft_printf;
 	rm -rfv $(OBJ)
 
+lclean: clean
+	make clean -C libft;
+	make clean -C ft_printf;
+
 fclean: clean
-	make fclean -C libft;
-	make fclean -C ft_printf;
 	rm -rfv $(NAME)
 
+lfclean: fclean
+	make fclean -C libft;
+	make fclean -C ft_printf;
+
 re: fclean all
+
+lre: lfclean all

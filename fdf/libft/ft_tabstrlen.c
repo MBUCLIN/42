@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_tabstrlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/01 16:16:08 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/19 15:54:21 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/19 15:08:16 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/19 15:10:25 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
+int		ft_tabstrlen(char **tabstr)
 {
-	del((*alst)->content, (*alst)->content_size);
-	ft_memdel((void **)alst);
+	int		i;
+
+	i = 0;
+	while (tabstr[i])
+		i++;
+	return (i);
 }

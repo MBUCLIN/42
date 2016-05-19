@@ -6,7 +6,7 @@ LIB = libft/libft.a
 
 LIBPRINTF = ft_printf/libftprintf.a
 
-SRC_NAME = 
+SRC_NAME = debug.c del.c initiate.c check.c
 
 SRC_PATH = src/
 
@@ -18,7 +18,7 @@ OBJ = $(addprefix $(SRC_PATH),$(OBJ_NAME))
 
 CFLAGS = -Wall -Wextra -Werror
 
-XFLAGS = -lmlx -framework AppKit -framework -OpenGL
+XFLAGS = -lmlx -framework AppKit -framework OpenGL
 
 CC = gcc
 

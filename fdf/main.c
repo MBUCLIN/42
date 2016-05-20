@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 15:15:19 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/19 17:46:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/20 16:36:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		main(int ac, char **av)
 {
 	t_list		*map;
+	t_all		*ev;
 
 	map = NULL;
 	if (ac != 2)
@@ -25,6 +26,17 @@ int		main(int ac, char **av)
 	if ((map = open_map(av[1])) == NULL)
 		return (0);
 	print_value_map(map);
-	ft_lstdel(&map, &del_map);
+	if ((ev = (t_all *)malloc(sizeof(t_all))) == NULL)
+	{
+		ft_putendl_fd(2, "fdf: malloc error");
+		ft_lstdel(&map, &del_map);
+		return (0);
+	}
+	ev->map = map;
+	if ((ev = initiate_mlx(ev)) == NULL)
+		return (0);
+	mlx_key_hook(ev->win->win, &key_event, ev);
+//	mlx_mouse_hook(ev->win->win, &mouse_event, ev);
+	mlx_loop(ev->win->mlx);
 	return (1);
 }

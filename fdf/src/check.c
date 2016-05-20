@@ -6,11 +6,30 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 17:55:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/19 18:29:40 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/20 14:17:25 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+int		check_number(char **split, int size)
+{
+	long		n;
+	int			i;
+
+	i = 0;
+	while (split[i])
+	{
+		n = ft_satoi(split[i]);
+		if (n > INT_MAX || n < INT_MIN)
+		{
+			ft_deltabstr(split, size);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
 
 int		check_line(char *line)
 {

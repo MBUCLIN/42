@@ -6,7 +6,7 @@ LIB = libft/libft.a
 
 LIBPRINTF = ft_printf/libftprintf.a
 
-SRC_NAME = debug.c del.c initiate.c check.c
+SRC_NAME = debug.c del.c initiate_map.c check.c
 
 SRC_PATH = src/
 

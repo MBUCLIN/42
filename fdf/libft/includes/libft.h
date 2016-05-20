@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/19 16:43:06 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/20 16:00:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ void				ft_lstaddend(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 
 size_t				ft_strlen(char const *str);
+int					ft_lstlen(t_list *head);
 int					ft_tabstrlen(char **tabstr);
 int					ft_nlen(int n);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int					ft_isstrdigit(char *str);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);

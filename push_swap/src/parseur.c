@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 16:40:35 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/04/25 14:26:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/21 11:33:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static int		parse_numbers(char **avplus, int n)
 static int		check_args(char *c)
 {
 	if (c[0] == '-' &&\
-		!ft_isoption(c[1]) && !ft_isdigit(c[1]))
+		!ft_isoption(c[1], "cns") && !ft_isdigit(c[1]))
 		return (0);
-	else if (c[0] != '-' && !ft_isoption(c[0]) && !ft_isdigit(c[0]))
+	else if (c[0] != '-' && !ft_isoption(c[0], "cns") && !ft_isdigit(c[0]))
 		return (0);
 	return (1);
 }
@@ -80,7 +80,7 @@ int				parse_arg(char **av)
 		while (av[i][++j])
 			if (av[i][j] <= '9' && av[i][j] >= '0')
 				n = 1;
-			else if (ft_isoption(av[i][j]))
+			else if (ft_isoption(av[i][j], "cns"))
 				o = 1;
 			else if (!check_args(&av[i][j]))
 				return (0);

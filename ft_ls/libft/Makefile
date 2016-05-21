@@ -55,6 +55,7 @@ PC = ft_memset.c \
 	 ft_strtrim.c \
 	 ft_strsplit.c \
 	 ft_strlcat.c \
+	 ft_lstlen.c \
 	 ft_lstnew.c \
 	 ft_lstdelone.c \
 	 ft_lstdel.c \
@@ -79,7 +80,10 @@ PC = ft_memset.c \
 	 ft_nlen.c \
 	 ft_strsubfree.c \
 	 ft_islexisort.c \
-	 ft_isrevlexisort.c
+	 ft_isrevlexisort.c \
+	 ft_lstaddend.c \
+	 ft_tabstrlen.c \
+	 ft_isstrdigit.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -135,6 +139,7 @@ PO = ft_memset.o \
 	 ft_strtrim.o \
 	 ft_strsplit.o \
 	 ft_strlcat.o \
+	 ft_lstlen.o \
 	 ft_lstnew.o \
 	 ft_lstdelone.o \
 	 ft_lstdel.o \
@@ -159,7 +164,10 @@ PO = ft_memset.o \
 	 ft_nlen.o \
 	 ft_strsubfree.o \
 	 ft_islexisort.o \
-	 ft_isrevlexisort.o
+	 ft_isrevlexisort.o \
+	 ft_lstaddend.o \
+	 ft_tabstrlen.o \
+	 ft_isstrdigit.o
 
 FLAGS = -Wall -Wextra -Werror
 

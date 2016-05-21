@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 16:11:33 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/02/10 16:11:38 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/20 13:35:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static int		find_sword(const char *s, unsigned int i, char c)
 	return (size);
 }
 
-static char		*complete_tab(char *tab, const char *s, int i, char c)
+static char		*complete_tab(char **tab, const char *s, int i, char c)
 {
-	if (!(tab = ft_strsub(s, i, find_sword(s, i, c))))
+	if (!(*tab = ft_strsub(s, i, find_sword(s, i, c))))
 		return (NULL);
-	return (tab);
+	return (*tab);
 }
 
 char			**ft_strsplit(const char *s, char c)
@@ -63,13 +63,14 @@ char			**ft_strsplit(const char *s, char c)
 	j = 0;
 	if (s == NULL)
 		return (NULL);
-	if (!(tab = (char **)ft_memalloc(sizeof(char *) * find_nword(s, c))))
+	if (!(tab = (char **)ft_memalloc(sizeof(char *) * find_nword(s, c) + 1)))
 		return (NULL);
 	while (s[i])
 	{
 		if ((i == 0 && s[i] != c) || (s[i] != c && s[i - 1] == c))
 		{
-			tab[j] = complete_tab(tab[j], s, i, c);
+			if (!(tab[j] = complete_tab((tab + j), s, i, c)))
+				return (ft_deltabstr(tab, find_nword(s, c)));
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 14:41:59 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/20 16:36:14 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/21 19:06:56 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,21 @@ typedef struct		s_cdn
 typedef struct		s_iso
 {
 	int				coef;
-	int				imax;
-	int				jmax;
+	int				x;
+	int				y;
+	int				color;
+	int				z1;
+	int				z2;
 	t_cdn			*cdn;
 }					t_iso;
 
 typedef struct		s_win
 {
+	int				pos_x;
+	int				pos_y;
 	void			*mlx;
 	void			*win;
 }					t_win;
-
-typedef struct		s_img
-{
-	void			*img;
-	char			*data;
-	int				h;
-	int				w;
-	int				bpp;
-	int				slb;
-	int				endian;
-	int				x;
-	int				y;
-}					t_img;
 
 typedef struct		s_all
 {

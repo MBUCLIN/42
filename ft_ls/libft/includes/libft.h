@@ -6,13 +6,14 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/09 14:24:34 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/21 11:29:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define FT_ABS(n) ((n) < 0 ? -(n) : (n))
 # include <unistd.h>
 # include <stdlib.h>
 # include "get_next_line.h"
@@ -42,7 +43,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr(char const *str);
 void				ft_putstr_fd(char const *str, int fd);
 void				ft_putendl(char const *str);
-void				ft_putendl_fd(char const *str, int fd);
+void				ft_putendl_fd(int fd, char const *str);
 void				ft_putnbr(int nbr);
 void				ft_putnbr_fd(int nbr, int fd);
 void				ft_putnbrbase(int nbr, char *base);
@@ -52,14 +53,18 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstaddend(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 
 size_t				ft_strlen(char const *str);
+int					ft_lstlen(t_list *head);
+int					ft_tabstrlen(char **tabstr);
 int					ft_nlen(int n);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int					ft_isstrdigit(char *str);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);

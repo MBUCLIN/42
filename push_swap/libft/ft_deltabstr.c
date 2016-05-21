@@ -1,46 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parseur.c                                          :+:      :+:    :+:   */
+/*   ft_deltabstr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/18 15:22:08 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/19 14:34:07 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/04/27 16:12:02 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/19 18:21:47 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "includes/libft.h"
 
-int			check_line(int *y, int n)
+void		*ft_deltabstr(char **del, int pos)
 {
-	int		x;
+	int		i;
 
-	x = 0;
-	while (y[x])
+	i = 0;
+	while (i < pos)
 	{
-		x++;
+		if (del[i])
+			free(del[i]);
+		i++;
 	}
-	if (x != n && n != 0)
-		return (0);
-	return (1);
-}
-
-int			parse_map(t_lst *lines)
-{
-	t_lst		*tmp;
-	int			nn;
-
-	nn = 0;
-	tmp = lines;
-	while (tmp)
-	{
-		if (!(nn = check_line(tmp->content, nn)))
-		{
-			ft_lstdel(lines, &del_content);
-			return (0);
-		}
-		tmp = tmp->next;
-	}
-	return (1);
+	free(del);
+	return (NULL);
 }

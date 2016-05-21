@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/09 13:10:42 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/16 15:55:41 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/21 11:34:22 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int			put_msgel(unsigned int fd, const char *msg)
 {
-	ft_putendl_fd(msg, fd);
+	ft_putendl_fd(fd, msg);
 	return (0);
 }
 

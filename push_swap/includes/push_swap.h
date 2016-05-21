@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/09 13:08:43 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/04/25 14:14:19 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/21 11:32:12 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		print_info(t_inf *info);
 void		print_moov(t_moov *moov);
 t_turn		*reset_pos(t_turn *head);
 int			check_sort(t_turn *node, int max);
-int			ft_isoption(int c);
+int			ft_isoption(int c, char *option);
 int			after_option(char **args);
 void		del_pile(t_pile *head);
 t_turn		*del_turn(t_turn *head);

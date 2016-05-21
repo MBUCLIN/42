@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 16:30:58 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/16 15:56:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/21 11:38:17 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void		print_command(t_cmd *command, int n)
 			ft_putchar(' ');
 		i++;
 	}
-	ft_putchar('\n');
+	if (i)
+		ft_putchar('\n');
 	if (n)
 		ft_printf("It took %d turn(s) to sort it\n", i);
 }

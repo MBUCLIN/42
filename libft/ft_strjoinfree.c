@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:55:02 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/01/06 15:13:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 15:14:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ char	*ft_strjoinfree(char *s1, char const *s2)
 	if (s2)
 		ft_strcpy((toret + ft_strlen(s1)), s2);
 	toret[ft_strlen(s1) + ft_strlen(s2)] = '\0';
-	free(s1);
-	s1 = NULL;
+	if (s1)
+	{
+		free(s1);
+		s1 = NULL;
+	}
 	return (toret);
 }

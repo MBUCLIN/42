@@ -83,7 +83,9 @@ PC = ft_memset.c \
 	 ft_isrevlexisort.c \
 	 ft_lstaddend.c \
 	 ft_tabstrlen.c \
-	 ft_isstrdigit.c
+	 ft_isstrdigit.c \
+	 ft_fill_data.c \
+	 ft_swap.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -167,7 +169,9 @@ PO = ft_memset.o \
 	 ft_isrevlexisort.o \
 	 ft_lstaddend.o \
 	 ft_tabstrlen.o \
-	 ft_isstrdigit.o
+	 ft_isstrdigit.o \
+	 ft_fill_data.o \
+	 ft_swap.o
 
 FLAGS = -Wall -Wextra -Werror
 

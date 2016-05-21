@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 15:15:19 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/20 16:36:10 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/21 19:08:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		main(int ac, char **av)
 	}
 	ev->map = map;
 	if ((ev = initiate_mlx(ev)) == NULL)
+		return (0);
+	if (draw_image(&ev) == 0)
 		return (0);
 	mlx_key_hook(ev->win->win, &key_event, ev);
 //	mlx_mouse_hook(ev->win->win, &mouse_event, ev);

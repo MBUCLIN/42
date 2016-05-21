@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:51:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/04/05 16:15:18 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/10 16:33:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int		ft_strcmp(const char *s1, const char *s2)
 {
 	return (ft_memcmp(s1, s2, ft_strlen(s1) + 1));
 }

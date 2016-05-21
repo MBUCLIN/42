@@ -1,3 +1,5 @@
+.PHONY: all, clean, fclean, re
+
 NAME = push_swap
 
 SRC_NAME = initiate.c del.c option.c parseur.c put_pile.c command.c\

@@ -28,6 +28,7 @@ PC = ft_memset.c \
 	 ft_isalnum.c \
 	 ft_isascii.c \
 	 ft_isprint.c \
+	 ft_isoption.c \
 	 ft_atoi.c \
 	 ft_memcmp.c \
 	 ft_isblank.c \
@@ -54,6 +55,7 @@ PC = ft_memset.c \
 	 ft_strtrim.c \
 	 ft_strsplit.c \
 	 ft_strlcat.c \
+	 ft_lstlen.c \
 	 ft_lstnew.c \
 	 ft_lstdelone.c \
 	 ft_lstdel.c \
@@ -71,7 +73,17 @@ PC = ft_memset.c \
 	 ft_sitoabase.c \
 	 ft_strmidadd.c \
 	 get_next_line.c \
-	 ft_satoi.c
+	 ft_satoi.c \
+	 ft_chrnotoption.c \
+	 ft_deltabstr.c \
+	 ft_strncadd.c \
+	 ft_nlen.c \
+	 ft_strsubfree.c \
+	 ft_islexisort.c \
+	 ft_isrevlexisort.c \
+	 ft_lstaddend.c \
+	 ft_tabstrlen.c \
+	 ft_isstrdigit.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -101,6 +113,7 @@ PO = ft_memset.o \
 	 ft_isalnum.o \
 	 ft_isascii.o \
 	 ft_isprint.o \
+	 ft_isoption.o \
 	 ft_atoi.o \
 	 ft_memcmp.o \
 	 ft_strcmp.o \
@@ -126,6 +139,7 @@ PO = ft_memset.o \
 	 ft_strtrim.o \
 	 ft_strsplit.o \
 	 ft_strlcat.o \
+	 ft_lstlen.o \
 	 ft_lstnew.o \
 	 ft_lstdelone.o \
 	 ft_lstdel.o \
@@ -143,7 +157,17 @@ PO = ft_memset.o \
 	 ft_sitoabase.o \
 	 ft_strmidadd.o \
 	 get_next_line.o \
-	 ft_satoi.o
+	 ft_satoi.o \
+	 ft_chrnotoption.o \
+	 ft_deltabstr.o \
+	 ft_strncadd.o \
+	 ft_nlen.o \
+	 ft_strsubfree.o \
+	 ft_islexisort.o \
+	 ft_isrevlexisort.o \
+	 ft_lstaddend.o \
+	 ft_tabstrlen.o \
+	 ft_isstrdigit.o
 
 FLAGS = -Wall -Wextra -Werror
 

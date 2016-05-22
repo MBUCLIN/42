@@ -7,7 +7,7 @@ LIB = libft/libft.a
 LIBPRINTF = ft_printf/libftprintf.a
 
 SRC_NAME = debug.c del.c initiate_map.c check.c initiate_mlx.c \
-		   function_keyevent.c draw_image.c draw_line.c
+		   function_keyevent.c draw_image.c draw_line.c get.c redraw.c
 
 SRC_PATH = src/
 

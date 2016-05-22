@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 15:14:33 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 17:36:24 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/22 20:16:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_iso			*initiate_iso()
+t_iso			*initiate_iso(t_img *img)
 {
 	t_iso		*iso;
 
@@ -28,8 +28,7 @@ t_iso			*initiate_iso()
 		return (NULL);
 	}
 	iso->color = 0xFF0000;
-	iso->x = 64;
-	iso->y = 32;
+	iso = get_tile(iso, img);
 	iso->z1 = 0;
 	iso->z2 = 0;
 	iso->coef = 1;
@@ -45,8 +44,8 @@ static void		set_image(t_img **img, t_list *map)
 	(*img)->bpp = 0;
 	(*img)->slb = 0;
 	(*img)->endian = 0;
-	(*img)->h = 1280;
-	(*img)->w = 1280;
+	(*img)->h = 2000;
+	(*img)->w = 2000;
 }
 
 t_img			*initiate_image(t_all *ev)
@@ -111,7 +110,7 @@ t_all			*initiate_mlx(t_all *ev)
 		del_event(ev);
 		return (NULL);
 	}
-	if ((ev->iso = initiate_iso()) == NULL)
+	if ((ev->iso = initiate_iso(ev->img)) == NULL)
 	{
 		del_event(ev);
 		return (NULL);

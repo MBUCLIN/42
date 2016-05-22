@@ -62,6 +62,7 @@ PC = ft_memset.c \
 	 ft_lstadd.c \
 	 ft_lstiter.c \
 	 ft_lstmap.c \
+	 ft_imgcpy.c \
 	 ft_putnbrbase.c \
 	 ft_atoibase.c \
 	 ft_itoabase.c \
@@ -148,6 +149,7 @@ PO = ft_memset.o \
 	 ft_lstadd.o \
 	 ft_lstiter.o \
 	 ft_lstmap.o \
+	 ft_imgcpy.o \
 	 ft_putnbrbase.o \
 	 ft_atoibase.o \
 	 ft_itoabase.o \

@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/19 15:57:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 20:03:21 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/22 17:43:36 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/22 20:19:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void		print_y(int *y, size_t size)
+int				get_z(int *y, int x)
 {
-	size_t		i;
-
-	i = 0;
-	if (y)
-		while (i < size)
-		{
-			ft_printf("%3d", y[i]);
-			i++;
-		}
+	return (y[x]);
 }
-void		print_value_map(t_list *head)
-{
-	t_list		*tmp;
 
-	tmp = head;
-	ft_printf("%d : size\n", tmp->content_size / sizeof(int));
-	while (tmp)
-	{
-		print_y((int *)tmp->content, (tmp->content_size / sizeof(int)));
-		tmp = tmp->next;
-		ft_putendl("");
-	}
+t_iso			*get_tile(t_iso *iso, t_img *img)
+{
+	int			x;
+	int			y;
+
+	x = (img->w / img->x);
+	y = (img->h / img->y);
+	iso->x = x > y ? y : x;
+	iso->y = x > y ? y : x;
+	return (iso);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/21 14:28:38 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 17:35:39 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/22 20:23:31 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,23 @@ int			few_x_for_one_y(t_img **img, t_iso *iso, t_cdn *c)
 	int		x;
 	int		y;
 
-	if (!check_coordonne(iso->cdn))
-		return (0);
 	if (c->x1 > c->x2)
 	{
 		ft_swap(&c->x1, &c->x2);
 		ft_swap(&c->y1, &c->y2);
 	}
-	x = c->x1;
+	if (!check_coordonne(iso->cdn))
+		return (0);
+	x = c->x1 + 1;
 	y = c->y1;
-	while (x <= c->x2)
+	ft_fill_data(img, c->x1, c->y1, iso->color);
+	while (x < c->x2)
 	{
 		y = c->y1 + ((c->y2 - c->y1) * (x - c->x1)) / (c->x2 - c->x1);
 		ft_fill_data(img, x, y, iso->color);
 		x++;
 	}
+	ft_fill_data(img, c->x2, c->y2, iso->color);
 	return (1);
 }
 
@@ -40,21 +42,23 @@ int			few_y_for_one_x(t_img **img, t_iso *iso, t_cdn *c)
 	int		x;
 	int		y;
 
-	if (!check_coordonne(iso->cdn))
-		return (0);
 	if (c->y1 > c->y2)
 	{
 		ft_swap(&c->x1, &c->x2);
 		ft_swap(&c->y1, &c->y2);
 	}
+	if (!check_coordonne(iso->cdn))
+		return (0);
 	x = c->x1;
-	y = c->y1;
-	while (y <= c->y2)
+	y = c->y1 + 1;
+	ft_fill_data(img, c->x1, c->y1, iso->color);
+	while (y < c->y2)
 	{
 		x = c->x1 + ((c->x2 - c->x1) * (y - c->y1)) / (c->y2 - c->y1);
 		ft_fill_data(img, x, y, iso->color);
 		y++;
 	}
+	ft_fill_data(img, c->x2, c->y2, iso->color);
 	return (1);
 }
 

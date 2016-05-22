@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/21 12:33:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/21 20:56:33 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/22 17:33:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int		calcul_iso(int x, int y, t_iso *iso, int xy)
 	if (xy == -1)
 		ret = (x - y) * (iso->x / 2);
 	else if (xy == 1)
-		ret = ((x + y) * (iso->y / 2)) - (iso->coef * iso->z1);
+		ret = ((x + y) * (iso->y / 2));
 	else if (xy == 2)
-		ret = ((x + y) * (iso->y / 2)) - (iso->coef * iso->z2);
+		ret = ((x + y) * (iso->y / 2));
 	return (ret);
 }
 

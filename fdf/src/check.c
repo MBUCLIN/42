@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 17:55:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 19:06:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/23 16:35:25 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,14 @@ int		check_map(t_list *head)
 	return (1);
 }
 
-int		check_coordonne(t_cdn *cdn)
+int		check_coordonne(t_cdn *cdn, int h)
 {
 	if (cdn->x1 <= 0 || cdn->y1 <= 0 || cdn->y2 <= 0 || cdn->x2 <= 0)
 	{
-		ft_putendl("coordonne not good");
 		return (0);
 	}
-	if (cdn->x2 >= 1280 || cdn->y2 >= 1280 || cdn->y1 >= 1280 || cdn->x1 >= 1280)
+	if (cdn->x2 >= h || cdn->y2 >= h || cdn->y1 >= h || cdn->x1 >= h)
 	{
-		ft_putendl("coordonne not good");
 		return (0);
 	}
 	return (1);

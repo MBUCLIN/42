@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 15:14:33 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 20:16:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/23 17:45:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ static void		set_image(t_img **img, t_list *map)
 	(*img)->img = NULL;
 	(*img)->data  = NULL;
 	(*img)->y = ft_lstlen(map);
-	(*img)->x = map->content_size;
+	(*img)->x = (map->content_size / sizeof(int)) * 2;
 	(*img)->bpp = 0;
 	(*img)->slb = 0;
 	(*img)->endian = 0;
-	(*img)->h = 2000;
-	(*img)->w = 2000;
+	(*img)->h = 1280;
+	(*img)->w = 1280;
 }
 
 t_img			*initiate_image(t_all *ev)

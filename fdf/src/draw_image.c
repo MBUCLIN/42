@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/21 12:33:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 20:23:44 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/23 16:21:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,27 @@ int		calcul_iso(int x, int y, t_iso *iso, int xy)
 
 	ret = 0;
 	if (xy == -1)
-		ret = (x - y) * (iso->x / 2);
+		ret = (x - y) * ((iso->coef * iso->x) / 2);
 	else if (xy == 1)
-		ret = ((x + y) * (iso->y / 2));
+		ret = ((x + y) * ((iso->coef * iso->y) / 2));
 	else if (xy == 2)
-		ret = ((x + y) * (iso->y / 2));
+		ret = ((x + y) * ((iso->coef * iso->y) / 2));
 	return (ret);
 }
 
-t_iso	*get_depart_point_line(t_iso *iso, int i, int j, int n)
+t_iso	*get_depart_point_line(t_all *ev, int i, int j, int n)
 {
-	iso->cdn->x1 = calcul_iso(i, j, iso, -1) + WIN_W / 2;
-	iso->cdn->y1 = calcul_iso(i, j, iso, 1) + WIN_H / 2;
+	ev->iso->cdn->x1 = calcul_iso(i, j, ev->iso, -1) + ev->img->w / 2;
+	ev->iso->cdn->y1 = calcul_iso(i, j, ev->iso, 1) + ev->img->h / 2;
 	if (n == -1)
-		iso->cdn->x2 = calcul_iso(i + 1, j, iso, -1) + WIN_W / 2;
+		ev->iso->cdn->x2 = calcul_iso(i + 1, j, ev->iso, -1) + ev->img->w / 2;
 	else
-		iso->cdn->x2 = calcul_iso(i, j + 1, iso, -1) + WIN_W / 2;
+		ev->iso->cdn->x2 = calcul_iso(i, j + 1, ev->iso, -1) + ev->img->w / 2;
 	if (n == -1)
-		iso->cdn->y2 = calcul_iso(i + 1, j, iso, 2) + WIN_H / 2;
+		ev->iso->cdn->y2 = calcul_iso(i + 1, j, ev->iso, 2) + ev->img->h / 2;
 	else
-		iso->cdn->y2 = calcul_iso(i, j + 1, iso, 2) + WIN_H / 2;
-	return (iso);
+		ev->iso->cdn->y2 = calcul_iso(i, j + 1, ev->iso, 2) + ev->img->h / 2;
+	return (ev->iso);
 }
 
 int		fill_image(t_all **ev, t_list *map)
@@ -58,7 +58,7 @@ int		fill_image(t_all **ev, t_list *map)
 			{
 				(*ev)->iso->z1 = get_z((int *)tmp->content, i);
 				(*ev)->iso->z2 = get_z((int *)tmp->content, i + 1);
-				(*ev)->iso = get_depart_point_line((*ev)->iso, i, j, -1);
+				(*ev)->iso = get_depart_point_line((*ev), i, j, -1);
 				if (!straight_line(&((*ev)->img), (*ev)->iso))
 					return (0);
 			}
@@ -66,7 +66,7 @@ int		fill_image(t_all **ev, t_list *map)
 			{
 				(*ev)->iso->z1 = get_z((int *)tmp->content, i);
 				(*ev)->iso->z2 = get_z((int *)tmp->next->content, i);
-				(*ev)->iso = get_depart_point_line((*ev)->iso, i, j, 1);
+				(*ev)->iso = get_depart_point_line((*ev), i, j, 1);
 				if (!straight_line(&((*ev)->img), (*ev)->iso))
 					return (0);
 			}
@@ -85,12 +85,8 @@ int		draw_image(t_all **ev)
 	img = NULL;
 	if (fill_image(ev, (*ev)->map) == 0)
 	{
-		change_tile((*ev)->iso);
-		if ((img = reset_image((*ev)->img, (*ev)->win)) == NULL)
-			end_fdf(*ev);
-		del_img((*ev)->win->mlx, (*ev)->img);
-		(*ev)->img = img;
-		return (draw_image(ev));
+		ft_putendl("Img too little");
+		end_fdf(*ev);
 	}
 	mlx_put_image_to_window((*ev)->win->mlx, (*ev)->win->win,\
 	(*ev)->img->img, (*ev)->win->pos_x, (*ev)->win->pos_y);

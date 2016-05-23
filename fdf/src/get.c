@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/22 17:43:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 20:19:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/23 16:40:39 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ t_iso			*get_tile(t_iso *iso, t_img *img)
 	x = (img->w / img->x);
 	y = (img->h / img->y);
 	iso->x = x > y ? y : x;
-	iso->y = x > y ? y : x;
+	iso->y = iso->x;
 	return (iso);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 15:17:25 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 19:43:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/23 14:16:17 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void		del_img(void *mlx, t_img *img)
 {
 	if (img)
 	{
-		mlx_destroy_image(mlx, img->img);
+		if (img->img)
+			mlx_destroy_image(mlx, img->img);
 		free(img);
 		img = NULL;
 	}

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 15:59:32 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 20:15:26 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/23 15:07:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ void		del_event(t_all *ev);
 int			check_number(char **split, int size);
 int			check_line(char *line);
 int			check_map(t_list *head);
-int			check_coordonne(t_cdn *c);
+int			check_coordonne(t_cdn *c, int h);
 int			get_z(int *y, int x);
-int			change_tile(t_iso *iso);
 t_iso		*get_tile(t_iso *iso, t_img *img);
 int			convert_split(char **split, t_list **new);
 int			stock_map(char *line, t_list **map);
@@ -49,9 +48,9 @@ int			few_x_for_one_y(t_img **img, t_iso *iso, t_cdn *c);
 int			few_y_for_one_x(t_img **img, t_iso *iso, t_cdn *c);
 int			straight_line(t_img **img, t_iso *iso);
 int			calcul_iso(int x, int y, t_iso *iso, int xy);
-t_iso		*get_depart_point_line(t_iso *iso, int i, int j, int n);
+t_iso		*get_depart_point_line(t_all *ev, int i, int j, int n);
 int			fill_image(t_all **ev, t_list *map);
-t_img		*reset_image(t_img *img, t_win *win);
+t_img		*new_image(t_win *win);
 int			draw_image(t_all **ev);
 
 #endif

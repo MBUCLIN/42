@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 20:07:26 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/24 16:34:32 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct		s_img
 	int				bpp;
 	int				slb;
 	int				endian;
+	int				z;
 	int				x;
 	int				y;
 }					t_img;

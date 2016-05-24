@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 15:39:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/18 16:14:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/24 12:57:20 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int		error_option(char *arg_er)
 	int		c;
 
 	c = ft_chrnotoption(arg_er + 1, "lRratuU");
-	ft_printf("ft_ls: illegal option -- %c\n", c);
-	ft_putendl("usage: ft_ls [-lRratuU]");
+	ft_putstr_fd("ft_ls: illegal option -- ", 2);
+	ft_putchar_fd(c, 2);
+	ft_putendl_fd(2, "");
+	ft_putendl_fd(2, "usage: ft_ls [-lRratuU]");
 	return (-1);
 }
 

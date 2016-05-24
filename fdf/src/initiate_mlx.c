@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 15:14:33 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/23 17:45:02 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/24 16:53:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,18 @@ t_iso			*initiate_iso(t_img *img)
 	return (iso);
 }
 
-static void		set_image(t_img **img, t_list *map)
+static int		set_image(t_img **img, t_list *map)
 {
 	(*img)->img = NULL;
-	(*img)->data  = NULL;
-	(*img)->y = ft_lstlen(map);
+	(*img)->data = NULL;
+	(*img)->z = get_max_z(map);
+	(*img)->y = ft_lstlen(map) * 2;
 	(*img)->x = (map->content_size / sizeof(int)) * 2;
-	(*img)->bpp = 0;
 	(*img)->slb = 0;
 	(*img)->endian = 0;
 	(*img)->h = 1280;
 	(*img)->w = 1280;
+	return (1);
 }
 
 t_img			*initiate_image(t_all *ev)
@@ -57,7 +58,12 @@ t_img			*initiate_image(t_all *ev)
 		ft_putendl_fd(2, "fdf: malloc error");
 		return (NULL);
 	}
-	set_image(&(ev->img), ev->map);
+	if (set_image(&ev->img, ev->map) == 0)
+	{
+		ft_putendl_fd(2, "fdf: the map is too big");
+		free(ev->img);
+		return (NULL);
+	}
 	if ((img = mlx_new_image(ev->win->mlx, ev->img->w, ev->img->h)) == NULL)
 	{
 		ft_putendl_fd(2, "fdf: image creation error");
@@ -65,12 +71,12 @@ t_img			*initiate_image(t_all *ev)
 		return (NULL);
 	}
 	ev->img->img = img;
-	ev->img->data = mlx_get_data_addr\
-	(ev->img->img, &ev->img->bpp, &ev->img->slb, &ev->img->endian);
+	ev->img->data = mlx_get_data_addr(ev->img->img, &ev->img->bpp,
+									&ev->img->slb, &ev->img->endian);
 	return (ev->img);
 }
 
-t_win			*initiate_window()
+t_win			*initiate_window(void)
 {
 	t_win		*win;
 

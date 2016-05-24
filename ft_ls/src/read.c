@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:46:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/19 12:59:06 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/24 12:42:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ int			get_dir_content(t_all **node, int option, int call)
 		return (-1);
 	if (!(dir = opendir((*node)->name->path)))
 	{
+		if (!((*node)->printname))
+			ft_printf("%s:\n", (*node)->name->path);
 		put_error((*node)->name->name);
-		ft_putendl("");
+		if ((*node)->next)
+			ft_putendl("");
 		return (-1);
 	}
 	if (!((*node)->son = read_dir(*node, dir, option)))

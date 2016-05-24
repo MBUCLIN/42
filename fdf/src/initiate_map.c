@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:31:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 17:55:24 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/24 15:58:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int			convert_split(char **split, t_list **new)
 	int		*content;
 	int		cs;
 
-	content = NULL;
 	cs = ft_tabstrlen(split);
 	if ((content = (int *)malloc(sizeof(int) * (cs + 1))) == NULL)
 	{
@@ -25,12 +24,9 @@ int			convert_split(char **split, t_list **new)
 		ft_deltabstr(split, cs);
 		return (0);
 	}
-	cs = 0;
-	while (split[cs])
-	{
+	cs = -1;
+	while (split[++cs])
 		content[cs] = ft_atoi(split[cs]);
-		cs++;
-	}
 	content[cs] = 0;
 	ft_deltabstr(split, cs);
 	if ((*new = ft_lstnew(content, cs * sizeof(int))) == NULL)
@@ -43,20 +39,18 @@ int			convert_split(char **split, t_list **new)
 	return (1);
 }
 
-int		stock_map(char *line, t_list **map)
+int			stock_map(char *line, t_list **map)
 {
 	char		**split;
 	t_list		*new;
 
-	split = NULL;
-	new = NULL;
 	if ((split = ft_strsplit(line, ' ')) == NULL)
 	{
 		ft_putendl_fd(2, "fdf: malloc error");
 		ft_lstdel(map, &del_map);
 		return (0);
 	}
-	if (!check_number(split, ft_tabstrlen(split)))
+	if (!check_number(split, ft_tabstrlen(split)) || !check_line(line))
 	{
 		ft_putendl_fd(2, "fdf: map error");
 		ft_lstdel(map, &del_map);
@@ -83,12 +77,6 @@ t_list		*read_file_map(int fd)
 	map = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if (!check_line(line))
-		{
-			ft_putendl_fd(2, "fdf: map error");
-			ft_lstdel(&map, &del_map);
-			return (NULL);
-		}
 		if (!(stock_map(line, &map)))
 		{
 			free(line);

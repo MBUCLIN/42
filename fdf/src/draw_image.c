@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/21 12:33:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/23 16:21:02 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/24 16:53:06 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,27 @@ t_iso	*get_depart_point_line(t_all *ev, int i, int j, int n)
 	return (ev->iso);
 }
 
+int		add_line(t_all **ev, t_list *node, int x, int y)
+{
+	if ((unsigned long)(x + 1) != node->content_size / sizeof(int))
+	{
+		(*ev)->iso->z1 = get_z((int *)node->content, x);
+		(*ev)->iso->z2 = get_z((int *)node->content, x + 1);
+		(*ev)->iso = get_depart_point_line((*ev), x, y, -1);
+		if (!straight_line(&((*ev)->img), (*ev)->iso))
+			return (0);
+	}
+	if (node->next)
+	{
+		(*ev)->iso->z1 = get_z((int *)node->content, x);
+		(*ev)->iso->z2 = get_z((int *)node->next->content, x);
+		(*ev)->iso = get_depart_point_line((*ev), x, y, 1);
+		if (!straight_line(&((*ev)->img), (*ev)->iso))
+			return (0);
+	}
+	return (1);
+}
+
 int		fill_image(t_all **ev, t_list *map)
 {
 	t_list		*tmp;
@@ -54,22 +75,8 @@ int		fill_image(t_all **ev, t_list *map)
 		i = 0;
 		while ((unsigned long)i < (tmp->content_size / sizeof(int)))
 		{
-			if ((unsigned long)(i + 1) != tmp->content_size / sizeof(int))
-			{
-				(*ev)->iso->z1 = get_z((int *)tmp->content, i);
-				(*ev)->iso->z2 = get_z((int *)tmp->content, i + 1);
-				(*ev)->iso = get_depart_point_line((*ev), i, j, -1);
-				if (!straight_line(&((*ev)->img), (*ev)->iso))
-					return (0);
-			}
-			if (tmp->next)
-			{
-				(*ev)->iso->z1 = get_z((int *)tmp->content, i);
-				(*ev)->iso->z2 = get_z((int *)tmp->next->content, i);
-				(*ev)->iso = get_depart_point_line((*ev), i, j, 1);
-				if (!straight_line(&((*ev)->img), (*ev)->iso))
-					return (0);
-			}
+			if (!add_line(ev, tmp, i, j))
+				return (0);
 			i++;
 		}
 		tmp = tmp->next;
@@ -85,10 +92,10 @@ int		draw_image(t_all **ev)
 	img = NULL;
 	if (fill_image(ev, (*ev)->map) == 0)
 	{
-		ft_putendl("Img too little");
+		ft_putendl_fd(2, "fdf: map error");
 		end_fdf(*ev);
 	}
-	mlx_put_image_to_window((*ev)->win->mlx, (*ev)->win->win,\
-	(*ev)->img->img, (*ev)->win->pos_x, (*ev)->win->pos_y);
-	return (1);	
+	mlx_put_image_to_window((*ev)->win->mlx, (*ev)->win->win,
+						(*ev)->img->img, (*ev)->win->pos_x, (*ev)->win->pos_y);
+	return (1);
 }

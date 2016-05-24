@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 15:57:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/22 20:03:21 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/24 14:04:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		print_y(int *y, size_t size)
 			i++;
 		}
 }
+
 void		print_value_map(t_list *head)
 {
 	t_list		*tmp;

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 15:14:33 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/24 16:53:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/25 13:29:46 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ t_iso			*initiate_iso(t_img *img)
 	}
 	iso->color = 0xFF0000;
 	iso = get_tile(iso, img);
+	if (!check_wha(iso))
+	{
+		del_iso(iso);
+		ft_putendl_fd(2, "fdf: map too big");
+		return (NULL);
+	}
 	iso->z1 = 0;
 	iso->z2 = 0;
 	iso->coef = 1;

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 17:55:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/24 16:48:58 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/25 13:29:25 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,9 @@ int		check_coordonne(t_cdn *cdn, int h)
 	return (1);
 }
 
-int		check_tile(int tile, t_img *img)
+int		check_wha(t_iso *iso)
 {
-	if ((img->h / 2) + (tile / 2) - img->z < 0)
-		return (0);
-	ft_printf("%d : calc", (img->h / 2) + ((img->x / 2) + (img->y)) + (tile / 2) - -img->z);
-	if ((img->h / 2) + ((img->x / 2) + img->y) + (tile / 2) - -img->z > img->h)
+	if (iso->x < 2 || iso->y < 2)
 		return (0);
 	return (1);
 }

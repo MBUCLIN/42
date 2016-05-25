@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 15:59:32 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/24 16:40:50 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/25 13:29:36 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			check_number(char **split, int size);
 int			check_line(char *line);
 int			check_map(t_list *head);
 int			check_coordonne(t_cdn *c, int h);
-int			check_tile(int tile, t_img *img);
+int			check_wha(t_iso *iso);
 int			get_z(int *y, int x);
 t_iso		*get_tile(t_iso *iso, t_img *img);
 int			get_max_z(t_list *map);

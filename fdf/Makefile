@@ -1,4 +1,4 @@
-.PHONY: all, clean, lclean, fclean, lfclean, re, lre
+.PHONY: all clean lclean fclean lfclean re lre
 
 NAME = fdf
 

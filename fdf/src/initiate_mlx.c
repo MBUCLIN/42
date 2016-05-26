@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 15:14:33 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/25 13:29:46 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/26 13:34:09 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_iso			*initiate_iso(t_img *img)
 	if (!check_wha(iso))
 	{
 		del_iso(iso);
-		ft_putendl_fd(2, "fdf: map too big");
+		ft_putendl_fd(2, "fdf: the map is too big");
 		return (NULL);
 	}
 	iso->z1 = 0;

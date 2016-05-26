@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/21 11:29:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/24 16:34:32 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ typedef	struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_img
+{
+	void			*img;
+	char			*data;
+	int				h;
+	int				w;
+	int				bpp;
+	int				slb;
+	int				endian;
+	int				z;
+	int				x;
+	int				y;
+}					t_img;
 
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_memalloc(size_t size);
@@ -47,6 +61,7 @@ void				ft_putendl_fd(int fd, char const *str);
 void				ft_putnbr(int nbr);
 void				ft_putnbr_fd(int nbr, int fd);
 void				ft_putnbrbase(int nbr, char *base);
+void				ft_swap(int *n1, int *n2);
 void				ft_puttab(char **tab);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
@@ -55,6 +70,8 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstaddend(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+void				ft_imgcpy(t_img **dest, t_img *src);
+void				ft_fill_data(t_img **img, int x, int y, int color);
 
 size_t				ft_strlen(char const *str);
 int					ft_lstlen(t_list *head);

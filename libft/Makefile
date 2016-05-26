@@ -62,6 +62,7 @@ PC = ft_memset.c \
 	 ft_lstadd.c \
 	 ft_lstiter.c \
 	 ft_lstmap.c \
+	 ft_imgcpy.c \
 	 ft_putnbrbase.c \
 	 ft_atoibase.c \
 	 ft_itoabase.c \
@@ -83,7 +84,9 @@ PC = ft_memset.c \
 	 ft_isrevlexisort.c \
 	 ft_lstaddend.c \
 	 ft_tabstrlen.c \
-	 ft_isstrdigit.c
+	 ft_isstrdigit.c \
+	 ft_fill_data.c \
+	 ft_swap.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -146,6 +149,7 @@ PO = ft_memset.o \
 	 ft_lstadd.o \
 	 ft_lstiter.o \
 	 ft_lstmap.o \
+	 ft_imgcpy.o \
 	 ft_putnbrbase.o \
 	 ft_atoibase.o \
 	 ft_itoabase.o \
@@ -167,7 +171,9 @@ PO = ft_memset.o \
 	 ft_isrevlexisort.o \
 	 ft_lstaddend.o \
 	 ft_tabstrlen.o \
-	 ft_isstrdigit.o
+	 ft_isstrdigit.o \
+	 ft_fill_data.o \
+	 ft_swap.o
 
 FLAGS = -Wall -Wextra -Werror
 

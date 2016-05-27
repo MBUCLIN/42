@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 17:07:15 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/26 17:45:56 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/27 16:16:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,8 @@
 
 char		*read_command(char *line, int n)
 {
-	char		*afterpart;
-
-	afterpart = NULL;
-	if (line)
-	{
-		if (get_next_line(0, &afterpart) <= 0)
-		{
-			free(line);
-			return (NULL);
-		}
-		if ((line = ft_strjoinfree(line, "\n")) == NULL)
-			return (NULL);
-		if ((line = ft_strjoindfree(line, afterpart)) == NULL)
-			return (NULL);
-	}
-	else if (line == NULL)
-		if (get_next_line(0, &line) <= 0)
-			return (NULL);
+	if ((line = get_linecommand(line)) == NULL)
+		return (NULL);
 	n = ft_strnchr(line, '\"');
 	if (n == 0)
 		return (line);

@@ -6,7 +6,8 @@ LIB = libft/libft.a
 
 LIBFTPRINTF = ft_printf/libftprintf.a
 
-SRC_NAME = initiate.c prompt.c read_command.c command.c get.c
+SRC_NAME = initiate.c prompt.c read_command.c command.c get.c search.c \
+		   access.c del.c error.c apply.c
 
 SRC_PATH = src/
 

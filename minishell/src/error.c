@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   access.c                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/26 19:45:31 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/27 17:38:10 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/27 14:25:01 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/27 16:28:50 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-int		fill_access(char (*access)[256], char *path, char *xname)
+void			end_minishell(t_shell *shell)
 {
-	int		i;
-	int		j;
+	del_shell(shell);
+	exit(-1);
+}
 
-	i = 0;
-	if (path)
-		while (path[i])
-		{
-			(*access)[i] = path[i];
-			i++;
-		}
-	j = 0;
-	(*access)[i++] = '/';
-	while (xname[j])
+void			ft_perror(char *msg, char *more)
+{
+	char		*print;
+
+	print = NULL;
+	if (more)
 	{
-		(*access)[i] = xname[j];
-		j++;
-		i++;
+		if ((print = ft_strjoin(msg, more)) == NULL)
+		{
+			ft_putendl_fd(2, "minishell: malloc error");
+			exit(-1);
+		}
+		ft_putendl_fd(2, print);
+		free(print);
 	}
-	(*access)[i] = 0;
-	return (i);
+	else
+		ft_putendl_fd(2, msg);
 }

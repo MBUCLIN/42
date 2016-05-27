@@ -88,7 +88,8 @@ PC = ft_memset.c \
 	 ft_fill_data.c \
 	 ft_swap.c \
 	 ft_srchenv.c \
-	 ft_strnchr.c
+	 ft_strnchr.c \
+	 ft_tabstrdup.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -177,7 +178,8 @@ PO = ft_memset.o \
 	 ft_fill_data.o \
 	 ft_swap.o \
 	 ft_srchenv.o \
-	 ft_strnchr.o
+	 ft_strnchr.o \
+	 ft_tabstrdup.o
 
 FLAGS = -Wall -Wextra -Werror
 

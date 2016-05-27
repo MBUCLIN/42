@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 15:08:16 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/26 17:06:50 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/27 16:10:17 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static char		*prompt_option(char *opt, char **env)
 		return (ft_srchenv("LOGNAME=", env));
 	else if (!ft_strcmp("-p", opt))
 		return (getcwd(NULL, 0));
-	ft_putendl("Mec la y a du gros debug a faire. c pas normal tout ca");
 	return (NULL);
 }
 
@@ -41,5 +40,5 @@ char			*search_prompt(char *opt, char **env)
 			return (ft_strdup("$>"));
 		return (prompt);
 	}
-	return (ft_strdup(opt));;
+	return (ft_strdup(opt));
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/26 17:15:41 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/27 17:29:49 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ char				*ft_strtrim(char const *s);
 char				*ft_strncadd(char *str, int n, int c);
 char				*ft_srchenv(char *varname, char **env);
 char				**ft_strsplit(char const *s, char c);
+char				**ft_tabstrdup(char **tab);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));

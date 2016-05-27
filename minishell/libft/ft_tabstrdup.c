@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   access.c                                           :+:      :+:    :+:   */
+/*   ft_tabstrdup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/26 19:45:31 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/27 17:38:10 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/27 17:21:23 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/27 17:30:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minish.h"
+#include "includes/libft.h"
 
-int		fill_access(char (*access)[256], char *path, char *xname)
+char		**ft_tabstrdup(char **tab)
 {
 	int		i;
-	int		j;
+	char	**dest;
+	int		len;
 
+	if (tab == NULL)
+		return (NULL);
+	len = ft_tabstrlen(tab);
+	if ((dest = (char **)malloc(sizeof(char *) * (len + 1))) == NULL)
+		return (NULL);
 	i = 0;
-	if (path)
-		while (path[i])
-		{
-			(*access)[i] = path[i];
-			i++;
-		}
-	j = 0;
-	(*access)[i++] = '/';
-	while (xname[j])
+	dest[i] = NULL;
+	while (tab[i])
 	{
-		(*access)[i] = xname[j];
-		j++;
+		if ((dest[i] = ft_strdup(tab[i])) == NULL)
+		{
+			ft_deltabstr(dest, len);
+			return (NULL);
+		}
+		dest[i + 1] = NULL;
 		i++;
 	}
-	(*access)[i] = 0;
-	return (i);
+	return (dest);
 }

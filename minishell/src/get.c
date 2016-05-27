@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/26 18:37:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/27 16:26:46 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,27 @@ char		*get_commandname(char *command)
 	while (command[i + sub] && command[i + sub] != ' ')
 		sub++;
 	return (ft_strsub(command, i, sub));
+}
+
+char		*get_linecommand(char *line)
+{
+	char		*afterpart;
+
+	afterpart = NULL;
+	if (line)
+	{
+		if (get_next_line(0, &afterpart) <= 0)
+		{
+			free(line);
+			return (NULL);
+		}
+		if ((line = ft_strjoindfree(line, "\n")) == NULL)
+			return (NULL);
+		if ((line = ft_strjoindfree(line, afterpart)) == NULL)
+			return (NULL);
+	}
+	else if (line == NULL)
+		if (get_next_line(0, &line) <= 0)
+			return (NULL);
+	return (line);
 }

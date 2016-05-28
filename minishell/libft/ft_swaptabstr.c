@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isblank.c                                       :+:      :+:    :+:   */
+/*   ft_swaptabstr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/22 14:31:08 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 13:34:23 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/28 15:11:00 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/28 15:16:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int		ft_isblank(int c)
+void		ft_swaptabstr(char ***tab, int st, int len)
 {
-	if (c == ' ' || c == '\t' || c == '\n' ||\
-		c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
+	while (st < len)
+	{
+		(*tab)[st] = (*tab)[st + 1];
+		st++;
+	}
 }

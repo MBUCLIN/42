@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isblank.c                                       :+:      :+:    :+:   */
+/*   ft_deltabswapstr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/22 14:31:08 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 13:34:23 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/28 15:05:10 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/28 15:10:40 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int		ft_isblank(int c)
+char	**ft_deltabswapstr(char **env, char *del, int len)
 {
-	if (c == ' ' || c == '\t' || c == '\n' ||\
-		c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
+	int		i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (!ft_strcmp(env[i], del))
+		{
+			free(env[i]);
+			ft_swaptabstr(&env, i, len);
+		}
+		i++;
+	}
+	return (env);
 }

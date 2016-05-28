@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 17:05:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/27 17:52:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/28 17:20:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ char		*apply_builtin(t_shell *shell, char *command)
 	else if (!ft_strcmp("env", shell->exec->xname))
 		ft_puttab(shell->env);
 	else if (!ft_strcmp("setenv", shell->exec->xname))
-		shell->env = add_env(shell);
+		shell->env = add_env(shell->env, shell->exec->args);
 	else if (!ft_strcmp("unsetenv", shell->exec->xname))
-		shell->env = rem_env(shell);
+		shell->env = rem_env(shell->env, shell->exec->args);
 	else
 		ft_perror("minishell: command not found: ", shell->exec->xname);
 	if (shell->env == NULL)
@@ -49,7 +49,13 @@ char		*apply_command(t_shell *shell, char *command)
 	}
 	free(command);
 	if (!ft_strcmp("cd", shell->exec->xname))
-		ft_chdir(shell);
+	{
+		if ((shell->path = ft_chdir(shell->path, shell->exec->args)) == NULL)
+		{
+			ft_perror("minishell: malloc error", NULL);
+			end_minishell(shell);
+		}
+	}
 	else
 		exec_command(shell);
 	return (NULL);

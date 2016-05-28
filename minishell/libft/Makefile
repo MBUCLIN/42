@@ -89,7 +89,13 @@ PC = ft_memset.c \
 	 ft_swap.c \
 	 ft_srchenv.c \
 	 ft_strnchr.c \
-	 ft_tabstrdup.c
+	 ft_tabstrdup.c \
+	 ft_lsttotabstrfree.c \
+	 ft_delstrcontent.c \
+	 ft_addstrtotab.c \
+	 ft_deltabswapstr.c \
+	 ft_swaptabstr.c \
+	 ft_skpblk.c
 
 PO = ft_memset.o \
 	 ft_memalloc.o \
@@ -179,7 +185,13 @@ PO = ft_memset.o \
 	 ft_swap.o \
 	 ft_srchenv.o \
 	 ft_strnchr.o \
-	 ft_tabstrdup.o
+	 ft_tabstrdup.o \
+	 ft_lsttotabstrfree.o \
+	 ft_delstrcontent.o \
+	 ft_addstrtotab.o \
+	 ft_deltabswapstr.o \
+	 ft_swaptabstr.o \
+	 ft_skpblk.o
 
 FLAGS = -Wall -Wextra -Werror
 

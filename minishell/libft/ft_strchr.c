@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:10:25 by mbuclin           #+#    #+#             */
-/*   Updated: 2015/11/30 17:06:46 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/28 17:37:20 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	return (ft_memchr(s, c, ft_strlen(s) + 1));
+	return (ft_memchr(s, c, ft_strlen(s)));
 }

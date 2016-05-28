@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isblank.c                                       :+:      :+:    :+:   */
+/*   ft_delstrcontent.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/22 14:31:08 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 13:34:23 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/28 14:06:33 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/28 14:10:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int		ft_isblank(int c)
+void		ft_delstrcontent(void *content, size_t size)
 {
-	if (c == ' ' || c == '\t' || c == '\n' ||\
-		c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
+	size = 0;
+	free(content);
 }

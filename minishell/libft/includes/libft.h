@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/27 17:29:49 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/28 15:43:46 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ void				ft_lstaddend(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_imgcpy(t_img **dest, t_img *src);
 void				ft_fill_data(t_img **img, int x, int y, int color);
+void				ft_delstrcontent(void *content, size_t size);
+void				ft_swaptabstr(char ***tab, int st, int len);
 
 size_t				ft_strlen(char const *str);
+int					ft_skpblk(char *str);
 int					ft_lstlen(t_list *head);
 int					ft_tabstrlen(char **tabstr);
 int					ft_nlen(int n);
@@ -128,6 +131,9 @@ char				*ft_strncadd(char *str, int n, int c);
 char				*ft_srchenv(char *varname, char **env);
 char				**ft_strsplit(char const *s, char c);
 char				**ft_tabstrdup(char **tab);
+char				**ft_lsttotabstrfree(t_list *head);
+char				**ft_addstrtotab(char **tab, char *str);
+char				**ft_deltabswapstr(char **env, char *del, int len);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));

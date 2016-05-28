@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_deltabstr.c                                     :+:      :+:    :+:   */
+/*   ft_lsttotabstrfree.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/27 16:12:02 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 14:45:54 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/28 13:34:34 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/28 14:11:15 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void		*ft_deltabstr(char **del, int pos)
+char		**ft_lsttotabstrfree(t_list *head)
 {
 	int		i;
+	t_list	*tmp;
+	char	**tab;
+	int		len;
 
-	i = 0;
-	while (i < pos)
+	len = ft_lstlen(head);
+	if ((tab = (char **)malloc(sizeof(char *) * (len + 1))) == NULL)
 	{
-		if (del[i])
-			free(del[i]);
-		i++;
+		ft_lstdel(&head, ft_delstrcontent);
+		return (NULL);
 	}
-	free(del);
-	return (NULL);
+	tmp = head;
+	i = 0;
+	while (tmp)
+	{
+		tab[i + 1] = NULL;
+		if ((tab[i] = ft_strdup((char *)tmp->content)) == NULL)
+		{
+			ft_deltabstr(tab, len);
+			ft_lstdel(&head, ft_delstrcontent);
+			return (NULL);
+		}
+		tmp = tmp->next;
+	}
+	return (tab);
 }

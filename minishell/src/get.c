@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/27 16:26:46 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/28 17:43:41 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,43 @@ char		*get_linecommand(char *line)
 		if (get_next_line(0, &line) <= 0)
 			return (NULL);
 	return (line);
+}
+
+
+char		**get_arguments(char *command)
+{
+	t_list		*head;
+	t_list		*new;
+	int			st;
+	int			i;
+	int			q;
+
+	head = NULL;
+	i = ft_skpblk(command);
+	st = i;
+	q = 0;
+	while (command[i])
+	{
+		if (command[i] == '"')
+			q++;
+		if ((q == 0 || q % 2 == 0) && ft_isblank(command[i]))
+		{
+			if ((new = ft_lstnew((command + st), st - i + 1)) == NULL)
+				return (NULL);
+			((char *)new->content)[new->content_size] = 0;
+			st = i + 1;
+			ft_lstaddend(&head, new);
+		}
+		i++;
+	}
+	return (ft_lsttotabstrfree(head));
+}
+
+char		*get_fullpath(char *path, char *arg)
+{
+	char		*new;
+
+	if (check_cut(arg) == -1)
+		return (cut_path(path, arg));
+	return (add_path(path, arg));
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:57:32 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 13:33:31 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:51:05 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		ft_lstaddend(t_list **alst, t_list *new)
 {
 	t_list		*tmp;
 
+	if (new == NULL)
+		return ;
 	if ((*alst) == NULL)
 	{
 		(*alst) = new;

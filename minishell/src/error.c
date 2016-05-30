@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 14:25:01 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 17:32:23 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:45:47 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ void			ft_perror(char *msg, char *more)
 		ft_putendl_fd(2, msg);
 }
 
-void		errorformat(char *err)
+void			errorformat(char *err)
 {
 	ft_putstr_fd("env: ", 2);
 	ft_putstr_fd(err, 2);
 	ft_putendl_fd(2, ": bad format: [NAME=value ...]");
 }
 
-char		*bad_arg(char **arg)
+char			*bad_arg(char **arg)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	while (arg[i])
 	{
 		if (check_argenv(arg[i]) == -1)
@@ -56,9 +56,4 @@ char		*bad_arg(char **arg)
 		i++;
 	}
 	return (NULL);
-}
-
-void		ft_kill(int sig)
-{
-	exit(sig);
 }

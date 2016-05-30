@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 15:43:46 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:02:04 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void				ft_putendl_fd(int fd, char const *str);
 void				ft_putnbr(int nbr);
 void				ft_putnbr_fd(int nbr, int fd);
 void				ft_putnbrbase(int nbr, char *base);
+void				ft_putlst(t_list *head);
 void				ft_swap(int *n1, int *n2);
 void				ft_puttab(char **tab);
 void				ft_striter(char *s, void (*f)(char *));

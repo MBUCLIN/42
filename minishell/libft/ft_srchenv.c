@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 15:25:47 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/26 18:54:46 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:44:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ char		*ft_srchenv(char *varname, char **env)
 	while (env[i])
 	{
 		if ((varcontent = ft_strstr(env[i], varname)))
-			return (ft_strsub(varcontent, ft_strlen(varname),\
+		{
+			return (ft_strsub(varcontent, ft_strlen(varname),
 							ft_strlen(varcontent)));
+		}
 		i++;
 	}
 	return (NULL);

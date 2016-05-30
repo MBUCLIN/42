@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 17:55:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/26 13:35:12 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 12:10:36 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int		check_map(t_list *head)
 	while (tmp)
 	{
 		if (tmp->content_size != cs)
+		{
+			ft_lstdel(&head, &del_map);
 			return (0);
+		}
 		tmp = tmp->next;
 	}
 	return (1);

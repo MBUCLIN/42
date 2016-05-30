@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:59:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/27 17:43:48 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:52:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-t_exec		*initiate_exec(char *path, char *xname)
+t_exec			*initiate_exec(char *path, char *xname)
 {
 	t_exec		*exec;
 
@@ -21,16 +21,17 @@ t_exec		*initiate_exec(char *path, char *xname)
 	exec->xpath = NULL;
 	exec->xname = NULL;
 	exec->args = NULL;
-	if ((exec->xpath = ft_strdup(path)) == NULL)
-	{
-		free(exec);
-		return (NULL);
-	}
+	if (path)
+		if ((exec->xpath = ft_strdup(path)) == NULL)
+		{
+			free(exec);
+			return (NULL);
+		}
 	exec->xname = xname;
 	return (exec);
 }
 
-t_path		*initiate_path(void)
+t_path			*initiate_path(void)
 {
 	t_path		*path;
 
@@ -47,16 +48,21 @@ t_path		*initiate_path(void)
 	return (path);
 }
 
-t_shell		*initiate_shell(char **env, char *prompt)
+static void		set_shell(t_shell **shell)
+{
+	(*shell)->prompt = NULL;
+	(*shell)->env = NULL;
+	(*shell)->path = NULL;
+	(*shell)->exec = NULL;
+}
+
+t_shell			*initiate_shell(char **env, char *prompt)
 {
 	t_shell			*shell;
 
 	if ((shell = (t_shell *)malloc(sizeof(t_shell))) == NULL)
 		return (NULL);
-	shell->prompt = NULL;
-	shell->env = NULL;
-	shell->path = NULL;
-	shell->exec = NULL;
+	set_shell(&shell);
 	if ((shell->prompt = search_prompt(prompt, env)) == NULL)
 	{
 		free(shell);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 17:05:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 17:20:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:30:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char		*apply_builtin(t_shell *shell, char *command)
 {
+	if (!ft_strcmp("exit", command))
+		end_minishell(shell);
 	if ((shell->exec->args = get_arguments(command)) == NULL)
 	{
 		ft_perror("minishell: malloc error", NULL);
@@ -21,9 +23,7 @@ char		*apply_builtin(t_shell *shell, char *command)
 		end_minishell(shell);
 	}
 	free(command);
-	if (!ft_strcmp("exit", shell->exec->xname))
-		end_minishell(shell);
-	else if (!ft_strcmp("env", shell->exec->xname))
+	if (!ft_strcmp("env", shell->exec->xname))
 		ft_puttab(shell->env);
 	else if (!ft_strcmp("setenv", shell->exec->xname))
 		shell->env = add_env(shell->env, shell->exec->args);
@@ -36,6 +36,7 @@ char		*apply_builtin(t_shell *shell, char *command)
 		ft_perror("minishell: malloc error", NULL);
 		end_minishell(shell);
 	}
+	del_exec(shell->exec);
 	return (NULL);
 }
 
@@ -50,7 +51,8 @@ char		*apply_command(t_shell *shell, char *command)
 	free(command);
 	if (!ft_strcmp("cd", shell->exec->xname))
 	{
-		if ((shell->path = ft_chdir(shell->path, shell->exec->args)) == NULL)
+		if ((shell->path = ft_chdir(shell->env,\
+								shell->path, shell->exec->args)) == NULL)
 		{
 			ft_perror("minishell: malloc error", NULL);
 			end_minishell(shell);
@@ -58,5 +60,6 @@ char		*apply_command(t_shell *shell, char *command)
 	}
 	else
 		exec_command(shell);
+	del_exec(shell->exec);
 	return (NULL);
 }

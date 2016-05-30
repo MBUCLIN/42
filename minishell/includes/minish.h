@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 17:35:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:21:39 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <signal.h>
+# include <sys/stat.h>
 # include "../libft/includes/libft.h"
 # include "../ft_printf/includes/ft_printf.h"
 
@@ -48,13 +49,18 @@ void				ft_perror(char *msg, char *more);
 void				errorformat(char *err);
 char				*bad_arg(char **arg);
 void				ft_kill(int sig);
+int					goto_argpath(t_path *path, char *arg);
+int					goto_lastpath(t_path *path);
+t_path				*goto_pathhome(char **env, t_path *path);
+t_path				*goto_newpath(int n, t_path *path, char *arg);
 int					check_isdir(char *arg);
 int					check_exec(char *path);
 int					check_argenv(char *arg);
 char				*get_commandname(char *command);
 char				*get_linecommand(char *line);
 char				**get_arguments(char *command);
-t_path				*ft_chdir(t_path *path, char **args);
+char				*get_var(char *arg, char **env);
+t_path				*ft_chdir(char **env, t_path *path, char **args);
 char				**add_env(char **env, char **arg);
 char				**rem_env(char **env, char **arg);
 void				exec_command(t_shell *sh);

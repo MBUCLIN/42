@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:54:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/27 17:37:37 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:18:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int		search_cpath(t_shell **shell, char *name, char *cpath)
 			return (-1);
 		}
 		return (0);
+	}
+	if ((((*shell)->exec) = initiate_exec(NULL, name)) == NULL)
+	{
+		free(name);
+		return (-1);
 	}
 	return (1);
 }

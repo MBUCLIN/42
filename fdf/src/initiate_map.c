@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 14:31:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/26 13:35:01 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 12:10:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ t_list		*open_map(char *filename)
 	if (!check_map(map))
 	{
 		ft_putendl_fd(2, "fdf: map error");
-		ft_lstdel(&map, &del_map);
 		return (NULL);
 	}
 	if (close(fd) == -1)

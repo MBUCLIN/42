@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 13:34:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 14:11:15 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:40:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,12 @@ char		**ft_lsttotabstrfree(t_list *head)
 
 	len = ft_lstlen(head);
 	if ((tab = (char **)malloc(sizeof(char *) * (len + 1))) == NULL)
-	{
-		ft_lstdel(&head, ft_delstrcontent);
 		return (NULL);
-	}
 	tmp = head;
-	i = 0;
+	i = -1;
 	while (tmp)
 	{
-		tab[i + 1] = NULL;
-		if ((tab[i] = ft_strdup((char *)tmp->content)) == NULL)
+		if ((tab[++i] = ft_strdup((char *)tmp->content)) == NULL)
 		{
 			ft_deltabstr(tab, len);
 			ft_lstdel(&head, ft_delstrcontent);
@@ -38,5 +34,7 @@ char		**ft_lsttotabstrfree(t_list *head)
 		}
 		tmp = tmp->next;
 	}
+	tab[i] = NULL;
+	ft_lstdel(&head, ft_delstrcontent);
 	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 13:56:37 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 13:14:04 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:37:17 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int		main_loop(t_shell *shell)
 
 	while (1)
 	{
+		ft_putstr(shell->prompt);
 		if ((command = read_command(NULL, 0)) == NULL)
 		{
 			ft_perror("minishell: malloc error", NULL);
@@ -30,13 +31,10 @@ static int		main_loop(t_shell *shell)
 			end_minishell(shell);
 		}
 		ft_printf("f : %d\n", f);
-		if (!ft_strcmp("exit", command))
-			end_minishell(shell);
-/*		else if (f == 0)
+		if (f == 0 && ft_strcmp("env", command))
 			command = apply_command(shell, command);
-		else if (f == 1)
-			command = apply_builtin(shell, command);*/
-		ft_putstr(shell->prompt);
+		else
+			command = apply_builtin(shell, command);
 	}
 	return (0);
 }
@@ -55,6 +53,5 @@ int				main(int ac, char **av, char **env)
 		ft_perror("minishell: malloc error", NULL);
 		return (0);
 	}
-	ft_putstr(shell->prompt);
 	return (main_loop(shell));
 }

@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_chdir.c                                         :+:      :+:    :+:   */
+/*   ft_putlst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/28 15:48:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 13:43:32 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/30 18:00:10 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/30 18:01:08 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minish.h"
+#include "includes/libft.h"
 
-t_path		*ft_chdir(char **env, t_path *path, char **args)
+void			ft_putlst(t_list *head)
 {
-	int				n;
+	t_list		*tmp;
 
-	if (!args[1])
-		return (goto_pathhome(env, path));
-	if (ft_tabstrlen(args) > 2)
+	tmp = head;
+	while (tmp)
 	{
-		ft_perror("cd: string not in pwd:", args[1]);
-		return (path);
+		ft_putendl((char *)tmp->content);
+		tmp = tmp->next;
 	}
-	else if ((n = check_isdir(args[1])) == -1)
-		return (path);
-	return (goto_newpath(n, path, args[1]));
 }

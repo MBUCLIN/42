@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 17:43:41 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:51:50 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char		*get_linecommand(char *line)
 	return (line);
 }
 
-
 char		**get_arguments(char *command)
 {
 	t_list		*head;
@@ -66,24 +65,37 @@ char		**get_arguments(char *command)
 	{
 		if (command[i] == '"')
 			q++;
-		if ((q == 0 || q % 2 == 0) && ft_isblank(command[i]))
+		if ((q == 0 || q % 2 == 0) && ft_isblank(command[i]) && i > st)
 		{
-			if ((new = ft_lstnew((command + st), st - i + 1)) == NULL)
+			if ((new = ft_lstnew((command + st), i - st + 1)) == NULL)
 				return (NULL);
-			((char *)new->content)[new->content_size] = 0;
-			st = i + 1;
+			st += ft_skpblk((command + i)) + i;
 			ft_lstaddend(&head, new);
 		}
 		i++;
 	}
+	if ((new = ft_lstnew((command + st), i - st)) == NULL)
+		return (NULL);
+	ft_lstaddend(&head, new);
 	return (ft_lsttotabstrfree(head));
 }
 
-char		*get_fullpath(char *path, char *arg)
+char		*get_var(char *arg, char **env)
 {
-	char		*new;
+	char		*var;
+	char		*ret;
 
-	if (check_cut(arg) == -1)
-		return (cut_path(path, arg));
-	return (add_path(path, arg));
+	if ((var = ft_strjoin(arg, "=")) == NULL)
+	{
+		ft_perror("minishell: malloc error", NULL);
+		end_minishell(NULL);
+	}
+	if ((ret = ft_srchenv(var, env)) == NULL)
+		return (NULL);
+	if ((ret = ft_strjoindfree(var, ret)) == NULL)
+	{
+		ft_perror("minishell: malloc error", NULL);
+		end_minishell(NULL);
+	}
+	return (ret);
 }

@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:23:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 17:24:50 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/30 18:45:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-int		find_command(t_shell **shell, char *command)
+int			find_command(t_shell **shell, char *command)
 {
 	char		*name;
 	int			f;
@@ -41,12 +41,12 @@ void		exec_command(t_shell *sh)
 		return ;
 	}
 	father = fork();
-	if (father)
+	if (father > 0)
 	{
 		waitpid(father, &stat, 0);
 		sig = WIFSIGNALED(stat);
 		if (sig == SIGTSTP)
-			signal(sig, &ft_kill);
+			signal(sig, SIG_DFL);
 		return ;
 	}
 	if (father == 0)

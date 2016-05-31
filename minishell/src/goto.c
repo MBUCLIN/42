@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:15:19 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 18:29:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/31 16:05:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int			goto_argpath(t_path *path, char *arg)
 {
 	char		*npath;
 
-	if ((path->cpath = ft_strjoinfree(path->cpath, "/")) == NULL)
+	if ((npath = ft_strjoin(path->cpath, "/")) == NULL)
 		return (0);
-	if ((npath = ft_strjoin(path->cpath, arg)) == NULL)
+	if ((npath = ft_strjoinfree(npath, arg)) == NULL)
 		return (0);
 	if (chdir(npath) == -1)
 		return (-1);
+	free(npath);
 	return (1);
 }
 
@@ -38,6 +39,11 @@ t_path		*goto_pathhome(char **env, t_path *path)
 
 	if ((npath = ft_srchenv("HOME=", env)) == NULL)
 		return (path);
+	if ((chdir(npath)) == -1)
+	{
+		free(npath);
+		return (path);
+	}
 	free(path->ppath);
 	path->ppath = path->cpath;
 	path->cpath = npath;
@@ -46,7 +52,7 @@ t_path		*goto_pathhome(char **env, t_path *path)
 
 t_path		*goto_newpath(int n, t_path *path, char *arg)
 {
-	if (n == 0)
+	if (n == 1)
 	{
 		if ((n = goto_argpath(path, arg)) == -1)
 			return (path);

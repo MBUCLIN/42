@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 17:05:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 18:30:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/31 16:49:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ char		*apply_builtin(t_shell *shell, char *command)
 
 char		*apply_command(t_shell *shell, char *command)
 {
+	ft_putendl("get arg");
 	if ((shell->exec->args = get_arguments(command)) == NULL)
 	{
 		ft_perror("minishell: malloc error", NULL);
 		free(command);
 		end_minishell(shell);
 	}
+	check_args(shell->exec->args);
 	free(command);
 	if (!ft_strcmp("cd", shell->exec->xname))
 	{
@@ -57,9 +59,16 @@ char		*apply_command(t_shell *shell, char *command)
 			ft_perror("minishell: malloc error", NULL);
 			end_minishell(shell);
 		}
+		if ((shell->env = ft_chgvalue("PWD=", shell->path->cpath,\
+									shell->env)) == NULL)
+		{
+			ft_perror("minishell: malloc error", NULL);
+			end_minishell(shell);
+		}
 	}
 	else
 		exec_command(shell);
 	del_exec(shell->exec);
+	ft_putendl("deleted");
 	return (NULL);
 }

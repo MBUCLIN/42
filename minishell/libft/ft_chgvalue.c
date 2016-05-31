@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_chgvalue.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/01 16:15:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 16:53:09 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/31 12:40:05 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/31 15:12:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+char			**ft_chgvalue(char *name, char *nvalue, char **tab)
 {
-	t_list	*lst;
+	int			i;
+	char		*new;
 
-	if (!(lst = (t_list *)ft_memalloc(sizeof(*lst))))
+	i = 0;
+	if (nvalue == NULL)
 		return (NULL);
-	if (content != NULL)
+	if ((new = ft_strjoin(name, nvalue)) == NULL)
+		return (NULL);
+	while (tab[i])
 	{
-		if ((lst->content = ft_memalloc(content_size)) == NULL)
+		if (ft_strstr(tab[i], name))
 		{
-			free(lst);
-			return (NULL);
+			free(tab[i]);
+			if ((tab[i] = ft_strdup(new)) == NULL)
+				return (NULL);
+			free(new);
+			return (tab);
 		}
-		lst->content = ft_memcpy(lst->content, content, content_size);
+		i++;
 	}
-	else
-	{
-		lst->content = NULL;
-		content_size = 0;
-	}
-	lst->content_size = content_size;
-	lst->next = NULL;
-	return (lst);
+	free(new);
+	return (tab);
 }

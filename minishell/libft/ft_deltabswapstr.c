@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 15:05:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/28 15:10:40 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/31 15:23:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	**ft_deltabswapstr(char **env, char *del, int len)
 		if (!ft_strcmp(env[i], del))
 		{
 			free(env[i]);
+			env[i] = NULL;
 			ft_swaptabstr(&env, i, len);
 		}
 		i++;

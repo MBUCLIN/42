@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:23:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 18:45:16 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/31 17:10:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,20 @@ void		exec_command(t_shell *sh)
 	int		father;
 	int		stat;
 	int		sig;
+	char	*exec;
 
-	if (check_exec(sh->exec->xpath) == -1)
+	if ((exec = ft_creadir(sh->exec->xpath, sh->exec->xname)) == NULL)
+		end_minishell(sh);
+	if (check_exec(exec) == -1)
 	{
 		ft_perror("minishell: command not found: ", sh->exec->xname);
 		return ;
 	}
+	ft_printf("len : %d\n", ft_tabstrlen(sh->exec->args));
 	father = fork();
-	if (father > 0)
-	{
+	if (father)
 		waitpid(father, &stat, 0);
-		sig = WIFSIGNALED(stat);
-		if (sig == SIGTSTP)
-			signal(sig, SIG_DFL);
-		return ;
-	}
-	if (father == 0)
-		execve(sh->exec->xpath, sh->exec->args, sh->env);
+	if (!father)
+		execve(exec, sh->exec->args, sh->env);
+	free(exec);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 18:21:39 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/31 16:51:36 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int					goto_argpath(t_path *path, char *arg);
 int					goto_lastpath(t_path *path);
 t_path				*goto_pathhome(char **env, t_path *path);
 t_path				*goto_newpath(int n, t_path *path, char *arg);
-int					check_isdir(char *arg);
+int					check_args(char **args);
+int					check_isdir(char *arg, char *cpath);
 int					check_exec(char *path);
 int					check_argenv(char *arg);
 char				*get_commandname(char *command);

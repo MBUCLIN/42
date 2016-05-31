@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 13:56:37 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 18:37:17 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/31 16:04:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int		main_loop(t_shell *shell)
 			ft_perror("minishell: malloc error", NULL);
 			end_minishell(shell);
 		}
-		ft_printf("f : %d\n", f);
 		if (f == 0 && ft_strcmp("env", command))
 			command = apply_command(shell, command);
 		else

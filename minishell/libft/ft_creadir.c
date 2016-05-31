@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_creadir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/01 16:15:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 16:53:09 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/05/31 14:08:34 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/05/31 14:09:58 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+char		*ft_creadir(char *path, char *name)
 {
-	t_list	*lst;
+	char		*ret;
 
-	if (!(lst = (t_list *)ft_memalloc(sizeof(*lst))))
+	if ((ret = ft_strjoin(path, "/")) == NULL)
 		return (NULL);
-	if (content != NULL)
-	{
-		if ((lst->content = ft_memalloc(content_size)) == NULL)
-		{
-			free(lst);
-			return (NULL);
-		}
-		lst->content = ft_memcpy(lst->content, content, content_size);
-	}
-	else
-	{
-		lst->content = NULL;
-		content_size = 0;
-	}
-	lst->content_size = content_size;
-	lst->next = NULL;
-	return (lst);
+	if ((ret = ft_strjoinfree(ret, name)) == NULL)
+		return (NULL);
+	return (ret);
 }

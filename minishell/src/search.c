@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:54:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 18:18:23 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/31 15:13:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int		search_pathofname(t_shell **sh, char *xname, char **pathes)
 			ft_memset(acc, 0, len);
 		i++;
 	}
+	ft_deltabstr(pathes, ft_tabstrlen(pathes));
 	return (1);
 }
 
@@ -75,5 +76,6 @@ int		search_envpath(char *xname, t_shell **sh)
 		free(path);
 		return (-1);
 	}
+	free(path);
 	return (search_pathofname(sh, xname, pathes));
 }

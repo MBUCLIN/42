@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 18:53:31 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/05/31 16:58:58 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,30 @@ char		**get_arguments(char *command)
 	i = ft_skpblk(command);
 	st = i;
 	q = 0;
+	ft_printf("%d : len\n", ft_strlen(command));
+	ft_putendl("srch arg");
 	while (command[i])
 	{
 		if (command[i] == '"')
 			q++;
 		if ((q == 0 || q % 2 == 0) && ft_isblank(command[i]) && i > st)
 		{
-			if ((new = ft_lstnew((command + st), i - st + 1)) == NULL)
+			ft_printf("%d : st\n%d : i\n", st, i);
+			if ((new = ft_lstnew((command + st), i - st)) == NULL)
 				return (NULL);
-			st += ft_skpblk((command + i)) + i;
+			((char *)new->content)[new->content_size] = 0;
+			st = ft_skpblk((command + i)) + i;
+			ft_printf("%d : st after skpblk\n", st);
 			ft_lstaddend(&head, new);
 		}
 		i++;
 	}
+	ft_printf("%d : st\n%d : i\n", st, i);
 	if ((new = ft_lstnew((command + st), i - st)) == NULL)
 		return (NULL);
+	((char *)new->content)[new->content_size] = 0;
 	ft_lstaddend(&head, new);
+	ft_putlst(head);
 	return (ft_lsttotabstrfree(head));
 }
 

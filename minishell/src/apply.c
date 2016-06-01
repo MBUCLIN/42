@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 17:05:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 16:49:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/01 16:39:08 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ char		*apply_command(t_shell *shell, char *command)
 		end_minishell(shell);
 	}
 	check_args(shell->exec->args);
+	if (!ft_strcmp("", command))
+	{
+		free(command);
+		return (NULL);
+	}
 	free(command);
 	if (!ft_strcmp("cd", shell->exec->xname))
 	{
@@ -69,6 +74,10 @@ char		*apply_command(t_shell *shell, char *command)
 	else
 		exec_command(shell);
 	del_exec(shell->exec);
-	ft_putendl("deleted");
+	if ((shell->prompt = change_prompt(shell)) == NULL)
+	{
+		ft_perror("minishell: malloc error", NULL);
+		end_minishell(shell);
+	}
 	return (NULL);
 }

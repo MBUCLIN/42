@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:59:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 18:52:18 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/01 16:39:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_shell			*initiate_shell(char **env, char *prompt)
 	if ((shell = (t_shell *)malloc(sizeof(t_shell))) == NULL)
 		return (NULL);
 	set_shell(&shell);
+	shell->opt = search_option(prompt);
 	if ((shell->prompt = search_prompt(prompt, env)) == NULL)
 	{
 		free(shell);
@@ -82,4 +83,39 @@ t_shell			*initiate_shell(char **env, char *prompt)
 		return (NULL);
 	}
 	return (shell);
+}
+
+int				reconstruct_path(t_shell **sh)
+{
+	char		*path;
+	int			fd;
+	char		*line;
+	int			ret;
+
+	ft_putendl("HEHE");
+	if (access("/etc/paths", R_OK | F_OK) == -1)
+		return (-1);
+	ft_putendl("not access");
+	if ((path = ft_strdup("PATH=")) == NULL)
+		return (-1);
+	ft_putendl("not dup");
+	line = NULL;
+	if ((fd = open("/etc/paths", O_RDONLY)) == -1)
+		return (-1);
+	ft_putendl("not open");
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		if ((path = ft_strjoindfree(path, line)) == NULL)
+			return (-1);
+		line = NULL;
+		if ((path = ft_strjoinfree(path, ":")) == NULL)
+			return (-1);
+	}
+	if (ret == -1)
+		return (ret);
+	ft_putendl("not GNL");
+	if (((*sh)->env = ft_addstrtotab((*sh)->env, path)) == NULL)
+		return (-1);
+	ft_putendl("ah oe");
+	return (1);
 }

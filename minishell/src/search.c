@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:54:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 15:13:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/01 16:33:53 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int		search_cpath(t_shell **shell, char *name, char *cpath)
 	char	acc[256];
 	int		len;
 
-	len = fill_access(&acc, NULL, name);
+	len = fill_access(&acc, cpath, name);
+	ft_printf("acc : |%s|\n", acc);
 	if (access(acc, F_OK) == 0)
 	{
 		if (((*shell)->exec = initiate_exec(cpath, name)) == NULL)
@@ -70,7 +71,12 @@ int		search_envpath(char *xname, t_shell **sh)
 	char		**pathes;
 
 	if ((path = ft_srchenv("PATH=", (*sh)->env)) == NULL)
-		return (-1);
+	{
+		if (reconstruct_path(sh) == -1)
+			return (-1);
+		if ((path = ft_srchenv("PATH=", (*sh)->env)) == NULL)
+			return (-1);
+	}
 	if ((pathes = ft_strsplit(path, ':')) == NULL)
 	{
 		free(path);
@@ -78,4 +84,11 @@ int		search_envpath(char *xname, t_shell **sh)
 	}
 	free(path);
 	return (search_pathofname(sh, xname, pathes));
+}
+
+int		search_option(char *option)
+{
+	if (!ft_strcmp("-p", option))
+		return (1);
+	return (0);
 }

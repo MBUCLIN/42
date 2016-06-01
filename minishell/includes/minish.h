@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 16:51:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/01 16:38:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_exec
 
 typedef struct		s_shell
 {
+	int				opt;
 	char			**env;
 	char			*prompt;
 	t_path			*path;
@@ -48,7 +49,9 @@ void				end_minishell(t_shell *shell);
 void				ft_perror(char *msg, char *more);
 void				errorformat(char *err);
 char				*bad_arg(char **arg);
+void				msg_signal(int sig, char *name);
 void				ft_kill(int sig);
+int					reconstruct_path(t_shell **shell);
 int					goto_argpath(t_path *path, char *arg);
 int					goto_lastpath(t_path *path);
 t_path				*goto_pathhome(char **env, t_path *path);
@@ -57,6 +60,7 @@ int					check_args(char **args);
 int					check_isdir(char *arg, char *cpath);
 int					check_exec(char *path);
 int					check_argenv(char *arg);
+char				*change_prompt(t_shell *shell);
 char				*get_commandname(char *command);
 char				*get_linecommand(char *line);
 char				**get_arguments(char *command);
@@ -72,6 +76,7 @@ int					search_pathofname(t_shell **sh, char *xname,\
 										char **pathes);
 int					search_cpath(t_shell **shell, char *name, char *cpath);
 int					search_envpath(char *xname, t_shell **sh);
+int					search_option(char *option);
 int					find_command(t_shell **shell, char *command);
 char				*apply_builtin(t_shell *shell, char *command);
 char				*apply_command(t_shell *shell, char *command);

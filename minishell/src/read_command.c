@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 17:07:15 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/27 16:16:16 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/02 17:17:33 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char		*read_command(char *line, int n)
 {
 	if ((line = get_linecommand(line)) == NULL)
 		return (NULL);
+	if (!ft_isstrascii(line))
+		end_minishell(NULL);
 	n = ft_strnchr(line, '\"');
 	if (n == 0)
 		return (line);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 14:28:56 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/02 17:01:31 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int					ft_isdigit(int c);
 int					ft_isstrdigit(char *str);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
+int					ft_isstrascii(char *str);
 int					ft_isprint(int c);
 int					ft_isblank(int c);
 int					ft_isoption(int c, char *option);

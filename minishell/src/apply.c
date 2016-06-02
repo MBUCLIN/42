@@ -6,23 +6,16 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 17:05:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/01 16:39:08 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/02 18:57:19 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-char		*apply_builtin(t_shell *shell, char *command)
+static char		*apply_builtin(t_shell *shell)
 {
-	if (!ft_strcmp("exit", command))
+	if (!ft_strcmp("exit", shell->exec->xname))
 		end_minishell(shell);
-	if ((shell->exec->args = get_arguments(command)) == NULL)
-	{
-		ft_perror("minishell: malloc error", NULL);
-		free(command);
-		end_minishell(shell);
-	}
-	free(command);
 	if (!ft_strcmp("env", shell->exec->xname))
 		ft_puttab(shell->env);
 	else if (!ft_strcmp("setenv", shell->exec->xname))
@@ -40,22 +33,8 @@ char		*apply_builtin(t_shell *shell, char *command)
 	return (NULL);
 }
 
-char		*apply_command(t_shell *shell, char *command)
+static char		*apply_exec(t_shell *shell)
 {
-	ft_putendl("get arg");
-	if ((shell->exec->args = get_arguments(command)) == NULL)
-	{
-		ft_perror("minishell: malloc error", NULL);
-		free(command);
-		end_minishell(shell);
-	}
-	check_args(shell->exec->args);
-	if (!ft_strcmp("", command))
-	{
-		free(command);
-		return (NULL);
-	}
-	free(command);
 	if (!ft_strcmp("cd", shell->exec->xname))
 	{
 		if ((shell->path = ft_chdir(shell->env,\
@@ -80,4 +59,24 @@ char		*apply_command(t_shell *shell, char *command)
 		end_minishell(shell);
 	}
 	return (NULL);
+}
+
+char			*apply_command(int f, t_shell *shell, char *command)
+{
+	if (!ft_strcmp(command, "") || f == -2)
+	{
+		if (command)
+			free(command);
+		return (NULL);
+	}
+	else if ((shell->exec->args = get_arguments(command)) == NULL)
+	{
+		ft_perror("minishell: malloc error", NULL);
+		free(command);
+		end_minishell(shell);
+	}
+	free(command);
+	if (f == 0 && ft_strcmp("env", command))
+		return (apply_exec(shell));
+	return (apply_builtin(shell));
 }

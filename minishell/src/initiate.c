@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:59:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/01 16:39:10 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/02 18:00:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,30 +92,23 @@ int				reconstruct_path(t_shell **sh)
 	char		*line;
 	int			ret;
 
-	ft_putendl("HEHE");
-	if (access("/etc/paths", R_OK | F_OK) == -1)
+	if (access("/etc/paths", R_OK) == -1)
 		return (-1);
-	ft_putendl("not access");
 	if ((path = ft_strdup("PATH=")) == NULL)
 		return (-1);
-	ft_putendl("not dup");
 	line = NULL;
 	if ((fd = open("/etc/paths", O_RDONLY)) == -1)
 		return (-1);
-	ft_putendl("not open");
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
+		if (ft_strlen(path) > 5)
+			if ((path = ft_strjoinfree(path, ":")) == NULL)
+				return (-1);
 		if ((path = ft_strjoindfree(path, line)) == NULL)
 			return (-1);
 		line = NULL;
-		if ((path = ft_strjoinfree(path, ":")) == NULL)
-			return (-1);
 	}
-	if (ret == -1)
-		return (ret);
-	ft_putendl("not GNL");
-	if (((*sh)->env = ft_addstrtotab((*sh)->env, path)) == NULL)
+	if (ret == -1 || ((*sh)->env = ft_addstrtotab((*sh)->env, path)) == NULL)
 		return (-1);
-	ft_putendl("ah oe");
 	return (1);
 }

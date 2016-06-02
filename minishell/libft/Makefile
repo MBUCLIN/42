@@ -27,6 +27,7 @@ PC = ft_memset.c \
 	 ft_isdigit.c \
 	 ft_isalnum.c \
 	 ft_isascii.c \
+	 ft_isstrascii.c \
 	 ft_isprint.c \
 	 ft_isoption.c \
 	 ft_atoi.c \
@@ -127,6 +128,7 @@ PO = ft_memset.o \
 	 ft_isdigit.o \
 	 ft_isalnum.o \
 	 ft_isascii.o \
+	 ft_isstrascii.o \
 	 ft_isprint.o \
 	 ft_isoption.o \
 	 ft_atoi.o \

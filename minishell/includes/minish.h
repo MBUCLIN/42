@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/01 16:38:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/02 18:30:41 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,14 @@ char				*bad_arg(char **arg);
 void				msg_signal(int sig, char *name);
 void				ft_kill(int sig);
 int					reconstruct_path(t_shell **shell);
+t_list				*new_arguments(t_list **head, char *content, size_t size);
+int					find_path(t_shell **sh, char *name, char **pathes);
 int					goto_argpath(t_path *path, char *arg);
 int					goto_lastpath(t_path *path);
 t_path				*goto_pathhome(char **env, t_path *path);
 t_path				*goto_newpath(int n, t_path *path, char *arg);
-int					check_args(char **args);
+t_path				*goto_slash(t_path *path, char *name);
+int					check_builtin(char *name);
 int					check_isdir(char *arg, char *cpath);
 int					check_exec(char *path);
 int					check_argenv(char *arg);
@@ -74,12 +77,11 @@ char				*search_prompt(char *option, char **env);
 int					fill_access(char (*access)[256], char *path, char *name);
 int					search_pathofname(t_shell **sh, char *xname,\
 										char **pathes);
-int					search_cpath(t_shell **shell, char *name, char *cpath);
+int					search_cpath(t_shell **shell, char *name);
 int					search_envpath(char *xname, t_shell **sh);
 int					search_option(char *option);
 int					find_command(t_shell **shell, char *command);
-char				*apply_builtin(t_shell *shell, char *command);
-char				*apply_command(t_shell *shell, char *command);
+char				*apply_command(int f, t_shell *shell, char *command);
 t_exec				*initiate_exec(char *path, char *xname);
 t_path				*initiate_path(void);
 t_shell				*initiate_shell(char **env, char *prompt);

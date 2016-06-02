@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:46:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/24 12:42:23 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/02 17:50:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int			get_dir_content(t_all **node, int option, int call)
 	{
 		if (!((*node)->printname))
 			ft_printf("%s:\n", (*node)->name->path);
+		ft_putendl("permi?");
 		put_error((*node)->name->name);
+		ft_putendl("mb?");
 		if ((*node)->next)
 			ft_putendl("");
 		return (-1);

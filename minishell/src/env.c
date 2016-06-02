@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 14:13:29 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 15:26:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/02 18:55:46 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char		**add_env(char **env, char **arg)
 	}
 	len = ft_tabstrlen(env) - 1;
 	i = 0;
-	ft_puttab(arg);
 	while (arg[++i])
 	{
 		if ((env = ft_addstrtotab(env, arg[i])) == NULL)

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:15:19 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 16:05:16 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/02 17:09:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ t_path		*goto_pathhome(char **env, t_path *path)
 	char	*npath;
 
 	if ((npath = ft_srchenv("HOME=", env)) == NULL)
+	{
+		ft_perror("minishell: cd: HOME is not set", NULL);
 		return (path);
+	}
 	if ((chdir(npath)) == -1)
 	{
 		free(npath);
@@ -75,6 +78,20 @@ t_path		*goto_newpath(int n, t_path *path, char *arg)
 			del_path(path);
 			return (NULL);
 		}
+	}
+	return (path);
+}
+
+t_path		*goto_slash(t_path *path, char *arg)
+{
+	if ((chdir(arg)) == -1)
+		return (path);
+	free(path->ppath);
+	path->ppath = path->cpath;
+	if ((path->cpath = ft_strdup("/")) == NULL)
+	{
+		del_path(path);
+		return (NULL);
 	}
 	return (path);
 }

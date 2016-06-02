@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 15:08:16 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/01 16:37:57 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/02 17:59:03 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char			*search_prompt(char *opt, char **env)
 	return (ft_strdup(opt));
 }
 
-char		*change_prompt(t_shell *shell)
+char			*change_prompt(t_shell *shell)
 {
 	if (shell->opt)
 	{

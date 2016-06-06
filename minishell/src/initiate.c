@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:59:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/02 18:00:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/06 16:41:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,32 +83,4 @@ t_shell			*initiate_shell(char **env, char *prompt)
 		return (NULL);
 	}
 	return (shell);
-}
-
-int				reconstruct_path(t_shell **sh)
-{
-	char		*path;
-	int			fd;
-	char		*line;
-	int			ret;
-
-	if (access("/etc/paths", R_OK) == -1)
-		return (-1);
-	if ((path = ft_strdup("PATH=")) == NULL)
-		return (-1);
-	line = NULL;
-	if ((fd = open("/etc/paths", O_RDONLY)) == -1)
-		return (-1);
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
-		if (ft_strlen(path) > 5)
-			if ((path = ft_strjoinfree(path, ":")) == NULL)
-				return (-1);
-		if ((path = ft_strjoindfree(path, line)) == NULL)
-			return (-1);
-		line = NULL;
-	}
-	if (ret == -1 || ((*sh)->env = ft_addstrtotab((*sh)->env, path)) == NULL)
-		return (-1);
-	return (1);
 }

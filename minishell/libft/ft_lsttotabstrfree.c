@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 13:34:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 16:48:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/06 15:29:56 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ char		**ft_lsttotabstrfree(t_list *head)
 	i = 0;
 	while (tmp)
 	{
+		tab[i + 1] = NULL;
 		if ((tab[i] = ft_strdup((char *)tmp->content)) == NULL)
 		{
 			ft_deltabstr(tab, len);
 			return (NULL);
 		}
+		tab[tmp->content_size] = 0;
 		tmp = tmp->next;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 17:07:15 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/02 17:17:33 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/06 15:32:48 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ char		*read_command(char *line, int n)
 	if (n == 0)
 		return (line);
 	else if (n < 0)
-	{
-		free(line);
 		return (NULL);
-	}
 	else if (n % 2 == 0)
 		return (line);
 	return (read_command(line, n));

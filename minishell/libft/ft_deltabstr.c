@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 16:12:02 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/30 15:32:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/06 15:30:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void		*ft_deltabstr(char **del, int pos)
 	i = 0;
 	if (del)
 	{
-		while (del[i] && i < pos)
+		while (i < pos)
 		{
 			if (del[i])
 			{
 				free(del[i]);
+				del[i] = NULL;
 			}
 			i++;
 		}

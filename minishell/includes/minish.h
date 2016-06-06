@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/02 18:30:41 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/06 14:16:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char				*bad_arg(char **arg);
 void				msg_signal(int sig, char *name);
 void				ft_kill(int sig);
 int					reconstruct_path(t_shell **shell);
+char				**change_arg(char **args, char **env);
 t_list				*new_arguments(t_list **head, char *content, size_t size);
 int					find_path(t_shell **sh, char *name, char **pathes);
 int					goto_argpath(t_path *path, char *arg);

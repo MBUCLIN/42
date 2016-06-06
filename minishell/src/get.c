@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/02 18:23:08 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/06 15:33:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char		*get_linecommand(char *line)
 			free(line);
 			return (NULL);
 		}
-		if ((line = ft_strjoindfree(line, "\n")) == NULL)
+		if ((line = ft_strjoinfree(line, "\n")) == NULL)
 			return (NULL);
 		if ((line = ft_strjoindfree(line, afterpart)) == NULL)
 			return (NULL);

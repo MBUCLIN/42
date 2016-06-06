@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:54:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/02 18:45:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/06 15:05:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,7 @@ int		search_envpath(char *xname, t_shell **sh)
 	char		**pathes;
 
 	if ((path = ft_srchenv("PATH=", (*sh)->env)) == NULL)
-	{
-		if (reconstruct_path(sh) == -1)
-			return (-1);
-		if ((path = ft_srchenv("PATH=", (*sh)->env)) == NULL)
-			return (-1);
-	}
+		return (1);
 	if ((pathes = ft_strsplit(path, ':')) == NULL)
 	{
 		free(path);

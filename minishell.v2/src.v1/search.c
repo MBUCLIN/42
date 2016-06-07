@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:54:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 16:02:06 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/07 17:25:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,30 @@ t_exec			*search_cpath(t_exec *exec, char *command)
 	}
 	if ((exec->xpath = ft_strdup(exec->xname)) == NULL)
 		end_minishell(-1);
-	if ((exec->args = get_arguments(command)) == NULL)
+	if ((exec->args = get_arguments(command, &exec->args)) == NULL)
 		end_minishell(-1);
 	return (exec);
+}
+
+static char		*find_path(char *name, char **paths)
+{
+	int		i;
+	int		len;
+	char	acc[256];
+
+	i = 0;
+	while (paths[i])
+	{
+		len = fill_access(&acc, paths[i], name);
+		if (access(acc, F_OK) == 0)
+			break ;
+		else
+			ft_memset(acc, 0, len);
+		i++;
+	}
+	if (paths[i] == NULL)
+		return (ft_strdup(""));
+	return (ft_strdup(acc));
 }
 
 char			*search_envpath(char *xname, t_shell *sh)
@@ -39,7 +60,12 @@ char			*search_envpath(char *xname, t_shell *sh)
 	if ((paths = ft_strsplit(path, ':')) == NULL)
 		end_minishell(-1);
 	path = NULL;
-	if ((path = fnd_path(name, paths)) == NULL)
+	if ((path = find_path(xname, paths)) == NULL)
 		end_minishell(-1);
+	if (!ft_strcmp(path, ""))
+	{
+		free(path);
+		return (NULL);
+	}
 	return (path);
 }

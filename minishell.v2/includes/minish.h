@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 16:10:29 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/07 16:48:41 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ typedef struct		s_shell
 void				end_minishell(int exitval);
 void				ft_perror(char *msg, char *more);
 
+int					fill_access(char (*access)[256], char *path, char *xname);
+t_exec				*search_cpath(t_exec *exec, char *command);
+char				*search_envpath(char *xname, t_shell *sh);
+char				**get_arguments(char *command, char ***arg);
 t_exec				*initiate_exec(void);
-char				*get_commandname(t_sehll *shell, char (command);
 t_exec				*find_commandtype(t_shell *shell, char *command);
 char				*read_command(char *line, int n);
 

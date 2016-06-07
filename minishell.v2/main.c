@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 13:56:37 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 16:04:11 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/07 17:20:46 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ static int		main_loop(t_shell *shell)
 			end_minishell(-1);
 		}
 		shell->exec = find_commandtype(shell, command);
+		ft_printf("|%s| : name\n", shell->exec->xname);
+		ft_printf("|%s| : path\n", shell->exec->xpath);
+		ft_puttab(shell->exec->args);
 //		command = apply_command(f, shell, command);
 	}
 	return (0);
@@ -50,6 +53,5 @@ int				main(int ac, char **av, char **env)
 		ft_perror("minishell: malloc error", NULL);
 		return (-1);
 	}
-	ft_putstr(shell->prompt);
 	return (main_loop(shell));
 }

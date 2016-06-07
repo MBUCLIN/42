@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:23:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 16:05:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/07 17:23:20 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,21 @@ t_exec			*find_commandtype(t_shell *shell, char *command)
 	}
 	if (isbuiltin(exec->xname))
 	{
-		if ((exec->args = get_arguments(command)) == NULL)
+		if ((exec->args = get_arguments(command, &exec->args)) == NULL)
 			end_minishell(-1);
-		exec->path = NULL;
+		exec->xpath = NULL;
 		return (exec);
 	}
 	if ((exec->xpath = search_envpath(exec->xname, shell)) == NULL)
+	{
+		ft_putendl("TU VA LA DEDANS ENCULE");
 		return (search_cpath(exec, command));
-	if ((exec->args = get_arguments(command)) == NULL)
+	}
+	if ((exec->args = get_arguments(command, &exec->args)) == NULL)
 		end_minishell(-1);
 	return (exec);
 }
-
+/*
 static void		signal_controlc(int father)
 {
 	if (signal(SIGINT, SIG_IGN))
@@ -105,4 +108,4 @@ void			exec_command(t_shell *sh)
 	signal(SIGINT, SIG_DFL);
 	signal(SIGSEGV, SIG_DFL);
 	free(exec);
-}
+}*/

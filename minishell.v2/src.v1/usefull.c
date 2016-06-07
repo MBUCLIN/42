@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 18:15:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 15:26:27 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/07 16:45:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,33 +80,4 @@ char			**change_arg(char **arg, char **env)
 		i++;
 	}
 	return (arg);
-}
-t_list			*new_arguments(t_list **head, char *content, size_t size)
-{
-	t_list		*new;
-
-	if ((new = ft_lstnew(content, size)) == NULL)
-		return (NULL);
-	((char *)new->content)[size] = 0;
-	ft_lstaddend(head, new);
-	return (*head);
-}
-
-char			*find_path(t_shell *sh, char *name, char **pathes)
-{
-	int		i;
-	char	acc[256];
-	int		len;
-
-	i = 0;
-	while (pathes[i])
-	{
-		len = fill_access(&acc, pathes[i], name);
-		if (access(acc, F_OK) == 0)
-			return (ft_strdup(acc));
-		else
-			ft_memset(acc, 0, len);
-		i++;
-	}
-	return (1);
 }

@@ -6,41 +6,51 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 16:12:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/07 17:18:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-char		**get_arguments(char *command)
+static char		**new_arg(char ***arg, char *new)
 {
-	t_list		*head;
-	int			st;
-	int			i;
-	int			q;
+	if (new == NULL)
+		return (NULL);
+	if ((*arg = ft_addstrtotab(*arg, new)) == NULL)
+		return (NULL);
+	free(new);
+	new = NULL;
+	return (*arg);
+}
 
-	head = NULL;
+char			**get_arguments(char *command, char ***arg)
+{
+	int		q;
+	int		i;
+	int		s;
+
+	*arg = NULL;
 	i = ft_skpblk(command);
-	st = i;
 	q = 0;
+	s = i;
+	ft_putendl(command);
 	while (command[i])
 	{
 		if (command[i] == '"')
 			q++;
-		if ((q == 0 || q % 2 == 0) && ft_isblank(command[i]) && i > st)
+		if ((q == 0 || q % 2 == 0) && ft_isblank(command[i]))
 		{
-			if ((head = new_arguments(&head, command + st, i - st)) == NULL)
+			if ((*arg = new_arg(arg, ft_strsub(command, s, i - s))) == NULL)
 				return (NULL);
-			st = ft_skpblk((command + i)) + i;
+			i = ft_skpblk(command + i);
+			s = i;
 		}
 		i++;
 	}
-	if ((head = new_arguments(&head, command + st, i - st)) == NULL)
-		return (NULL);
-	return (ft_lsttotabstrfree(head));
+	return (new_arg(arg, ft_strsub(command, s, i - s)));
 }
 
-char		*get_var(char *arg, char **env)
+/*char		*get_var(char *arg, char **env)
 {
 	char		*var;
 	char		*ret;
@@ -58,4 +68,4 @@ char		*get_var(char *arg, char **env)
 		end_minishell(NULL);
 	}
 	return (ret);
-}
+}*/

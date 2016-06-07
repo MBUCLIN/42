@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 15:08:16 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/19 15:10:25 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/07 16:58:08 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int		ft_tabstrlen(char **tabstr)
 	int		i;
 
 	i = 0;
-	while (tabstr[i])
-		i++;
+	if (tabstr != NULL)
+		while (tabstr[i])
+			i++;
 	return (i);
 }

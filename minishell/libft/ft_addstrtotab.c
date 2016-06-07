@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 14:37:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/01 16:24:40 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/07 13:36:06 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,18 @@ char		**ft_addstrtotab(char **tab, char *str)
 	if ((new = (char **)malloc(sizeof(char *) * (len + 1))) == NULL)
 		return (ft_deltabstr(tab, len));
 	i = 0;
-	while (tab[i])
-	{
-		new[i] = tab[i];
-		i++;
-	}
-	free(tab);
-	if ((new[i] = ft_strdup(str)) == NULL)
+	if (tab)
+		while (tab[i])
+		{
+			new[i] = tab[i];
+			i++;
+		}
+	if ((new[i++] = ft_strdup(str)) == NULL)
 	{
 		ft_deltabstr(tab, len);
 		return (ft_deltabstr(new, i));
 	}
-	new[i + 1] = NULL;
+	ft_deltabstrp(tab, len);
+	new[i] = NULL;
 	return (new);
 }

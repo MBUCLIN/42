@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:59:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/06 16:41:10 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/07 13:05:17 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,7 @@ t_shell			*initiate_shell(char **env, char *prompt)
 		free(shell);
 		return (NULL);
 	}
-	if ((shell->env = ft_tabstrdup(env)) == NULL)
-	{
-		free(shell->prompt);
-		free(shell);
-		return (NULL);
-	}
+	shell->env = env;
 	if ((shell->path = initiate_path()) == NULL)
 	{
 		free(shell->prompt);

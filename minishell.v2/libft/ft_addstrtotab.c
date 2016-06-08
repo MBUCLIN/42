@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 14:37:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 16:56:06 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/08 15:24:30 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char		**ft_addstrtotab(char **tab, char *str)
 		ft_deltabstr(tab, len);
 		return (ft_deltabstr(new, i));
 	}
-	ft_deltabstr(tab, len);
+	free(tab);
 	new[i] = NULL;
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 16:48:41 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/08 16:46:31 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct		s_path
 typedef struct		s_exec
 {
 	char			*xpath;
-	pid_t			xpid;
 	char			*xname;
 	char			**args;
 }					t_exec;
@@ -44,9 +43,16 @@ typedef struct		s_shell
 
 void				end_minishell(int exitval);
 void				ft_perror(char *msg, char *more);
+char				*bad_arg(char **args);
+
+void				del_exec(t_exec *exec);
+
+char				*change_prompt(t_shell *shell);
+char				**change_args(char **args, char **env);
+char				**change_underscore(t_exec *exec, char **env);
 
 int					fill_access(char (*access)[256], char *path, char *xname);
-t_exec				*search_cpath(t_exec *exec, char *command);
+t_exec				*search_cpath(t_exec *exec);
 char				*search_envpath(char *xname, t_shell *sh);
 char				**get_arguments(char *command, char ***arg);
 t_exec				*initiate_exec(void);

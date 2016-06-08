@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 17:18:18 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/08 16:48:15 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,9 @@ char			**get_arguments(char *command, char ***arg)
 	int		i;
 	int		s;
 
-	*arg = NULL;
 	i = ft_skpblk(command);
 	q = 0;
 	s = i;
-	ft_putendl(command);
 	while (command[i])
 	{
 		if (command[i] == '"')
@@ -42,7 +40,7 @@ char			**get_arguments(char *command, char ***arg)
 		{
 			if ((*arg = new_arg(arg, ft_strsub(command, s, i - s))) == NULL)
 				return (NULL);
-			i = ft_skpblk(command + i);
+			i += ft_skpblk((command + i));
 			s = i;
 		}
 		i++;
@@ -56,16 +54,10 @@ char			**get_arguments(char *command, char ***arg)
 	char		*ret;
 
 	if ((var = ft_strjoin(arg, "=")) == NULL)
-	{
-		ft_perror("minishell: malloc error", NULL);
-		end_minishell(NULL);
-	}
+		end_minishell(-1);
 	if ((ret = ft_srchenv(var, env)) == NULL)
 		return (NULL);
-	if ((ret = ft_strjoindfree(var, ret)) == NULL)
-	{
-		ft_perror("minishell: malloc error", NULL);
-		end_minishell(NULL);
-	}
+	if ((ret = ft_strjoinfree(var, ret)) == NULL)
+		end_minishell(-1);
 	return (ret);
 }*/

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:23:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 17:23:20 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/08 15:31:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,23 @@ t_exec			*find_commandtype(t_shell *shell, char *command)
 
 	if ((exec = initiate_exec()) == NULL)
 		end_minishell(-1);
+	if ((exec->args = get_arguments(command, &exec->args)) == NULL)
+		end_minishell(-1);
 	if ((exec->xname = get_commandname(command)) == NULL)
 		end_minishell(-1);
 	if (ft_strlen(exec->xname) >= 256)
 	{
-		free(exec->xname);
+		ft_perror("minishell: command not found: ", exec->xname);
 		exec->xname = NULL;
 		return (exec);
 	}
 	if (isbuiltin(exec->xname))
 	{
-		if ((exec->args = get_arguments(command, &exec->args)) == NULL)
-			end_minishell(-1);
 		exec->xpath = NULL;
 		return (exec);
 	}
 	if ((exec->xpath = search_envpath(exec->xname, shell)) == NULL)
-	{
-		ft_putendl("TU VA LA DEDANS ENCULE");
-		return (search_cpath(exec, command));
-	}
-	if ((exec->args = get_arguments(command, &exec->args)) == NULL)
-		end_minishell(-1);
+		return (search_cpath(exec));
 	return (exec);
 }
 /*

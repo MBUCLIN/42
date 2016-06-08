@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 13:56:37 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 17:20:46 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/08 16:22:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ static int		main_loop(t_shell *shell)
 
 	while (1)
 	{
+		signal(SIGINT, SIG_IGN);
 		ft_putstr(shell->prompt);
 		if ((command = read_command(NULL, 0)) == NULL)
-		{
-			ft_perror("minishell: malloc error", NULL);
 			end_minishell(-1);
-		}
 		shell->exec = find_commandtype(shell, command);
-		ft_printf("|%s| : name\n", shell->exec->xname);
-		ft_printf("|%s| : path\n", shell->exec->xpath);
-		ft_puttab(shell->exec->args);
-//		command = apply_command(f, shell, command);
+		free(command);
+		command = NULL;
+		if (!ft_strcmp(shell->exec->xname, ""))
+			continue ;
+		shell->exec->args = change_args(shell->exec->args, shell->env);
+		shell->env = change_underscore(shell->exec, shell->env);
+//		if (exec->name)
+//			apply_command(shell->exec, &shell);
 	}
 	return (0);
 }
@@ -44,14 +46,8 @@ int				main(int ac, char **av, char **env)
 		return (0);
 	}
 	if ((cpyenv = initiate_env(env)) == NULL)
-	{
-		ft_perror("minishell: malloc error", NULL);
-		return (-1);
-	}
-	if ((shell = initiate_shell(env, av[1])) == NULL)
-	{
-		ft_perror("minishell: malloc error", NULL);
-		return (-1);
-	}
+		end_minishell(-1);
+	if ((shell = initiate_shell(cpyenv, av[1])) == NULL)
+		end_minishell(-1);
 	return (main_loop(shell));
 }

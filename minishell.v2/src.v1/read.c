@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 13:35:40 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 14:45:57 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/08 14:18:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char		*read_etcpaths(void)
 	if ((fd = open("/etc/paths", O_RDONLY)) == -1)
 	{
 		ft_perror("minishell: file not found", NULL);
-		end_minishell(fd);
+		end_minishell(-2);
 	}
 	while (get_next_line(fd, &line) > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 14:21:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/08 16:43:47 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:42:21 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,35 @@
 
 char		*change_prompt(t_shell *shell)
 {
+	char		*change;
 	if (shell->opt != 1)
 		return (shell->prompt);
 	free(shell->prompt);
 	shell->prompt = NULL;
-	return (ft_strdup(shell->path->cpath));
+	if ((change = ft_strdup(shell->path->cpath)) == NULL)
+		end_minishell(-1);
+	if ((change = ft_strjoinfree(change, " ")) == NULL)
+		end_minishell(-1);
+	return (change);
 }
 
 char		**change_args(char **args, char **env)
 {
 	int		i;
 	char	*change;
+	char	*srch;
 
 	i = 0;
 	while (args[i])
 	{
 		if (args[i][0] == '$')
 		{
-			if ((change = ft_srchenv((args[i] + 1), env)))
+			if ((srch = ft_strjoin(((args[i]) + 1), "=")) == NULL)
+				end_minishell(-1);
+			if ((change = ft_srchenv(srch, env)))
 			{
 				free(args[i]);
-				if ((args[i] = ft_strdup(change + 1)) == NULL)
+				if ((args[i] = ft_strdup(change)) == NULL)
 					end_minishell(-1);
 			}
 		}

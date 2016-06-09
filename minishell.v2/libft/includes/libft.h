@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/02 17:01:31 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 18:10:03 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void				*ft_memmove(void *dest, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t len);
 void				*ft_deltabstr(char **del, int pos);
 
+void				ft_exit(char **args);
 void				ft_memdel(void **ap);
+void				ft_handle(int sig);
 void				ft_strdel(char **as);
 void				ft_bzero(void *s, size_t len);
 void				ft_tabdel(void **todel);
@@ -80,6 +82,7 @@ size_t				ft_strlen(char const *str);
 int					ft_skpblk(char *str);
 int					ft_lstlen(t_list *head);
 int					ft_tabstrlen(char **tabstr);
+int					ft_tabstrsrch(char *srch, char **tab);
 int					ft_nlen(int n);
 int					ft_tolower(int c);
 int					ft_toupper(int c);

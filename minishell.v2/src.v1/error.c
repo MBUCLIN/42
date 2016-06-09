@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 14:25:01 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/08 16:46:06 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:50:36 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,19 @@ char			*bad_arg(char **arg)
 	return (NULL);
 }
 
-void			msg_signal(int sig, char *name)
+void			msg_signal(int sig, char *xname)
 {
+	char		*name;
+
+	if ((name = ft_strdup(xname)) == NULL)
+		end_minishell(-1);
 	if (sig == 11)
-		ft_perror("minishell: segmentation fault	", name);
+		ft_perror("minishell: segmentation fault: ", name);
 	else if (sig == 6)
-		ft_perror("minishell: abort	", name);
+		ft_perror("minishell: abort: ", name);
 	else if (sig == 10)
-		ft_perror("minishell: bus error	", name);
+		ft_perror("minishell: bus error: ", name);
 	else if (sig == 8)
-		ft_perror("minishell: floating point execption	", name);
+		ft_perror("minishell: floating point execption: ", name);
+	free(name);
 }

@@ -1,6 +1,8 @@
 NAME = libft.a
 
-PC = ft_memset.c \
+PC = ft_exit.c \
+	 ft_memset.c \
+	 ft_handle.c \
 	 ft_memalloc.c \
 	 ft_memcpy.c \
 	 ft_memccpy.c \
@@ -99,9 +101,12 @@ PC = ft_memset.c \
 	 ft_addstrtotab.c \
 	 ft_putlst.c \
 	 ft_chgvalue.c \
-	 ft_creadir.c
+	 ft_creadir.c \
+	 ft_tabstrsrch.c
 
-PO = ft_memset.o \
+PO = ft_exit.o \
+	 ft_memset.o \
+	 ft_handle.o \
 	 ft_memalloc.o \
 	 ft_memcpy.o \
 	 ft_memccpy.o \
@@ -200,7 +205,8 @@ PO = ft_memset.o \
 	 ft_addstrtotab.o \
 	 ft_putlst.o \
 	 ft_chgvalue.o \
-	 ft_creadir.o
+	 ft_creadir.o \
+	 ft_tabstrsrch.o
 
 FLAGS = -Wall -Wextra -Werror
 

@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:15:19 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/02 17:09:02 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:40:17 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-int			goto_argpath(t_path *path, char *arg)
+static int			goto_argpath(t_path *path, char *arg)
 {
 	char		*npath;
 
@@ -23,25 +23,29 @@ int			goto_argpath(t_path *path, char *arg)
 	if (chdir(npath) == -1)
 		return (-1);
 	free(npath);
+
 	return (1);
 }
 
-int			goto_lastpath(t_path *path)
+static int			goto_lastpath(t_path *path)
 {
 	if (chdir(path->ppath) == -1)
 		return (-1);
 	return (1);
 }
 
-t_path		*goto_pathhome(char **env, t_path *path)
+t_path				*goto_pathhome(char **env, t_path *path)
 {
 	char	*npath;
+	char	*var;
 
-	if ((npath = ft_srchenv("HOME=", env)) == NULL)
+	if ((var = ft_srchenv("HOME=", env)) == NULL)
 	{
 		ft_perror("minishell: cd: HOME is not set", NULL);
 		return (path);
 	}
+	if ((npath = ft_strdup(var)) == NULL)
+		end_minishell(-1);
 	if ((chdir(npath)) == -1)
 	{
 		free(npath);
@@ -53,7 +57,7 @@ t_path		*goto_pathhome(char **env, t_path *path)
 	return (path);
 }
 
-t_path		*goto_newpath(int n, t_path *path, char *arg)
+t_path				*goto_newpath(int n, t_path *path, char *arg)
 {
 	if (n == 1)
 	{
@@ -82,16 +86,13 @@ t_path		*goto_newpath(int n, t_path *path, char *arg)
 	return (path);
 }
 
-t_path		*goto_slash(t_path *path, char *arg)
+t_path				*goto_slash(t_path *path, char *arg)
 {
 	if ((chdir(arg)) == -1)
 		return (path);
 	free(path->ppath);
 	path->ppath = path->cpath;
 	if ((path->cpath = ft_strdup("/")) == NULL)
-	{
-		del_path(path);
-		return (NULL);
-	}
+		end_minishell(-1);
 	return (path);
 }

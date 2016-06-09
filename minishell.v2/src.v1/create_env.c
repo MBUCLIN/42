@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 13:20:42 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 16:10:31 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:47:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,24 @@ int			create_pathenv(char ***cpy, char *name, char *content)
 	free(content);
 	if ((*cpy = ft_addstrtotab(*cpy, new)) == NULL)
 		return (-1);
+	free(new);
 	return (0);
 }
 
 int			create_pathbinenv(char ***cpy)
 {
 	char	*new;
+	char	*path;
 
+	if ((path = ft_strdup("PATH=")) == NULL)
+		return (-1);
 	if ((new = read_etcpaths()) == NULL)
+		return (-1);
+	if ((new = ft_strjoindfree(path, new)) == NULL)
 		return (-1);
 	if ((*cpy = ft_addstrtotab(*cpy, new)) == NULL)
 		return (-1);
+	free(new);
 	return (0);
 }
 
@@ -43,8 +50,10 @@ int			create_underscore(char	***cpy, char *name, char *content)
 		return (-1);
 	if ((new = ft_strjoin(name, content)) == NULL)
 		return (-1);
+	free(content);
 	if ((*cpy = ft_addstrtotab(*cpy, new)) == NULL)
 		return (-1);
+	free(new);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:59:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/08 15:10:10 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:43:21 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ char		**initiate_env(char **env)
 	int			check[4];
 
 	if (env == NULL || env[0] == NULL)
+	{
 		return (recreate_env());
+	}
 	if ((cpy = ft_tabstrdup(env)) == NULL)
 		return (NULL);
 	if ((ft_srchenv("PATH=", cpy)) == NULL)

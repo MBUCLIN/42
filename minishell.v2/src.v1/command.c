@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:23:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/08 15:31:57 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:29:03 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_exec			*find_commandtype(t_shell *shell, char *command)
 		end_minishell(-1);
 	if (ft_strlen(exec->xname) >= 256)
 	{
-		ft_perror("minishell: command not found: ", exec->xname);
+		ft_perror("minishell: command too long: ", exec->xname);
 		exec->xname = NULL;
 		return (exec);
 	}
@@ -58,49 +58,3 @@ t_exec			*find_commandtype(t_shell *shell, char *command)
 		return (search_cpath(exec));
 	return (exec);
 }
-/*
-static void		signal_controlc(int father)
-{
-	if (signal(SIGINT, SIG_IGN))
-	{
-		kill(SIGINT, father);
-		ft_putendl("");
-		return ;
-	}
-}
-
-static void		signal_error(int father, char *name, int sig)
-{
-	signal(sig, SIG_DFL);
-	kill(sig, father);
-	msg_signal(sig, name);
-}
-
-void			exec_command(t_shell *sh)
-{
-	int		father;
-	int		stat;
-	char	*exec;
-
-	stat = 0;
-	if ((exec = ft_creadir(sh->exec->xpath, sh->exec->xname)) == NULL)
-		end_minishell(sh);
-	if (check_exec(exec) == -1)
-	{
-		ft_perror("minishell: command not found: ", sh->exec->xname);
-		return ;
-	}
-	father = fork();
-	if (father)
-	{
-		signal_controlc(father);
-		waitpid(father, &stat, 0);
-		if (WIFSIGNALED(stat))
-			signal_error(father, sh->exec->xname, stat);
-	}
-	if (!father)
-		execve(exec, sh->exec->args, sh->env);
-	signal(SIGINT, SIG_DFL);
-	signal(SIGSEGV, SIG_DFL);
-	free(exec);
-}*/

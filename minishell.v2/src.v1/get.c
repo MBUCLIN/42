@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/08 16:48:15 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:29:07 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static char		**new_arg(char ***arg, char *new)
 	if ((*arg = ft_addstrtotab(*arg, new)) == NULL)
 		return (NULL);
 	free(new);
-	new = NULL;
 	return (*arg);
 }
 
@@ -48,7 +47,7 @@ char			**get_arguments(char *command, char ***arg)
 	return (new_arg(arg, ft_strsub(command, s, i - s)));
 }
 
-/*char		*get_var(char *arg, char **env)
+char		*get_var(char *arg, char **env)
 {
 	char		*var;
 	char		*ret;
@@ -60,4 +59,4 @@ char			**get_arguments(char *command, char ***arg)
 	if ((ret = ft_strjoinfree(var, ret)) == NULL)
 		end_minishell(-1);
 	return (ret);
-}*/
+}

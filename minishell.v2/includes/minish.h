@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/08 16:46:31 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:56:44 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,19 @@ typedef struct		s_shell
 void				end_minishell(int exitval);
 void				ft_perror(char *msg, char *more);
 char				*bad_arg(char **args);
+void				msg_signal(int sig, char *name);
 
+void				del_path(t_path *path);
 void				del_exec(t_exec *exec);
 
 char				*change_prompt(t_shell *shell);
 char				**change_args(char **args, char **env);
 char				**change_underscore(t_exec *exec, char **env);
+
+t_path				*goto_pathhome(char **env, t_path *path);
+t_path				*goto_newpath(int n, t_path *path, char *arg);
+t_path				*goto_slash(t_path *path, char *arg);
+char				*get_var(char *arg, char **env);
 
 int					fill_access(char (*access)[256], char *path, char *xname);
 t_exec				*search_cpath(t_exec *exec);
@@ -72,4 +79,9 @@ char				*search_prompt(int option, char **env);
 int					search_option(char *option);
 t_shell				*initiate_shell(char **env, char *prompt);
 
+char				**rem_env(char **env, char **arg);
+char				**add_env(char **env, char **args);
+t_path				*ft_chdir(char **env, t_path *path, char **args);
+void				exec_command(t_shell *sh);
+void				apply_command(t_exec *exec, t_shell **shell);
 #endif

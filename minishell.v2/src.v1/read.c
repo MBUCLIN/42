@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 13:35:40 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/08 14:18:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:56:32 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char		*read_etcpaths(void)
 			return (NULL);
 		line = NULL;
 	}
+	close(fd);
 	return (paths);
 }
 

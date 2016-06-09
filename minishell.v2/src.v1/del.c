@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 14:14:45 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/06 15:57:58 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/09 16:28:41 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,7 @@ void		del_exec(t_exec *exec)
 			exec->xname = NULL;
 		}
 		if (exec->args)
-		{
-			ft_putendl("EXEC args de mes couilles");
 			exec->args = ft_deltabstr(exec->args, ft_tabstrlen(exec->args));
-		}
-		exec->xpid = -1;
-		ft_putendl("EXEC TA MERE LA PUTE ");
 		free(exec);
 	}
 }

@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_creadir.c                                       :+:      :+:    :+:   */
+/*   ft_tabstrsrch.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/31 14:08:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 16:53:05 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/06/09 14:23:54 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/06/09 14:27:15 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-char		*ft_creadir(char *path, char *name)
+int			ft_tabstrsrch(char *srch, char **tab)
 {
-	char		*ret;
+	int		i;
 
-	ret = NULL;
-	if (!ft_strcmp(name, "/"))
-		return (ft_strdup(name));
-	if (path)
-		if ((ret = ft_strjoin(path, "/")) == NULL)
-			return (NULL);
-	if ((ret = ft_strjoinfree(ret, name)) == NULL)
-		return (NULL);
-	return (ret);
+	i = 0;
+	while (tab[i])
+	{
+		if (ft_strstr(tab[i], srch))
+			return (i);
+		i++;
+	}
+	return (i);
 }

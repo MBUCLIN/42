@@ -3,30 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   del.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 14:14:45 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 16:28:41 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/28 15:04:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-void		del_path(t_path *path)
+void		del_path(t_list *path)
 {
 	if (path)
 	{
-		if (path->cpath)
-		{
-			free(path->cpath);
-			path->cpath = NULL;
-		}
-		if (path->ppath)
-		{
-			free(path->ppath);
-			path->ppath = NULL;
-		}
-		free(path);
+		ft_lstdel(&path, ft_delstrcontent);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_chdir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 15:48:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 16:56:40 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/28 15:40:50 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static int		check_isdir(char *arg, char *cpath)
 	if ((path = ft_creadir(cpath, arg)) == NULL)
 		return (2);
 	sta = lstat(path, &buf);
-	if (sta == -1 || !S_ISDIR(buf.st_mode))
+	if (sta == -1 || (!S_ISDIR(buf.st_mode) && !S_ISLNK(buf.st_mode)))
 	{
 		free(path);
-		if (arg[0] == '-' && arg[1] == 0)
+		if (arg[0] == '-' && (arg[1] == 0 || ft_isstrdigit(arg + 1)))
 			return (0);
 		ft_perror("cd: no such file or directory: ", ft_strdup(arg));
 		return (-1);
@@ -38,20 +38,20 @@ static int		check_isdir(char *arg, char *cpath)
 	return (1);
 }
 
-t_path			*ft_chdir(char **env, t_path *path, char **args)
+t_list			*ft_chdir(char **env, t_list *path, char **args)
 {
 	int				n;
 
-	if (args[1] == NULL)
+	if (args[1] == NULL || ft_isempty(args[1]))
 		return (goto_pathhome(env, path));
 	if (ft_tabstrlen(args) > 2)
 	{
 		ft_perror("cd: string not in pwd: ", ft_strdup(args[1]));
 		return (path);
 	}
-	else if ((n = check_isdir(args[1], path->cpath)) == -1)
+	else if ((n = check_isdir(args[1], (char *)(path->content))) == -1)
 		return (path);
-	if (!ft_strcmp("/", args[1]))
+	if (args[1][0] == '/' && ft_strlen(args[1]) == 1)
 		return (goto_slash(path, args[1]));
 	if (n == 2)
 		return (NULL);

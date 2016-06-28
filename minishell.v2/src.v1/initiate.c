@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initiate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:59:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 17:43:21 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/28 15:57:39 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,18 @@ t_exec			*initiate_exec(void)
 	return (exec);
 }
 
-t_path			*initiate_path(void)
+t_list			*initiate_path(void)
 {
-	t_path		*path;
+	t_list		*head;
+	char		*path;
 
-	if ((path = (t_path *)malloc(sizeof(t_path))) == NULL)
+	if ((path = getcwd(NULL, 0)) == NULL)
 		return (NULL);
-	path->cpath = NULL;
-	path->ppath = NULL;
-	if ((path->cpath = getcwd(NULL, 0)) == NULL)
-	{
-		free(path);
+	if ((head = ft_lstnew(path, ft_strlen(path))) == NULL)
 		return (NULL);
-	}
-	if ((path->ppath = getcwd(NULL, 0)) == NULL)
-	{
-		free(path->cpath);
-		free(path);
-		return (NULL);
-	}
-	return (path);
+
+	head->next = NULL;
+	return (head);
 }
 
 static void		set_shell(t_shell **shell)

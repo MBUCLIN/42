@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_lstindex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/01 16:15:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:05:41 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/06/28 15:06:02 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/06/28 15:12:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+t_list		*ft_lstindex(t_list *head, int index)
 {
+	int		i;
 	t_list	*tmp;
 
-	while (*alst)
+	i = 0;
+	tmp = head;
+	while (tmp)
 	{
-		tmp = (*alst)->next;
-		ft_lstdelone(alst, del);
-		(*alst) = tmp;
+		if (i == index)
+			return (tmp);
+		i++;
+		tmp = tmp->next;
 	}
-	alst = NULL;
+	return (NULL);
 }

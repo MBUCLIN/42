@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 16:15:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/31 16:53:09 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/28 15:38:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 		return (NULL);
 	if (content != NULL)
 	{
-		if ((lst->content = ft_memalloc(content_size)) == NULL)
+		if ((lst->content = ft_memalloc(content_size + 1)) == NULL)
 		{
 			free(lst);
 			return (NULL);
 		}
 		lst->content = ft_memcpy(lst->content, content, content_size);
+		*(char *)(lst->content + content_size) = 0;
 	}
 	else
 	{

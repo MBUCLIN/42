@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 18:10:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/28 15:08:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int					ft_isblank(int c);
 int					ft_isoption(int c, char *option);
 int					ft_islexisort(const char *s1, const char *s2);
 int					ft_isrevlexisort(char *s1, char *s2);
+int					ft_isempty(char *str);
 int					ft_chrnotoption(char *chr, char *option);
 int					ft_atoi(char *str);
 int					ft_atoibase(char *nbr_b, char *base);
@@ -144,5 +145,6 @@ char				**ft_deltabswapstr(char **env, char *del, int len);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+t_list				*ft_lstindex(t_list *head, int index);
 
 #endif

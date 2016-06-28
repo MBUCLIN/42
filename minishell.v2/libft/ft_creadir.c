@@ -17,7 +17,7 @@ char		*ft_creadir(char *path, char *name)
 	char		*ret;
 
 	ret = NULL;
-	if (!ft_strcmp(name, "/"))
+	if (name[0] == '/')
 		return (ft_strdup(name));
 	if (path)
 		if ((ret = ft_strjoin(path, "/")) == NULL)

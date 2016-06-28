@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_isempty.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/01 16:15:56 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:05:41 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/06/28 14:06:25 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/06/28 14:07:15 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+int			ft_isempty(char *str)
 {
-	t_list	*tmp;
-
-	while (*alst)
-	{
-		tmp = (*alst)->next;
-		ft_lstdelone(alst, del);
-		(*alst) = tmp;
-	}
-	alst = NULL;
+	if (str && str[0] == 0)
+		return (1);
+	return (0);
 }

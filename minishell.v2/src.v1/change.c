@@ -3,23 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   change.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 14:21:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 17:42:21 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/28 15:04:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
+void		change_path(t_list **node, int i)
+{
+	if ((*node)->next)
+		change_path(&(*node)->next, ++i);
+	if (i > 9)
+		ft_lstdelone(node, ft_delstrcontent);
+}
+
 char		*change_prompt(t_shell *shell)
 {
 	char		*change;
+
 	if (shell->opt != 1)
 		return (shell->prompt);
 	free(shell->prompt);
 	shell->prompt = NULL;
-	if ((change = ft_strdup(shell->path->cpath)) == NULL)
+	if ((change = ft_strdup((char *)(shell->path->content))) == NULL)
 		end_minishell(-1);
 	if ((change = ft_strjoinfree(change, " ")) == NULL)
 		end_minishell(-1);

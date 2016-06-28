@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:23:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 17:29:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/28 17:19:37 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		isbuiltin(char *name)
 {
 	if (!ft_strcmp(name, "cd") || !ft_strcmp(name, "env") ||\
 		!ft_strcmp(name, "setenv") || !ft_strcmp(name, "unsetenv") ||\
-		!ft_strcmp(name, "exit"))
+		!ft_strcmp(name, "exit") || !ft_strcmp(name, "echo"))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:59:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:57:39 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/08 13:32:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_list			*initiate_path(void)
 		return (NULL);
 	if ((head = ft_lstnew(path, ft_strlen(path))) == NULL)
 		return (NULL);
-
+	free(path);
 	head->next = NULL;
 	return (head);
 }

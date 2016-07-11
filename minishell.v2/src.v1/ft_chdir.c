@@ -6,13 +6,13 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 15:48:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:40:50 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/29 17:54:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-static int		check_isdir(char *arg, char *cpath)
+int		check_isdir(char *arg, char *cpath, char *exec)
 {
 	struct stat		buf;
 	int				sta;
@@ -26,12 +26,14 @@ static int		check_isdir(char *arg, char *cpath)
 		free(path);
 		if (arg[0] == '-' && (arg[1] == 0 || ft_isstrdigit(arg + 1)))
 			return (0);
-		ft_perror("cd: no such file or directory: ", ft_strdup(arg));
+		ft_putstr_fd(exec, 2);
+		ft_perror(": no such file or directory: ", ft_strdup(arg));
 		return (-1);
 	}
 	else if (access(path, X_OK) == -1)
 	{
-		ft_perror("cd: permission denied: ", path);
+		ft_putstr_fd(exec, 2);
+		ft_perror(": permission denied: ", path);
 		return (-1);
 	}
 	free(path);
@@ -49,7 +51,7 @@ t_list			*ft_chdir(char **env, t_list *path, char **args)
 		ft_perror("cd: string not in pwd: ", ft_strdup(args[1]));
 		return (path);
 	}
-	else if ((n = check_isdir(args[1], (char *)(path->content))) == -1)
+	else if ((n = check_isdir(args[1], (char *)(path->content), args[0])) == -1)
 		return (path);
 	if (args[1][0] == '/' && ft_strlen(args[1]) == 1)
 		return (goto_slash(path, args[1]));

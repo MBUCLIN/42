@@ -104,7 +104,8 @@ PC = ft_exit.c \
 	 ft_creadir.c \
 	 ft_tabstrsrch.c \
 	 ft_isempty.c \
-	 ft_lstindex.c
+	 ft_lstindex.c \
+	 ft_treatquote.c
 
 PO = ft_exit.o \
 	 ft_memset.o \
@@ -210,7 +211,8 @@ PO = ft_exit.o \
 	 ft_creadir.o \
 	 ft_tabstrsrch.o \
 	 ft_isempty.o \
-	 ft_lstindex.o
+	 ft_lstindex.o \
+	 ft_treatquote.o
 
 FLAGS = -Wall -Wextra -Werror
 

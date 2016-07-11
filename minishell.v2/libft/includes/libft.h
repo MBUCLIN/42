@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:08:34 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/11 14:03:06 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ char				*ft_strtrim(char const *s);
 char				*ft_strncadd(char *str, int n, int c);
 char				*ft_creadir(char *path, char *name);
 char				*ft_srchenv(char *varname, char **env);
+char				*ft_treatquote(char *str);
 char				**ft_chgvalue(char *name, char *nvalue, char **tab);
 char				**ft_strsplit(char const *s, char c);
 char				**ft_tabstrdup(char **tab);

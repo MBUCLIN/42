@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 14:21:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:04:11 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/08 16:43:04 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ char		**change_underscore(t_exec *exec, char **env)
 	if (!ft_strcmp(exec->xname, "echo") && ft_srchenv("$_", exec->args))
 		return (env);
 	len = ft_tabstrlen(exec->args) - 1;
-	last = exec->args[len];
+	if (!ft_strcmp(exec->xname, "env") || !ft_strcmp(exec->xname, "setenv"))
+		last = exec->args[0];
+	else
+		last = exec->args[len];
 	while (env[i])
 	{
 		if (ft_strstr(env[i], "_="))
@@ -84,4 +87,27 @@ char		**change_underscore(t_exec *exec, char **env)
 		i++;
 	}
 	return (env);
+}
+
+int			env_to_change(char **env, char *arg)
+{
+	char	*name;
+	int		i;
+
+	i = 0;
+	if ((name = cut_envvar(arg)) == NULL)
+		return (0);
+	if ((name = ft_strjoinfree(name, "=")) == NULL)
+		end_minishell(-1);
+	while (env[i])
+	{
+		if (ft_strstr(env[i], name))
+		{
+			free(name);
+			return (1);
+		}
+		i++;
+	}
+	free(name);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 17:20:50 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/08 16:43:05 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,15 @@ void				change_path(t_list **node, int i);
 char				*change_prompt(t_shell *shell);
 char				**change_args(char **args, char **env);
 char				**change_underscore(t_exec *exec, char **env);
+int					env_to_change(char **env, char *arg);
 
 t_list				*goto_pathhome(char **env, t_list *path);
 t_list				*goto_newpath(int n, t_list *path, char *arg);
 t_list				*goto_slash(t_list *path, char *arg);
 char				*get_var(char *arg, char **env);
+char				*cut_envvar(char *arg);
+int					check_isdir(char *arg, char *cpath, char *exec);
+int					is_exec(char *path);
 
 int					fill_access(char (*access)[256], char *path, char *xname);
 t_exec				*search_cpath(t_exec *exec);
@@ -78,7 +82,7 @@ t_shell				*initiate_shell(char **env, char *prompt);
 
 char				**rem_env(char **env, char **arg);
 char				**add_env(char **env, char **args);
-char				**env_builtin(char **env, char **args);
+char				**env_builtin(t_shell *sh, char **args);
 t_list				*ft_chdir(char **env, t_list *path, char **args);
 void				exec_command(t_shell *sh);
 void				apply_command(t_exec *exec, t_shell **shell);

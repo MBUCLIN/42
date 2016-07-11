@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 14:29:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 17:52:20 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/29 17:54:12 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-static int		is_exec(char *path)
+int		is_exec(char *path)
 {
 	struct stat		buf;
 	int				sta;
@@ -28,6 +28,11 @@ static void		signal_error(int pid, char *path, int sig)
 	signal(sig, SIG_DFL);
 	kill(sig, pid);
 	msg_signal(sig, path);
+}
+
+void			exec_by_env()
+{
+
 }
 
 void			exec_command(t_shell *sh)

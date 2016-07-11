@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 17:05:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 17:20:10 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/11 14:09:44 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,19 @@ static void			apply_cd(t_shell **sh, t_exec *exec, char **env)
 static void ft_echo(char **args)
 {
 	int		i;
+	char	*print;
 
-	i = 2;
-	ft_putstr(args[1]);
+	i = 1;
 	while (args[i])
 	{
-		ft_printf(" %s", args[i]);
+		if ((print = ft_treatquote(args[i])) == NULL)
+			end_minishell(-1);
+		if (i != 1)
+			ft_printf(" %s", print);
+		else
+			ft_putstr(print);
+		free(print);
+		print = NULL;
 		i++;
 	}
 	ft_putchar('\n');
@@ -47,7 +54,7 @@ static void			apply_builtin(t_exec *exec, t_shell **shell)
 	else if (!ft_strcmp(exec->xname, "cd"))
 		apply_cd(shell, exec, (*shell)->env);
 	else if (!ft_strcmp(exec->xname, "env"))
-		(*shell)->env = env_builtin((*shell)->env, exec->args);
+		(*shell)->env = env_builtin((*shell), exec->args);
 	else if (!ft_strcmp(exec->xname, "setenv"))
 		(*shell)->env = add_env((*shell)->env, exec->args);
 	else if (!ft_strcmp(exec->xname, "unsetenv"))

@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:15:19 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:57:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/13 16:40:19 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,12 @@ t_list				*goto_newpath(int n, t_list *path, char *arg)
 	t_list		*tmp;
 	char		*new;
 
+	new = NULL;
 	if (n == 1)
 	{
 		if ((n = goto_argpath(path, arg)) == -1)
 			return (path);
-		if ((new = getcwd(NULL, 0)) == NULL)
-			end_minishell(-1);
-		if (n == 0)
+		if (n == 0 || (new = getcwd(NULL, 0)) == NULL)
 			end_minishell(-1);
 		if ((tmp = ft_lstnew(new, ft_strlen(new))) == NULL)
 			end_minishell(-1);

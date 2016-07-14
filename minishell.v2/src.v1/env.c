@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/28 14:13:29 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/11 13:50:27 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/07/14 15:42:44 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/07/14 17:44:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 char			**rem_env(char **env, char **arg)
 {
-	char		*var;
 	int			len;
 	int			i;
+	char		*var;
 
-	i = 1;
 	len = ft_tabstrlen(env);
+	i = 1;
+	if (error_unset(arg) == 1)
+		return (env);
 	while (arg[i])
 	{
-		if ((var = get_var(arg[i], env)) == NULL)
+		if ((var = get_var(arg[i], env)) != NULL)
 		{
-			ft_perror("unsetenv: illegal name -- ", ft_strdup(arg[i]));
-			ft_putendl_fd(2, "usage: unsetenv [NAME ...]");
-			return (env);
+			env = ft_deltabswapstr(env, var, len--);
+			free(var);
+			var = NULL;
 		}
-		env = ft_deltabswapstr(env, var, len--);
-		free(var);
-		var = NULL;
 		i++;
 	}
+	ft_puttab(env);
 	return (env);
 }
 
@@ -64,61 +64,55 @@ static char		**arg_exist(char **env, char *arg)
 
 char			**add_env(char **env, char **arg)
 {
-	char	*bad;
-	int		i;
+	int			i;
 
-	if ((bad = bad_arg(arg)))
-	{
-		ft_perror("setenv: illegal name or value -- ", ft_strdup(bad));
-		ft_putendl_fd(2, "usage: setenv [NAME=value ...]");
+	i = 1;
+	if (error_set(arg) == 1)
 		return (env);
-	}
-	i = 0;
-	while (arg[++i])
-		if (arg[i][0] == '$')
-		{
-			ft_perror("env: illegal char on: ", ft_strdup(arg[i]));
-			return (env);
-		}
-		else if (env_to_change(env, arg[i]))
+	while (arg[i])
+	{
+		if (env_to_change(env, arg[i]))
 			env = arg_exist(env, arg[i]);
-	 	else if ((env = ft_addstrtotab(env, arg[i])) == NULL)
-			return (NULL);
+		else if ((env = ft_addstrtotab(env, arg[i])) == NULL)
+			end_minishell(-1);
+		i++;
+	}
 	ft_puttab(env);
 	return (env);
 }
 
-static char		**env_opt_i(t_shell *sh, char **arg)
+static char		**env_opt_i(t_shell *sh, char **args)
 {
 	t_exec		*tmp;
 	char		**envtmp;
 
 	tmp = sh->exec;
-	sh->exec = find_commandtype(sh, arg[2]);
+	if (error_init(args) == 1)
+		return (sh->env);
+	sh->exec = find_commandtype(sh, args[ft_tabstrlen(args) - 1]);
 	if (sh->exec->xname == NULL)
 	{
 		del_exec(sh->exec);
-		sh->exec = tmp;
-		return (sh->env);
+		sh->exec = NULL;
 	}
 	envtmp = sh->env;
-	sh->env = NULL;
+	sh->env = process_argenv(args, sh->exec);
 	exec_command(sh);
 	del_exec(sh->exec);
 	sh->exec = tmp;
 	sh->env = envtmp;
 	return (sh->env);
 }
-
 char			**env_builtin(t_shell *sh, char **args)
 {
 	if (args[1] == NULL)
+	{
 		ft_puttab(sh->env);
+		return (sh->env);
+	}
 	else if (!ft_strcmp(args[1], "-i"))
 		return (env_opt_i(sh, args));
 	else if (!ft_strcmp(args[1], "-u"))
 		return (rem_env(sh->env, (args + 1)));
-	else if (ft_strchr(args[1], '='))
-		return (add_env(sh->env, args));
-	return (sh->env);
+	return (add_env(sh->env, args));
 }

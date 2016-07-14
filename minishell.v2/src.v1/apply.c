@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 17:05:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/11 14:09:44 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/12 14:20:31 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ static void			apply_cd(t_shell **sh, t_exec *exec, char **env)
 		end_minishell(-1);
 	if ((env = ft_chgvalue("PWD=", (*sh)->path->content, env)) == NULL)
 		end_minishell(-1);
-	if ((*sh)->path->next && (env = ft_chgvalue("OLDPWD=", (*sh)->path->next->content, env)) == NULL)
+	if ((*sh)->path->next && (env = ft_chgvalue("OLDPWD=",\
+							(*sh)->path->next->content, env)) == NULL)
 		end_minishell(-1);
 	change_path(&((*sh)->path), 0);
 	if (((*sh)->prompt = change_prompt((*sh))) == NULL)
 		end_minishell(-1);
 }
 
-static void ft_echo(char **args)
+static void			ft_echo(char **args)
 {
 	int		i;
 	char	*print;
@@ -45,6 +46,7 @@ static void ft_echo(char **args)
 	}
 	ft_putchar('\n');
 }
+
 static void			apply_builtin(t_exec *exec, t_shell **shell)
 {
 	if (!ft_strcmp(exec->xname, "exit"))

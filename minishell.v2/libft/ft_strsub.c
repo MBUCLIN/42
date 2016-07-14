@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:57:47 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 17:16:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/12 14:18:33 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char	*toret;
+	char		*toret;
 	size_t		i;
 	size_t		j;
 

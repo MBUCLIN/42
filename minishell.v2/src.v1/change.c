@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 14:21:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/08 16:43:04 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/13 16:40:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,6 @@ char		*change_prompt(t_shell *shell)
 	if ((change = ft_strjoinfree(change, " ")) == NULL)
 		end_minishell(-1);
 	return (change);
-}
-
-char		**change_args(char **args, char **env)
-{
-	int		i;
-	char	*change;
-	char	*srch;
-
-	i = 0;
-	while (args[i])
-	{
-		if (args[i][0] == '$')
-		{
-			if ((srch = ft_strjoin(((args[i]) + 1), "=")) == NULL)
-				end_minishell(-1);
-			if ((change = ft_srchenv(srch, env)))
-			{
-				free(args[i]);
-				if ((args[i] = ft_strdup(change)) == NULL)
-					end_minishell(-1);
-			}
-		}
-		i++;
-	}
-	return (args);
 }
 
 char		**change_underscore(t_exec *exec, char **env)

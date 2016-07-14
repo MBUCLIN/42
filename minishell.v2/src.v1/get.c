@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/11 15:30:51 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/12 14:26:37 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char			**get_arguments(char *command, char ***arg)
 	return (new_arg(arg, ft_strsub(command, s, i - s)));
 }
 
-char		*get_var(char *arg, char **env)
+char			*get_var(char *arg, char **env)
 {
 	char		*var;
 	char		*ret;
@@ -73,7 +73,7 @@ char		*get_var(char *arg, char **env)
 	return (ret);
 }
 
-char		*cut_envvar(char *var)
+char			*cut_envvar(char *var)
 {
 	int		i;
 

@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/08 16:43:05 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/14 17:43:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ typedef struct		s_shell
 
 void				end_minishell(int exitval);
 void				ft_perror(char *msg, char *more);
-char				*bad_arg(char **args);
 void				msg_signal(int sig, char *name);
+int					error_unset(char **arg);
+int					error_set(char **arg);
+int					error_init(char **arg);
 
 void				del_path(t_list *path);
 void				del_exec(t_exec *exec);
@@ -50,6 +52,7 @@ char				*change_prompt(t_shell *shell);
 char				**change_args(char **args, char **env);
 char				**change_underscore(t_exec *exec, char **env);
 int					env_to_change(char **env, char *arg);
+char				**process_argenv(char **arg, t_exec *exec);
 
 t_list				*goto_pathhome(char **env, t_list *path);
 t_list				*goto_newpath(int n, t_list *path, char *arg);

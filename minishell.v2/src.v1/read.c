@@ -6,13 +6,13 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 13:35:40 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/08 13:19:58 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/12 14:28:21 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-char		*read_etcpaths(void)
+char			*read_etcpaths(void)
 {
 	char		*line;
 	char		*paths;

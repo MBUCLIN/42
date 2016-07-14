@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 14:25:01 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 17:50:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/14 17:22:46 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,6 @@ void			errorformat(char *err)
 	ft_putstr_fd("env: ", 2);
 	ft_putstr_fd(err, 2);
 	ft_putendl_fd(2, ": bad format: [NAME=value ...]");
-}
-
-char			*bad_arg(char **arg)
-{
-	int		i;
-
-	i = 1;
-	while (arg[i])
-	{
-		if (ft_strchr(arg[i], '=') == NULL)
-			return (arg[i]);
-		i++;
-	}
-	return (NULL);
 }
 
 void			msg_signal(int sig, char *xname)

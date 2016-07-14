@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/11 14:03:06 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/13 15:30:05 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ char				*ft_strstr(const char *s1, const char *s2);
 char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strsubfree(char *str, int n, int len);
+char				*ft_substrc(char *str, int c);
 char				*ft_strmap(char *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strjoin(char const *s1, char const *s2);
@@ -137,6 +138,7 @@ char				*ft_strncadd(char *str, int n, int c);
 char				*ft_creadir(char *path, char *name);
 char				*ft_srchenv(char *varname, char **env);
 char				*ft_treatquote(char *str);
+char				*ft_rpcstr(char *rpc, char *str, int st, int end);
 char				**ft_chgvalue(char *name, char *nvalue, char **tab);
 char				**ft_strsplit(char const *s, char c);
 char				**ft_tabstrdup(char **tab);

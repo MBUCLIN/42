@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 13:20:42 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/09 17:47:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/12 14:24:24 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			create_pathbinenv(char ***cpy)
 	return (0);
 }
 
-int			create_underscore(char	***cpy, char *name, char *content)
+int			create_underscore(char ***cpy, char *name, char *content)
 {
 	char		*new;
 

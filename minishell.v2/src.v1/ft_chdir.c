@@ -6,13 +6,13 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 15:48:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/29 17:54:14 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/12 14:26:20 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-int		check_isdir(char *arg, char *cpath, char *exec)
+int				check_isdir(char *arg, char *cpath, char *exec)
 {
 	struct stat		buf;
 	int				sta;

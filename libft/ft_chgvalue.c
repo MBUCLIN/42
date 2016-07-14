@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 12:40:05 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:24:17 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/06/28 15:38:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ char			**ft_chgvalue(char *name, char *nvalue, char **tab)
 		return (NULL);
 	if ((new = ft_strjoin(name, nvalue)) == NULL)
 		return (NULL);
-	ft_putendl("in lib");
 	while (tab[i])
 	{
-		ft_putnbr(i);
-		ft_putendl(" = i");
 		if (ft_strstr(tab[i], name))
 		{
 			free(tab[i]);

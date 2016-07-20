@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:42:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/14 17:44:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/18 15:44:27 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ static char		**env_opt_i(t_shell *sh, char **args)
 	sh->env = envtmp;
 	return (sh->env);
 }
+
 char			**env_builtin(t_shell *sh, char **args)
 {
 	if (args[1] == NULL)

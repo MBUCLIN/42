@@ -6,13 +6,13 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 14:57:58 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/14 17:43:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/18 15:45:25 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-static char		*replace_by_var(char *arg, char **env, int st, int size)
+static char			*replace_by_var(char *arg, char **env, int st, int size)
 {
 	char		*srch;
 	char		*var;
@@ -34,7 +34,7 @@ static char		*replace_by_var(char *arg, char **env, int st, int size)
 	return (ft_rpcstr(rep, arg, st - 1, size));
 }
 
-static char		*replace_args(char *arg, char **env)
+static char			*replace_args(char *arg, char **env)
 {
 	int			i;
 	int			st;
@@ -56,7 +56,7 @@ static char		*replace_args(char *arg, char **env)
 	return (replace_by_var(arg, env, st, i));
 }
 
-char			**change_args(char **args, char **env)
+char				**change_args(char **args, char **env)
 {
 	int		i;
 	char	*change;
@@ -64,7 +64,7 @@ char			**change_args(char **args, char **env)
 	i = 0;
 	while (args[i])
 	{
-		while (ft_strchr(args[i] , '$'))
+		while (ft_strchr(args[i], '$'))
 		{
 			change = NULL;
 			if ((change = replace_args(args[i], env)) == NULL)
@@ -79,7 +79,7 @@ char			**change_args(char **args, char **env)
 	return (args);
 }
 
-char		**process_argenv(char **arg, t_exec *exec)
+char				**process_argenv(char **arg, t_exec *exec)
 {
 	int			i;
 	int			ex;
@@ -87,7 +87,7 @@ char		**process_argenv(char **arg, t_exec *exec)
 
 	i = 2;
 	ex = 0;
-	if (arg[i + 2] == NULL)
+	if (arg[i] == NULL)
 		return (NULL);
 	if (exec != NULL)
 		ex = 1;

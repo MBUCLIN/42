@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:55:13 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/14 17:43:47 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/07/18 16:36:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,33 @@ int			error_set(char **arg)
 	return (0);
 }
 
+static int	file_check(char *file)
+{
+	struct stat		buf;
+
+	if (file[0] != '/' && file[1] != '/' && file[2] != '/')
+	{
+		ft_perror("env: no such file or directory -- ", ft_strdup(file));
+		return (0);
+	}
+	if (stat(file, &buf) == -1)
+	{
+		ft_perror("env: no such file or directory -- ", ft_strdup(file));
+		return (0);
+	}
+	if (!S_ISREG(buf.st_mode))
+	{
+		ft_perror("env: no such file or directory -- ", ft_strdup(file));
+		return (0);
+	}
+	if (!(S_IXUSR & buf.st_mode))
+	{
+		ft_perror("env: permission dinied: ", ft_strdup(file));
+		return (0);
+	}
+	return (1);
+}
+
 int			error_init(char **arg)
 {
 	int		i;
@@ -69,6 +96,10 @@ int			error_init(char **arg)
 	i = 2;
 	while (arg[i])
 	{
+		if (arg[i + 1] == NULL && !ft_strcmp(arg[i], "env"))
+			return (1);
+		if (arg[i + 1] == NULL && !file_check(arg[i]))
+			return (1);
 		if (ft_strchr(arg[i], '=') == NULL && arg[i + 1] != NULL)
 		{
 			ft_putstr_fd("env: -i: ", 2);
@@ -78,5 +109,7 @@ int			error_init(char **arg)
 		}
 		i++;
 	}
+	if (i == 2)
+		return (1);
 	return (0);
 }

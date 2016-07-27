@@ -48,4 +48,3 @@ function create_elements() {
     mothElem.appendChild(document.createElement("br"));
     mothElem.appendChild(create_link("not subscribe yet?", "subscribe.php", "other"));
 };
-create_elements();

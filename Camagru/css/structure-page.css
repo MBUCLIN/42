@@ -22,9 +22,22 @@ header h1 {
   margin: none;
   position:fixed;
   top:70px;
+  box-shadow: 0px 0px 10px 10px black;
   border-radius: 15px 20px 15px 20px;
   text-align: center;
   display: none;
+}
+#hidd_menu {
+	background-color: rgb(50, 50, 50);
+	display: none;
+	border-radius: 20px 10px 20px 10px;
+	box-shadow: 0px 0px 10px 10px black;
+	height: 150px;
+	width: 100px;
+	position: fixed;
+	top: 150px;
+	left: 10px;
+	z-index: 2;
 }
 #rolling-menu {
   background-color: rgb(50, 50, 50);
@@ -48,8 +61,11 @@ header h1 {
   left: 110px;
 }
 
-#list{
-  text-align:center;
+#list_visit{
+	list-style-type: none;
+	position:fixed;
+	left: -10px;
+	text-align:center;
 }
 
 #loggin {
@@ -77,7 +93,7 @@ footer {
   height: 60px;
   border-radius: 20px 10px 0px 0px;
 }
- @media (max-width: 900px) {
+ @media only screen and (max-width: 900px) {
    #rolling-menu {display:none;}
    #disp_menu {display:block;}
  }

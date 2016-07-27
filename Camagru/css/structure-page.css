@@ -1,0 +1,83 @@
+header {
+  background-color:rgb(10, 10, 10);
+  width: 100%;
+  height: 60px;
+  border-radius:0px 0px 10px 10px;
+  text-align:center;
+  position:fixed;
+  top:0px;
+  left:0px;
+  z-index:1;
+}
+header h1 {
+  color:red;
+  font-size:40px;
+  margin-top:5px;
+}
+
+#disp_menu {
+  background-color: rgb(50, 50, 50);
+  height: 60px;
+  width: 60px;
+  margin: none;
+  position:fixed;
+  top:70px;
+  border-radius: 15px 20px 15px 20px;
+  text-align: center;
+  display: none;
+}
+#rolling-menu {
+  background-color: rgb(50, 50, 50);
+  height: 1000px;
+  width:100px;
+  border-radius:0px 20px 10px 0px;
+  position:fixed;
+  top:50px;
+  left:0px;
+  z-index:0;
+  text-align:center;
+}
+
+ #log {
+  background-color: rgb(100, 100, 100);
+  height : 300px;
+  width: 200px;
+  border-radius: 50px 30px 50px 30px;
+  position:fixed;
+  top: 65px;
+  left: 110px;
+}
+
+#list{
+  text-align:center;
+}
+
+#loggin {
+  margin: 30px 15px 15px 30px;
+}
+#sub {
+  width: 60px;
+  height: 20px;
+  position:relative;
+  top: 5px;
+  left: 25px;
+  border-radius: 7px 7px 7px 7px;
+}
+#other {
+  text-decoration: none;
+  font-size:13px;
+  margin-left:25px;
+}
+footer {
+  background-color: rgb(130, 130, 130);
+  width:100%;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  height: 60px;
+  border-radius: 20px 10px 0px 0px;
+}
+ @media (max-width: 900px) {
+   #rolling-menu {display:none;}
+   #disp_menu {display:block;}
+ }

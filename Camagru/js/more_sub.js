@@ -1,6 +1,7 @@
 function body_maxWidth(min) {
   var   body = document.body.clientWidth;
 
+
   if (body <= 900)
     return (0);
   return (1);
@@ -12,6 +13,7 @@ document.getElementById("more_us").addEventListener("click", function() {
   var     cpw_disp = document.getElementById("cpw_info");
   var     em_disp = document.getElementById("em_info");
 
+	console.debug("clicked");
   if (body_maxWidth(900) === 0)
     return ;
   if (user_disp.style.display === "none" ) {

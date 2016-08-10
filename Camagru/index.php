@@ -21,11 +21,10 @@
 	<div id="disp_menu"><h3 id="menu">M</h3></div>
 	<div id="hidd_menu" style="display:none"></div>
 	<div id="rolling-menu" name="head_menu"></div>
-	<script src="js/display_menu.js" type="text/javascript"></script>
-
-	<script src="<?php echo $menu; ?>" type="text/javascript"></script>
 	<div id="log" name="log"></div>
-	<script src="<?php echo $file_name_log; ?>" type="text/javascript"></script>
 	<?php unset($menu, $file_name_log); ?>
+	<script src="<?php echo $file_name_log; ?>" type="text/javascript"></script>
+	<script src="js/display_menu.js" type="text/javascript"></script>
+	<script src="<?php echo $menu; ?>" type="text/javascript"></script>
 	<footer></footer>
 </body></html>

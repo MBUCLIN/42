@@ -10,10 +10,10 @@
 				DROP TABLE IF EXISTS `img_tag`;';
 		$pdo->exec($sql);
 		echo 'TABLES DROPED<br />';
-		$sql = 'CREATE TABLE `wt_conf` (login VARCHAR(16) NOT NULL, passwd CHAR(128) NOT NULL, mail VARCHAR(320));
+		$sql = 'CREATE TABLE `wt_conf` (login VARCHAR(16) NOT NULL, passwd CHAR(128) NOT NULL, mail VARCHAR(320) NOT NULL);
 				CREATE TABLE `users` (id INT(11) PRIMARY KEY AUTO_INCREMENT, login VARCHAR(16) NOT NULL, passwd CHAR(128) NOT NULL);
-				CREATE TABLE `user_info` (id INT(11) PRIMARY KEY AUT);
-				CREATE TABLE `images`;
+				CREATE TABLE `user_info` (id INT(11) PRIMARY KEY AUTO_INCREMENT, mail VARCHAR(320) NOT NULL);
+				CREATE TABLE `images` (id_img INT(11) PRIMARY KEY, img_name VARCHAR(255), id INT(11);
 				CREATE TABLE `img_info`;
 				CREATE TABLE `img_tag`;';
 		$pdo->exec($sql);

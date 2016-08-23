@@ -4,14 +4,16 @@
 	if (isset($_SESSION['logged_on_us'])) {
 		header("Location: index.php");
 	}
-	$user_name = $_POST['user_name'];
+	$user_name = htmlspecialchars($_POST['user_name']);
 	$password = hash('sha512', $_POST['passwd']);
-	$e_mail = $_POST['mail'];
+	$e_mail = htmlspecialchars($_POST['mail']);
+	$token = hash('md5', time());
+
 	try {
 		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = 'USE db_camagru;';
 		$pdo->exec($sql);
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$pdo->beginTransaction();
 		$sql = 'SELECT login, mail FROM `users`, `user_info` WHERE login = :user OR mail = :mail';
 		$pre =  $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -21,29 +23,23 @@
 		if (isset($ret['login']) || isset($ret['mail'])) {
 			$_POST['error'] = 'Your login or password already exists.';
 			unset($ret, $pdo, $sql, $pre, $user_name, $password, $e_mail, $_POST['user_name'], $_POST['passwd'], $_POST['mail']);
-			header('Location : subscribe.php');
+			header('Location: subscribe.php');
 		}
 		$pdo->beginTransaction();
-		$sql = "INSERT INTO wt_conf VALUES (?, ?, ?);";
+		$sql = "INSERT INTO wt_conf VALUES (?, ?, ?, ?);";
 		$pre = $pdo->prepare($sql);
-		$pre->execute(array($user_name, $password, $e_mail));
+		$pre->execute(array($user_name, $password, $e_mail, $token));
 		$pdo->commit();
 	} catch (PDOException $error) {
 		$pdo->rollback();
-		echo 'Exception catched : ' . $error->getMessage() . '\n';
+		$_POST['error'] = "An error occured while connection to database";
 		$pdo = null;
 		unset($error);
-		exit();
+		header("Location : subscribe.php");
 	}
-	echo $e_mail . ' : e_mail' . '	<br />';
-	$true = mail($e_mail, 'Confirm account Camagru',
-		'Hello world! and welcome to Camagru,
-
-	You have to validate your account with the link below :
-	http://localhost:8080/Camagru/validate.php
-
-	Enter your login and password and let\'s take some pictures !!');
-	if ($true === FALSE)
-		echo 'fait chier';
-	unset($ret, $pdo, $sql, $pre, $user_name, $password, $e_mail, $_POST['user_name'], $_POST['passwd'], $_POST['mail']);
+//	$msg = 'Hello world! and welcome to Camagru,\r\n\r\nYou have to validate your account with the link below :\r\nhttp://localhost:8080/Camagru/validate.php\r\nEnter your login and password and let\'s\r\ntake some pictures !!';
+//	$msg = wordwrap($msg, 70, '\r\n');
+//	$true = mail($e_mail, 'Confirm account Camagru', $msg);
+	unset($ret, $pdo, $sql, $pre, $user_name, $password, $e_mail, $token, $_POST['user_name'], $_POST['passwd'], $_POST['mail']);
+	header("Location: validate.php");
 ?>

@@ -18,11 +18,8 @@ function create_list() {
 	var		rolling = document.getElementById("rolling-menu");
 	var		hidden = document.getElementById("hidd_menu");
 	var		mothElem = document.createElement("li");
-	var		li = document.getElementById("")
 	var		childElem;
 
-	if (li)
-		return ;
 	for (var i = 0; i < list.length; i++) {
 		childElem = create_ul_logged(i, list[i]);
 		childElem.name = list[i];

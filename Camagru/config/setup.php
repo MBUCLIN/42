@@ -5,17 +5,17 @@
 		$sql = 'CREATE DATABASE IF NOT EXISTS db_camagru;
 						USE db_camagru;';
 		$pdo->exec($sql);
-		$sql = 'DROP TABLE IF EXISTS `users`;
-			DROP TABLE IF EXISTS `user_info`;
-			DROP TABLE IF EXISTS `images`;
-			DROP TABLE IF EXISTS `img_info`;
-			DROP TABLE IF EXISTS `wt_conf`;';
+		$sql = "DROP TABLE IF EXISTS `users`;
+				DROP TABLE IF EXISTS `user_info`;
+				DROP TABLE IF EXISTS `images`;
+				DROP TABLE IF EXISTS `image_info`;
+				DROP TABLE IF EXISTS `wt_conf`;";
 		$pdo->exec($sql);
-		$sql = 'CREATE TABLE `wt_conf` (login VARCHAR(16) NOT NULL, passwd CHAR(128) NOT NULL, mail VARCHAR(320) NOT NULL, token VARCHAR(100));
-				CREATE TABLE `users` (id INT(11) PRIMARY KEY AUTO_INCREMENT, login VARCHAR(16) NOT NULL, passwd CHAR(128) NOT NULL);
-				CREATE TABLE `user_info` (id INT(11) PRIMARY KEY AUTO_INCREMENT, mail VARCHAR(320) NOT NULL);
-				CREATE TABLE `images` (id_img INT(11) PRIMARY KEY AUTO_INCREMENT, img_myname VARCHAR(255), id INT(11));
-				CREATE TABLE `img_info` (id_img INT(11) PRIMARY KEY, tag VARCHAR(26) NOT NULL, img_usname VARCHAR(255) NOT NULL);';
+		$sql = "CREATE TABLE `wt_conf` (login VARCHAR(16) NOT NULL, passwd CHAR(128) NOT NULL, mail VARCHAR(320) NOT NULL, token VARCHAR(100));
+				CREATE TABLE `users` (id VARCHAR(32) PRIMARY KEY NOT NULL, login VARCHAR(16) NOT NULL, passwd CHAR(128) NOT NULL);
+				CREATE TABLE `user_info` (id VARCHAR(32) PRIMARY KEY NOT NULL, mail VARCHAR(320) NOT NULL);
+				CREATE TABLE `images` (id_img VARCHAR(32) PRIMARY KEY NOT NULL, id VARCHAR(32) NOT NULL);
+				CREATE TABLE `img_info` (id_img INT(11) PRIMARY KEY, array_tag VARCHAR(1500), array_like VARCHAR(1500), array_comment TEXT);";
 		$pdo->exec($sql);
 		$pdo = null;
 		$sql = null;
@@ -26,4 +26,5 @@
 		echo 'Exception caught : ' . $error->getMessage() . '\n';
 		exit();
 	}
+	header("Location: ../index.php");
 ?>

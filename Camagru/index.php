@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	include "php_function/login_logout.php";
 	if (!isset($_SESSION['logged_on_us'])) {
 		$menu = 'js/menu_visit.js';
 	} else {
@@ -28,6 +27,7 @@
 	</div>
 	<script src="js/display_menu.js" type="text/javascript"></script>
 	<script src="<?php echo $menu;?>" type="text/javascript"></script>
+	<script src="js/putaword.js" type="text/javascript"></script>
 	<?php unset($menu); ?>
 	<footer></footer>
 </body></html>

@@ -1,7 +1,6 @@
 function body_maxWidth(min) {
   var   body = document.body.clientWidth;
 
-
   if (body <= 900)
     return (0);
   return (1);

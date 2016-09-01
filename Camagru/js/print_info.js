@@ -10,7 +10,7 @@ function display_login_info() {
 function display_passwd_info() {
   var   div = document.getElementById("pw_info");
   var   vchar = document.createTextNode("valid char : A-Z, a-z, 0-9 ,");
-  var   vsize = document.createTextNode(" To be valid password has to contain atleast 6 characters and no more than 20");
+  var   vsize = document.createTextNode(" To be valid password has to contain atleast 6 characters and no more than 40");
   var   vformat = document.createTextNode("and atleast of one upper/lower and digit characters");
   div.appendChild(vchar);
   div.appendChild(vsize);

@@ -13,11 +13,9 @@
 	<div id="hidd_menu" style="display:none"></div>
 	<div id="rolling-menu" name="head_menu"></div>
 	<div id="sended_mail" name="sended_mail"><i>A mail has been send to your mail, get the code on it to validate.</i><br/><i>You can olso log you here, but you won't be able to save your pictures.</i></div>
+	<div id='log' name='log_div'><?php include('php_script/login.php'); ?></div>
 	<div class="div_form" name="valid" id="valid_div">
 		<form method="POST" id="token_form" name="token_form"><p>Insert the <i>code</i> sended in your mail.</p><input type="text" id="token" name="token" /><br /><button id="activ" name="active">Activ</button></form>
-	</div>
-	<div class="div_form" name="quick" id="quick_div">
-		<form name="quick_form" id="quick_form" method="POST"><br />login : <input type="text" id="login" name="login" /><br />password : <input type="password" id="passwd" name="password" /><br /><button id="submit" name="submit">Log</button></form>
 	</div>
 	<script src="js/valid.js" type="text/javascript"></script>
 	<script src="js/display_menu.js" type="text/javascript"></script>

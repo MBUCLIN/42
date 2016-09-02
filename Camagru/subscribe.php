@@ -19,7 +19,7 @@
 	<div id="disp_menu"><h3 id="menu">M</h3></div>
 	<div id="hidd_menu"></div>
 	<div id="rolling-menu" name="head_menu"></div>
-	<div id="error" name="error" style="<?php echo $display; ?>"><p><?php echo $	_POST['error']; ?></p></div>
+	<div id="error" name="error" style="<?php echo $display; ?>"><p><?php echo $_POST['error']; ?></p></div>
 	<div id='log' name='log_div'><?php include('php_script/login.php'); ?></div>
 	<div id="div_form" name="div_form" style="<?php echo $top; ?>">
 		<form method='POST' id="sub_form" name="sub_form">

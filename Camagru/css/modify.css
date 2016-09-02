@@ -1,0 +1,22 @@
+#modify {
+	background-color: rgb(200,200,200);
+	position: fixed;
+	top: 80px;
+	left: 150px;
+	height: auto;
+	width: 500px;
+	border-radius: 15px 50px 50px 15px;
+	box-shadow: 5px 5px 5px rgb(150,150,150);
+}
+#modify p {
+	margin-left: 5px;
+	color: blue;
+}
+.mod {
+	background-color: rgb(230,230,230);
+	color: red;
+	border-radius: 5px 5px 5px 5px;
+	margin-bottom: 5px;
+	position:relative;
+	left: 30px;
+}

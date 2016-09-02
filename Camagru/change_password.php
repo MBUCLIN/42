@@ -14,6 +14,10 @@
 	<div id="hidd_menu" style="display:none"></div>
 	<div id="rolling-menu" name="head_menu"></div>
 	<div id='log' name='log_div'><?php include('php_script/logout.php');?></div>
+	<div id="modify" name="modify">
+		<?php include('php_script/modify.php'); ?>
+	</div>
+	<script src="js/modify.js" type="text/javascript"></script>
 	<script src="js/display_menu.js" type="text/javascript"></script>
 	<script src="js/menu_logged.js" type="text/javascript"></script>
 	<footer></footer>

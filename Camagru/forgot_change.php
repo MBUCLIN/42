@@ -1,12 +1,11 @@
 <?php
-	echo 'toto';
 	if (isset($_SESSION['logged_on_us'])) {
 		header("Location: index.php");
 	} else if (!isset($_POST['login']) || !isset($_POST['mail'])) {
 		header("Location: forgot_password.php");
 	}
-	$login = $_POST['login'];
-	$mail = $_POST['mail'];
+	$login = htmlspecialchars($_POST['login']);
+	$mail = htmlspecialchars($_POST['mail']);
 	$trans = FALSE;
 	include("config/database.php");
 	try {

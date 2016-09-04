@@ -1,40 +1,41 @@
 #sended_mail {
-  background-color:rgb(200,200,200);
-  position: fixed;
-  top:100px;
-  left:150px;
-  width:62%;
-  text-align:center;
-  border-radius:10px;
+	background-color:rgb(200,200,200);
+	position: fixed;
+	top:100px;
+	left:150px;
+	width:500px;
+	text-align:center;
+	border-radius:10px;
 }
 
 .div_form {
-  background-color: rgb(200,200,200);
-  border-radius:20px 10px 20px 10px;
-  padding-left:5px;
-  width: 300px;
-  height: 125px;
+	background-color: rgb(200,200,200);
+	border-radius:20px 10px 20px 10px;
+	padding-left:5px;
+	width: 300px;
+	height: 125px;
 }
 #valid_div {
-  position: fixed;
-  left: 150px;
-  top: 180px;
+	position: fixed;
+	left: 150px;
+	top: 180px;
 }
 #quick_div {
-  position: fixed;
-  left:500px;
-  top:180px;
+	position: fixed;
+	left:500px;
+	top:180px;
 }
- #login {
-   margin-left: 28px;
- }
+#login {
+	margin-left: 28px;
+}
+
 @media only screen and (max-width: 900px) {
-  #quick_div {left:150px;top:320px;}
+	#quick_div {left:150px;top:320px;}
 }
 @media only screen and (max-width: 670px) {
-  #valid_div {top: 220px;}
-  #quick_div {top: 360px;}
+	#valid_div {top: 220px;}
+	#quick_div {top: 360px;}
 }
-@media only screen and (max-width: 500px) {
-  #sended_mail {width:300px;}
+@media only screen and (max-width: 670px) {
+	#sended_mail {width:300px;}
 }

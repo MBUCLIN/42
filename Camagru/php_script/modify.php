@@ -26,15 +26,15 @@
 				unset($pdo, $sql, $ret, $pre);
 			}
 		}
-	} catch (PDOExecption $error) {
+	} catch (PDOException $error) {
 		$_POST['error'] = 'Could not connect to database';
 		echo '<div id="error"><p>' . $_POST['error'] . '</p></div>';
 	}
 	if (!isset($_POST['error'])) {
 		$mod_pass = "<div id='mod_pass' name='change_pass'>";
 		$mod_mail = "<div id='mod_mail' name='change_mail'>";
-		$button_mail = "<button id='mail_send' class='mod' name='mail_click'>Modify</button>";
-		$button_pass = "<button id='pass_send' class='mod' name='pass_click'>Modify</button>";
+		$button_mail = "<form action='change_password.php' method='GET' id='form_pass'><button id='mail_send' class='mod' name='mail_click' value='e_mail'>Modify</button></form>";
+		$button_pass = "<form actopn='change_password.php' method='GET' id='form_mail'><button id='pass_send' class='mod' name='pass_click' value='password'>Modify</button></form>";
 		$end_div = "</div>";
 		echo $mod_pass . "<p>Modify password :</p>" . $button_pass . $end_div;
 		echo $mod_mail . "<p>Modify e mail   :</p>" . $button_mail . $end_div;

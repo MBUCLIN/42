@@ -6,13 +6,13 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 19:45:31 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/06 15:09:43 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/06 15:16:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
 
-int		fill_access(char (*access)[256], char *path, char *xname)
+int			fill_access(char (*access)[256], char *path, char *xname)
 {
 	int		i;
 	int		j;

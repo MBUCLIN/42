@@ -1,6 +1,6 @@
 <?php
 	include("config/database.php");
-	$info = array('login' => $_SESSION['logged_on_us'], 'mail' => null, 'id' => null);
+	$info = array('login' => $_SESSION['logged_on_us'], 'mail' => null, 'id' => null, 'comment' => null);
 	try {
 		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -11,28 +11,27 @@
 		$ret = $pre->fetchAll();
 		if (!isset($ret[0]['id'])) {
 			$_POST['error'] = "No id for that login";
-			header("Location: index.php");
 		} else {
 			$info['id'] = $ret[0]['id'];
-			$sql = "SELECT `mail` FROM user_info WHERE `id` = :id;";
+			$sql = "SELECT `mail`, `comment` FROM user_info WHERE `id` = :id;";
 			$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => CURSOR_FWDONLY));
 			$pre->execute(array('id' => $info['id']));
 			$ret = $pre->fetchAll();
 			if (!isset($ret[0]['mail'])) {
 				$_POST['error'] = "no mail found";
-				header("Location: index.php");
 			} else {
 				$info['mail'] = $ret[0]['mail'];
+				if ($ret[0]['comment'] === null) {
+					$info['comment'][] = "No commentary yet";
+				} else {
+					$unse = unserialize($ret[0]['comment']);
+					$info['comment'] = $unse;
+				}
 			}
 		}
 		$pdo = null;
-		unset($pdo, $sql, $pre, $ret);
+		unset($pdo, $sql, $pre, $ret, $unse);
 	} catch (PDOException $error) {
 		$_POST['error'] = "An error occured while connecting to database";
-		header("Location: index.php");
-	}
-	if (!isset($_POST['error'])) {
-		$you = "<p>" . $info['login'] . "</p>";
-		
 	}
 ?>

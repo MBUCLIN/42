@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:42:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/18 15:44:27 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/06 15:09:58 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static char		**env_opt_i(t_shell *sh, char **args)
 	char		**envtmp;
 
 	tmp = sh->exec;
+	sh->exec = NULL;
 	if (error_init(args) == 1)
 		return (sh->env);
 	sh->exec = find_commandtype(sh, args[ft_tabstrlen(args) - 1]);
@@ -96,9 +97,11 @@ static char		**env_opt_i(t_shell *sh, char **args)
 		sh->exec = NULL;
 	}
 	envtmp = sh->env;
+	sh->env = NULL;
 	sh->env = process_argenv(args, sh->exec);
 	exec_command(sh);
 	del_exec(sh->exec);
+	sh->env = ft_deltabstr(sh->env, ft_tabstrlen(sh->env));
 	sh->exec = tmp;
 	sh->env = envtmp;
 	return (sh->env);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/14 17:43:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/06 15:09:45 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char				*change_prompt(t_shell *shell);
 char				**change_args(char **args, char **env);
 char				**change_underscore(t_exec *exec, char **env);
 int					env_to_change(char **env, char *arg);
+char				**env_alloc(int len);
 char				**process_argenv(char **arg, t_exec *exec);
 
 t_list				*goto_pathhome(char **env, t_list *path);

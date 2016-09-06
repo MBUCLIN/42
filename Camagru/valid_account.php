@@ -34,9 +34,9 @@
 				$pre->execute(array('id' => $user['id'], ':login' => $user['login'], ':passwd' => $user['passwd']));
 				$pdo->commit();
 				$pdo->beginTransaction();
-				$sql = "INSERT INTO user_info (id, mail) VALUES (:id, :mail);";
+				$sql = "INSERT INTO user_info (id, mail, comment) VALUES (:id, :mail, :comment);";
 				$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-				$pre->execute(array('id' => $user['id'], ':mail' => $user['mail']));
+				$pre->execute(array('id' => $user['id'], 'mail' => $user['mail'], 'comment' => null));
 				$pdo->commit();
 				$pdo = null;
 			}

@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:23:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/18 13:42:12 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/06 14:54:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_exec			*find_commandtype(t_shell *shell, char *command)
 		end_minishell(-1);
 	if (ft_strlen(exec->xname) >= 256)
 	{
-		ft_perror("minishell: command too long: ", exec->xname);
 		exec->xname = NULL;
 		return (exec);
 	}

@@ -1,0 +1,57 @@
+#onceuppon {
+	background-color: rgb(50,50,50);
+	color: rgb(200,200,200);
+	position: fixed;
+	top: 80px;
+	left: 150px;
+	width: 500px;
+	height: 110px;
+	border-radius: 0px 50px 50px 0px;
+	box-shadow: 5px 4px 2px rgb(150,150,150);
+}
+#onceuppon p {
+	margin-bottom: -3px;
+	margin-left: 5px;
+}
+
+#hidd_comm {
+		background-color: rgb(100,100,100);
+		position:fixed;
+		top:250px;
+		left:150px;
+		width:500px;
+		height:300px;
+		display:none;
+		z-index: 1;
+}
+
+#about_you {
+	background-color: rgb(100,100,100);
+	position: fixed;
+	top: 250px;
+	left: 150px;
+	width: 500px;
+	height: 300px;
+	border-radius: 10px 10px 150px 150px;
+}
+.about {
+	color: rgb(200, 150, 100);
+	margin-left: 7px;
+}
+#comm {
+	padding:3px;
+	overflow: hidden;
+	height: 15px;
+	border: 3px solid rgb(10,10,10);
+	border-radius: 10px 10px 10px 10px;
+}
+.link_about {
+	color: red;
+	position: fixed;
+	top: 300px;
+	left: 450px;
+}
+.button_about {
+	margin-left: 180px;
+	margin-right: 7px;
+}

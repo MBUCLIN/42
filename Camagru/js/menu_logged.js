@@ -1,5 +1,5 @@
 function create_ul_logged(index, text) {
-	var		ln_list = ['index.php', 'galery.php', 'profil.php', 'pictures.php'];
+	var		ln_list = ['index.php', 'galery.php', 'myprofil.php', 'pictures.php'];
 	var		elem = document.createElement("ul");
 	var		a = document.createElement("a");
 	var		disp = document.createTextNode(text);

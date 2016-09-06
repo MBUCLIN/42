@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 14:57:58 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/18 15:45:25 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/06 15:14:47 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,20 @@ char				**process_argenv(char **arg, t_exec *exec)
 
 	i = 2;
 	ex = 0;
+	env = NULL;
 	if (arg[i] == NULL)
 		return (NULL);
 	if (exec != NULL)
 		ex = 1;
-	env = (char **)malloc(sizeof(char *) * (ft_tabstrlen(arg) - (i + ex) + 1));
-	if (env == NULL)
-		end_minishell(-1);
-	while (arg[i])
-	{
-		if ((ex == 1 && arg[i + 1] != NULL) || ex == 0)
-			if ((env[i - 2] = ft_strdup(arg[i])) == NULL)
-				end_minishell(-1);
-		i++;
-	}
+	if (ft_tabstrlen(arg) > 3)
+		env = env_alloc(ft_tabstrlen(arg) - (i + ex));
+	if (env)
+		while (arg[i])
+		{
+			if ((ex == 1 && arg[i + 1] != NULL) || ex == 0)
+				if ((env[i - 2] = ft_strdup(arg[i])) == NULL)
+					end_minishell(-1);
+			i++;
+		}
 	return (env);
 }

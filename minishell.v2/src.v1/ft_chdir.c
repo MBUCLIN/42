@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 15:48:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/12 14:26:20 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/05 17:29:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,24 @@ int				check_isdir(char *arg, char *cpath, char *exec)
 	return (1);
 }
 
+char			*tild_replace(char *arg, char **env)
+{
+	char		*new;
+	char		*home;
+
+	new = NULL;
+	home = NULL;
+	if ((home = ft_srchenv("HOME=", env)) == NULL)
+		return (arg);
+	if (ft_strlen(arg) > 1)
+		if ((new = ft_strdup(arg + 1)) == NULL)
+			end_minishell(-1);
+	if ((new = ft_strjoin(home, new)) == NULL)
+		end_minishell(-1);
+	free(arg);
+	return (new);
+}
+
 t_list			*ft_chdir(char **env, t_list *path, char **args)
 {
 	int				n;
@@ -51,7 +69,9 @@ t_list			*ft_chdir(char **env, t_list *path, char **args)
 		ft_perror("cd: string not in pwd: ", ft_strdup(args[1]));
 		return (path);
 	}
-	else if ((n = check_isdir(args[1], (char *)(path->content), args[0])) == -1)
+	if (args[1][0] == '~')
+		args[1] = tild_replace(args[1], env);
+	if ((n = check_isdir(args[1], (char *)(path->content), args[0])) == -1)
 		return (path);
 	if (args[1][0] == '/' && ft_strlen(args[1]) == 1)
 		return (goto_slash(path, args[1]));

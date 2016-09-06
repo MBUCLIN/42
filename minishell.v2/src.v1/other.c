@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   access.c                                           :+:      :+:    :+:   */
+/*   other.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 19:45:31 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/07 16:50:09 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/06 15:09:43 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,17 @@ int		fill_access(char (*access)[256], char *path, char *xname)
 	if (i == 256 && xname[j] != 0)
 		return (-1);
 	return (i);
+}
+
+char		**env_alloc(int len)
+{
+	char		**env;
+
+	env = NULL;
+	if (!len)
+		return (env);
+	if ((env = (char **)malloc(sizeof(char *) * (len + 1))) == NULL)
+		end_minishell(-1);
+	env[len] = NULL;
+	return (env);
 }

@@ -1,0 +1,41 @@
+#video_div {
+	background-color: rgb(245,245,245);
+	padding-top: 20px;
+	border-radius: 50px 50px 50px 50px;
+	box-shadow: 5px 5px 5px rgb(200,200,200);
+	position: fixed;
+	top: 100px;
+	left:200px;
+	width:400px;
+	height: 800px;
+
+}
+#merge_div {
+	background-color: rgb(245,245,245);
+	padding:10px;
+	border-radius: 50px 50px 50px 50px;
+	box-shadow: 5px 5px 5px rgb(200,200,200);
+	position: fixed;
+	top: 400px;
+	left:650px;
+	width: 340px;
+	height: 500px;
+}
+#video {
+margin-left:30px;
+}
+#canvas {
+	margin-top: 50px;
+	margin-left:30px;
+	display:none;
+}
+#smile {
+	position: relative;
+	top: 30px;
+	left: -180px;
+}
+
+#imgdisp {
+	position: relative;
+	top: 70px;
+}

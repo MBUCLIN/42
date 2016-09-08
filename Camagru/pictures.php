@@ -17,10 +17,11 @@
 		<button id="smile" type="button">Take</button>
 		<canvas id="canvas"></canvas>
 	</div>
-	<div id="merge_div"></div><?php include("php_script/list_merge.php"); ?></div>
+	<div id="merge_div"><?php include("php_script/list_merge.php"); ?></div>
 	<div id="log"><?php include("php_script/logout.php"); ?></div>
 	<script src="js/videocanvas.js" type="text/javascript"></script>
 	<script src="js/display_menu.js" type="text/javascript"></script>
 	<script src="js/menu_logged.js" type="text/javascript"></script>
+	<script src="js/face_stickers.js" type="text/javascript"></script>
 	<footer></footer>
 </body></html>

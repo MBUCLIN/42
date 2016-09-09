@@ -4,8 +4,8 @@
 	echo "<p>Choose a sticker to put in your picture :</p>";
 	while ($i < 5) {
 		$file = $name . '/' . $name . $i . ".png";
-		echo '<label for="' . $name . $i . '"><img src="' . $file . '" id="' . $i . $name . '" /></label>';
-		echo '<input type="checkbox" id="' . $name . $i . '" />';
+		echo '<label for="' . $name . $i . '" id="'. $i . $name . $i .'"><img src="' . $file . '" id="' . $i . $name . '" /></label>';
+		echo '<input type="radio" id="' . $name . $i . '" />';
 		$i++;
 	}
 ?>

@@ -7,7 +7,7 @@
 <!DOCTYPE html public>
 <html><head>
 	<title>Another world</title><link href="css/structure-page.css" type="text/css" rel="stylesheet" /><link href="css/picture.css" type="text/css" rel="stylesheet" />
-</head><body>
+</head><body id="body">
 	<header name="header"><h1 name="header_text">don't forget to smile</h1></header>
 	<div id="disp_menu"><h3 id="menu">M</h3></div>
 	<div id="hidd_menu" style="display:none"></div>
@@ -17,7 +17,8 @@
 		<button id="smile" type="button">Take</button>
 		<canvas id="canvas"></canvas>
 	</div>
-	<div id="merge_div"><?php include("php_script/list_merge.php"); ?></div>
+	<div id="merge_div"><?php include("php_script/list_merge.php"); ?>
+	</div>
 	<div id="log"><?php include("php_script/logout.php"); ?></div>
 	<script src="js/videocanvas.js" type="text/javascript"></script>
 	<script src="js/display_menu.js" type="text/javascript"></script>

@@ -12,7 +12,7 @@
 
 				if (box !== ev.target) {
 					box.checked = false;
-					if (del) {
+					if (del && del.class !== "putted") {
 						del.remove();
 					}
 				} else if (box === ev.target) {
@@ -24,18 +24,20 @@
 
 						copy.style.zIndex = "1";
 						copy.style.position = "fixed";
-						copy.id = "copy" + ev.target.id;
+						copy.id = "copy" + i.toString() + "face";
 						copy.style.display = "none";
 						document.body.appendChild(copy);
 						document.body.addEventListener("mousemove", function(ev) {
-							if (copy.style.display) {
-								copy.style.display = "block";
-							}
+							if (copy.class !== "putted") {
+								if (copy.style.display) {
+									copy.style.display = "block";
+								}
 								copy.style.top = ev.clientY + 5 + "px";
 								copy.style.left = ev.clientX + 5 + "px";
+							}
 						});
 						video.addEventListener("mousedown", function(ev) {
-							box.checked = false;
+							copy.class = "putted";
 						});
 
 					}

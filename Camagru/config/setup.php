@@ -1,4 +1,6 @@
 <?php
+	session_start();
+	unset($_SESSION['logged_on_us']);
 	include("database.php");
 	try {
 		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
@@ -23,8 +25,10 @@
 		$DB_USER = null;
 		$DB_PASSWORD = null;
 	} catch (PDOException $error) {
-		echo 'Exception caught : ' . $error->getMessage() . '\n';
 		exit();
+	}
+	if (!file_exists("../images")) {
+		mkdir("../images");
 	}
 	header("Location: ../index.php");
 ?>

@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	$trans = 0;
 	include("config/database.php");
 	if (isset($_SESSION['logged_on_us'])) {
 		header("Location: index.php");
@@ -17,39 +18,39 @@
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = 'USE db_camagru;';
 			$pdo->exec($sql);
-			$pdo->beginTransaction();
 			$sql = "SELECT `login` FROM wt_conf WHERE `login` = :login";
 			$rep =  $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$rep->execute(array('login' => $user_name));
 			$ret = $rep->fetchAll();
-			$pdo->commit();
 			if (isset($ret[0]['login'])) {
 				$_POST['error'] = "Login already exists.";
 				header("Location: subscribe.php");
 			} else {
-				$pdo->beginTransaction();
 				$sql = "SELECT `login` FROM users WHERE `login` = :login";
 				$rep = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 				$rep->execute(array('login' => $user_name));
 				$ret = $rep->fetchAll();
-				$pdo->commit();
 				if (isset($ret[0]['login'])) {
 					$_POST['error'] = "Login already exists.";
 					header("Location: subscribe.php");
 				} else {
+					$trans = 1;
 					$pdo->beginTransaction();
 					$sql = "INSERT INTO wt_conf VALUES (?, ?, ?, ?);";
 					$pre = $pdo->prepare($sql);
 					$pre->execute(array($user_name, $password, $e_mail, $token));
 					$pdo->commit();
+					$trans = 0;
 				}
 			}
 		} catch (PDOException $error) {
-			$pdo->rollback();
+			if ($trans) {
+				$pdo->rollback();
+			}
 			$_POST['error'] = "An error occured while connection to database";
 			$pdo = null;
 			unset($error);
-			header("Location : subscribe.php");
+			header("Location: subscribe.php");
 		}
 		$msg = 'Hello world! and welcome to Camagru,
 

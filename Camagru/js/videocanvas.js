@@ -30,10 +30,43 @@
 		}
 	}, false);
 	button.addEventListener("click", function(eventObject) {
+		var		images = null;
+		var		size = null;
+		var		context = canvas.getContext('2d');
 		canvas.width = width;
 		canvas.height = height;
 		canvas.style.display = "block";
-		canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-		var		data = canvas.toDataURL('image/png');
+		context.drawImage(video, 0, 0, width, height);
+		for (var i = 0; i < 5; i++) {
+			if (images) {
+				images[i] = document.getElementById("copy" + i.toString() + "face");
+			} else {
+				images = new Array(document.getElementById("copy" + i.toString() + "face"));
+			}
+			if (images[i]) {
+				var		imgx = images[i].offsetLeft - (video.offsetLeft + document.getElementById("video_div").offsetLeft);
+				var		imgy = images[i].offsetTop - (video.offsetTop + document.getElementById("video_div").offsetTop);
+				if (size) {
+					size += i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+				} else {
+					size = "pos=" + i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+				}
+			}
+		}
+		var		photo = canvas.toDataURL('image/png');
+		var 	xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState === 4 && this.status === 200) {
+				console.log(xhttp.responseText);
+				alert("Clear and say to user that the image is saved");
+			} else if (this.status === 400) {
+				alert("The status is 400");
+			} else {
+				alert("The status is other than 200");
+			}
+		};
+		xhttp.open("POST", "php_script/save_image.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("image=" + photo + "&" + size);
 	}, false);
 })();

@@ -55,8 +55,10 @@
 		if (putted) {
 			var		images = null;
 			var		size = null;
+			var		select = document.getElementById("select");
 			var		context = canvas.getContext('2d');
 
+			select.style.display = "block";
 			canvas.width = width;
 			canvas.height = height;
 			context.drawImage(video, 0, 0, width, height);
@@ -83,25 +85,30 @@
 					context.drawImage(images[i], imgx, imgy, images[i].clientWidth, images[i].clientHeight);
 				}
 			}
-			document.getElementById("save").addEventListener("click", function() {
-				var 	xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState === 4) {
-						if (this.status === 200) {
-							clear_div(canvas, context);
+			if (select.value !== "Choose tag") {
+				document.getElementById("save").addEventListener("click", function() {
+					var 	xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+						if (this.readyState === 4) {
+							if (this.status === 200) {
+								select.style.display = "none";
+								clear_div(canvas, context);
+							}
 						}
-					}
-				};
-				xhttp.open("POST", "php_script/save_image.php", true);
-				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhttp.send("image=" + photo + "&" + size);
-			});
+					};
+					xhttp.open("POST", "php_script/save_image.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send("image=" + photo + "&" + size + "&tag=" + select.value);
+				});
+			}
 		}
 	}, false);
 	document.getElementById("reset").addEventListener("click", function() {
 		var		canvas = document.getElementById("canvas");
 		var		context = canvas.getContext('2d');
+		var		select = document.getElementById("select");
 
+		select.style.display = "none";
 		clear_div(canvas, context);
 	});
 })();

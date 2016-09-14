@@ -16,6 +16,17 @@
 		<video id="video">Not availlable for you YOU ARE TOO WEAK!</video>
 		<button class="but_vid" id="smile" type="button">Take</button><button class="but_vid" id="reset" type="button">Reset</button>
 		<canvas id="canvas"></canvas>
+		<select id="select">
+			<option selected disabled>Choose tag</option>
+			<option>to much fun</option>
+			<option>fun</option>
+			<option>medium fun</option>
+			<option>little fun</option>
+			<option>little serious</option>
+			<option>medium serious</option>
+			<option>serious</option>
+			<option>more than serious</option>
+		</select>
 		<button class="but_vid" id="save" type="button">save</button>
 	</div>
 	<div id="merge_div"><?php include("php_script/list_merge.php"); ?>

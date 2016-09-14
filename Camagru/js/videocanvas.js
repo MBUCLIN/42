@@ -1,4 +1,18 @@
 (function () {
+	function		clear_div(canvas, context) {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		canvas.style.display = "none";
+		document.getElementById("save").style.display = "none";
+		for (var i = 0; i < 5; i++) {
+			var		del = document.getElementById("copy" + i.toString() + "face");
+			var		radio = document.getElementById("face" + i.toString());
+
+			if (del) {
+				del.remove(del);
+			}
+			radio.checked = false;
+		}
+	}
 	var		stream = false;
 	var		video = document.getElementById("video");
 	var		canvas = document.getElementById("canvas");
@@ -30,43 +44,64 @@
 		}
 	}, false);
 	button.addEventListener("click", function(eventObject) {
-		var		images = null;
-		var		size = null;
-		var		context = canvas.getContext('2d');
-		canvas.width = width;
-		canvas.height = height;
-		canvas.style.display = "block";
-		context.drawImage(video, 0, 0, width, height);
+		var		putted = 0;
 		for (var i = 0; i < 5; i++) {
-			if (images) {
-				images[i] = document.getElementById("copy" + i.toString() + "face");
-			} else {
-				images = new Array(document.getElementById("copy" + i.toString() + "face"));
-			}
-			if (images[i]) {
-				var		imgx = images[i].offsetLeft - (video.offsetLeft + document.getElementById("video_div").offsetLeft);
-				var		imgy = images[i].offsetTop - (video.offsetTop + document.getElementById("video_div").offsetTop);
-				if (size) {
-					size += i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+			var		copy = document.getElementById("copy" + i.toString() + "face");
+
+			if (copy)
+				if (copy.class === "putted")
+					putted = 1;
+		}
+		if (putted) {
+			var		images = null;
+			var		size = null;
+			var		context = canvas.getContext('2d');
+
+			canvas.width = width;
+			canvas.height = height;
+			context.drawImage(video, 0, 0, width, height);
+			canvas.style.display = "block";
+			document.getElementById("save").style.display = "block";
+
+			var		photo = canvas.toDataURL('image/png');
+
+			for (var i = 0; i < 5; i++) {
+				if (images) {
+					images[i] = document.getElementById("copy" + i.toString() + "face");
 				} else {
-					size = "pos=" + i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+					images = new Array(document.getElementById("copy" + i.toString() + "face"));
+				}
+				if (images[i]) {
+					var		imgx = images[i].offsetLeft - (video.offsetLeft + document.getElementById("video_div").offsetLeft);
+					var		imgy = images[i].offsetTop - (video.offsetTop + document.getElementById("video_div").offsetTop);
+
+					if (size) {
+						size += i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+					} else {
+						size = "pos=" + i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+					}
+					context.drawImage(images[i], imgx, imgy, images[i].clientWidth, images[i].clientHeight);
 				}
 			}
+			document.getElementById("save").addEventListener("click", function() {
+				var 	xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState === 4) {
+						if (this.status === 200) {
+							clear_div(canvas, context);
+						}
+					}
+				};
+				xhttp.open("POST", "php_script/save_image.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("image=" + photo + "&" + size);
+			});
 		}
-		var		photo = canvas.toDataURL('image/png');
-		var 	xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState === 4 && this.status === 200) {
-				console.log(xhttp.responseText);
-				alert("Clear and say to user that the image is saved");
-			} else if (this.status === 400) {
-				alert("The status is 400");
-			} else {
-				alert("The status is other than 200");
-			}
-		};
-		xhttp.open("POST", "php_script/save_image.php", true);
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("image=" + photo + "&" + size);
 	}, false);
+	document.getElementById("reset").addEventListener("click", function() {
+		var		canvas = document.getElementById("canvas");
+		var		context = canvas.getContext('2d');
+
+		clear_div(canvas, context);
+	});
 })();

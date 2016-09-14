@@ -14,8 +14,9 @@
 	<div id="rolling-menu" name="head_menu"></div>
 	<div id="video_div" name="div_video">
 		<video id="video">Not availlable for you YOU ARE TOO WEAK!</video>
-		<button id="smile" type="button">Take</button>
+		<button class="but_vid" id="smile" type="button">Take</button><button class="but_vid" id="reset" type="button">Reset</button>
 		<canvas id="canvas"></canvas>
+		<button class="but_vid" id="save" type="button">save</button>
 	</div>
 	<div id="merge_div"><?php include("php_script/list_merge.php"); ?>
 	</div>

@@ -30,11 +30,18 @@ margin-left:30px;
 	display:none;
 }
 #smile {
-	position: relative;
 	top: 30px;
-	left: -180px;
+	left: -220px;
 }
-
+#reset {
+	top: 12px;
+	left: 180px;
+}
+#save {
+	display: none;
+	top: 10px;
+	left: 160px;
+}
 #imgdisp {
 	position: relative;
 	top: 70px;
@@ -44,4 +51,9 @@ margin-left:30px;
 	top: -100px;
 	width: 150px;
 	height: 150px;
+}
+
+.but_vid {
+	position: relative;
+
 }

@@ -1,7 +1,5 @@
 document.getElementById("disp_menu").addEventListener("click", function(object) {
 	var		little_menu = document.getElementById("hidd_menu");
-	var		menu_script = document.createElement("script");
-	var		menu_name = document.getElementById("list_visit");
 
 	if (little_menu.style.display === "none") {
 		little_menu.style.display = "block";

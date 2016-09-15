@@ -1,10 +1,10 @@
 <?php
-	include("config/database.php");
+	include("../config/database.php");
 	if (isset($_SESSION['logged_on_us'])) {
-		header("Location: index.php");
+		header("Location: ../index.php");
 	} else if (empty($_POST['token'])) {
 		$_POST['error'] = "Empty input field.";
-		header("Location: validate.php");
+		header("Location: ../validate.php");
 	} else {
 		$trans = 0;
 		$token = $_POST['token'];
@@ -19,7 +19,7 @@
 			$ret = $pre->fetchAll();
 			if (!isset($ret[0]['token'])) {
 				$_POST['error'] = "This code does not exists. Get it on your mail box!";
-				header("Location: validate.php");
+				header("Location: ../validate.php");
 			} else {
 				$user = array("id" => hash("md5", microtime().rand()), "login" => $ret[0]['login'], "passwd" => $ret[0]['passwd'], "mail" => $ret[0]["mail"]);
 				$trans = 1;
@@ -51,10 +51,10 @@
 			}
 			$pdo = null;
 			$_POST['error'] = 'An error occured while connecting to database';
-			header("Location: validate.php");
+			header("Location: ../validate.php");
 		}
 		unset($pdo, $pre, $sql, $ret, $user, $token, $trans);
 		if (!isset($_POST['error']))
-			header("Location: index.php");
+			header("Location: ../index.php");
 	}
 ?>

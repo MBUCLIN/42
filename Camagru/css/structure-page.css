@@ -1,80 +1,104 @@
 body {
-	background-color:rgb(150,250,190);
+	background-color:rgb(40,44,52);
 }
 
 header {
-  background-color:rgb(10, 10, 10);
-  width: 100%;
-  height: 60px;
-  border-radius:0px 0px 10px 10px;
-  text-align:center;
-  position:fixed;
-  top:0px;
-  left:0px;
-  z-index:1;
-  overflow:hidden;
+	background-color:rgb(255, 255, 255);
+	width: 100%;
+	height: 70px;
+	text-align:center;
+	position:fixed;
+	top:0px;
+	left:0px;
+	z-index:1;
 }
 header h1 {
-  color:red;
-  font-size:40px;
-  margin-top:5px;
+	overflow:hidden;
+	color:red;
+	font-size:40px;
+	margin-top:9px;
+	height:46px;
 }
 
 #disp_menu {
-  background-color: rgb(50, 50, 50);
-  height: 60px;
-  width: 60px;
-  margin: none;
-  position:fixed;
-  top:70px;
-  box-shadow: 0px 0px 10px 10px black;
-  border-radius: 15px 20px 15px 20px;
-  text-align: center;
-  display: none;
+	background-color: rgb(235, 231, 223);
+	z-index: 1;
+	height: 60px;
+	width: 60px;
+	position:fixed;
+	top:5px;
+	box-shadow: 0px 0px 2px 2px rgb(185, 181, 173);
+	border-radius: 15px 20px 15px 20px;
+	text-align: center;
+	display: none;
 }
 #hidd_menu {
-	background-color: rgb(50, 50, 50);
+	background-color: rgb(235, 231, 223);
 	display: none;
-	border-radius: 20px 10px 20px 10px;
-	box-shadow: 0px 0px 10px 10px black;
-	height: 150px;
-	width: 100px;
+	border-radius: 15px 25px 15px 25px;
+	box-shadow: 0px 0px 2px 2px rgb(185, 181, 173);
+	height: 160px;
+	width: 70px;
 	position: fixed;
-	top: 150px;
-	left: 10px;
+	top: 70px;
+	left: 5px;
 	z-index: 2;
 }
 #rolling-menu {
-  background-color: rgb(50, 50, 50);
-  height: 1000px;
-  width:100px;
-  border-radius:0px 20px 10px 0px;
-  position:fixed;
-  top:50px;
-  left:0px;
-  z-index:0;
-  text-align:center;
+	background-color: rgb(235, 231, 223);
+	padding-top: 50px;
+	height: 500px;
+	width:100px;
+	border-radius:0px 20px 10px 0px;
+	position:fixed;
+	top:50px;
+	left:0px;
+	z-index:0;
+}
+.menu_list {
+	list-style-type: none;
+	text-align:center;
+}
+.menu_ul {
+	width: 80%;
+	background-color: rgb(185, 181, 173);
+	border-radius: 20px 20px 3px 3px;
+	border-bottom: 1px solid rgb(135, 131, 123);
+	padding-left: 10px;
+}
+.menu_link {
+	color:red;
+	text-decoration: none;
 }
 
- #log {
-  background-color: rgb(100, 100, 100);
-  height : 300px;
-  width: 200px;
-  border-radius: 50px 30px 50px 30px;
-  box-shadow: 5px 5px 5px black;
-  position:fixed;
-  top: 80px;
-  left: 800px;
+#disp_log {
+	background-color: rgb(165, 161, 153);
+	z-index: 1;
+	height: 60px;
+	width: 60px;
+	position:fixed;
+	top:5px;
+	left: 80px;
+	box-shadow: 0px 0px 2px 2px rgb(115, 111, 103);
+	border-radius: 15px 20px 15px 20px;
+	text-align: center;
+	display:none;
 }
-#welcome {
-  color: rgb(255,255,255);
-  margin-left:25px;
+#log {
+	border: 2px solid white;
+	border-radius: 0px 25px 15px 25px;
+	background-color: rgb(165, 161, 153);
+	height : 200px;
+	width: 200px;
+	position:relative;
+	top:65px;
+	left:95px;
 }
 
 .required {
-  background-color : rgb(225,225,225);
-  margin-top: 20px;
-  margin-left: 15px;
+	background-color : rgb(225,225,225);
+	margin-top: 20px;
+	margin-left: 15px;
 }
 .logref {
   margin-left: 8px;
@@ -84,13 +108,6 @@ header h1 {
   border-radius: 5px;
   margin-left: 63px;
   margin-top: 15px;
-}
-
-#list_visit{
-	list-style-type: none;
-	position:fixed;
-	left: -10px;
-	text-align:center;
 }
 
 #login_form {
@@ -123,7 +140,14 @@ footer {
   height: 60px;
   border-radius: 20px 10px 0px 0px;
 }
- @media only screen and (max-width: 900px) {
-   #rolling-menu {display:none;}
-   #disp_menu {display:block;}
+
+@media only screen and (max-width: 900px) {
+	#rolling-menu {display:none;}
+	#disp_menu {display:block;}
+	#log {left:0px;}
  }
+@media only screen and (max-width: 500px) {
+	#log {display:none;}
+	#disp_log {display:block;}
+	header {padding-left:145px;text-align:initial;}
+}

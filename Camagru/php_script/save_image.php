@@ -1,5 +1,6 @@
 <?php
 	//function part
+	// *** CREATE AN IMAGE OBJECT FROM A B64 IMAGE STRING *** //
 	function	get_imagefrompict($pic, $fname, $fpath) {
 		$encoded = str_replace("data:image/png;base64,", "", $pic);
 		$encoded = str_replace(' ', '+', $encoded);
@@ -10,6 +11,7 @@
 		}
 		return (FALSE);
 	}
+	// *** CREATE AN ARRAY WITH THE NUMBER OF THE MEME AND THE POSITION THEIR THE IMAGE *** //
 	function	prepare_posmeme($position) {
 		$position = explode(":", $position);
 		$submeme = array("num" => null, "x" => null, "y" => null);
@@ -29,9 +31,9 @@
 			return (FALSE);
 		}
 	}
+	// *** MERGE THE MEME WITH THE IMAGE AND RETURN THE IMAGE OBJECT *** //
 	function	merge_to_finalimg($image, $meme) {
 		foreach ($meme as $i => $value) {
-			echo "../face/face" . $meme[$i]['num'] . ".png";
 			$merge = imagecreatefrompng("../face/face" . $meme[$i]["num"] . ".png");
 			$size = getimagesize("../face/face" . $meme[$i]["num"] . ".png");
 			imagecolortransparent($merge, imagecolorat($merge, 0, 0));
@@ -42,6 +44,7 @@
 		}
 		return ($image);
 	}
+	// *** CREATE A PNG IMAGE FILE WITH AN IMAGE OBJECT *** //
 	function	image_puttofilepng($img, $name, $path) {
 		if (file_exists($path . $name . ".png")) {
 			return (FALSE);
@@ -56,16 +59,16 @@
 	if (!isset($_SESSION['logged_on_us'])) {
 		$_POST['error'] = "No user logged";
 		echo "Error log";
-	} else if (!isset($_POST['image']) || !isset($_POST['pos'])) {
+	} else if (!isset($_POST['image']) || !isset($_POST['pos']) || !isset($_POST['tag'])) {
 		$_POST['error'] = "Post not set";
 		echo "Error request";
 	} else {
+		$tag = htmlspecialchars($_POST['tag']);
 		$pic64 = $_POST['image'];
-		$pos = $_POST['pos'];
+		$pos = htmlspecialchars($_POST['pos']);
 		$file_name = hash("md5", time().rand());
 		$image = get_imagefrompict($pic64, $file_name, "../images/");
 		unset($pic64);
-		imagepng($image, "../toto.png");
 		if ($image !== FALSE) {
 			$meme = prepare_posmeme($pos);
 			$image = merge_to_finalimg($image, $meme);
@@ -88,13 +91,22 @@
 						} else {
 							$trans = 1;
 							$pdo->beginTransaction();
-							$sql = "INSERT INTO images VALUES (:img, :id);";
+							$sql = "INSERT INTO images VALUES (:imgI, :id);";
 							$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-							$pre->execute(array('img' => $file_name, 'id' => $ret[0]['id']));
+							$pre->execute(array('imgI' => $file_name, 'id' => $ret[0]['id']));
+							$pdo->commit();
+							$pdo->beginTransaction();
+							$sql = "INSERT INTO img_info VALUES (:imgII, :tag, :likes, :comment);";
+							$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+							$pre->execute(array('imgII' => $file_name, 'tag' => $tag, 'likes' => "No likes yet", 'comment' => "No comment yet"));
 							$pdo->commit();
 							$trans = 0;
+							$pdo = null;
 						}
 					} catch (PDOException $error) {
+						if (file_exists("../images/" . $file_name . ".png")) {
+							unlink("../images/" . $file_name . ".png");
+						}
 						$_POST['error'] = "PDO error";
 						if ($trans) {
 							$pdo->rollBack();
@@ -105,13 +117,15 @@
 					}
 					unset($pdo, $sql, $pre, $ret, $file_name, $trans);
 				} else {
+					$_POST['error'] = "Could not create the file";
 					echo "Error file";
 				}
 			} else {
+				$_POST['error'] = "Could not merge the images";
 				echo "Error merge";
 			}
 		} else {
-
+			$_POST['error'] = "Could not create an image from string";
 			echo "Error image";
 		}
 		if (!isset($_POST['error'])) {

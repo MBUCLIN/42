@@ -17,7 +17,7 @@
 				CREATE TABLE `users` (id VARCHAR(32) PRIMARY KEY NOT NULL, login VARCHAR(16) NOT NULL, passwd CHAR(128) NOT NULL);
 				CREATE TABLE `user_info` (id VARCHAR(32) PRIMARY KEY NOT NULL, mail VARCHAR(320) NOT NULL, comment TEXT);
 				CREATE TABLE `images` (id_img VARCHAR(32) PRIMARY KEY NOT NULL, id VARCHAR(32) NOT NULL);
-				CREATE TABLE `img_info` (id_img INT(11) PRIMARY KEY, array_tag VARCHAR(1500), array_like VARCHAR(1500), array_comment TEXT);";
+				CREATE TABLE `img_info` (id_img VARCHAR(32) PRIMARY KEY NOT NULL, tag VARCHAR(20), array_like VARCHAR(1500), array_comment TEXT);";
 		$pdo->exec($sql);
 		$pdo = null;
 		$sql = null;

@@ -18,14 +18,12 @@
 		<canvas id="canvas"></canvas>
 		<select id="select">
 			<option selected disabled>Choose tag</option>
-			<option>to much fun</option>
+			<option>troll</option>
 			<option>fun</option>
-			<option>medium fun</option>
-			<option>little fun</option>
-			<option>little serious</option>
-			<option>medium serious</option>
-			<option>serious</option>
-			<option>more than serious</option>
+			<option>wtf</option>
+			<option>cute</option>
+			<option>freedom</option>
+			<option>cantcategorize</option>
 		</select>
 		<button class="but_vid" id="save" type="button">save</button>
 	</div>

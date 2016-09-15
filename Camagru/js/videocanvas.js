@@ -1,4 +1,4 @@
-(function () {
+(function() {
 	function		clear_div(canvas, context) {
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		canvas.style.display = "none";
@@ -85,24 +85,34 @@
 					context.drawImage(images[i], imgx, imgy, images[i].clientWidth, images[i].clientHeight);
 				}
 			}
-			if (select.value !== "Choose tag") {
-				document.getElementById("save").addEventListener("click", function() {
-					var 	xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function() {
-						if (this.readyState === 4) {
-							if (this.status === 200) {
-								select.style.display = "none";
-								clear_div(canvas, context);
+			document.getElementById("save").addEventListener("click", function() {
+				var 	xhttp = new XMLHttpRequest();
+				var		select = document.getElementById("select");
+
+				xhttp.onreadystatechange = function() {
+					if (this.readyState === 4) {
+						if (this.status === 200) {
+							if (this.responseText !== "Succes") {
+								alert("The image failed to be saved");
+								console.log(this.responseText);
 							}
+							var		canvas = document.getElementById("canvas");
+							var		context = canvas.getContext('2d');
+
+							select.style.display = "none";
+							clear_div(canvas, context);
 						}
-					};
+					}
+				};
+				if (select.value !== "Choose tag") {
 					xhttp.open("POST", "php_script/save_image.php", true);
 					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send("image=" + photo + "&" + size + "&tag=" + select.value);
-				});
-			}
+				}
+			});
 		}
 	}, false);
+
 	document.getElementById("reset").addEventListener("click", function() {
 		var		canvas = document.getElementById("canvas");
 		var		context = canvas.getContext('2d');

@@ -28,7 +28,7 @@
 		<p><strong>2)</strong>	Get your new password from your mail-box</p><br />
 		<p><strong>3)</strong>	Connect to your account and change your password</p>
 	</div>
-	<div id="forgot" name="forgot_div" style="<?php echo $top; ?>"><form id="forgot_form" action="forgot_change.php" 	name="forgot_form" method="POST">
+	<div id="forgot" name="forgot_div" style="<?php echo $top; ?>"><form id="forgot_form" action="php_script/forgot_change.php" 	name="forgot_form" method="POST">
 		<h5>User name :</h5><input type="text" id="login" class="forg" name="login" maxlength="15" minlength="4" pattern="[A-Za-z0-9]+" /><br />
 		<h5>e mail :</h5><input type="email" id="mail" class="forg" name="mail" pattern="[A-Za-z0-9.]+@[a-zA-Z0-9.]+" maxlength="320" minlength="6" /><br />
 		<button id="submit" class="submit" type="submit" name="submit">Send Passwd</button></form>

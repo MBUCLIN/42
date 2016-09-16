@@ -1,18 +1,18 @@
 <?php
 	$ref = array("index.php", "galery.php", "subscribe.php", "validate.php");
 	$list = array("Home", "Galery", "Sub", "Valid");
-	$li = "<li name='head_list' class='menu_list' id='menu_list'>";
+	$ul = "<ul name='head_list' class='menu_ul' id='menu_list'>";
 	$a = "<a ";
 	$end_a = "</a>";
-	$ul = "<ul class='menu_ul'>";
-	$end_ul = "</ul>";
+	$li = "<li >";
 	$end_li = "</li>";
+	$end_ul = "</ul>";
 
 	$i = 0;
-	echo $li;
+	echo $ul;
 	while ($i < count($list)) {
-		echo $ul . $a . "href='" . $ref[$i] . "' name='" . $list[$i] . "_ref' class='menu_link'><span>" . $list[$i] . "</span>" . $end_a . $end_ul;
+		echo $li . $a . "href='" . $ref[$i] . "' name='" . $list[$i] . "_ref' class='menu_link'><span>" . $list[$i] . "</span>" . $end_a . $end_li;
 		$i++;
 	}
-	echo $end_li;
+	echo $end_ul;
 ?>

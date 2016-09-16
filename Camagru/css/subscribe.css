@@ -1,82 +1,87 @@
-#error {
-  background-color: rgb(100,100,100);
-  padding-left:7px;
-  position: fixed;
-  top:80px;
-  left: 150px;
-  width: 40%;
-  border-radius: 10px 20px 10px 20px;
-  box-shadow: 0px 5px 3px 0px black;
+#div_form_sub {
+	position: fixed;
+	top: 200px;
+	left: 310px;
+	width: 600px;
+	height: 300px;
+	border: 5px solid rgb(125, 121, 113);
+	background-color: rgb(145, 141, 133);
 }
-
-#div_form {
-  background-color: rgb(100, 100, 100);
-  position: fixed;
-  left: 150px;
-  width: 40%;
-  height: 450px;
-  border-radius: 50px 80px 50px 80px;
-  box-shadow: 0px 15px 10px 0px black;
+#h3text {
+	background-color: black;
+	width: 100%;
+	border-radius: 50px 50px 50px 50px;
+	margin-top: 5px;
+	font-size: 25px;
+	text-align: center;
+	color: white;
 }
-
+#div_form_sub h5 {
+	width: 135px;
+	color: white;
+	margin-left: 10px;
+	font-size:15px;
+}
+#div_h4 {
+	width: 50px;
+	color:red;
+	margin-left: 350px;
+	margin-top: -205px;
+}
+#div_h4 h4 {
+	text-align:center;
+	background-color: white;
+	border-radius: 50px;
+	padding:3px;
+	width: 25px;
+	height: 25px;
+	margin: 8px;
+}
 #sub_form {
-  width: 75%;
-  height: 450px;
-  margin-left: 50px;
+	width: 200px;
+	margin-left: 150px;
+	margin-top: -170px;
 }
-
-input.sub {
-  position:relative;
-  top:-40px;
+.sub {
+	color: white;
+	background-color: black;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	margin-bottom: 10px;
+	border-bottom: 1px solid rgb(145, 141, 133);
+	width: 180px;
+	height:30px;
 }
-
-#f_imput {
-  color: #ffffff;
-  font-size: 15px;
+#submit {
+	font-size: 15px;
+	background-color: red;
+	color: black;
+	border: none;
+	width: 80px;
+	height: 30px;
+	margin-left: 50px;
 }
-h5.input {
-
-  color: #ffffff;
-  font-size: 15px;
-  margin-top: -10px;
+#meme {
+	margin-left: 400px;
+	margin-top: -200px;
 }
-
-button.submit {
-  margin-top: -15px;
-  margin-left: 40px;
-  border-radius: 7px;
+@media only screen and (max-width: 900px) {
+	#div_form_sub {left:5px; top: 200px;}
 }
-
-.hidden {
-  display: none;
-  position: relative;
-  left: 250px;
-  width: 30%;
-  color: blue;
-}
-#us_info {
-  top: -430px;
-}
-#pw_info {
-  top: -330px;
-}
-#cpw_info {
-  top: -230px;
-}
-#em_info {
-  top: -130px;
-}
-
-.more {
-  position:relative;
-  top: -44px;
-  left:135px;
-  color: blue;
-}
-@media (min-width:1500px) {
-	#div_form {width:600px;}
-}
-@media (max-width: 900px) {
-   #error {left: 100px;width: 300px;}
-   #div_form {left: 80px;width: 380px;}
+@media only screen and (max-width: 400px) {
+	#div_form_sub {
+		width: 400px;
+	}
+	#div_form_sub h5 {
+		display:none;
+	}
+	#sub_form {
+		margin-top: -2px;
+		margin-left: 5px;
+	}
+	#meme {
+		margin-left: 220px;
+		margin-top: -200px;
+	}
 }

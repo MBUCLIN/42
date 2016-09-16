@@ -1,5 +1,5 @@
 body {
-	background-color:rgb(40,44,52);
+	background-color:black;
 }
 
 header {
@@ -23,25 +23,22 @@ header h1 {
 #disp_menu {
 	background-color: rgb(235, 231, 223);
 	z-index: 1;
-	height: 60px;
-	width: 60px;
+	height: 70px;
+	width: 70px;
 	position:fixed;
-	top:5px;
-	box-shadow: 0px 0px 2px 2px rgb(185, 181, 173);
-	border-radius: 15px 20px 15px 20px;
+	top:0px;
+	left:0px;
 	text-align: center;
 	display: none;
 }
 #hidd_menu {
 	background-color: rgb(235, 231, 223);
 	display: none;
-	border-radius: 15px 25px 15px 25px;
-	box-shadow: 0px 0px 2px 2px rgb(185, 181, 173);
 	height: 160px;
 	width: 70px;
 	position: fixed;
 	top: 70px;
-	left: 5px;
+	left: 0px;
 	z-index: 2;
 }
 #rolling-menu {
@@ -55,17 +52,18 @@ header h1 {
 	left:0px;
 	z-index:0;
 }
-.menu_list {
-	list-style-type: none;
-	text-align:center;
-}
 .menu_ul {
-	width: 80%;
-	background-color: rgb(185, 181, 173);
-	border-radius: 20px 20px 3px 3px;
-	border-bottom: 1px solid rgb(135, 131, 123);
+	background-color: rgb(0, 0, 0);
 	padding-left: 10px;
 }
+.menu_ul li {
+	padding-bottom: 10px;
+	width: 100%;
+	list-style-type: none;
+	text-align:center;
+	border-bottom: 1px solid rgb(124, 231, 223);
+}
+
 .menu_link {
 	color:red;
 	text-decoration: none;
@@ -74,63 +72,76 @@ header h1 {
 #disp_log {
 	background-color: rgb(165, 161, 153);
 	z-index: 1;
-	height: 60px;
-	width: 60px;
+	height: 70px;
+	width: 70px;
 	position:fixed;
-	top:5px;
-	left: 80px;
-	box-shadow: 0px 0px 2px 2px rgb(115, 111, 103);
-	border-radius: 15px 20px 15px 20px;
+	top:0px;
+	left: 70px;
 	text-align: center;
 	display:none;
 }
 #log {
-	border: 2px solid white;
-	border-radius: 0px 25px 15px 25px;
+	z-index: 1;
 	background-color: rgb(165, 161, 153);
 	height : 200px;
 	width: 200px;
 	position:relative;
-	top:65px;
-	left:95px;
+	top:62px;
+	left:92px;
 }
-
-.required {
-	background-color : rgb(225,225,225);
-	margin-top: 20px;
-	margin-left: 15px;
+#log_form {
+	position: relative;
+	top: 17px;
+}
+.input_login {
+	color: white;
+	padding-left: 10px;
+	background-color:black;
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom:1px solid rgb(165, 161, 153);
+	width: 70%;
+	height: 25px;
+	margin-left: 30px;
+}
+#log p {
+	font-size: 20px;
+	position: relative;
+	top: 7px;
+	left: 5px;
 }
 .logref {
-  margin-left: 8px;
-  text-decoration: none;
+	text-decoration: none;
+	margin-left: 30px;
+}
+#log button {
+	font-size: 15px;
+	background-color:red;
+	color: black;
+	border:none;
+	width: 80px;
+	height: 30px;
+	margin-left: 58px;
 }
 #logout {
-  border-radius: 5px;
-  margin-left: 63px;
-  margin-top: 15px;
+	margin-top: 30px;
 }
 
-#login_form {
-  margin: 30px 15px 15px 30px;
+#wordfromdev {
+	padding: 7px 10px 7px 20px;
+	z-index: -1;
+	position: fixed;
+	width: 70%;
+	top: 75px;
+	left: 305px;
+	background-color: rgb(185, 181, 173);
 }
-#sub {
-  width: 60px;
-  height: 20px;
-  position:relative;
-  top: 10px;
-  left: 50px;
-  border-radius: 7px 7px 7px 7px;
+#wordfromdev p {
+	color: red;
+
 }
-#subscr {
-  text-decoration: none;
-  font-size:13px;
-  margin-left:25px;
-}
-#forg {
-  text-decoration: none;
-  font-size:13px;
-  margin-left:25px;
-}
+
 footer {
   background-color: rgb(130, 130, 130);
   width:100%;
@@ -140,14 +151,18 @@ footer {
   height: 60px;
   border-radius: 20px 10px 0px 0px;
 }
-
+@media only screen and (max-width: 1100px) {
+	#wordfromdev p {width:600px;}
+}
 @media only screen and (max-width: 900px) {
 	#rolling-menu {display:none;}
 	#disp_menu {display:block;}
-	#log {left:0px;}
- }
-@media only screen and (max-width: 500px) {
-	#log {display:none;}
 	#disp_log {display:block;}
+	#log {display:none;
+		left:0px;margin-left:-8px;}
+	#wordfromdev {left:5px; width: 98%;}
+
+}
+@media only screen and (max-width: 500px) {
 	header {padding-left:145px;text-align:initial;}
 }

@@ -1,5 +1,6 @@
 body {
 	background-color:black;
+	overflow:scroll;
 }
 
 header {
@@ -7,7 +8,7 @@ header {
 	width: 100%;
 	height: 70px;
 	text-align:center;
-	position:fixed;
+	position: absolute;
 	top:0px;
 	left:0px;
 	z-index:1;
@@ -25,7 +26,7 @@ header h1 {
 	z-index: 1;
 	height: 70px;
 	width: 70px;
-	position:fixed;
+	position:absolute;
 	top:0px;
 	left:0px;
 	text-align: center;
@@ -36,7 +37,7 @@ header h1 {
 	display: none;
 	height: 160px;
 	width: 70px;
-	position: fixed;
+	position: absolute;
 	top: 70px;
 	left: 0px;
 	z-index: 2;
@@ -47,7 +48,7 @@ header h1 {
 	height: 500px;
 	width:100px;
 	border-radius:0px 20px 10px 0px;
-	position:fixed;
+	position:absolute;
 	top:50px;
 	left:0px;
 	z-index:0;
@@ -74,7 +75,7 @@ header h1 {
 	z-index: 1;
 	height: 70px;
 	width: 70px;
-	position:fixed;
+	position:absolute;
 	top:0px;
 	left: 70px;
 	text-align: center;
@@ -106,9 +107,11 @@ header h1 {
 	margin-left: 30px;
 }
 #log p {
+	color: red;
+	margin-top: 0px;
 	font-size: 20px;
 	position: relative;
-	top: 7px;
+	top: 10px;
 	left: 5px;
 }
 .logref {
@@ -117,21 +120,20 @@ header h1 {
 }
 #log button {
 	font-size: 15px;
-	background-color:red;
-	color: black;
-	border:none;
-	width: 80px;
-	height: 30px;
-	margin-left: 58px;
-}
-#logout {
-	margin-top: 30px;
+    background-color:red;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border:none;
+    width: 120px;
+    height: 30px;
+    margin-left: 35px;
 }
 
 #wordfromdev {
 	padding: 7px 10px 7px 20px;
 	z-index: -1;
-	position: fixed;
+	position: absolute;
 	width: 70%;
 	top: 75px;
 	left: 305px;
@@ -146,7 +148,7 @@ footer {
   background-color: rgb(130, 130, 130);
   width:100%;
   position: fixed;
-  bottom: 0px;
+  top : 1200px;
   left:0px;
   height: 60px;
   border-radius: 20px 10px 0px 0px;
@@ -162,6 +164,16 @@ footer {
 		left:0px;margin-left:-8px;}
 	#wordfromdev {left:5px; width: 98%;}
 
+}
+@media only screen and (max-width: 650px) {
+	#wordfromdev {
+		width: 100%;
+		height: 170px;
+	}
+	#wordfromdev p {width: 320px;
+		height: 150px;
+		overflow: hidden;
+	}
 }
 @media only screen and (max-width: 500px) {
 	header {padding-left:145px;text-align:initial;}

@@ -19,7 +19,7 @@
 	<div id="div_form_sub" name="div_form">
 		<h3 id="h3text">Subscribe Here my brother!</h3>
 		<div class="h5_div"><h5 name="us_trace">User name :</h5></div><div class="h5_div"><h5 name="pw_trace">Password :</h5></div><div class="h5_div"><h5 name="cpw_trace">Confirm password :</h5></div><div class="h5_div"><h5 name="em_trace">E-mail :</h5></div>
-		<form method='POST' id="sub_form" name="sub_form" action="php_script/confirm_subsend">
+		<form method='POST' id="sub_form" name="sub_form" action="php_script/confirm_subsend.php">
 			<input id="user_name" type="text" name="user_name" maxlength="15" pattern="[A-Za-z0-9]+" minlength="4" class='sub' />
 			<input id="passwd" type="password" name="passwd" maxlength="40" pattern="[A-Za-z0-9]+" minlength="6" class='sub' />
 			<input id="conf_passwd" type="password" name="conf_passwd" maxlength="40" minlength="6" pattern="[A-Za-z0-9]+" minlength="6" class='sub' />

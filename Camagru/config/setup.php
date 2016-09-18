@@ -5,7 +5,7 @@
 	try {
 		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
 		$sql = 'CREATE DATABASE IF NOT EXISTS db_camagru;
-						USE db_camagru;';
+				USE db_camagru;';
 		$pdo->exec($sql);
 		$sql = "DROP TABLE IF EXISTS `users`;
 				DROP TABLE IF EXISTS `user_info`;
@@ -20,11 +20,13 @@
 				CREATE TABLE `img_info` (id_img VARCHAR(32) PRIMARY KEY NOT NULL, tag VARCHAR(20), array_like VARCHAR(1500), array_comment TEXT);";
 		$pdo->exec($sql);
 		$pdo = null;
+
 		$sql = null;
 		$DB_DSN = null;
 		$DB_USER = null;
 		$DB_PASSWORD = null;
 	} catch (PDOException $error) {
+		echo $error->getmessage();
 		exit();
 	}
 	if (!file_exists("../images")) {

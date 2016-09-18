@@ -1,42 +1,63 @@
-#error {
-  background-color: rgb(100,100,100);
-  padding-left:7px;
-  position: fixed;
-  top:80px;
-  left: 150px;
-  width: 40%;
-  border-radius: 10px 20px 10px 20px;
-  box-shadow: 0px 5px 3px 0px black;
+#conseling {
+    background-color: rgb(205, 203, 191);
+    padding-left: 20px;
+    padding-right: 10px;
+    position: absolute;
+    top: 205px;
+    left: 305px;
+    width: 70%;
+    height: 125px;
+}
+#conseling strong {
+    color: red;
+}
+#conseling p {
+    white-space: nowrap;
 }
 
 #forgot {
-	position: fixed;
-	height: 240px;
-	width: 165px;
-	padding: 10px;
-	top: 80px;
-	left: 250px;
-	background-color: rgb(100, 100, 100);
-	border-radius:10px 15px 10px 15px;
-	box-shadow: 5px 5px 5px black;
+    background-color: rgb(155, 153, 141);
+    position: absolute;
+    top: 340px;
+    left: 305px;
+    width: 350px;
 }
-#conseling {
-	padding: 20px;
-	background-color: rgb(150, 150, 150);
-	position: fixed;
-	width: 300px;
-	top: 90px;
-	left: 450px;
-	border-radius: 30px 20px 30px 20px;
-	box-shadow: 5px 5px 5px rgb(100,100,100);
-}
- .forg {
-	 margin-bottom: 10px;
-	 margin-top: -3px;
- }
 
+#forgot_form {
+    margin-left: 30px;
+}
+#forgot_form h5 {
+    font-size: 15px;
+    color: red;
+}
+.forg {
+    color: white;
+    padding-left: 10px;
+    background-color:black;
+    margin-top: -15px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom:1px solid rgb(165, 161, 153);
+    width: 200px;
+    height: 25px;
+}
+#send_password {
+    font-size: 15px;
+    background-color:red;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border:none;
+    width: 120px;
+    height: 30px;
+    margin-left: 35px;
+}
  @media (max-width: 900px) {
-    #error {left: 100px;width: 300px;}
-    #forgot {left: 80px;}
-	#conseling {left: 300px;}
+     #conseling {left:5px;width:100%;}
+     #forgot {left:5px;}
  }
+@media (max-width: 650px) {
+    #conseling {top:265px;}
+    #forgot {top: 400px;}
+}

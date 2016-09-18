@@ -21,12 +21,12 @@
 		<p id="you">Profil of <?php echo $info['login']; ?></p>
 		<h4 class="sub_title" id="change">You're information : </h4>
 		<div id="about-you">
-			<div id="about-you-information" style='display:none;'>
+			<div id="about-you-information">
 				<h5>You're mail :</h5><p><?php echo $info['mail']; ?></p>
-				<button class="change_info" id="change-password" type="button">Modify password</button>
-				<button class="change_info" id="change-e_mail" type="button">Modify e-mail</button>
+				<button class="change_info" id="modify-password" type="button">Modify password</button>
+				<button class="change_info" id="modify-e_mail" type="button">Modify e-mail</button>
 			</div>
-			<div id="about-you-password">
+			<div id="about-you-password" style="display:none;">
 				<p class="modify">Old password :</p>
 				<p class="modify">New password :</p>
 				<p class="modify">Confirm password :</p>
@@ -37,13 +37,19 @@
 					<button class="change-button" type="submit">Modify</button>
 				</form>
 			</div>
+			<div id="about-you-mail" style="display:none;">
+				<p class="modify">Password :</p>
+				<p class="modify">E-mail :</p>
+				<form id="change-e_mail" class="change-form" action="php_script/modify_information.php" method="POST">
+					<input class="change-input" type="password" maxlength="40" pattern="[A-Za-z0-9]+" minlength="6" />
+					<input class="change-input" type="email" pattern="[A-Za-z0-9.]+@[a-zA-Z0-9.]+" maxlength="320" minlength="6" />
+					<button class="change-button" type="submit">Modify</button>
+				</form>
+			</div>
 		</div>
-		<button class="display-content" id="display-more-content" type="button">More</button>
-		<div id="about-last"></div>
 	</div>
 	<script src="js/display_menu.js" type="text/javascript"></script>
 	<script src="js/display_log.js" type="text/javascript"></script>
-	<script src="js/display_com.js" type="text/javascript"></script>
-	<script src="js/">
+	<script src="js/display_change.js" type="text/javascript"></script>
 	<?php unset($info);?>
 </body></html>

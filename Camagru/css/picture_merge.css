@@ -1,0 +1,36 @@
+#merge_div {
+	background-color: rgb(195, 193, 181);
+	position: absolute;
+	left: 720px;
+	top: 200px;
+	width: 220px;
+	padding-left: 15px;
+	margin-bottom: 100px;
+}
+#last-picture_div {
+	background-color: rgb(175, 173, 161);
+	position: absolute;
+	width: 700px;
+	top: 200px;
+	left: 965px;
+}
+.last_pictures {
+	margin-left: 10px;
+	margin-bottom: 15px;
+}
+@media (max-width: 1650px) {
+	#last-picture_div {
+		width: 400px;
+	}
+}
+@media (max-width: 1300px) {
+	#last-picture_div {left: 310px;top: 940px;width: 700px; margin-bottom: 100px;}
+	#merge_div {margin-bottom: 0px;}
+}
+@media (max-width: 900px) {
+	#merge_div {left: 410px;}
+	#last-picture_div {left:5px;}
+}
+@media (max-width: 650px) {
+	#merge_div {top: 265px;}
+}

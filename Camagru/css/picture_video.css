@@ -1,0 +1,54 @@
+#video_div {
+	background-color: rgb(225, 223, 211);
+	position: absolute;
+	top: 200px;
+	left: 310px;
+	width: 400px;
+}
+#video_div h4 {
+	color: red;
+	text-align: center;
+}
+#video {
+	margin-left: 40px;
+	margin-top: 20px;
+}
+
+#smile {
+	margin-left: 100px;
+}
+.but_vid {
+	background-color: red;
+	font-size: 15px;
+	border: none;
+	width: 80px;
+	margin-top: 10px;
+	margin-left: 30px;
+	margin-bottom: 15px;
+}
+
+#canvas {
+	margin-left: 40px;
+	margin-top: 20px;
+	display: none;
+}
+#select {
+	background-color: black;
+	color:white;
+	font-size: 14px;
+	width:100px;
+	margin-left: 150px;
+	margin-top: 20px;
+	display: none;
+}
+#save {
+	margin-left: 150px;
+	display: none;
+}
+
+@media (max-width: 900px) {
+	#video_div {left:5px;}
+}
+@media (max-width: 650px) {
+	#video_div {top:265px;}
+}

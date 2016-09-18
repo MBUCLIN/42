@@ -45,6 +45,7 @@
 	}, false);
 	button.addEventListener("click", function(eventObject) {
 		var		putted = 0;
+
 		for (var i = 0; i < 5; i++) {
 			var		copy = document.getElementById("copy" + i.toString() + "face");
 
@@ -57,7 +58,9 @@
 			var		size = null;
 			var		select = document.getElementById("select");
 			var		context = canvas.getContext('2d');
+			var		last = document.getElementById("last-picture_div");
 
+			console.log(document.body.clientWidth);
 			select.style.display = "block";
 			canvas.width = width;
 			canvas.height = height;

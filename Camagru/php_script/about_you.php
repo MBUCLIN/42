@@ -1,6 +1,6 @@
 <?php
 	include("config/database.php");
-	$info = array("login" => $_SESSION['logged_on_us'], "comment" => array());
+	$info = array("login" => $_SESSION['logged_on_us']);
 	try {
 		$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -12,7 +12,7 @@
 		if (!isset($ret[0]['id'])) {
 			$_POST['error'] = "No id for that login";
 		} else {
-			$sql = "SELECT `mail`, `comment` FROM user_info WHERE `id` = :id;";
+			$sql = "SELECT `mail` FROM user_info WHERE `id` = :id;";
 			$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => CURSOR_FWDONLY));
 			$pre->execute(array('id' => $ret[0]['id']));
 			$ret = $pre->fetchAll();
@@ -20,20 +20,6 @@
 				$_POST['error'] = "No mail found";
 			} else {
 				$info['mail'] = $ret[0]['mail'];
-				if (!isset($ret[0]['comment'])) {
-					$info['comment'][] = "No commentary yet";
-				} else {
-					$unse = unserialize($ret[0]['comment']);
-					$comment = array();
-					foreach ($unse as $i => $value) {
-						$exp = explode(";", $unse[$i]);
-						unset($exp[0], $exp[1]);
-						array_values($exp);
-						$comment[] = implode($exp);
-					}
-					unset($exp, $unse, $i);
-					$info['comment'] = $comment;
-				}
 			}
 		}
 		$pdo = null;

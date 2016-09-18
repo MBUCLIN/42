@@ -31,6 +31,14 @@
 	}
 	if (!file_exists("../images")) {
 		mkdir("../images");
+	} else {
+		$files = scandir("../images");
+		foreach ($files as $key => $value) {
+			if ($files[$key][0] !== '.')
+				unlink("../images/" . $files[$key]);
+		}
+		rmdir("../images");
+		mkdir("../images");
 	}
 	header("Location: ../index.php");
 ?>

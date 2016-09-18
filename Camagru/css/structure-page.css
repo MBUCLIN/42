@@ -145,13 +145,14 @@ header h1 {
 }
 
 footer {
-  background-color: rgb(130, 130, 130);
-  width:100%;
-  position: fixed;
-  top : 1200px;
-  left:0px;
-  height: 60px;
-  border-radius: 20px 10px 0px 0px;
+	background-color: rgb(130, 130, 130);
+	width:100%;
+	left:0px;
+	margin-top: 50px;
+	position: fixed;
+	bottom: 0px;
+	height: 60px;
+	border-radius: 20px 10px 0px 0px;
 }
 @media only screen and (max-width: 1100px) {
 	#wordfromdev p {width:600px;}

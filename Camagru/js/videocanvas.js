@@ -1,6 +1,6 @@
 (function() {
 	function		clear_div(canvas, context) {
-		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
 		canvas.style.display = "none";
 		document.getElementById("save").style.display = "none";
 		for (var i = 0; i < 5; i++) {
@@ -60,7 +60,6 @@
 			var		context = canvas.getContext('2d');
 			var		last = document.getElementById("last-picture_div");
 
-			console.log(document.body.clientWidth);
 			select.style.display = "block";
 			canvas.width = width;
 			canvas.height = height;
@@ -97,7 +96,6 @@
 						if (this.status === 200) {
 							if (this.responseText !== "Succes") {
 								alert("The image failed to be saved");
-								console.log(this.responseText);
 							}
 							var		canvas = document.getElementById("canvas");
 							var		context = canvas.getContext('2d');
@@ -111,6 +109,7 @@
 					xhttp.open("POST", "php_script/save_image.php", true);
 					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send("image=" + photo + "&" + size + "&tag=" + select.value);
+					select.selectedIndex = 0;
 				}
 			});
 		}

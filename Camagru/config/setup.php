@@ -40,5 +40,17 @@
 		rmdir("../images");
 		mkdir("../images");
 	}
+	if (!file_exists("../resized")) {
+		mkdir("../resized");
+	} else {
+		$files = scandir("../resized");
+		foreach ($files as $key => $value) {
+			if ($files[$key][0] !== '.') {
+				unlink("../resized/" . $files[$key]);
+			}
+		}
+		rmdir("../resized");
+		mkdir("../resized");
+	}
 	header("Location: ../index.php");
 ?>

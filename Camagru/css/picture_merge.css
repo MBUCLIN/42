@@ -13,6 +13,7 @@
 	width: 700px;
 	top: 200px;
 	left: 965px;
+	margin-bottom: 100px;
 }
 .last_pictures {
 	margin-left: 10px;
@@ -33,4 +34,5 @@
 }
 @media (max-width: 650px) {
 	#merge_div {top: 265px;}
+	#last-picture_div {top: 960px;}
 }

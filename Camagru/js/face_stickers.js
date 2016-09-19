@@ -38,6 +38,7 @@
 						});
 						video.addEventListener("mousedown", function(ev) {
 							copy.class = "putted";
+							copy.style.position = "absolute";
 						});
 
 					}

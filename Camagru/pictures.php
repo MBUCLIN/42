@@ -36,12 +36,14 @@
 	</div>
 	<div id="merge_div"><?php include("php_script/list_merge.php"); ?></div>
 	<div id="last-picture_div">
-		<h4>Last pictures you took :</h4><br />
-		<?php include("php_script/last_picture.php"); ?>
+		<h4>Last pictures you took :</h4>
+		<div id="picture_took"></div>
+		<button class="but_vid" id="load_all" type="button">Load</button>
 	</div>
 	<script src="js/videocanvas.js" type="text/javascript"></script>
 	<script src="js/display_menu.js" type="text/javascript"></script>
 	<script src="js/display_log.js" type="text/javascript"></script>
 	<script src="js/face_stickers.js" type="text/javascript"></script>
+	<script src="js/load_picture.js" type="text/javascript"></script>
 	<footer></footer>
 </body></html>

@@ -53,6 +53,16 @@
 		imagedestroy($img);
 		return (TRUE);
 	}
+	// *** CREATE A COPY WITCH IS SMALLER IN A OTHER DIR *** //
+	function	image_resized($name, $src_dir, $dest_dir, $percent) {
+		$img = imagecreatefrompng($src_dir . $name . ".png");
+		list($width, $height) = getimagesize($src_dir . $name . ".png");
+		$newwidth = $width * $percent;
+		$newheight = $height * $percent;
+		$dest = imagecreatetruecolor($newwidth, $newheight);
+		imagecopyresized($dest, $img, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+		imagepng($dest, $dest_dir . $name . ".png");
+	}
 	//script part
 	session_start();
 	include("../config/database.php");
@@ -75,47 +85,50 @@
 			unset($meme, $pos);
 			if ($image !== FALSE) {
 				if (image_puttofilepng($image, $file_name, "../images/") !== FALSE) {
-					$trans = 0;
-					unset($image);
-					try {
-						$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-						$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-						$pdo->exec("USE db_camagru;");
-						$sql = "SELECT `id` FROM users WHERE `login` = :login;";
-						$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-						$pre->execute(array("login" => $_SESSION['logged_on_us']));
-						$ret = $pre->fetchAll();
-						if (!isset($ret[0]['id'])) {
-							$_POST['error'] = "No id for this login";
-							echo "Error id";
-						} else {
-							$trans = 1;
-							$pdo->beginTransaction();
-							$sql = "INSERT INTO images VALUES (:imgI, :id);";
+					if (image_resized($file_name, "../images/", "../resized/", 0.5) !== FALSE) {
+						$trans = 0;
+						unset($image);
+						try {
+							$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+							$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+							$pdo->exec("USE db_camagru;");
+							$sql = "SELECT `id` FROM users WHERE `login` = :login;";
 							$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-							$pre->execute(array('imgI' => $file_name, 'id' => $ret[0]['id']));
-							$pdo->commit();
-							$pdo->beginTransaction();
-							$sql = "INSERT INTO img_info VALUES (:imgII, :tag, :likes, :comment);";
-							$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-							$pre->execute(array('imgII' => $file_name, 'tag' => $tag, 'likes' => "No likes yet", 'comment' => "No comment yet"));
-							$pdo->commit();
-							$trans = 0;
-							$pdo = null;
+							$pre->execute(array("login" => $_SESSION['logged_on_us']));
+							$ret = $pre->fetchAll();
+							if (!isset($ret[0]['id'])) {
+								$_POST['error'] = "No id for this login";
+								echo "Error id";
+							} else {
+								$trans = 1;
+								$pdo->beginTransaction();
+								$sql = "INSERT INTO images VALUES (:imgI, :id);";
+								$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+								$pre->execute(array('imgI' => $file_name, 'id' => $ret[0]['id']));
+								$pdo->commit();
+								$pdo->beginTransaction();
+								$sql = "INSERT INTO img_info VALUES (:imgII, :tag, :likes, :comment);";
+								$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+								$pre->execute(array('imgII' => $file_name, 'tag' => $tag, 'likes' => "No likes yet", 'comment' => "No comment yet"));
+								$pdo->commit();
+								$trans = 0;
+								$pdo = null;
+							}
+						} catch (PDOException $error) {
+							echo $error->getMessage();
+							$_POST['error'] = "PDO error";
+							if ($trans) {
+								$pdo->rollBack();
+								echo "Error transaction";
+							} else {
+								echo "Error connection";
+							}
 						}
-					} catch (PDOException $error) {
-						if (file_exists("../images/" . $file_name . ".png")) {
-							unlink("../images/" . $file_name . ".png");
-						}
-						$_POST['error'] = "PDO error";
-						if ($trans) {
-							$pdo->rollBack();
-							echo "Error transaction";
-						} else {
-							echo "Error connection";
-						}
+						unset($pdo, $sql, $pre, $ret, $file_name, $trans);
+					} else {
+						$_POST['error'] = "Could not create a resized file";
+						echo "Error resized";
 					}
-					unset($pdo, $sql, $pre, $ret, $file_name, $trans);
 				} else {
 					$_POST['error'] = "Could not create the file";
 					echo "Error file";
@@ -130,6 +143,10 @@
 		}
 		if (!isset($_POST['error'])) {
 			echo "Succes";
+		} else {
+			if (file_exists("../images/" . $file_name . ".png")) {
+				unlink("../images/" . $file_name . ".png");
+			}
 		}
 	}
 ?>

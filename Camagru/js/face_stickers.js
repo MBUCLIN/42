@@ -4,7 +4,7 @@
 	for (var num = 0; num < 5; num++) {
 		var		elem_box = document.getElementById("face" + num.toString());
 
-		elem_box.addEventListener("change", function(ev) {
+		elem_box.addEventListener("click", function(ev) {
 			for (var i = 0; i < 5; i++) {
 				var		box = document.getElementById("face" + i.toString());
 				var		del = document.getElementById("copy" + i.toString() + "face");
@@ -12,7 +12,7 @@
 
 				if (box !== ev.target) {
 					box.checked = false;
-					if (del && del.class !== "putted") {
+					if (del && del.className !== "putted") {
 						del.remove();
 					}
 				} else if (box === ev.target) {
@@ -28,7 +28,7 @@
 						copy.style.display = "none";
 						document.body.appendChild(copy);
 						document.body.addEventListener("mousemove", function(ev) {
-							if (copy.class !== "putted") {
+							if (copy.className !== "putted") {
 								if (copy.style.display) {
 									copy.style.display = "block";
 								}
@@ -37,8 +37,14 @@
 							}
 						});
 						video.addEventListener("mousedown", function(ev) {
-							copy.class = "putted";
-							copy.style.position = "absolute";
+							if (copy.className !== "putted") {
+								var		top = copy.style.top.substr(0, copy.style.top.length - 2);
+
+								top = parseInt(top);
+								copy.style.top = top + window.pageYOffset + "px";
+								copy.className = "putted";
+								copy.style.position = "absolute";
+							}
 						});
 
 					}

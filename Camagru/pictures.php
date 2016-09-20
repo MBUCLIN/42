@@ -39,11 +39,13 @@
 		<h4>Last pictures you took :</h4>
 		<div id="picture_took"></div>
 		<button class="but_vid" id="load_all" type="button">Load</button>
+		<button class="but_vid" id="suppr_select" type="button" style="display:none">Delete</button>
 	</div>
 	<script src="js/videocanvas.js" type="text/javascript"></script>
 	<script src="js/display_menu.js" type="text/javascript"></script>
 	<script src="js/display_log.js" type="text/javascript"></script>
 	<script src="js/face_stickers.js" type="text/javascript"></script>
 	<script src="js/load_picture.js" type="text/javascript"></script>
+	<script src="js/delete_picture.js" type="text/javascript"></script>
 	<footer></footer>
 </body></html>

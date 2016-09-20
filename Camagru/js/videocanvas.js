@@ -8,10 +8,32 @@
 			var		radio = document.getElementById("face" + i.toString());
 
 			if (del) {
+				del.class = null;
 				del.remove(del);
 			}
 			radio.checked = false;
 		}
+	}
+	function		size_view(putted) {
+		var i = 0, imgx, imgy, size;
+		var		context = document.getElementById("canvas").getContext('2d');
+		var		video = document.getElementById("video");
+
+		while (putted[i]) {
+			if (putted[i]) {
+				imgx = putted[i].offsetLeft - (video.offsetLeft + document.getElementById("video_div").offsetLeft);
+				imgy = putted[i].offsetTop - (video.offsetTop + document.getElementById("video_div").offsetTop);
+
+				if (size) {
+					size += i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+				} else {
+					size = "pos=" + i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+				}
+				context.drawImage(putted[i], imgx, imgy, putted[i].clientWidth, putted[i].clientHeight);
+			}
+			i++;
+		}
+		return (size);
 	}
 	var		stream = false;
 	var		video = document.getElementById("video");
@@ -44,18 +66,11 @@
 		}
 	}, false);
 	button.addEventListener("click", function(eventObject) {
-		var		putted = 0;
+		var		putted = document.getElementsByClassName("putted");
+		var		i = 0;
+		var		size = null;
 
-		for (var i = 0; i < 5; i++) {
-			var		copy = document.getElementById("copy" + i.toString() + "face");
-
-			if (copy)
-				if (copy.class === "putted")
-					putted = 1;
-		}
 		if (putted) {
-			var		images = null;
-			var		size = null;
 			var		select = document.getElementById("select");
 			var		context = canvas.getContext('2d');
 			var		last = document.getElementById("last-picture_div");
@@ -69,24 +84,7 @@
 
 			var		photo = canvas.toDataURL('image/png');
 
-			for (var i = 0; i < 5; i++) {
-				if (images) {
-					images[i] = document.getElementById("copy" + i.toString() + "face");
-				} else {
-					images = new Array(document.getElementById("copy" + i.toString() + "face"));
-				}
-				if (images[i]) {
-					var		imgx = images[i].offsetLeft - (video.offsetLeft + document.getElementById("video_div").offsetLeft);
-					var		imgy = images[i].offsetTop - (video.offsetTop + document.getElementById("video_div").offsetTop);
-
-					if (size) {
-						size += i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
-					} else {
-						size = "pos=" + i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
-					}
-					context.drawImage(images[i], imgx, imgy, images[i].clientWidth, images[i].clientHeight);
-				}
-			}
+			size = size_view(putted);
 			document.getElementById("save").addEventListener("click", function() {
 				var 	xhttp = new XMLHttpRequest();
 				var		select = document.getElementById("select");
@@ -100,12 +98,13 @@
 							var		canvas = document.getElementById("canvas");
 							var		context = canvas.getContext('2d');
 
+							size = null;
 							select.style.display = "none";
 							clear_div(canvas, context);
 						}
 					}
 				};
-				if (select.value !== "Choose tag") {
+				if (select.value !== "Choose tag" && size) {
 					xhttp.open("POST", "php_script/save_image.php", true);
 					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send("image=" + photo + "&" + size + "&tag=" + select.value);

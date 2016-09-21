@@ -3,7 +3,6 @@
 	// *** CREATE AN IMAGE OBJECT FROM A B64 IMAGE STRING *** //
 	function	get_imagefrompict($pic, $fname, $fpath) {
 		$encoded = str_replace("data:image/png;base64,", "", $pic);
-		$encoded = str_replace(' ', '+', $encoded);
 		$decoded = base64_decode($encoded);
 		$image = imagecreatefromstring($decoded);
 		if ($image) {

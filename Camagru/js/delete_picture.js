@@ -18,14 +18,13 @@
 				if (this.status === 200) {
 					if (this.responseText !== "Success") {
 						alert("Could not delete the image");
-						console.log(this.responseText);
 					} else {
 						var		div = document.getElementById("picture_took");
 
 						request = request.substring(4, request.length);
 						request = request.split(':');
 						for (var i = 0, l = request.length; i < l; i++) {
-							div.removeChild(document.getElementById(request[i]));
+							document.getElementById("lab-" + request[i]).removeChild(document.getElementById(request[i]));
 							div.removeChild(document.getElementById("lab-" + request[i]));
 							div.removeChild(document.getElementById("che-" + request[i]));
 						}

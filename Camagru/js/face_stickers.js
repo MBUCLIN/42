@@ -1,5 +1,5 @@
 (function() {
-
+	var		display = document.getElementById("video_div").style.display;
 
 	for (var num = 0; num < 5; num++) {
 		var		elem_box = document.getElementById("face" + num.toString());
@@ -16,8 +16,10 @@
 						del.remove();
 					}
 				} else if (box === ev.target) {
+					var		boxcheck = ev.target.checked;
 					var		image = document.getElementById(i.toString() + "face");
 					var		video = document.getElementById("video");
+					var		imageUpload = document.getElementById("uploaded-image");
 
 					if (!document.getElementById("copy" + image.id) && box.checked === true) {
 						var		copy = image.cloneNode(true);
@@ -37,7 +39,7 @@
 							}
 						});
 						video.addEventListener("mousedown", function(ev) {
-							if (copy.className !== "putted") {
+							if (copy.className !== "putted" && boxcheck) {
 								var		top = copy.style.top.substr(0, copy.style.top.length - 2);
 
 								top = parseInt(top);
@@ -46,7 +48,18 @@
 								copy.style.position = "absolute";
 							}
 						});
+						if (document.getElementById("upload-file").files[0]){
+							imageUpload.addEventListener("mousedown", function(ev) {
+								if (copy.className !== "putted" && boxcheck) {
+									var		top = copy.style.top.substr(0, copy.style.top.length - 2);
 
+									top = parseInt(top);
+									copy.style.top = top + window.pageYOffset + "px";
+									copy.className = "putted";
+									copy.style.position = "absolute";
+								}
+							});
+						}
 					}
 				}
 			}

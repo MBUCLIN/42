@@ -4,12 +4,14 @@
 	top: 200px;
 	left: 310px;
 	width: 400px;
+	display: block;
 }
 #video_div h4 {
 	color: red;
 	text-align: center;
 }
 #video {
+	width: 320px;
 	margin-left: 40px;
 	margin-top: 20px;
 }

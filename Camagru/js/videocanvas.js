@@ -1,4 +1,5 @@
 (function() {
+
 	function		clear_div(canvas, context) {
 		context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
 		canvas.style.display = "none";
@@ -8,7 +9,7 @@
 			var		radio = document.getElementById("face" + i.toString());
 
 			if (del) {
-				del.class = null;
+				del.className = null;
 				del.remove(del);
 			}
 			radio.checked = false;
@@ -44,82 +45,85 @@
 
 	navigator.getMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia ||
 						navigator.mozGetUserMedia || navigator.msGetUserMedia);
-	navigator.getMedia({video:true, audio:false}, function(media) {
+	navigator.getMedia({video:true, audio:false}, function(oMedia) {
 		if (navigator.mozGetUserMedia) {
-			video.mozSrcObject = media;
+			video.mozSrcObject = oMedia;
 		} else {
 			var		vendorURL = window.URL || window.webkitURL;
-			video.src = vendorURL.createObjectURL(media);
+			video.src = vendorURL.createObjectURL(oMedia);
 		}
 		video.play();
 	}, function(err) {
-		console.log("Then go upload !\n" + err);
+		call_upload();
 	});
-	video.addEventListener("canplay", function(eventObject) {
-		if (!stream) {
-			height = video.videoHeight / (video.videoWidth/width);
-			video.setAttribute('width', width);
-			video.setAttribute('height', height);
-			canvas.setAttribute('width', width);
-			canvas.setAttribute('height', height);
-			stream = true;
-		}
-	}, false);
-	button.addEventListener("click", function(eventObject) {
-		var		putted = document.getElementsByClassName("putted");
-		var		i = 0;
-		var		size = null;
+	if (document.getElementById("video_div").style.display !== "none") {
+		video.addEventListener("canplay", function(event) {
+			if (!stream) {
+				height = video.videoHeight / (video.videoWidth/width);
+				video.setAttribute('width', width);
+				video.setAttribute('height', height);
+				canvas.setAttribute('width', width);
+				canvas.setAttribute('height', height);
+				stream = true;
+			}
+		}, false);
+		button.addEventListener("click", function(event) {
+			var		putted = document.getElementsByClassName("putted");
+			var		i = 0;
+			var		size = null;
 
-		if (putted) {
-			var		select = document.getElementById("select");
-			var		context = canvas.getContext('2d');
-			var		last = document.getElementById("last-picture_div");
-
-			select.style.display = "block";
-			canvas.width = width;
-			canvas.height = height;
-			context.drawImage(video, 0, 0, width, height);
-			canvas.style.display = "block";
-			document.getElementById("save").style.display = "block";
-
-			var		photo = canvas.toDataURL('image/png');
-
-			size = size_view(putted);
-			document.getElementById("save").addEventListener("click", function() {
-				var 	xhttp = new XMLHttpRequest();
+			if (putted[0]) {
 				var		select = document.getElementById("select");
+				var		context = canvas.getContext('2d');
+				var		last = document.getElementById("last-picture_div");
 
-				xhttp.onreadystatechange = function() {
-					if (this.readyState === 4) {
-						if (this.status === 200) {
-							if (this.responseText !== "Succes") {
-								alert("The image failed to be saved");
+				select.style.display = "block";
+				canvas.width = width;
+				canvas.height = height;
+				context.drawImage(video, 0, 0, width, height);
+				canvas.style.display = "block";
+				document.getElementById("save").style.display = "block";
+
+				var		photo = canvas.toDataURL('image/png');
+
+				size = size_view(putted);
+				document.getElementById("save").addEventListener("click", function() {
+					var 	xhttp = new XMLHttpRequest();
+					var		select = document.getElementById("select");
+
+					xhttp.onreadystatechange = function() {
+						if (this.readyState === 4) {
+							if (this.status === 200) {
+								if (this.responseText !== "Succes") {
+									alert("The image failed to be saved");
+								}
+								var		canvas = document.getElementById("canvas");
+								var		context = canvas.getContext('2d');
+
+								size = null;
+								select.style.display = "none";
+								clear_div(canvas, context);
 							}
-							var		canvas = document.getElementById("canvas");
-							var		context = canvas.getContext('2d');
-
-							size = null;
-							select.style.display = "none";
-							clear_div(canvas, context);
 						}
+					};
+					if (select.value !== "Choose tag" && size) {
+						var		encode = encodeURIComponent(photo);
+						xhttp.open("POST", "php_script/save_image.php", true);
+						xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						xhttp.send("image=" + encode + "&" + size + "&tag=" + select.value);
+						select.selectedIndex = 0;
 					}
-				};
-				if (select.value !== "Choose tag" && size) {
-					xhttp.open("POST", "php_script/save_image.php", true);
-					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-					xhttp.send("image=" + photo + "&" + size + "&tag=" + select.value);
-					select.selectedIndex = 0;
-				}
-			});
-		}
-	}, false);
+				});
+			}
+		}, false);
 
-	document.getElementById("reset").addEventListener("click", function() {
-		var		canvas = document.getElementById("canvas");
-		var		context = canvas.getContext('2d');
-		var		select = document.getElementById("select");
+		document.getElementById("reset").addEventListener("click", function() {
+			var		canvas = document.getElementById("canvas");
+			var		context = canvas.getContext('2d');
+			var		select = document.getElementById("select");
 
-		select.style.display = "none";
-		clear_div(canvas, context);
-	});
+			select.style.display = "none";
+			clear_div(canvas, context);
+		});
+	}
 })();

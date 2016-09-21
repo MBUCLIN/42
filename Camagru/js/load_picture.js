@@ -9,10 +9,9 @@
 			if (this.readyState === 4) {
 				if (this.status === 200) {
 					var		imgname = this.responseText.split(":");
-					console.log(this.responseText);
-					console.log(imgname);
 					if (imgname[0] === "Success") {
 						if (imgname.length < 2) {
+							document.getElementById("suppr_select").style.display = "none";
 							if (!document.getElementById("nothing")) {
 								var		p = document.createElement("p");
 								var		content = document.createTextNode("No images found");
@@ -20,10 +19,12 @@
 								p.appendChild(content);
 								p.id = "nothing";
 								document.getElementById("last-picture_div").appendChild(p);
+							} else {
+								document.getElementById("nothing").innerHTML = "No images found";
 							}
 						} else {
 							if (p_exists) {
-								div.removeChild(p_exists);
+								document.getElementById("last-picture_div").removeChild(p_exists);
 							}
 							var		p = document.createElement("p");
 							var		content = document.createTextNode("(Click on the picture to delete)");

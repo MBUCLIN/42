@@ -11,10 +11,9 @@
 	<link href="css/picture_video.css" type="text/css" rel="stylesheet" />
 	<link href="css/picture_merge.css" type="text/css" rel="stylesheet" />
 	<link href="css/picture_upload.css" type="text/css" rel="stylesheet" />
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 </head><body id="body">
 	<header name="header"><h1 name="header_text">Smile</h1></header>
-	<div id="disp_menu"><i class="fa fa-bars fa-align-center fa-2x" aria-hidden="true"></i></div>
+	<div id="disp_menu"><h3 id="menu">M</h3></div>
 	<div id="hidd_menu" style="display:none"><?php include("php_script/menu_logged.php"); ?></div>
 	<div id="rolling-menu" name="head_menu"><?php include("php_script/menu_logged.php"); ?></div>
 	<div id="disp_log"><h3 id="hlog">L</h3></div>

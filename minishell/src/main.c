@@ -6,11 +6,11 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 13:56:37 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/08 13:32:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/26 14:27:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minish.h"
+#include "../includes/minish.h"
 
 static int		main_loop(t_shell *shell)
 {

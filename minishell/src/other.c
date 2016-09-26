@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 19:45:31 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/06 15:16:18 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/26 16:02:33 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char		**env_alloc(int len)
 	char		**env;
 
 	env = NULL;
-	if (!len)
+	if (len <= 0)
 		return (env);
 	if ((env = (char **)malloc(sizeof(char *) * (len + 1))) == NULL)
 		end_minishell(-1);

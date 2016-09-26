@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 14:29:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/05 18:16:58 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/26 14:22:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int				is_exec(char *path)
 	int				sta;
 
 	sta = lstat(path, &buf);
-	if (!sta && S_ISREG(buf.st_mode) && access(path, X_OK) == 0)
+	if (!sta && (S_ISREG(buf.st_mode) || S_ISLNK(buf.st_mode)) &&\
+		access(path, X_OK) == 0)
 		return (sta);
 	return (-1);
 }

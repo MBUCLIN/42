@@ -6,11 +6,11 @@ LIB = libft/libft.a
 
 LIBFTPRINTF = ft_printf/libftprintf.a
 
-SRC_NAME = error.c initiate.c create_env.c read.c prompt.c get.c command.c \
+SRC_NAME = main.c error.c initiate.c create_env.c read.c prompt.c get.c command.c \
 		   search.c other.c change.c apply.c del.c env.c ft_chdir.c goto.c \
 		   exec.c argv.c error_env.c
 
-SRC_PATH = src.v1/
+SRC_PATH = src/
 
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 
@@ -25,7 +25,7 @@ CC = gcc
 $(NAME): $(OBJ)
 	make -C libft;
 	make -C ft_printf;
-	$(CC) $(CFLAGS) -o $(NAME) main.c $(OBJ) $(CFLAGS) $(LIB) $(LIBFTPRINTF)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(CFLAGS) $(LIB) $(LIBFTPRINTF)
 
 all: $(NAME)
 

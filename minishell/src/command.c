@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:23:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/06 14:54:51 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/26 16:08:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char		*get_commandname(char *command)
 
 	sub = 0;
 	i = ft_skpblk(command);
-	while (command[i + sub] && command[i + sub] != ' ')
+	while (command[i + sub] && !ft_isblank(command[i + sub]))
 		sub++;
 	return (ft_strsub(command, i, sub));
 }
@@ -39,6 +39,8 @@ t_exec			*find_commandtype(t_shell *shell, char *command)
 
 	if ((exec = initiate_exec()) == NULL)
 		end_minishell(-1);
+	if (ft_strlen(command) < 1)
+		return (exec);
 	if ((exec->args = get_arguments(command, &exec->args)) == NULL)
 		end_minishell(-1);
 	if ((exec->xname = get_commandname(command)) == NULL)

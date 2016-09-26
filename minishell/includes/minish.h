@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/06 15:09:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/26 16:02:31 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int					error_unset(char **arg);
 int					error_set(char **arg);
 int					error_init(char **arg);
 
+char				**remove_var(char *var, char **env, int len);
 void				del_path(t_list *path);
 void				del_exec(t_exec *exec);
 

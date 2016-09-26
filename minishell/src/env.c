@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:42:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/06 15:09:58 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/26 16:08:24 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char			**rem_env(char **env, char **arg)
 	{
 		if ((var = get_var(arg[i], env)) != NULL)
 		{
-			env = ft_deltabswapstr(env, var, len--);
+			env = remove_var(var, env, len - 1);
+			len = len - 1;
 			free(var);
 			var = NULL;
 		}

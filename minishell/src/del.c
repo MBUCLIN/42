@@ -6,11 +6,37 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 14:14:45 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:04:14 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/26 16:12:37 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minish.h"
+
+char		**remove_var(char *var, char **env, int len)
+{
+	char		**new;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	if ((new = (char **)malloc(sizeof(char *) * (len + 1))) == NULL)
+		end_minishell(-1);
+	new[len] = NULL;
+	while (env[i])
+	{
+		if (ft_strcmp(var, env[i]))
+		{
+			if ((new[j] = ft_strdup(env[i])) == NULL)
+				end_minishell(-1);
+			j++;
+		}
+		free(env[i]);
+		i++;
+	}
+	free(env);
+	return (new);
+}
 
 void		del_path(t_list *path)
 {

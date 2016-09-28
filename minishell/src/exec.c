@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 14:29:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/26 14:22:14 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/28 15:23:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void			exec_command(t_shell *sh)
 			signal_error(father, sh->exec->xname, stat);
 	}
 	if (!father)
-		execve(sh->exec->xpath, sh->exec->args, sh->env);
+		if (execve(sh->exec->xpath, sh->exec->args, sh->env) == -1) {
+			end_minishell(-2);
+		}
 	signal(SIGINT, ft_handle);
 }

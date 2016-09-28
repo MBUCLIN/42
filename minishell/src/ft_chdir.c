@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/28 15:48:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/26 16:30:57 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/27 15:13:15 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ char			*tild_replace(char *arg, char **env)
 
 	new = NULL;
 	home = NULL;
-	sleep(5);
-	ft_putendl("second\n");
 	if ((home = ft_srchenv("HOME=", env)) == NULL)
 		return (arg);
 	if (ft_strlen(arg) > 1)
@@ -57,7 +55,6 @@ char			*tild_replace(char *arg, char **env)
 	if ((new = ft_strjoindfree(ft_strdup(home), new)) == NULL)
 		end_minishell(-1);
 	free(arg);
-	sleep(5);
 	return (new);
 }
 

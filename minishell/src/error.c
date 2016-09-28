@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 14:25:01 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/14 17:22:46 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/28 14:43:50 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void			end_minishell(int exitval)
 {
 	if (exitval == -1)
 		ft_perror("minishell: malloc error", NULL);
+	else if (exitval == -2)
+		ft_perror("minishell: exec error", NULL);
 	exit(exitval);
 }
 

@@ -1,47 +1,7 @@
-#galery {
+#load {
 	background-color: rgb(155, 153, 141);
 	margin-left: 300px;
 	width: 70%;
 	padding-left: 15px;
 
-}
-
-#galery p {
-}
-#sort_picture {
-	background-color: rgb(195, 193, 181);
-	position: absolute;
-	width: 200px;
-	left: 100px;
-	top: 280px;
-	padding-top: 15px;
-}
-#sort-by {
-	background-color: black;
-	color:white;
-	font-size: 14px;
-	width:100px
-	margin-left: 15px;
-	margin-bottom: 8px;
-}
-.tag {
-	list-style: none;
-	width: 50%;
-	border-bottom: 1px solid black;
-	background-color: white;
-	color: red;
-}
-.tag:hover {
-	color: white;
-	background-color: black;
-	border-bottom: 1px solid red;
-}
-.galery {
-	margin: 8px;
-}
-@media (max-width: 900px) {
-	#sort_picture {left: 5px;}
-}
-@media (max-width: 650px) {
-	#sort_picture {display:none;}
 }

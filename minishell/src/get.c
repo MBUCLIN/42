@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:32:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/26 15:48:43 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/09/29 13:07:15 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ static char		**new_arg(char ***arg, char *new)
 {
 	if (new == NULL)
 		return (NULL);
+	else if (new[0] == 0)
+	{
+		free(new);
+		return (*arg);
+	}
 	if ((*arg = ft_addstrtotab(*arg, new)) == NULL)
 		return (NULL);
 	free(new);
@@ -46,6 +51,7 @@ char			**get_arguments(char *command, char ***arg)
 		if ((q[0] == 0 || q[0] % 2 == 0) && (q[1] == 0 || q[1] % 2 == 0) &&\
 			ft_isblank(command[i]))
 		{
+			s += ft_skpblk(command + s);
 			if ((*arg = new_arg(arg, ft_strsub(command, s, i - s))) == NULL)
 				return (NULL);
 			i += ft_skpblk((command + i)) - 1;
@@ -53,6 +59,7 @@ char			**get_arguments(char *command, char ***arg)
 		}
 		i++;
 	}
+	s += ft_skpblk(command + s);
 	return (new_arg(arg, ft_strsub(command, s, i - s)));
 }
 

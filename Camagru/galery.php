@@ -17,14 +17,13 @@
 	<div id="disp_log"><h3 id="hlog">L</h3></div>
 	<div id="log"><?php include("php_script/logout.php"); ?></div>
 	<div id="wordfromdev" name="speaktou"><p>Toto was a very good friend for Mike. They have known each other for quit some times. One day, Mike wanted to organize a surprise for Toto. But it has been a long time they did not see each other, he wasn't sure of what would make him happy. So he finaly decided that his idea was bad and finish his day on the couch</p></div>
-
 	<div id="load">
-		<p id="count"><i>0</i> pictures loaded.</p>
+		<p id="status">Nothing loaded now</p>
 	</div>
 	<div id="galery">
 	</div>
 	<script src="js/display_menu.js" type="text/javascript"></script>
 	<script src="js/display_log.js" type="text/javascript"></script>
-	<script src="js/display_list.js" type="text/javascript"></script>
+	<script src="js/function_pictures.js" type="text/javascript"></script>
 	<script src="js/display_pictures.js" type="text/javascript"></script>
 </body></html>

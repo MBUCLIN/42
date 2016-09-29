@@ -5,3 +5,23 @@
 	padding-left: 15px;
 
 }
+
+#galery {
+	background-color: rgb(255, 255, 255);
+	margin-left: 300px;
+	width: 70%;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+.like-button {
+	background-color: red;
+	width: 40px;
+	border: 0px;
+}
+.input-commentary {
+	width: 500px;
+	margin-left: 20px;
+	height: 50px;
+	padding-left: 15px;
+}

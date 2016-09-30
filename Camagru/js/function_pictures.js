@@ -20,7 +20,6 @@ var		arrayByBlock = function(argument) {
 	var		i = 0;
 	var		array = new Array();
 
-	console.log(array.length);
 	while (argument[i]) {
 		if (open && close) {
 			array[array.length] = argument.substring(open + 1, close);
@@ -41,7 +40,6 @@ var		arrayByBlock = function(argument) {
 	if (open && close) {
 		array[array.length] = argument.substring(open + 1, close);
 	}
-	console.log(array);
 	return (array);
 }
 // RECUPERE LES LOGINS DANS UN TABLEAU [0]login1[1]login2
@@ -124,6 +122,7 @@ var		createCommentTable = function(comment) {
 	var		arrayComment = createCommentArray(comment);
 	var		login, com, explode;
 	var		tr;
+	var		div = document.createElement("div");
 
 	if (arrayComment == false)
 		return (false);
@@ -141,7 +140,8 @@ var		createCommentTable = function(comment) {
 		com = null;
 		tr = null;
 	}
-	return (table);
+	div.appendChild(table);
+	return (div);
 }
 // INSERT A NEW ELEMENT IN THE DOM
 var		insertToDocument = function(id, comment, like_list, count) {
@@ -149,12 +149,16 @@ var		insertToDocument = function(id, comment, like_list, count) {
 	var		img = document.createElement("img");
 	var		like = document.createElement("button");
 	var		nb_like = document.createElement("p");
-	var		input = document.createElement("input");
+	var		textarea = document.createElement("textarea");
+	var		send_comm = document.createElement("button");
 	var		comment_table;
 
-	input.type = "text";
-	input.id = id + "-comment";
-	input.className = "input-commentary";
+	send_comm.type = "button";
+	send_comm.className = "send-comm";
+	send_comm.id = id + "-but_comm";
+	send_comm.innerHTML = "Send";
+	textarea.id = id + "-comment";
+	textarea.className = "textarea-commentary";
 	like.className = "like-button";
 	like.innerHTML = "Like";
 	like.alt = like_list;
@@ -169,13 +173,14 @@ var		insertToDocument = function(id, comment, like_list, count) {
 	div.className = "div-galery";
 	div.appendChild(img);
 	div.appendChild(like);
-	div.appendChild(input);
+	div.appendChild(textarea);
+	div.appendChild(send_comm);
 	comment_table = createCommentTable(comment);
 	if (comment_table) {
-		comment_table.id = id + "-table";
+		comment_table.id = id + "-div_table";
 		comment_table.className = "table-commentary";
 		div.appendChild(comment_table);
 	}
-	div.id = id + "-" + div;
+	div.id = id + "-" + "div";
 	document.getElementById("galery").appendChild(div);
 }

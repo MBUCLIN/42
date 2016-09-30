@@ -24,12 +24,12 @@
 					echo "No id for this user";
 				} else {
 					$id_user = $ret[0]['id'];
-					$sql = "SELECT `id` FROM images WHERE `id_img` = :id_img;";
+					$sql = "SELECT `id_user` FROM images WHERE `id_img` = :id_img;";
 					$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 					foreach($file_names as $key => $value) {
 						$pre->execute(array('id_img' => $file_names[$key]));
 						$ret = $pre->fetchAll();
-						if (!isset($ret[0]['id']) || $id_user !== $ret[0]['id']) {
+						if (!isset($ret[0]['id_user']) || $id_user !== $ret[0]['id_user']) {
 							$_POST['error'] = "Id doesn't match";
 							echo "No match found";
 							die();

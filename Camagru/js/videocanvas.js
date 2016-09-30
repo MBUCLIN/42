@@ -19,16 +19,18 @@
 		var i = 0, imgx, imgy, size;
 		var		context = document.getElementById("canvas").getContext('2d');
 		var		video = document.getElementById("video");
-
+		var		n;
 		while (putted[i]) {
 			if (putted[i]) {
 				imgx = putted[i].offsetLeft - (video.offsetLeft + document.getElementById("video_div").offsetLeft);
 				imgy = putted[i].offsetTop - (video.offsetTop + document.getElementById("video_div").offsetTop);
 
+				n = putted[i].id[4];
+				console.log(n);
 				if (size) {
-					size += i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+					size += n.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
 				} else {
-					size = "pos=" + i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+					size = "pos=" + n.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
 				}
 				context.drawImage(putted[i], imgx, imgy, putted[i].clientWidth, putted[i].clientHeight);
 			}
@@ -97,6 +99,7 @@
 								if (this.responseText !== "Succes") {
 									alert("The image failed to be saved");
 								}
+								console.log(this.responseText);
 								var		canvas = document.getElementById("canvas");
 								var		context = canvas.getContext('2d');
 

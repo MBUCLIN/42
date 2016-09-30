@@ -101,7 +101,7 @@
 							} else {
 								$trans = 1;
 								$pdo->beginTransaction();
-								$sql = "INSERT INTO images VALUES (:imgI, :id);";
+								$sql = "INSERT INTO images (`id_img`, `id_user`)VALUES (:imgI, :id);";
 								$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 								$pre->execute(array('imgI' => $file_name, 'id' => $ret[0]['id']));
 								$pdo->commit();

@@ -41,9 +41,12 @@
 						video.addEventListener("mousedown", function(ev) {
 							if (copy.className !== "putted" && boxcheck) {
 								var		top = copy.style.top.substr(0, copy.style.top.length - 2);
+								var		left = copy.style.left.substr(0, copy.style.top.length - 2);
 
 								top = parseInt(top);
+								left = parseInt(left);
 								copy.style.top = top + window.pageYOffset + "px";
+								copy.style.left = left + window.pageXOffset + "px";
 								copy.className = "putted";
 								copy.style.position = "absolute";
 							}

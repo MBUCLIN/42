@@ -25,7 +25,7 @@
 	}
 }
 @media (max-width: 1300px) {
-	#last-picture_div {left: 310px;top: 940px;width: 700px; margin-bottom: 100px;}
+	#last-picture_div {left: 310px;top: 1000px;width: 700px; margin-bottom: 100px;}
 	#merge_div {margin-bottom: 0px;}
 }
 @media (max-width: 900px) {
@@ -34,5 +34,5 @@
 }
 @media (max-width: 650px) {
 	#merge_div {top: 265px;}
-	#last-picture_div {top: 960px;}
+	#last-picture_div {top: 1070px;}
 }

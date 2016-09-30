@@ -13,18 +13,17 @@
 			$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->exec("USE db_camagru");
-			$sql = "SELECT `id_img`, `id` FROM images;";
+			$sql = "SELECT `id_img`, `id_user` FROM images ORDER BY `id` DESC LIMIT 10 OFFSET $number";
 			$pre = $pdo->prepare($sql);
 			$pre->execute();
 			$ret = $pre->fetchAll();
 			if ($ret && $ret[0]) {
 				$key = 0;
 				while (isset($ret[$key])) {
-					if ($key >= $number && $key < $number + 10) {
 						$array[$key][0] = $ret[$key]['id_img'];
 						$sql = "SELECT `login` FROM users WHERE `id` = :id";
 						$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => CURSOR_FWDONLY));
-						$pre->execute(array('id' => $ret[$key]['id']));
+						$pre->execute(array('id' => $ret[$key]['id_user']));
 						$login = $pre->fetchAll();
 						$array[$key][1] = $login[0]['login'];
 						$sql = "SELECT `array_comment` `array_like` FROM img_info WHERE `id_img` = :id_img";
@@ -36,7 +35,6 @@
 						if ($landc[0]['array_like'])
 							$array[$key][3] = $landc[0]['array_like'];
 						$key++;
-					}
 				}
 				unset($pdo, $sql, $pre, $ret, $key, $login, $landc);
 			}
@@ -56,6 +54,8 @@
 						echo ";" . $array[$key][3];
 					echo ")";
 				}
+				echo $number;
+				unset($number, $array);
 			}
 		}
 	}

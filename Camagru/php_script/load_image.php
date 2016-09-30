@@ -21,7 +21,7 @@
 				$_POST['error'] = "Error id";
 				echo "No login for that user:";
 			} else {
-				$sql = "SELECT `id_img` FROM images WHERE `id` = :id AND `id_img` <> :ids;";
+				$sql = "SELECT `id_img` FROM images WHERE `id_user` = :id AND `id_img` <> :ids ORDER BY `id` DESC";
 				$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 				foreach ($gotit as $key => $value) {
 					$pre->execute(array("id" => $ret[0]['id'], "ids" => $gotit[$key]));
@@ -40,7 +40,7 @@
 		if (!isset($_POST['error'])) {
 			echo "Success";
 			foreach ($ret as $key => $value) {
-				echo ":" . $ret[$key]['id_img'];
+				echo ":" . $ret[$key][0];
 			}
 		}
 	}

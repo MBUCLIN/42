@@ -8,6 +8,7 @@
 		xhttp.onreadystatechange = function() {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
+					console.log(this.responseText);
 					var		imgname = this.responseText.split(":");
 					if (imgname[0] === "Success") {
 						if (imgname.length < 2) {

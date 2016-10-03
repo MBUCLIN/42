@@ -8,14 +8,16 @@
 ?>
 <!DOCTYPE html public>
 <html lang='en'><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<title>Home Page</title>
 	<link href="css/structure-page.css" type="text/css" rel="stylesheet" />
 </head><body>
 	<header name="header"><h1 name="header_text">Hello World</h1></header>
-	<div id="disp_menu"><h3 id="hmenu" style="color:red;">M</h3></div>
+	<div id="disp_menu"><h3 id="hmenu">M</h3></div>
 	<div id="hidd_menu" style="display:none"><?php include($menu); ?></div>
 	<div id="rolling-menu" name="head_menu"><?php include($menu); unset($menu);?></div>
-	<div id="disp_log"><h3 id="hlog" style="color:red;">L</h3></div>
+	<div id="disp_log"><h3 id="hlog">L</h3></div>
 	<div id='log' name='log_div'>
 	<?php
 		if (!isset($_SESSION['logged_on_us'])) {

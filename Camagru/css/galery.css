@@ -1,28 +1,63 @@
 #load {
-	background-color: rgb(155, 153, 141);
+	background-color: rgb(88, 90, 85);
 	margin-left: 300px;
-	width: 70%;
-	padding-left: 15px;
-
+	width:70%;
 }
-
+#load p {
+	margin-left: 30px;
+	color: rgb(181,183,185);
+}
 #galery {
-	background-color: rgb(255, 255, 255);
+	background-color: rgb(88, 90, 85);
 	margin-left: 300px;
 	width: 70%;
 	padding-top: 10px;
 	padding-left: 15px;
 	padding-bottom: 15px;
 }
-
-.like-button {
-	background-color: red;
-	width: 40px;
-	border: 0px;
+.div-galery {
+	height: 280px;
+	border-bottom: 2px solid black;
+	margin-bottom: 7px;
 }
-.input-commentary {
-	width: 500px;
-	margin-left: 20px;
-	height: 50px;
-	padding-left: 15px;
+.form-comment {
+	margin-left: 370px;
+	margin-top: -30px;
+}
+.textarea-commentary {
+	padding-top: 5px;
+	padding-left:5px;
+	width: 400px;
+	color: rgb(181, 183, 185);
+ 	background-color: rgb(28,30,25);
+}
+.send-comm {
+	width: 50px;
+	height: 37px;
+	position: relative;
+	top: -13px;
+	color: blue;
+	background-color: rgb(115,125,145);
+	border: 1px solid blue;
+}
+.like-button {
+	margin-top: -25px;
+	background-color: rgb(115,125,145);
+	color:blue;
+	border: 1px solid blue;
+	width: 50px;
+	font-size: 13px;
+}
+
+@media (max-width: 1250px) {
+	#galery {width: 850px;}
+}
+@media (max-width: 900px) {
+	#load {margin-left: 0px;margin-top: 200px;width:100%;}
+	#galery {margin-left: 0px;}
+}
+@media (max-width: 650px) {
+	#load {margin-top: 265px;}
+	#galery {width: 700px;}
+	.textarea-commentary {width:250px;}
 }

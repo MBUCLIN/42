@@ -1,10 +1,10 @@
 body {
-	background-color:black;
+	background-color: rgb(28,30,25);
 	overflow:scroll;
 }
 
 header {
-	background-color:rgb(255, 255, 255);
+	background-color:rgb(58, 60, 55);
 	width: 100%;
 	height: 70px;
 	text-align:center;
@@ -15,14 +15,15 @@ header {
 }
 header h1 {
 	overflow:hidden;
-	color:red;
+	color: rgb(185, 181, 183);
 	font-size:40px;
 	margin-top:9px;
 	height:46px;
 }
 
 #disp_menu {
-	background-color: rgb(235, 231, 223);
+	border: 1px solid black;
+	background-color: rgb(58, 60, 55);
 	z-index: 1;
 	height: 70px;
 	width: 70px;
@@ -32,8 +33,11 @@ header h1 {
 	text-align: center;
 	display: none;
 }
+#disp_menu h3 {
+	color: rgb(185, 181, 183);
+}
 #hidd_menu {
-	background-color: rgb(235, 231, 223);
+	background-color: rgb(58, 60, 55);
 	display: none;
 	height: 160px;
 	width: 70px;
@@ -43,18 +47,19 @@ header h1 {
 	z-index: 2;
 }
 #rolling-menu {
-	background-color: rgb(235, 231, 223);
+	border-top: 1px solid black;
+	background-color: rgb(58, 60, 55);
 	padding-top: 50px;
 	height: 500px;
 	width:100px;
-	border-radius:0px 20px 10px 0px;
+	border-radius:0px 0px 10px 0px;
 	position:absolute;
-	top:50px;
+	top:70px;
 	left:0px;
 	z-index:0;
 }
 .menu_ul {
-	background-color: rgb(0, 0, 0);
+	background-color: rgb(28, 30, 25);
 	padding-left: 10px;
 }
 .menu_ul li {
@@ -62,16 +67,17 @@ header h1 {
 	width: 100%;
 	list-style-type: none;
 	text-align:center;
-	border-bottom: 1px solid rgb(124, 231, 223);
+	border-bottom: 1px solid rgb(0, 0, 0);
 }
 
 .menu_link {
-	color:red;
+	color: rgb(185, 181, 183);
 	text-decoration: none;
 }
 
 #disp_log {
-	background-color: rgb(165, 161, 153);
+	background-color: rgb(58, 60, 55);
+	border: 1px solid black;
 	z-index: 1;
 	height: 70px;
 	width: 70px;
@@ -81,9 +87,14 @@ header h1 {
 	text-align: center;
 	display:none;
 }
+#disp_log h3 {
+	color: rgb(185, 181, 183);
+}
 #log {
+	border-top: 1px solid black;
+	border-left: 1px solid black;
 	z-index: 1;
-	background-color: rgb(165, 161, 153);
+	background-color: rgb(58, 60, 55);
 	height : 200px;
 	width: 200px;
 	position:relative;
@@ -95,36 +106,38 @@ header h1 {
 	top: 17px;
 }
 .input_login {
-	color: white;
+	color: rgb(185, 181, 183);
 	padding-left: 10px;
-	background-color:black;
+	background-color: rgb(28,30,25);
 	border-top:none;
 	border-left:none;
 	border-right:none;
-	border-bottom:1px solid rgb(165, 161, 153);
+	border-bottom:1px solid black;
 	width: 70%;
 	height: 25px;
 	margin-left: 30px;
 }
 #log p {
-	color: red;
+	color: rgb(185, 181, 183);
+
 	margin-top: 0px;
 	font-size: 20px;
 	position: relative;
 	top: 10px;
-	left: 5px;
+	left: 12px;
 }
 .logref {
+	color: rgb(185, 181, 183);
 	text-decoration: none;
-	margin-left: 30px;
+	margin-left: 22px;
 }
 #log button {
 	font-size: 15px;
-    background-color:red;
-    color: black;
+    background-color: rgb(115, 125, 145);
+	border: 1px solid blue;
+    color: blue;
     margin-top: 10px;
     margin-bottom: 10px;
-    border:none;
     width: 120px;
     height: 30px;
     margin-left: 35px;
@@ -137,10 +150,10 @@ header h1 {
 	width: 70%;
 	top: 75px;
 	left: 305px;
-	background-color: rgb(185, 181, 173);
+	background-color: rgb(88, 90, 85);
 }
 #wordfromdev p {
-	color: red;
+	color: rgb(185, 181, 183);
 
 }
 
@@ -154,10 +167,10 @@ footer {
 	height: 60px;
 	border-radius: 20px 10px 0px 0px;
 }
-@media only screen and (max-width: 1100px) {
+@media (max-width: 1100px) {
 	#wordfromdev p {width:600px;}
 }
-@media only screen and (max-width: 900px) {
+@media (max-width: 900px) {
 	#rolling-menu {display:none;}
 	#disp_menu {display:block;}
 	#disp_log {display:block;}
@@ -166,7 +179,7 @@ footer {
 	#wordfromdev {left:5px; width: 98%;}
 
 }
-@media only screen and (max-width: 650px) {
+@media (max-width: 650px) {
 	#wordfromdev {
 		width: 100%;
 		height: 170px;
@@ -176,6 +189,6 @@ footer {
 		overflow: hidden;
 	}
 }
-@media only screen and (max-width: 500px) {
+@media (max-width: 500px) {
 	header {padding-left:145px;text-align:initial;}
 }

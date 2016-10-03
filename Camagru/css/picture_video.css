@@ -1,5 +1,5 @@
 #video_div {
-	background-color: rgb(225, 223, 211);
+	background-color: rgb(88, 90, 85);
 	position: absolute;
 	top: 200px;
 	left: 310px;
@@ -7,7 +7,7 @@
 	display: block;
 }
 #video_div h4 {
-	color: red;
+	color: rgb(181, 183, 185);
 	text-align: center;
 }
 #video {
@@ -20,9 +20,10 @@
 	margin-left: 100px;
 }
 .but_vid {
-	background-color: red;
+	background-color: rgb(115, 125, 145);
+	color: blue;
+	border: 1px solid blue;
 	font-size: 15px;
-	border: none;
 	width: 80px;
 	margin-top: 10px;
 	margin-left: 30px;

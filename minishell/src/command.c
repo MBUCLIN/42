@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 18:23:14 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/29 13:09:20 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/01 14:17:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_exec			*find_commandtype(t_shell *shell, char *command)
 
 	if ((exec = initiate_exec()) == NULL)
 		end_minishell(-1);
-	if (ft_strlen(command) < 1)
+	if (ft_strisblank(command))
 		return (exec);
 	if ((exec->args = get_arguments(command, &exec->args)) == NULL)
 		end_minishell(-1);

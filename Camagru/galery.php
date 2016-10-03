@@ -6,6 +6,8 @@
 ?>
 <!DOCTYPE html public>
 <html><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<title>Lot of picture</title>
 	<link href="css/structure-page.css" type="text/css" rel="stylesheet" />
 	<link href="css/galery.css" type="text/css" rel="stylesheet" />

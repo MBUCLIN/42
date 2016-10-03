@@ -1,41 +1,28 @@
 #div_form_sub {
+	margin-bottom: 150px;
 	position: absolute;
 	top: 200px;
 	left: 310px;
 	width: 600px;
 	height: 300px;
-	border: 5px solid rgb(125, 121, 113);
-	background-color: rgb(145, 141, 133);
+	border: 3px solid rgb(181, 185, 183);
+	background-color: rgb(88, 90, 85);
 }
 #h3text {
-	background-color: black;
-	width: 100%;
+	background-color: rgb(28,30,25);
+	width: 80%;
+	margin-left: 55px;
 	border-radius: 50px 50px 50px 50px;
 	margin-top: 5px;
 	font-size: 25px;
 	text-align: center;
-	color: white;
+	color: rgb(181, 185, 183);
 }
 #div_form_sub h5 {
 	width: 135px;
-	color: white;
+	color: rgb(181, 185, 183);
 	margin-left: 10px;
 	font-size:15px;
-}
-#div_h4 {
-	width: 50px;
-	color:red;
-	margin-left: 350px;
-	margin-top: -205px;
-}
-#div_h4 h4 {
-	text-align:center;
-	background-color: white;
-	border-radius: 50px;
-	padding:3px;
-	width: 25px;
-	height: 25px;
-	margin: 8px;
 }
 #sub_form {
 	width: 200px;
@@ -43,8 +30,8 @@
 	margin-top: -170px;
 }
 .sub {
-	color: white;
-	background-color: black;
+	color: rgb(181, 185, 183);
+	background-color: rgb(28, 30, 25);
 	border-top: none;
 	border-left: none;
 	border-right: none;
@@ -55,9 +42,9 @@
 }
 #submit {
 	font-size: 15px;
-	background-color: red;
-	color: black;
-	border: none;
+    background-color: rgb(115, 125, 145);
+	border: 1px solid blue;
+	color: blue;
 	width: 80px;
 	height: 30px;
 	margin-left: 50px;
@@ -66,13 +53,13 @@
 	margin-left: 400px;
 	margin-top: -200px;
 }
-@media only screen and (max-width: 900px) {
+@media (max-width: 900px) {
 	#div_form_sub {left:5px; top: 200px;}
 }
-@media only screen and (max-width: 650px) {
+@media (max-width: 650px) {
 	#div_form_sub {top: 265px;}
 }
-@media only screen and (max-width: 400px) {
+@media (max-width: 400px) {
 	#div_form_sub {
 		width: 400px;
 	}

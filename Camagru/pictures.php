@@ -6,6 +6,8 @@
 ?>
 <!DOCTYPE html public>
 <html><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<title>Another world</title>
 	<link href="css/structure-page.css" type="text/css" rel="stylesheet" />
 	<link href="css/picture_video.css" type="text/css" rel="stylesheet" />

@@ -1,5 +1,5 @@
 #conseling {
-    background-color: rgb(205, 203, 191);
+    background-color: rgb(88, 90, 85);
     padding-left: 20px;
     padding-right: 10px;
     position: absolute;
@@ -9,18 +9,20 @@
     height: 125px;
 }
 #conseling strong {
-    color: red;
+    color: rgb(151, 153, 155);
 }
 #conseling p {
     white-space: nowrap;
+	color: rgb(181, 183, 185);
 }
 
 #forgot {
-    background-color: rgb(155, 153, 141);
+    background-color: rgb(88, 90, 85);
     position: absolute;
     top: 340px;
     left: 305px;
     width: 350px;
+	margin-bottom: 150px;
 }
 
 #forgot_form {
@@ -28,12 +30,12 @@
 }
 #forgot_form h5 {
     font-size: 15px;
-    color: red;
+    color: rgb(181, 183, 185);
 }
 .forg {
     color: white;
     padding-left: 10px;
-    background-color:black;
+    background-color: rgb(28,30,25);
     margin-top: -15px;
     border-top:none;
     border-left:none;
@@ -44,11 +46,11 @@
 }
 #send_password {
     font-size: 15px;
-    background-color:red;
-    color: black;
+    background-color: rgb(115,125,145);
+    color: blue;
     margin-top: 10px;
     margin-bottom: 10px;
-    border:none;
+    border: 1px solid blue;
     width: 120px;
     height: 30px;
     margin-left: 35px;

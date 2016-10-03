@@ -1,36 +1,36 @@
 #upload_div {
-	background-color: rgb(225, 223, 211);
+	background-color: rgb(88, 90, 85);
 	position: absolute;
 	top: 200px;
 	left: 310px;
 	width: 400px;
 }
 #upload_div h4 {
-	color: red;
+	color: rgb(181, 183, 185);
 	text-align: center;
 }
 #uploaded-image {
 	width: 320px;
 	margin-left: 40px;
 	margin-top: 20px;
-	background-color: black;
-	color: white;
+	background-color:  rgb(28,30,25);
+	color: rgb(181, 183, 185);
 }
 
 #upload-form {
 	margin-left: 30px;
 }
 #upload-file {
-	background-color: black;
-	color: white;
+	background-color: rgb(28,30,25);
+	color: rgb(181, 183, 185);
 	width: 250px;
 	height: 40px;
 	font-size: 12px;
 	margin-left: 40px;
 }
 #upload-select {
-	background-color: black;
-	color:white;
+	background-color: rgb(28,30,25);
+	color: rgb(181, 183, 185);
 	font-size: 14px;
 	width:100px;
 	margin-left: 80px;

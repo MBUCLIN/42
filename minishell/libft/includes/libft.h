@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/07/13 15:30:05 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/01 14:17:49 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int					ft_isascii(int c);
 int					ft_isstrascii(char *str);
 int					ft_isprint(int c);
 int					ft_isblank(int c);
+int					ft_strisblank(char *str);
 int					ft_isoption(int c, char *option);
 int					ft_islexisort(const char *s1, const char *s2);
 int					ft_isrevlexisort(char *s1, char *s2);

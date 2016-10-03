@@ -1,5 +1,5 @@
 #merge_div {
-	background-color: rgb(195, 193, 181);
+	background-color: rgb(88, 90, 85);
 	position: absolute;
 	left: 720px;
 	top: 200px;
@@ -7,13 +7,22 @@
 	padding-left: 15px;
 	margin-bottom: 100px;
 }
+#merge_div p {
+	color: rgb(181, 183 ,185);
+}
 #last-picture_div {
-	background-color: rgb(175, 173, 161);
+	background-color: rgb(88, 90, 85);
 	position: absolute;
 	width: 700px;
 	top: 200px;
 	left: 965px;
 	margin-bottom: 100px;
+}
+#last-picture_div p {
+	color: rgb(181, 183, 185);
+}
+#last-picture_div h4 {
+	color: rgb(181, 183, 185);
 }
 .last_pictures {
 	margin-left: 10px;

@@ -152,7 +152,11 @@ var		insertToDocument = function(id, comment, like_list, count) {
 	var		textarea = document.createElement("textarea");
 	var		send_comm = document.createElement("button");
 	var		comment_table;
+	var		form = document.createElement("form");
 
+	form.method = "POST";
+	form.className = "form-comment";
+	form.id = id + "-form";
 	send_comm.type = "button";
 	send_comm.className = "send-comm";
 	send_comm.id = id + "-but_comm";
@@ -172,9 +176,10 @@ var		insertToDocument = function(id, comment, like_list, count) {
 	img.className = "image-galery";
 	div.className = "div-galery";
 	div.appendChild(img);
+	form.appendChild(textarea);
+	form.appendChild(send_comm);
+	div.appendChild(form);
 	div.appendChild(like);
-	div.appendChild(textarea);
-	div.appendChild(send_comm);
 	comment_table = createCommentTable(comment);
 	if (comment_table) {
 		comment_table.id = id + "-div_table";

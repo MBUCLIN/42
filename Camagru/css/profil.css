@@ -1,45 +1,47 @@
 #about {
-	background-color: rgb(135, 133, 121);
+	background-color: rgb(88, 90, 85);
 	position: absolute;
 	top: 205px;
 	left: 305px;
 	width: 500px;
 	padding-bottom: 25px;
+	margin-bottom: 150px;
 }
 #you {
-	color: red;
+	color: rgb(181, 183, 185);
 	font-size: 20px;
 	margin-left: 150px;
 }
 
 .sub_title {
 	font-size: 17px;
-	color: white;
+	color: rgb(181, 183, 185);
 	margin-left: 80px;
 }
 
 #about-you-information {
 	padding-top: 5px;
 	padding-bottom: 5px;
-	background-color: rgb(95, 93, 81);
 	width: 90%;
 	margin-left: 30px;
 }
 #about-you-information h5 {
 	margin-left: 10px;
+	color: rgb(181, 183, 185);
 }
 #about-you-information p {
 	top: -38px;
 	left: 150px;
 	position: relative;
 	padding-left: 10px;
-	background-color: black;
-	color: white;
+	background-color: rgb(28,30,25);
+	color: rgb(181, 183, 185);
 	width: 200px;
 }
 .change_info {
-	background-color: red;
-	border: none;
+	background-color: rgb(115, 125, 145);
+	color: blue;
+	border: 1px solid blue;
 	margin-left: 50px;
 	margin-top: -60px;
 	font-size: 15px;
@@ -47,13 +49,13 @@
 }
 
 #about-you-password {
-	background-color: rgb(95, 93, 81);
 	width: 90%;
 	margin-left: 30px;
 	white-space: pre-line;
 	height: 270px;
 }
 .modify {
+	color: rgb(181, 183, 185);
 	margin-left: 10px;
 }
 #change-password {
@@ -62,7 +64,7 @@
 	left: 200px;
 }
 .change-input {
-	background-color: black;
+	background-color: rgb(28,30,25);
 	color: white;
 	height: 25px;
 	width: 160px;
@@ -71,16 +73,16 @@
 	padding-left: 10px;
 }
 .change-button {
-	background-color:red;
+	background-color: rgb(115,125,145);
+	color:blue;
 	margin-left: -40px;
 	margin-top: 10px;
-	border: none;
+	border: 1px solid blue;
 	height: 35px;
 	width: 80px;
 	font-size: 18px;
 }
 #about-you-mail {
-	background-color: rgb(95, 93, 81);
 	width: 90%;
 	margin-left: 30px;
 	white-space: pre-line;

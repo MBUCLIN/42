@@ -1,16 +1,16 @@
 #sended_mail {
 	padding-left: 20px;
 	padding-right: 10px;
-	background-color: rgb(135, 131, 123);
+	background-color: rgb(88, 90, 85);
 	width: 70%;
-	position: fixed;
+	position: absolute;
 	top: 205px;
 	left: 305px;
 }
 
 #valid_div {
-	background-color: rgb(215, 211, 203);
-	position: fixed;
+	background-color: rgb(88, 90, 85);
+	position: absolute;
 	top: 270px;
 	left: 100px;
 	width: 100%;
@@ -19,16 +19,16 @@
 }
 #valid_div p {
 	margin-left: 65px;
-	color: red;
+	color: rgb(181, 185, 183);
 }
 
 #token_form {
 	margin-left: 30px;
 }
 #token {
-	color: white;
+	color: rgb(181, 185, 183);
 	padding-left: 10px;
-	background-color:black;
+	background-color: rgb(28,30,25);
 	border-top:none;
 	border-left:none;
 	border-right:none;
@@ -38,16 +38,16 @@
 }
 #activ {
 	font-size: 15px;
-	background-color:red;
-	color: black;
-	border:none;
+	background-color: rgb(115, 125, 145);
+	color: blue;
+	border: 1px solid blue;
 	width: 100px;
 	height: 30px;
 	margin-left: 45px;
 }
 img[id*=meme] {
 	position: relative;
-	top: -110px;
+	top: -130px;
 	left: 280px;
 }
 @media only screen and (max-width: 900px) {

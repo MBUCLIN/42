@@ -29,7 +29,7 @@ $(NAME):
 all: $(NAME)
 
 clean:
-	rm -f $(PO)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)

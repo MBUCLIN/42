@@ -45,16 +45,17 @@
 		unset($DB_DSN, $DB_USER, $DB_PASSWORD);
 		if (!isset($_POST['error'])) {
 			echo "Success";
+
 			if ($array && $array[0]) {
 				foreach ($array as $key => $value) {
-					echo ";(" . $array[$key][0] . ";" . $array[$key][1];
+					echo ";(" . $array[$key][0] . ";" . $array[$key][1] . ";";
 					if ($array[$key][2])
-						echo ";" . $array[$key][2];
+						echo $array[$key][2];
+					echo ";";
 					if ($array[$key][3])
-						echo ";" . $array[$key][3];
+						echo $array[$key][3];
 					echo ")";
 				}
-				echo $number;
 				unset($number, $array);
 			}
 		}

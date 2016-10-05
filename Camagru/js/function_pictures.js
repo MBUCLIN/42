@@ -1,4 +1,17 @@
-// CHECK IF SUCCESS OR ERROR
+// ########################################################################## //
+// ### This file contain function that are used for the galery.php file   ### //
+// ## The list of function that are in the file is :					   ## //
+// ##		check_response ::line 15::check for SUCCESS					   ## //
+// ##		arrayByBlock ::line 28:: create an array with ID;COM;LIKE	   ## //
+// ##		arrayImageLogin ::line 57:: create array with [log1,log2]	   ## //
+// ##		arrayImageId ::line 67:: create an array with [id1,id2]		   ## //
+// ##		arrayImageComment ::line 77:: create array [commImg1,commImg2] ## //
+// ##		arrayImageLike ::line 87:: create array with [log1,log2]	   ## //
+// ##		createCommentArray :: line 97:: create array [comm1,comm2]     ## //
+// ##		createCommentTable :: line 126:: create a table with the comm  ## //
+// ##		insertToDocument :: line 152:: insert the ImgDiv in the dom	   ## //
+// ########################################################################## //
+
 var			check_response = function(argument) {
 	var		explode = argument.split(";");
 
@@ -12,7 +25,6 @@ var			check_response = function(argument) {
 		return (0);
 	}
 };
-// CREE UN TABLEAU AVEC ID;COMMENT;LIKE
 var		arrayByBlock = function(argument) {
 	var		open = 0;
 	var		close = 0;
@@ -42,7 +54,6 @@ var		arrayByBlock = function(argument) {
 	}
 	return (array);
 }
-// RECUPERE LES LOGINS DANS UN TABLEAU [0]login1[1]login2
 var		arrayImageLogin = function(argument) {
 	var		explode;
 	var		arrayLogin = new Array();
@@ -53,7 +64,6 @@ var		arrayImageLogin = function(argument) {
 	}
 	return (arrayLogin);
 }
-// RECUPERE LES ID DANS UN TABLEAU  [0]id1[1]id2 ...
 var		arrayImageId = function(argument) {
 	var		explode;
 	var		arrayId = new Array();
@@ -64,59 +74,55 @@ var		arrayImageId = function(argument) {
 	}
 	return (arrayId);
 }
-// RECUPERE LES COMMENT DANS UN TABLEAU (user{,}comment1)(user{,}comment2)
 var		arrayImageComment = function(argument) {
 	var		explode;
 	var		arrayComment = new Array();
 
 	for (var i = 0, l = argument.length; i < l; i++) {
 		explode = argument[i].split(";");
-		arrayComment[i] = explode[2];
+		arrayComment[i] = explode[3];
 	}
 	return (arrayComment);
 }
- // RECUPERE LES LIKE DANS UN TABLEAU name1,name2
 var		arrayImageLike = function(argument) {
 	var		explode;
 	var		arrayLike = new Array();
 
 	for (var i = 0, l= argument.length; i < l; i++) {
 		explode = argument[i].split(";");
-		arrayLike[i] = explode[3];
+		arrayLike[i] = explode[2];
 	}
 	return (arrayLike);
 }
-// CREATE AN ARRAY [comment1,comment2];
 var		createCommentArray = function(comment) {
-	var		open = 0, close = 0, sub_level = 0, i = 0;
+	var		open = -1, close = 0, sub_level = 0, i = 0;
 	var		array = new Array();
 
 	if (comment == "No comment yet")
 		return (false);
 	while (comment[i]) {
-		if (open && close) {
+		if (comment[i] == '(' && open == -1) {
+			open = i;
+		} else if (comment[i] == '(' && open >= 0) {
+			sub_level++;
+		} else if (comment[i] == ')' && sub_level) {
+			sub_level--;
+		} else if (comment[i] == ')' && open >= 0 && !sub_level) {
+			close = i;
+		}
+		if (open >= 0 && close) {
 			if (array) {
 				array[array.length] = comment.substring(open + 1, close);
 			} else {
 				array[0] = comment.substring(open + 1, close);
 			}
-			open = 0;
+			open = -1;
 			close = 0;
-		}
-		if (comment[i] == '(' && open == 0) {
-			open = i;
-		} else if (comment[i] == '(' && open) {
-			sub_level++;
-		} else if (comment[i] == ')' && sub_level) {
-			sub_level--;
-		} else if (comment[i] == ')' && open && !sub_level) {
-			close = i;
 		}
 		i++;
 	}
 	return (array);
 }
-// CREATE A TABLE OF USER | comment
 var		createCommentTable = function(comment) {
 	var		table = document.createElement("table");
 	var		arrayComment = createCommentArray(comment);
@@ -128,7 +134,7 @@ var		createCommentTable = function(comment) {
 		return (false);
 	for (var i = 0, l = arrayComment.length; i < l; i++) {
 		tr = document.createElement("tr");
-		explode = arrayComment.split("{,}");
+		explode = arrayComment[i].split("{,}");
 		login = document.createElement("td");
 		com = document.createElement("td");
 		login.innerHTML = explode[0];
@@ -143,8 +149,7 @@ var		createCommentTable = function(comment) {
 	div.appendChild(table);
 	return (div);
 }
-// INSERT A NEW ELEMENT IN THE DOM
-var		insertToDocument = function(id, comment, like_list, count) {
+var		insertToDocument = function(id, like_list, comment, count) {
 	var		div = document.createElement("div");
 	var		img = document.createElement("img");
 	var		like = document.createElement("button");
@@ -157,7 +162,7 @@ var		insertToDocument = function(id, comment, like_list, count) {
 	form.method = "POST";
 	form.className = "form-comment";
 	form.id = id + "-form";
-	send_comm.type = "button";
+	send_comm.type = "submit";
 	send_comm.className = "send-comm";
 	send_comm.id = id + "-but_comm";
 	send_comm.innerHTML = "Send";
@@ -176,6 +181,7 @@ var		insertToDocument = function(id, comment, like_list, count) {
 	img.className = "image-galery";
 	div.className = "div-galery";
 	div.appendChild(img);
+
 	form.appendChild(textarea);
 	form.appendChild(send_comm);
 	div.appendChild(form);
@@ -188,4 +194,11 @@ var		insertToDocument = function(id, comment, like_list, count) {
 	}
 	div.id = id + "-" + "div";
 	document.getElementById("galery").appendChild(div);
+	document.getElementById(id + "-form").addEventListener("submit", function(Oevent) {
+		Oevent.preventDefault();
+		submitComment(Oevent, id);
+	});
+	like.addEventListener("click", function(Oevent) {
+		submitLike(Oevent, id);
+	});
 }

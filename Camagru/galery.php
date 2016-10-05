@@ -23,9 +23,12 @@
 		<p id="status">Nothing loaded now</p>
 	</div>
 	<div id="galery">
+		<button id="loadMore" type="button">Display more</button>
 	</div>
+	<script src="js/function_event.js" type="text/javascript"></script>
 	<script src="js/display_menu.js" type="text/javascript"></script>
 	<script src="js/display_log.js" type="text/javascript"></script>
+	<script src="js/function_event.js" type="text.havascript"></script>
 	<script src="js/function_pictures.js" type="text/javascript"></script>
 	<script src="js/display_pictures.js" type="text/javascript"></script>
 </body></html>

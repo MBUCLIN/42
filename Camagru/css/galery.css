@@ -20,11 +20,31 @@
 	border-bottom: 2px solid black;
 	margin-bottom: 7px;
 }
+
+.table-commentary {
+	background-color: rgb(28, 30, 25);
+	position: relative;
+	overflow-y: scroll;
+	width: 450px;
+	height:200px;
+	top: -280px;
+	left: 370px;
+}
+table {
+	width: 100%;
+}
+.table-commentary td {
+	width: 50%;
+	color: rgb(181, 183, 185);
+	border-right: 1px solid rgb(181, 183, 185);
+	border-bottom: 1px solid rgb(181, 185, 185);
+}
 .form-comment {
 	margin-left: 370px;
 	margin-top: -30px;
 }
 .textarea-commentary {
+	resize: none;
 	padding-top: 5px;
 	padding-left:5px;
 	width: 400px;
@@ -49,6 +69,14 @@
 	font-size: 13px;
 }
 
+#loadMore {
+	background-color: rgb(115,125,145);
+	color: blue;
+	border: 1px solid blue;
+	font-size: 13px;
+	margin-bottom: 10px;
+	margin-left: 150px;
+}
 @media (max-width: 1250px) {
 	#galery {width: 850px;}
 }

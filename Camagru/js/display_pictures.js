@@ -1,10 +1,8 @@
 (function() {
 	var		count = 0;
 	var		stat = 0;
-
 	function		scrollRequest(scrollY, scrollH, height) {
 		if (height + scrollY >= scrollH - 50) {
-			console.log("toto");
 			if (stat == 0) {
 				stat = 1;
 				if (loadRequest() != 0) {
@@ -21,6 +19,7 @@
 		xhttp.onreadystatechange = function() {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
+					console.log(this.responseText);
 					if (!check_response(this.responseText)) {
 						var		cpy = this.responseText;
 						var		img_info = arrayByBlock(cpy);
@@ -28,13 +27,19 @@
 						var		img_id = arrayImageId(img_info);
 						var		img_comment = arrayImageComment(img_info);
 						var		img_like = arrayImageLike(img_info);
+						var		galery = document.getElementById("galery");
+						var		click = document.getElementById("loadMore");
 
 						for (var i = 0, l = img_info.length; i < l; i++) {
 							insertToDocument(img_id[i], img_login, img_comment[i], img_like[i], count);
 						}
+						console.log(img_login);
+						console.log(img_like);
 						count += img_info.length;
 						status.innerHTML = count.toString() + " images loaded.";
-						xhttp = undefined;
+						galery.removeChild(click);
+						if (img_info.length)
+							galery.appendChild(click);
 						return (img_info.length);
 					} else {
 						alert("An error occure while loading images");
@@ -55,8 +60,13 @@
 		xhttp.send("num=" + count);
 	};
 
-	window.onload = loadRequest();
-	document.body.onscroll = function() {
+	window.onload = function() {
+		var		galery = document.getElementById("galery");
+		var		click = document.getElementById("loadMore");
+
+		loadRequest();
+	};
+	document.getElementById("loadMore").onclick = function() {
 		var		scrollY = document.body.scrollTop;
 		var		scrollH = document.body.scrollHeight;
 		var		height = document.body.clientHeight;

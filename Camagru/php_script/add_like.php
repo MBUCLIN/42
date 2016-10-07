@@ -23,7 +23,18 @@
 					$_POST['error'] = "Error like";
 					echo "Error getting likes";
 				} else {
-					$ret = $_SESSION['logged_on_us'] . ""
+					if ($ret[0]['array_like'] !== "No likes yet") {
+						$ret = $ret[0]['array_like'] . "," . $_SESSION['logged_on_us'];
+					} else {
+						$ret = $_SESSION['logged_on_us'];
+					}
+					$trans = 1;
+					$pdo->beginTransaction();
+					$sql = "UPDATE img_info SET `array_like` = :ret WHERE `id_img` = :id_img";
+					$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+					$pre->execute(array('ret' => $ret, 'id_img' => $id_img));
+					$pdo->commit();
+					$trans = 0;
 				}
 			} catch (PDOException $error) {
 				if ($trans) {
@@ -34,6 +45,11 @@
 					echo "Error database";
 				}
 				unset($trans, $pdo, $sql, $pre, $ret, $id_img);
+			}
+			if (!isset($_POST['error'])) {
+				echo "Success";
+				echo ";" . $ret;
+				unset($pdo, $pre, $sql, $ret, $trans, $id_img);
 			}
 		}
 	}

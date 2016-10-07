@@ -19,6 +19,7 @@
 		}
 	}
 	function	merge_to_finalimg($image, $meme) {
+
 		foreach ($meme as $i => $value) {
 			$merge = imagecreatefrompng("../face/face" . $meme[$i]["num"] . ".png");
 			$size = getimagesize("../face/face" . $meme[$i]["num"] . ".png");
@@ -117,9 +118,9 @@
 								$id = $ret[0]['id'];
 								$pdo->beginTransaction();
 								$trans = 1;
-								$sql = "INSERT INTO images VALUES (:id_img, :id);";
+								$sql = "INSERT INTO images (`id_img`, `id_user`) VALUES (:id_img, :id_user);";
 								$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-								$pre->execute(array('id_img' => $file_name, 'id' => $id));
+								$pre->execute(array('id_img' => $file_name, 'id_user' => $id));
 								$pdo->commit();
 								$trans = 0;
 								$pdo->beginTransaction();

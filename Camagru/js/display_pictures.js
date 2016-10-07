@@ -19,7 +19,6 @@
 		xhttp.onreadystatechange = function() {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
-					console.log(this.responseText);
 					if (!check_response(this.responseText)) {
 						var		cpy = this.responseText;
 						var		img_info = arrayByBlock(cpy);
@@ -33,8 +32,6 @@
 						for (var i = 0, l = img_info.length; i < l; i++) {
 							insertToDocument(img_id[i], img_login, img_comment[i], img_like[i], count);
 						}
-						console.log(img_login);
-						console.log(img_like);
 						count += img_info.length;
 						status.innerHTML = count.toString() + " images loaded.";
 						galery.removeChild(click);

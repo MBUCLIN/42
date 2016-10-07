@@ -2,16 +2,18 @@
 	function	size_view(putted) {
 		var i = 0, imgx, imgy, size;
 		var	image = document.getElementById("uploaded-image");
+		var n;
 
 		while (putted[i]) {
 			if (putted[i]) {
 				imgx = putted[i].offsetLeft - (image.offsetLeft + document.getElementById("upload_div").offsetLeft);
 				imgy = putted[i].offsetTop - (image.offsetTop + document.getElementById("upload_div").offsetTop);
 
+				n = putted[i].id[4];
 				if (size) {
-					size += i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+					size += n.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
 				} else {
-					size = "pos=" + i.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
+					size = "pos=" + n.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
 				}
 			}
 			i++;
@@ -53,7 +55,6 @@
 					if (this.status === 200) {
 						if (this.responseText !== "Success") {
 							alert("The image failed to be saved or is not an image");
-							console.log(this.responseText);
 						}
 							clear_div(imageUpload);
 					}

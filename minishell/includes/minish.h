@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 14:50:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/09/26 16:02:31 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/07 16:41:47 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <sys/wait.h>
-# include "../libft/includes/libft.h"
-# include "../ft_printf/includes/ft_printf.h"
+# include "../../libft/includes/libft.h"
+# include "../../ft_printf/includes/ft_printf.h"
 
 typedef struct		s_exec
 {

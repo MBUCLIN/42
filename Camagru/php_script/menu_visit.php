@@ -15,4 +15,5 @@
 		$i++;
 	}
 	echo $end_ul;
+	unset($ref, $list, $ul, $a, $end_a, $li, $end_li, $end_ul);
 ?>

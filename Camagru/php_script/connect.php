@@ -35,7 +35,8 @@
 			header("Location: ../index.php");
 		}
 		unset($pdo, $sql, $pre, $ret, $DB_DSN, $DB_USER, $DB_PASSWORD, $login, $passwd);
-		if (!isset($_POST['error']))
+		if (!isset($_POST['error'])) {
 			header("Location: ../index.php");
+		}
 	}
 ?>

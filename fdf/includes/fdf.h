@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 15:59:32 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/25 13:29:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/07 16:43:13 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <limits.h>
 # include <mlx.h>
-# include "../libft/includes/libft.h"
-# include "../ft_printf/includes/ft_printf.h"
+# include "../../libft/includes/libft.h"
+# include "../../ft_printf/includes/ft_printf.h"
 # include "fdf_structure.h"
 # define WIN_W 1280
 # define WIN_H 1280

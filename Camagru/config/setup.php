@@ -27,6 +27,7 @@
 		$DB_PASSWORD = null;
 	} catch (PDOException $error) {
 		echo $error->getmessage();
+		unset($pdo, $sql, $DB_DSN, $DB_USER, $DB_PASSWORD, $error);
 		exit();
 	}
 	if (!file_exists("../images")) {
@@ -37,8 +38,11 @@
 			if ($files[$key][0] !== '.')
 				unlink("../images/" . $files[$key]);
 		}
-		rmdir("../images");
-		mkdir("../images");
+		unset($key, $value);
+		if (count($files) <= 2) {
+			rmdir("../images");
+			mkdir("../images");
+		}
 	}
 	if (!file_exists("../resized")) {
 		mkdir("../resized");
@@ -49,8 +53,12 @@
 				unlink("../resized/" . $files[$key]);
 			}
 		}
-		rmdir("../resized");
-		mkdir("../resized");
+		unset($key, $value);
+		if (count($files) <= 2) {
+			rmdir("../resized");
+			mkdir("../resized");
+		}
 	}
+	unset($files, $pdo, $sql, $DB_DSN, $DB_USER, $DB_PASSWORD);
 	header("Location: ../index.php");
 ?>

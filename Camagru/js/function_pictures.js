@@ -6,7 +6,7 @@
 // ##		arrayImageLogin ::line 57:: create array with [log1,log2]	   ## //
 // ##		arrayImageId ::line 67:: create an array with [id1,id2]		   ## //
 // ##		arrayImageComment ::line 77:: create array [commImg1,commImg2] ## //
-// ##		arrayImageLike ::line 87:: create array with [log1,log2]	   ## //
+// ##		arrayImageLike ::line 87:: create array with[logreq,log1,log2] ## //
 // ##		createCommentArray :: line 97:: create array [comm1,comm2]     ## //
 // ##		createCommentTable :: line 126:: create a table with the comm  ## //
 // ##		insertToDocument :: line 152:: insert the ImgDiv in the dom	   ## //
@@ -59,7 +59,7 @@ var		arrayImageLogin = function(argument) {
 	var		arrayLogin = new Array();
 
 	for (var i = 0, l = argument.length; i < l; i++) {
-		explode = argument[i].split(";");
+		explode = argument[i].split("[;]");
 		arrayLogin[i] = explode[1];
 	}
 	return (arrayLogin);
@@ -69,7 +69,7 @@ var		arrayImageId = function(argument) {
 	var		arrayId = new Array();
 
 	for (var i = 0, l = argument.length; i < l; i++) {
-		explode = argument[i].split(";");
+		explode = argument[i].split("[;]");
 		arrayId[i] = explode[0];
 	}
 	return (arrayId);
@@ -79,8 +79,8 @@ var		arrayImageComment = function(argument) {
 	var		arrayComment = new Array();
 
 	for (var i = 0, l = argument.length; i < l; i++) {
-		explode = argument[i].split(";");
-		arrayComment[i] = explode[3];
+		explode = argument[i].split("[;]");
+		arrayComment[i] = explode[2];
 	}
 	return (arrayComment);
 }
@@ -89,8 +89,8 @@ var		arrayImageLike = function(argument) {
 	var		arrayLike = new Array();
 
 	for (var i = 0, l= argument.length; i < l; i++) {
-		explode = argument[i].split(";");
-		arrayLike[i] = explode[2];
+		explode = argument[i].split("[;]");
+		arrayLike[i] = explode[3];
 	}
 	return (arrayLike);
 }
@@ -149,7 +149,20 @@ var		createCommentTable = function(comment) {
 	div.appendChild(table);
 	return (div);
 }
-var		insertToDocument = function(id, like_list, comment, count) {
+var		is_userlikepic = function(like) {
+	var		i = 1;
+	var		array = like.split(',');
+
+	if (array && array[1])
+	while (i < array.length) {
+		if (array[i] === array[0]) {
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+var		insertToDocument = function(id, login, comment, like_list, count) {
 	var		div = document.createElement("div");
 	var		img = document.createElement("img");
 	var		like = document.createElement("button");
@@ -172,33 +185,49 @@ var		insertToDocument = function(id, like_list, comment, count) {
 	like.innerHTML = "Like";
 	like.alt = like_list;
 	like.id = id + "-" + "like";
-	if (like_list)
-		nb_like.innerHTML = like_list.length.toString() + " likes";
-	else
-		nb_like.innerHTML = "0 like";
 	img.src = "images/" + id + ".png";
 	img.id = id + "-" + "img";
 	img.className = "image-galery";
 	div.className = "div-galery";
 	div.appendChild(img);
-
 	form.appendChild(textarea);
 	form.appendChild(send_comm);
 	div.appendChild(form);
-	div.appendChild(like);
-	comment_table = createCommentTable(comment);
-	if (comment_table) {
-		comment_table.id = id + "-div_table";
-		comment_table.className = "table-commentary";
-		div.appendChild(comment_table);
+	if (is_userlikepic(like_list)) {
+		if (like_list.length > 1) {
+			var		split = like_list.split(",");
+			var		nb = split.length - 1;
+
+			nb_like.style.marginTop = "-25px";
+			split = undefined;
+			nb_like.id = id + "-nb_like";
+			nb_like.className = "nb_like";
+			nb_like.innerHTML = nb + "  Likes on this picture.";
+			div.appendChild(nb_like);
+		}
+	} else {
+		like.style.marginTop = "-25px";
+		div.appendChild(like);
 	}
 	div.id = id + "-" + "div";
-	document.getElementById("galery").appendChild(div);
-	document.getElementById(id + "-form").addEventListener("submit", function(Oevent) {
+	form.addEventListener("submit", function(Oevent) {
 		Oevent.preventDefault();
 		submitComment(Oevent, id);
 	});
 	like.addEventListener("click", function(Oevent) {
-		submitLike(Oevent, id);
+		submitLike(Oevent, id, like_list.split(','));
 	});
+	comment_table = createCommentTable(comment);
+	if (comment_table) {
+		comment_table.id = id + "-div_table";
+		comment_table.className = "table-commentary";
+		if (like.parentNode === div) {
+			like.style.marginTop = "-225px"
+			div.insertBefore(comment_table, like);
+		} else if (nb_like.parentNode === div) {
+			nb_like.style.marginTop = "-225px";
+			div.insertBefore(comment_table, nb_like);
+		}
+	}
+	document.getElementById("galery").appendChild(div);
 }

@@ -2,9 +2,9 @@
 
 NAME = fdf
 
-LIB = libft/libft.a
+LIB = ../libft/libft.a
 
-LIBPRINTF = ft_printf/libftprintf.a
+LIBPRINTF = ../ft_printf/libftprintf.a
 
 SRC_NAME = debug.c del.c initiate_map.c check.c initiate_mlx.c \
 		   function_keyevent.c draw_image.c draw_line.c get.c redraw.c
@@ -24,8 +24,8 @@ XFLAGS = -lmlx -framework AppKit -framework OpenGL
 CC = gcc
 
 $(NAME): $(OBJ)
-	make -C libft;
-	make -C ft_printf;
+	make -C ../libft;
+	make -C ../ft_printf;
 	$(CC) $(CFLAGS) -o $(NAME) main.c $(OBJ) $(XFLAGS) $(LIB) $(LIBPRINTF)
 
 all: $(NAME)
@@ -34,16 +34,16 @@ clean:
 	rm -rfv $(OBJ)
 
 lclean: clean
-	make clean -C libft;
-	make clean -C ft_printf
+	make clean -C ../libft;
+	make clean -C ../ft_printf
 
 fclean: clean
 	rm -rfv $(NAME)
 
 lfclean: lclean
 	rm -rfv $(NAME)
-	make fclean -C libft;
-	make fclean -C ft_printf;
+	make fclean -C ../libft;
+	make fclean -C ../ft_printf;
 
 re: fclean all
 

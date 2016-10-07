@@ -74,5 +74,11 @@
 	<script src="js/face_stickers.js" type="text/javascript"></script>
 	<script src="js/load_picture.js" type="text/javascript"></script>
 	<script src="js/delete_picture.js" type="text/javascript"></script>
-	<footer></footer>
+	<footer>
+		<a class="footer-link" href="http://www.intra.42.fr" alt="intra" title="subject">Intra link</a>
+		<br />
+		<a class="footer-link" href="https://cdn.intra.42.fr/pdf/pdf/595/camagru.fr.pdf" alt="subject" title="subject">PDF subject camagru link</a>
+		<p id="footer-copy">&copy mbuclin</p>
+		<p id="footer-me">mail: mbuclin@student.42.fr :: date: 2016</p>
+	</footer>
 </body></html>

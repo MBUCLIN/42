@@ -10,7 +10,7 @@
 			echo "Error comment";
 		} else {
 			$id_img = htmlspecialchars(trim($_POST['id_img']));
-			$comment = htmlspecialchars($_POST['comment']);
+			$comment = filter_var($_POST['comment'], FILTER_SANITIZE_SPECIAL_CHARS);
 			$trans = 0;
 			$comment = "(" . $_SESSION['logged_on_us'] . "{,}" . $comment . ")";
 			try {

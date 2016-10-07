@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 14:18:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/18 17:45:19 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/07 16:42:44 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <uuid/uuid.h>
 # include <time.h>
 # include <inttypes.h>
-# include "../libft/includes/libft.h"
-# include "../ft_printf/includes/ft_printf.h"
+# include "../../libft/includes/libft.h"
+# include "../../ft_printf/includes/ft_printf.h"
 # include "ft_ls_struct.h"
 
 void		*del_name(t_name *head);

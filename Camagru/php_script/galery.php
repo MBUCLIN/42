@@ -26,14 +26,14 @@
 						$pre->execute(array('id' => $ret[$key]['id_user']));
 						$login = $pre->fetchAll();
 						$array[$key][1] = $login[0]['login'];
-						$sql = "SELECT `array_comment` `array_like` FROM img_info WHERE `id_img` = :id_img";
+						$sql = "SELECT `array_comment`, `array_like` FROM img_info WHERE `id_img` = :id_img";
 						$pre = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 						$pre->execute(array('id_img' => $ret[$key]['id_img']));
 						$landc = $pre->fetchAll();
-						if ($landc[0]['array_comment'])
+						if ($landc[0]['array_comment'] !== "No comment Yet")
 							$array[$key][2] = $landc[0]['array_comment'];
-						if ($landc[0]['array_like'])
-							$array[$key][3] = $landc[0]['array_like'];
+						if ($landc[0]['array_like'] !== "No likes yet")
+							$array[$key][3] = $_SESSION['logged_on_us'] . ',' . $landc[0]['array_like'];
 						$key++;
 				}
 				unset($pdo, $sql, $pre, $ret, $key, $login, $landc);
@@ -45,13 +45,12 @@
 		unset($DB_DSN, $DB_USER, $DB_PASSWORD);
 		if (!isset($_POST['error'])) {
 			echo "Success";
-
 			if ($array && $array[0]) {
 				foreach ($array as $key => $value) {
-					echo ";(" . $array[$key][0] . ";" . $array[$key][1] . ";";
+					echo ";(" . $array[$key][0] . "[;]" . $array[$key][1] . "[;]";
 					if ($array[$key][2])
 						echo $array[$key][2];
-					echo ";";
+					echo "[;]";
 					if ($array[$key][3])
 						echo $array[$key][3];
 					echo ")";

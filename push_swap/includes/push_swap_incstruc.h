@@ -6,15 +6,15 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 16:39:13 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/04/22 18:01:56 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/07 16:44:09 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_INCSTRUC_H
 # define PUSH_SWAP_INCSTRUC_H
 
-# include "../libft/includes/libft.h"
-# include "../ft_printf/includes/ft_printf.h"
+# include "../../libft/includes/libft.h"
+# include "../../ft_printf/includes/ft_printf.h"
 # define NB_OPTION 3
 # define NUMBER 0
 # define COLOR 1

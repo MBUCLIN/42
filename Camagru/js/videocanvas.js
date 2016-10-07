@@ -26,7 +26,6 @@
 				imgy = putted[i].offsetTop - (video.offsetTop + document.getElementById("video_div").offsetTop);
 
 				n = putted[i].id[4];
-				console.log(n);
 				if (size) {
 					size += n.toString() + "," + imgx.toString() + "," + imgy.toString() + ":";
 				} else {
@@ -99,7 +98,6 @@
 								if (this.responseText !== "Succes") {
 									alert("The image failed to be saved");
 								}
-								console.log(this.responseText);
 								var		canvas = document.getElementById("canvas");
 								var		context = canvas.getContext('2d');
 

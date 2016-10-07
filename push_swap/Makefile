@@ -15,9 +15,9 @@ SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 
 OBJ_NAME = $(subst .c,.o,$(SRC_NAME))
 
-LIB = libft/libft.a
+LIB = ../libft/libft.a
 
-LIBFTPRINTF = ft_printf/libftprintf.a
+LIBFTPRINTF = ../ft_printf/libftprintf.a
 
 OBJ = $(addprefix $(SRC_PATH),$(OBJ_NAME))
 
@@ -26,20 +26,20 @@ CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 
 $(NAME): $(OBJ)
-	make -C libft;
-	make -C ft_printf;
+	make -C ../libft;
+	make -C ../ft_printf;
 	$(CC) $(CFLAGS) -o $(NAME) main.c $(OBJ) $(LIB) $(LIBFTPRINTF)
 
 all: $(NAME)
 
 clean:
-	make clean -C libft;
-	make clean -C ft_printf;
+	make clean -C ../libft;
+	make clean -C ../ft_printf;
 	rm -rfv $(OBJ)
 
 fclean: clean
-	make fclean -C libft;
-	make fclean -C ft_printf;
+	make fclean -C ../libft;
+	make fclean -C ../ft_printf;
 	rm -rfv $(NAME)
 
 re: fclean all

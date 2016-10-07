@@ -23,9 +23,8 @@ var		submitComment = function(ev, id) {
 function		actualize_comment(xhttp, comment, button, id) {
 	if (xhttp.readyState === 4) {
 		if (xhttp.status === 200) {
-			console.log(xhttp.responseText);
 			if (!check_response(xhttp.responseText)) {
-				var		commentary = xhttp.responseText.split(";")[1];
+				var		commentary = xhttp.responseText.substring(8);
 				var		big_div = document.getElementById(id + "-div"), div, table;
 				if (!document.getElementById(id + "-div_table")) {
 					div = createCommentTable(commentary);
@@ -84,10 +83,20 @@ function		actualize_Like(xhttp, id, list_len) {
 				var		like = document.getElementById(id + "-like");
 				var		div = document.getElementById(id + "-div");
 				var		like_number = document.createElement("p");
-				var		inner = list_len + "Likes on this picture.";
+				var		len = xhttp.responseText.split(';')[1];
+				var inner;
+
+				len = len.split(',').length;
+				inner = len + " Likes on this picture.";
+
+				like_number.id = id + "-nb_like";
+				like_number.className = "nb_like";
+				if (document.getElementById(id + "-div_table"))
+					like_number.style.marginTop = "-225px";
+				else
+					like_number.style.marginTop = "-25px";
 				if (div && like) {
 					div.removeChild(like);
-				} else if (div) {
 					like_number.innerHTML = inner;
 					div.appendChild(like_number);
 				}

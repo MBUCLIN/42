@@ -5,7 +5,8 @@ PATH = src/
 
 SRC_NAME = main.c canon.c \
 		   command/read_loop.c command/handle.c command/cursor.c \
-		   command/tabulation.c \
+		   command/tabulation.c command/recreate.c command/handle_del.c \
+		   command/handle_trbl.c command/termcap.c command/rewrite.c \
 		   other/winsize.c \
 		   error/shell_error.c \
 		   env/search_env.c

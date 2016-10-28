@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:46:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/26 12:40:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/28 13:55:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ int			get_tabszst(int pos)
 
 	col = get_colsz();
 	colpos = ((pos + 3) % col);
-	if (colpos < 4)
+	if (pos == 0)
 		return (1);
-	if (colpos % 4)
-		return (colpos % 4);
-	return (4);
+	return (-((colpos % 4) - 4));
 }
 
 int			get_tabsznd(int pos)
@@ -33,7 +31,7 @@ int			get_tabsznd(int pos)
 
 	col = get_colsz();
 	colpos = ((pos + 3) % col);
-	if (colpos == 4)
+	if (pos == 1)
 		return (1);
 	else if (colpos % 4)
 		return (colpos % 4);

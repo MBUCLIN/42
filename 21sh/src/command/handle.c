@@ -6,71 +6,98 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/26 18:01:25 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/28 16:15:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static char		*recreate_command(char *cmd)
+static int		get_mask(char *buf)
 {
 	int		len;
-	char	*newone;
 
-	if (cmd != NULL)
-		len = ft_strlen(cmd);
-	else
-		len = 0;
-	if ((newone = (char *)malloc(sizeof(char) * (len + BUF_SIZE + 1))) == NULL)
-		return (NULL);
-	ft_bzero(newone, len + BUF_SIZE + 1);
-	newone = ft_strcpy(newone, cmd);
-	return (newone);
+	len = ft_strlen(buf);
+	if (len == 3 && buf[2] < 67)
+		return (IS_HIST);
+	else if ((len == 3 && buf[2] < 70) ||\
+			(len == 4 && buf[3] < 67))
+		return (IS_MVTRBL);
+	else if (len == 3)
+		return (IS_MVSTND);
+	else if (len == 4)
+		return (IS_MVWRD);
+	else if (buf[0] == 12)
+		return (IS_CLEAR);
+	else if (buf[0] < 18)
+		return (IS_WRDCP);
+	else if (buf[0] < 25)
+		return (IS_SCRC);
+	return (IS_DEL);
 }
 
-static char		*recreate_szchar(char *szchar)
+void			handle_special(char *buf, t_command **cmd)
 {
-	int		len;
-	char	*newone;
+	int			mask;
 
-	if (szchar != NULL)
-		len = ft_strlen(szchar);
-	else
-		len = 0;
-	if ((newone = (char *)malloc(sizeof(char) * (len + BUF_SIZE + 1))) == NULL)
-		return (NULL);
-	ft_bzero(newone, len + BUF_SIZE + 1);
-	newone = ft_strcpy(newone, szchar);
-	return (newone);
+	mask = get_mask(buf);
+	if (mask == 0)
+		handle_del(cmd);
+	else if (IF_MVTRBL(mask))
+		handle_trbl(buf, cmd);
 }
-static void		handle_end(int c, t_command **cmd)
+
+static char		*inserton_str(char *szchar, char *cmd, t_command **comd)
 {
-	int			bt;
+	char		*sub;
+	int			i;
+	int			j;
+	int			save;
+
+	i = (*comd)->pos;
+	save = i;
+	j = 0;
+	sub = NULL;
+	if ((sub = ft_strsub(cmd + i, 0, ft_strlen(cmd + i))) == NULL)
+		return (NULL);
+	while (++i <= (*comd)->len)
+	{
+		(*comd)->pos = i;
+		cmd[i] = sub[j];
+		if (cmd[i] == '\t')
+			szchar[i] = get_tabszst(get_cursor(LOCAT, comd));
+		else
+			szchar[i] = 1;
+		j++;
+	}
+	(*comd)->pos = save;
+	free(sub);
+	return (cmd);
+}
+void			handle_normal(int c, t_command **cmd)
+{
 	int			n;
 
-	if ((*cmd)->pos % BUF_SIZE == 0)
+
+	if ((*cmd)->len != 0 && (*cmd)->len % BUF_SIZE == 0)
 	{
+		ft_printf("create");
 		if (((*cmd)->command = recreate_command((*cmd)->command)) == NULL)
 			exit(1);
 		if (((*cmd)->szchar = recreate_szchar((*cmd)->szchar)) == NULL)
 			exit(1);
 	}
+	inserton_str((*cmd)->szchar, (*cmd)->command, cmd);
 	(*cmd)->command[(*cmd)->pos] = c;
-	bt = 1;
+	(*cmd)->szchar[(*cmd)->pos] = 1;
 	n = -1;
 	if (c == '\t')
 	{
-		bt = get_tabszst(get_cursor(LOCAT, cmd));
-		c = ' ';
+		(*cmd)->szchar[(*cmd)->pos] = get_tabszst(get_cursor(LOCAT, cmd));
+		c = '.';
 	}
-	(*cmd)->szchar[(*cmd)->pos] = bt;
-	while (++n < bt)
-		write(1, &c, 1);
+	while (++n < (*cmd)->szchar[(*cmd)->pos])
+		insert_char(c);
 	(*cmd)->pos++;
 	(*cmd)->len++;
-}
-void			handle_normal(int c, t_command **cmd)
-{
-	if ((*cmd)->pos == (*cmd)->len)
-		handle_end(c, cmd);
+	rewrite_end(cmd, 1);
 }

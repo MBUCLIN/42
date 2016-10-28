@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:53:02 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/05/02 18:02:58 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/25 15:15:29 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char		*ft_strsubfree(char *str, int n, int len)
 	int			i;
 
 	i = 0;
-	if (!str || !len)
+	if (str == NULL || !len)
 		return (NULL);
-	if (!(dest = (char *)malloc(sizeof(char) * (len + 1))))
+	if ((dest = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
 	{
 		free(str);
 		return (NULL);

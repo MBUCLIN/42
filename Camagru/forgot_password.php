@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	$call = 1;
+	$call_menu = 1;
 	if (isset($_SESSION['logged_on_us'])) {
 		header("Location: index.php");
 	}
@@ -16,7 +18,7 @@
 	<header name="header"><h1 name="header_text">Memory problem?</h1></header>
 	<div id="disp_menu"><h3 id="menu">M</h3></div>
 	<div id="hidd_menu" style="display:none"><?php include("php_script/menu_visit.php"); ?></div>
-	<div id="rolling-menu" name="head_menu"><?php include("php_script/menu_visit.php"); ?></div>
+	<div id="rolling-menu" name="head_menu"><?php include("php_script/menu_visit.php"); unset($call_menu); ?></div>
 	<div id="disp_log"><h3 id="hlog">L</h3></div>
 	<div id='log' name='log_div'><?php include('php_script/login.php'); ?></div>
 
@@ -28,13 +30,13 @@
 	</div>
 	<div id="forgot" name="forgot_div" style="<?php echo $top; ?>"><form id="forgot_form" action="php_script/forgot_change.php" name="forgot_form" method="POST">
 		<h5>User name :</h5><input type="text" id="login" class="forg" name="login" maxlength="15" minlength="4" pattern="[A-Za-z0-9]+" placeholder="user name"/>
-		<h5>e mail :</h5><input type="email" id="mail" class="forg" name="mail" pattern="[A-Za-z0-9.]+@[a-zA-Z0-9.]+" maxlength="320" minlength="6" placeholder="password"/><br />
+		<h5>e mail :</h5><input type="email" id="mail" class="forg" name="mail" pattern="[A-Za-z0-9.]+@[a-zA-Z0-9.]+" maxlength="320" minlength="6" placeholder="my@mail.com"/><br />
 		<button id="send_password" class="submit" type="submit" name="submit">Send Passwd</button></form>
 	</div>
 	<script src="js/display_menu.js" type="text/javascript"></script>
 	<script src="js/display_log.js" type="text/javascript"></script>
 	<footer>
-		<a class="footer-link" href="http://www.intra.42.fr" alt="intra" title="subject">Intra link</a>
+		<a class="footer-link" href="https://signin.intra.42.fr/users/sign_in" alt="intra" title="subject">Intra link</a>
 		<br />
 		<a class="footer-link" href="https://cdn.intra.42.fr/pdf/pdf/595/camagru.fr.pdf" alt="subject" title="subject">PDF subject camagru link</a>
 		<p id="footer-copy">&copy mbuclin</p>

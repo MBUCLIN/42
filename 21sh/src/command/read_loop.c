@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/26 17:01:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/28 15:38:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,12 @@ static t_command	*create_command(void)
 	cmd = NULL;
 	if ((cmd = (t_command *)malloc(sizeof(t_command))) == NULL)
 		return (NULL);
-	cmd->command = NULL;
-	cmd->szchar = NULL;
+	if ((cmd->command = (char *)malloc(sizeof(char) * (BUF_SIZE + 1))) == NULL)
+		return (NULL);
+	if ((cmd->szchar = (char *)malloc(sizeof(char) * (BUF_SIZE + 1))) == NULL)
+		return (NULL);
+	ft_bzero(cmd->command, BUF_SIZE + 1);
+	ft_bzero(cmd->szchar, BUF_SIZE + 1);
 	cmd->pos = 0;
 	cmd->len = 0;
 	return (cmd);
@@ -91,6 +95,8 @@ char				*read_loop(void)
 		}
 		else if (type == 1)
 			handle_normal(buf[0], &cmd);
+		else
+			handle_special(buf, &cmd);
 		ft_memset(buf, 0, 7);
 	}
 	return (NULL);

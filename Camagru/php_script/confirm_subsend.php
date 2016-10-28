@@ -79,7 +79,6 @@
 		Enter the code :' . $token .'
 		Enter your login and password and let\'s
 		take some pictures !!';
-			$msg = wordwrap($msg, 70, '<br />');
 			mail($e_mail, 'Confirm account Camagru', $msg);
 			unset($ret, $pdo, $sql, $rep, $user_name, $password, $e_mail, $token);
 			if (!isset($_POST['error']))

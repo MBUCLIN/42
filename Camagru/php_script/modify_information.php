@@ -5,21 +5,21 @@
 		header("Location: ../index.php");
 	} else if (!isset($_POST['oldpw']) || !isset($_POST['newpw']) || !isset($_POST['confpw'])) {
 		if (!isset($_POST['pw']) || !isset($_POST['mail'])) {
-			header("Location: ../change_password.php");
+			header("Location: ../myprofil.php");
 		} else {
 			$mail = htmlspecialchars($_POST['mail']);
 			$pw = hash('sha512', htmlspecialchars($_POST['pw']));
 		}
 	} else if (!isset($_POST['mail']) || !isset($_POST['pw'])) {
 		if (!isset($_POST['oldpw']) || !isset($_POST['newpw']) || !isset($_POST['confpw'])) {
-			header("Location: ../change_password.php");
+			header("Location: ../myprofil.php");
 		} else {
 			$pw = hash('sha512', htmlspecialchars($_POST['oldpw']));
 			$newpw = hash('sha512', htmlspecialchars($_POST['newpw']));
 			$confpw = hash('sha512', htmlspecialchars($_POST['confpw']));
 			if ($newpw !== $confpw) {
 				$_POST['error'] = "The new password and his confirmation has to be an exact match.";
-				header("Location: ../change_password.php");
+				header("Location: ../myprofil.php");
 			}
 		}
 	}
@@ -41,7 +41,7 @@
 			} else {
 				if ($ret[0]['passwd'] !== $pw) {
 					$_POST['error'] = 'Wrong password given...';
-					header("Location: ../change_password.php");
+					header("Location: ../myprofil.php");
 				} else {
 					$trans = 1;
 					$pdo->beginTransaction();
@@ -65,7 +65,7 @@
 			}
 			$_POST['error'] = "An error occured while exchanging with the database";
 			$pdo = null;
-			header("Location: ../index.php");
+			header("Location: ../myprofil.php");
 		}
 		unset($pdo, $sql, $pre, $ret, $pw, $mail, $newpw, $confpw, $trans);
 		if (!isset($_POST['error'])) {

@@ -1,9 +1,11 @@
 <?php
-	include("config/database.php");
+	include("../config/database.php");
 	if (isset($_SESSION['logged_on_us'])) {
-		header("Location: index.php");
+		$_POST['error'] = "User logged";
+		header("Location: ../index.php");
 	} else if (!isset($_POST['login']) || !isset($_POST['mail'])) {
-		header("Location: forgot_password.php");
+		$_POST['error'] = "No inputs";
+		header("Location: ../forgot_password.php");
 	} else {
 		$trans = 0;
 		$login = htmlspecialchars($_POST['login']);
@@ -19,7 +21,7 @@
 			$ret = $pre->fetchAll();
 			if (!isset($ret[0]['id'])) {
 				$_POST['error'] = "The login that you entered isn't valid.";
-				header("Location: forgot_password.php");
+				header("Location: ../forgot_password.php");
 			} else {
 				$id = $ret[0]['id'];
 				$sql = "SELECT `mail` FROM user_info WHERE `id` = :id";
@@ -28,7 +30,7 @@
 				$ret = $pre->fetchAll();
 				if (!isset($ret[0]['mail'])) {
 					$_POST['error'] = "A mail could not been found for your login ..";
-					header("Location: forgot_password.php");
+					header("Location: ../forgot_password.php");
 				} else {
 					$trans = 1;
 					$pdo->beginTransaction();
@@ -46,7 +48,7 @@
 			}
 			$pdo = null;
 			$_POST['error'] = "An error occured while connection to database";
-			header("Location: index.php");
+			header("Location: ../forgot_password.php");
 		}
 		$msg = "Hi dear custumer,
 
@@ -55,12 +57,11 @@
 	Don't forget to change it for the next conexion!
 	You're new password is : " . $token . ".
 	Have a nice day with Camagru!";
-		$msg = wordwrap($msg, 70, '\n');
 		if (mail($mail, 'New password for Camagru', $msg) === FALSE) {
 			$_POST['error'] = 'Could not send the mail.';
-			header("Location: forgot_password.php");
+			header("Location: ../forgot_password.php");
 		}
-		header("Location: index.php");
+		header("Location: ../index.php");
 		unset($pdo, $sql, $ret, $pre, $login, $mail, $DB_DSN, $DB_USER, $DB_PASSWORD, $msg, $token, $id);
 	}
 ?>

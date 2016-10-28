@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/26 17:35:38 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/28 15:21:45 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 
 /* Thoose macro are used to choose function */
 
-# define IF_DEL(m) (m & IS_DEL)
 # define IF_MVTRBL(m) (m & IS_MVTRBL)
 # define IF_MVWRD(m) (m & IS_MVWRD)
 # define IF_MVSTND(m) (m & IS_MVSTNT)
@@ -47,21 +46,21 @@
 /*  normal.                                     */
 
 # define TABLEN 16
-# define HISTN {27, 91, 65, 0, 0, 0}
-# define HISTP {27, 91, 66, 0, 0, 0}
-# define MVOUP {27, 27, 91, 65, 0, 0}
-# define MVODO {27, 27, 91, 66, 0, 0}
-# define MVOLFT {27, 91, 68, 0, 0, 0}
-# define MVORGT {27, 91, 67, 0, 0, 0}
-# define MVWLFT {27, 27, 91, 68, 0, 0}
-# define MVWRGT {27, 27, 91, 67, 0, 0}
-# define MVST {27, 91, 72, 0, 0, 0}
+# define HISTN {27, 91, 65, 0, 0, 0} //
+# define HISTP {27, 91, 66, 0, 0, 0} //
+# define MVOUP {27, 27, 91, 65, 0, 0} //
+# define MVODO {27, 27, 91, 66, 0, 0} //
+# define MVOLFT {27, 91, 68, 0, 0, 0} //
+# define MVORGT {27, 91, 67, 0, 0, 0} //
+# define MVWLFT {27, 27, 91, 68, 0, 0} //
+# define MVWRGT {27, 27, 91, 67, 0, 0} //
+# define MVST {27, 91, 72, 0, 0, 0} //
 # define MVND {27, 91, 70, 0, 0, 0}
-# define WCUT {14, 0, 0, 0, 0, 0}
-# define WPST {16, 0, 0, 0, 0, 0}
+# define WCUT {14, 0, 0, 0, 0, 0} //
+# define WPST {16, 0, 0, 0, 0, 0} //
 # define SCUR {24, 0, 0, 0, 0, 0}
 # define RCUR {18, 0, 0, 0, 0, 0}
-# define BCLR {12, 0, 0, 0, 0, 0}
+# define BCLR {12, 0, 0, 0, 0, 0} //
 # define CDEL {127, 0, 0, 0, 0, 0}
 
 # define KEYTAB { HISTN, HISTP, MVOUP, MVODO, MVOLFT, MVORGT, MVWLFT, MVWRGT,\
@@ -98,7 +97,18 @@ int					get_colsz(void);
 
 char				*search_env(char *var, t_list *env);
 
-void				handle_normal();
+void				ft_termstr(char *id);
+void				delete_char(void);
+void				insert_char(int c);
+char				*recreate_szchar(char *szchar);
+char				*recreate_command(char *cmd);
+
+void				rewrite_end(t_command **cmd, int insert);
+
+void				handle_trbl(char *buf, t_command **cmd);
+void				handle_del(t_command **cmd);
+void				handle_special(char *buf, t_command **cmd);
+void				handle_normal(int c, t_command **cmd);
 char				*read_loop(void);
 
 #endif

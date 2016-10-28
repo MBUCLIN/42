@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 16:15:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/06/28 15:38:10 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/20 13:47:27 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 {
 	t_list	*lst;
 
-	if (!(lst = (t_list *)ft_memalloc(sizeof(*lst))))
+	if ((lst = (t_list *)ft_memalloc(sizeof(t_list))) == NULL)
 		return (NULL);
 	if (content != NULL)
 	{

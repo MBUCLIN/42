@@ -1,4 +1,7 @@
 <?php
+	if (!isset($_SESSION['logged_on_us'])) {
+		header("Location: ../index.php");
+	}
 	$name = "face";
 	$i = 0;
 	echo "<p>Choose a sticker to put in your picture :</p>";

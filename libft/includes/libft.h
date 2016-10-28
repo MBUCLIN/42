@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/01 14:17:49 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/28 12:03:33 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 int					ft_strnchr(char *str, int c);
+int					ft_writechar(int c);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 ssize_t				ft_satoi(char *str);
 
@@ -150,5 +151,6 @@ char				**ft_deltabswapstr(char **env, char *del, int len);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstindex(t_list *head, int index);
+t_list				*ft_artol(char **array);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/28 15:21:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/01 11:33:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,19 @@ int					noncanonize_input(char *name);
 
 int					get_cursor(int flag, t_command **cmd);
 int					get_tabszst(int pos);
-int					get_tabsznd(int pos);
 int					get_colsz(void);
 
 char				*search_env(char *var, t_list *env);
 
 void				ft_termstr(char *id);
+void				ft_termgoto(char *id, int c, int l);
 void				delete_char(void);
 void				insert_char(int c);
-char				*recreate_szchar(char *szchar);
-char				*recreate_command(char *cmd);
+void				left_moove(t_command *cmd);
+void				right_moove(t_command *cmd);
+void				recreate(t_command **cmd);
 
-void				rewrite_end(t_command **cmd, int insert);
+void				rewrite_end(t_command **cmd);
 
 void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);

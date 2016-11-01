@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 12:16:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/28 14:04:58 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/31 15:06:35 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,12 @@ void		ft_termstr(char *id)
 		tputs(req, 1, ft_writechar);
 }
 
-void		delete_char(void)
+void		ft_termgoto(char *id, int c, int l)
 {
 	char		*req;
 
-	if ((req = tgetstr("dm", NULL)) == NULL)
-		ft_termstr("dc");
+	if ((req = tgoto(id, l, c)) == NULL)
+		return ;
 	else
-	{
 		tputs(req, 1, ft_writechar);
-		ft_termstr("dc");
-		ft_termstr("ed");
-	}
-}
-
-void		insert_char(int c)
-{
-	char	*req;
-	
-	if ((req = tgetstr("im", NULL)) == NULL)
-	{
-		if ((req = tgetstr("ic", NULL)) == NULL)
-			write(1, &c, 1);
-		else
-		{
-			tputs(req, 1, ft_writechar);
-			write(1, &c, 1);
-		}
-	}
-	else
-	{
-		tputs(req, 1, ft_writechar);
-		write(1, &c, 1);
-		ft_termstr("ei");
-	}
 }

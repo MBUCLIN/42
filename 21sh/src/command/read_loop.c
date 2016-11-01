@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/28 15:38:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/31 16:10:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int			check_special(char *buf)
 	}
 	if (ft_strlen(buf) > 1)
 		return (0);
-	else if ((buf[0] <= 31 || buf[0] >= 127) && (buf[0] != '\t' && buf[0] != '\n'))
+	else if ((buf[0] <= 31 || buf[0] >= 127) &&\
+			(buf[0] != '\t' && buf[0] != '\n'))
 		return (0);
 	return (1);
 }
@@ -48,6 +49,8 @@ static char			*get_command(t_command **cmd)
 	else
 		ret = ft_strdup((*cmd)->command);
 	free((*cmd)->command);
+	free((*cmd)->szchar);
+	(*cmd)->szchar = NULL;
 	(*cmd)->command = NULL;
 	free((*cmd));
 	*cmd = NULL;
@@ -86,18 +89,14 @@ char				*read_loop(void)
 	{
 		if (buf[0] == '\n' && !buf[1])
 			return (get_command(&cmd));
-		else if (buf[0] == 27 && !buf[1])
+		else if (buf[0] == 27 && buf[1] == 0)
 			return (NULL);
-		if ((type = check_special(buf)) == 0)
-		{
-			ft_memset(buf, 0, 7);
-			continue ;
-		}
-		else if (type == 1)
-			handle_normal(buf[0], &cmd);
-		else
+		if ((type = check_special(buf)) == 2)
 			handle_special(buf, &cmd);
+		if (type == 1)
+			handle_normal(buf[0], &cmd);
 		ft_memset(buf, 0, 7);
 	}
+	ft_putendl("NULL read");
 	return (NULL);
 }

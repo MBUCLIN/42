@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:52:10 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/27 16:25:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/31 16:02:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 
 int		get_colsz(void)
 {
-	struct winsize		winsz;
-
-	if (ioctl(0, TIOCGWINSZ, &winsz) == -1)
-		return (-1);
-	return (winsz.ws_col);
+	return (tgetnum("co"));
 }

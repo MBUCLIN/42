@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 14:33:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/27 14:40:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/01 11:38:44 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-char		*recreate_command(char *cmd)
+static char		*recreate_command(char *cmd)
 {
 	int		len;
 	char	*newone;
@@ -27,7 +27,7 @@ char		*recreate_command(char *cmd)
 	return (newone);
 }
 
-char		*recreate_szchar(char *szchar)
+static char		*recreate_szchar(char *szchar)
 {
 	int		len;
 	char	*newone;
@@ -42,3 +42,16 @@ char		*recreate_szchar(char *szchar)
 	return (newone);
 }
 
+void			recreate(t_command **cmd)
+{
+	if ((*cmd)->len != 0 && (*cmd)->len % BUF_SIZE == 0)
+	{
+		(*cmd)->command = recreate_command((*cmd)->command);
+		(*cmd)->szchar = recreate_szchar((*cmd)->szchar);
+		if ((*cmd)->command == NULL || (*cmd)->szchar == NULL)
+		{
+			sherror("21sh", ERRMALLOC, NULL);
+			exit(1);
+		}
+	}
+}

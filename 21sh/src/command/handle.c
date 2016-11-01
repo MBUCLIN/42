@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/28 16:15:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/01 12:09:05 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,55 +49,66 @@ void			handle_special(char *buf, t_command **cmd)
 static char		*inserton_str(char *szchar, char *cmd, t_command **comd)
 {
 	char		*sub;
-	int			i;
 	int			j;
 	int			save;
 
-	i = (*comd)->pos;
-	save = i;
+	save = (*comd)->pos;
 	j = 0;
 	sub = NULL;
-	if ((sub = ft_strsub(cmd + i, 0, ft_strlen(cmd + i))) == NULL)
+	if ((sub = ft_strsub(cmd + (*comd)->pos,\
+						0, ft_strlen(cmd + (*comd)->pos))) == NULL)
 		return (NULL);
-	while (++i <= (*comd)->len)
+	(*comd)->pos++;
+	while (sub[j])
 	{
-		(*comd)->pos = i;
-		cmd[i] = sub[j];
-		if (cmd[i] == '\t')
-			szchar[i] = get_tabszst(get_cursor(LOCAT, comd));
+		cmd[(*comd)->pos] = sub[j];
+		if (sub[j] == '\t')
+			szchar[(*comd)->pos] = get_tabszst(get_cursor(LOCAT, comd));
 		else
-			szchar[i] = 1;
+			szchar[(*comd)->pos] = 1;
 		j++;
+		(*comd)->pos++;
 	}
 	(*comd)->pos = save;
 	free(sub);
 	return (cmd);
 }
+
 void			handle_normal(int c, t_command **cmd)
 {
 	int			n;
+	int			col;
+	int			sf;
+	int			cursor;
 
-
-	if ((*cmd)->len != 0 && (*cmd)->len % BUF_SIZE == 0)
-	{
-		ft_printf("create");
-		if (((*cmd)->command = recreate_command((*cmd)->command)) == NULL)
-			exit(1);
-		if (((*cmd)->szchar = recreate_szchar((*cmd)->szchar)) == NULL)
-			exit(1);
-	}
+	sf = 0;
+	col = get_colsz();
+	recreate(cmd);
 	inserton_str((*cmd)->szchar, (*cmd)->command, cmd);
 	(*cmd)->command[(*cmd)->pos] = c;
 	(*cmd)->szchar[(*cmd)->pos] = 1;
-	n = -1;
-	if (c == '\t')
-	{
-		(*cmd)->szchar[(*cmd)->pos] = get_tabszst(get_cursor(LOCAT, cmd));
-		c = '.';
-	}
-	while (++n < (*cmd)->szchar[(*cmd)->pos])
-		insert_char(c);
 	(*cmd)->pos++;
 	(*cmd)->len++;
-	rewrite_end(cmd, 1);
+	cursor = get_cursor(LOCAT, cmd);
+	if (cursor % col == 0)
+		sf = 1;
+	if (c == '\t')
+	{
+		(*cmd)->szchar[(*cmd)->pos - 1] = get_tabszst(cursor);
+		if ((cursor - 1 + (*cmd)->szchar[(*cmd)->pos - 1]) % col == 0)
+			sf = 1;
+		c = '.';
+	}
+	n = 0;
+	while (n < (*cmd)->szchar[(*cmd)->pos - 1])
+	{
+		insert_char(c);
+		n++;
+	}
+	if (sf)
+	{
+		ft_termstr("sf");
+		ft_printf("%d : cursor\n%d : col\n", cursor, col);
+	}
+	rewrite_end(cmd);
 }

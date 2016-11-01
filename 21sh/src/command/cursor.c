@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:50:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/28 15:32:10 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/10/31 15:56:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		get_cursorpos(t_command **cmd)
 		cursor += (*cmd)->szchar[i];
 		i++;
 	}
-	return (cursor);
+	return (cursor + 3);
 }
 
 static int		get_cursorlength(t_command **cmd)
@@ -43,7 +43,7 @@ static int		get_cursorlength(t_command **cmd)
 		cursor += (*cmd)->szchar[i];
 		i++;
 	}
-	return (cursor);
+	return (cursor + 3);
 }
 
 int				get_cursor(int flag, t_command **cmd)

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:04:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/28 15:12:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/01 12:09:07 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 static void		deleteon_str(char *szchar, char *cmd, t_command **comd)
 {
 	int		i;
+	int		pos;
 
 	i = (*comd)->pos;
-	
-	if (szchar[i] && cmd[i])
+	pos = (*comd)->pos;
+	if (cmd[i])
 	{
 		while (cmd[i])
 		{
@@ -28,30 +29,33 @@ static void		deleteon_str(char *szchar, char *cmd, t_command **comd)
 			else
 				szchar[i] = 1;
 			i++;
+			(*comd)->pos = i;
 		}
 	}
-	szchar[i - 1] = 0;
+	(*comd)->pos = pos;
 }
 
 void			handle_del(t_command **cmd)
 {
-	int		n;
-	int		oldlen;
-	int		sz_char;
+	int			cursor;
+	int			col;
+	int			szchar;
 
-	n = 0;
-	oldlen = get_cursor(LENGT, cmd) - (*cmd)->szchar[(*cmd)->pos - 1];
 	if ((*cmd)->pos == 0)
 		return ;
-	while (n < (*cmd)->szchar[(*cmd)->pos - 1])
+	col = get_colsz();
+	cursor = get_cursor(LOCAT, cmd);
+	szchar = (*cmd)->szchar[(*cmd)->pos];
+	while (szchar)
 	{
-		tputs(tgetstr("le", NULL), 1, ft_writechar);
+		left_moove(*cmd);
+		if (cursor % col == 0)
+			ft_termstr("ce");
 		delete_char();
-		n++;
+		szchar--;
 	}
-	(*cmd)->pos -= 1;
-	(*cmd)->len -= 1;
-	sz_char = (*cmd)->szchar[(*cmd)->pos];
+	(*cmd)->pos--;
+	(*cmd)->len--;
 	deleteon_str((*cmd)->szchar, (*cmd)->command, cmd);
-	rewrite_end(cmd, 0);
+	rewrite_end(cmd);
 }

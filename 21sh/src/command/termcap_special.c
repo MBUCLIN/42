@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 15:00:35 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/01 11:13:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/01 17:47:06 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,12 @@ void		insert_char(int c)
 	}
 }
 
-void		left_moove(t_command *cmd)
+void		left_moove(int cursor)
 {
-	int			cursor;
 	int			col;
 	int			i;
 
 	i = 0;
-	cursor = get_cursor(LOCAT, &cmd);
 	col = get_colsz();
 	if (cursor % col == 0)
 	{

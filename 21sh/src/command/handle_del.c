@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:04:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/01 12:09:07 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/01 17:25:59 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,13 @@ void			handle_del(t_command **cmd)
 		return ;
 	col = get_colsz();
 	cursor = get_cursor(LOCAT, cmd);
-	szchar = (*cmd)->szchar[(*cmd)->pos];
+	szchar = (*cmd)->szchar[(*cmd)->pos - 1];
 	while (szchar)
 	{
-		left_moove(*cmd);
-		if (cursor % col == 0)
-			ft_termstr("ce");
+		left_moove(cursor);
 		delete_char();
 		szchar--;
+		cursor--;
 	}
 	(*cmd)->pos--;
 	(*cmd)->len--;

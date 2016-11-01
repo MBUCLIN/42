@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/01 11:33:02 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/01 17:19:07 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void				ft_termstr(char *id);
 void				ft_termgoto(char *id, int c, int l);
 void				delete_char(void);
 void				insert_char(int c);
-void				left_moove(t_command *cmd);
+void				left_moove(int cursor);
 void				right_moove(t_command *cmd);
 void				recreate(t_command **cmd);
 

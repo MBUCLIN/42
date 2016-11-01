@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/01 12:09:05 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/01 17:50:59 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,30 +85,28 @@ void			handle_normal(int c, t_command **cmd)
 	col = get_colsz();
 	recreate(cmd);
 	inserton_str((*cmd)->szchar, (*cmd)->command, cmd);
+	cursor = get_cursor(LOCAT, cmd);
 	(*cmd)->command[(*cmd)->pos] = c;
 	(*cmd)->szchar[(*cmd)->pos] = 1;
 	(*cmd)->pos++;
 	(*cmd)->len++;
-	cursor = get_cursor(LOCAT, cmd);
-	if (cursor % col == 0)
+	if ((cursor + 1) % col == 0)
 		sf = 1;
 	if (c == '\t')
 	{
 		(*cmd)->szchar[(*cmd)->pos - 1] = get_tabszst(cursor);
-		if ((cursor - 1 + (*cmd)->szchar[(*cmd)->pos - 1]) % col == 0)
+		if ((cursor + (*cmd)->szchar[(*cmd)->pos - 1]) % col == 0)
 			sf = 1;
 		c = '.';
 	}
 	n = 0;
 	while (n < (*cmd)->szchar[(*cmd)->pos - 1])
 	{
+		
 		insert_char(c);
 		n++;
 	}
 	if (sf)
-	{
 		ft_termstr("sf");
-		ft_printf("%d : cursor\n%d : col\n", cursor, col);
-	}
 	rewrite_end(cmd);
 }

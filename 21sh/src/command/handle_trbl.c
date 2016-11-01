@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 16:18:38 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/31 15:12:33 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/01 17:19:27 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		handle_rightleft(int add, t_command **cmd)
 	n = -1;
 	while (++n != (*cmd)->szchar[(*cmd)->pos + add])
 		if (add == -1)
-			left_moove(*cmd);
+			left_moove(get_cursor(LOCAT, cmd));
 		else
 			right_moove(*cmd);
 	if (add == -1)

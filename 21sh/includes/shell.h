@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/01 17:19:07 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/02 16:11:19 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int					canonize_input(char *name);
 int					noncanonize_input(char *name);
 
 int					get_cursor(int flag, t_command **cmd);
+int					place_cursor(int oldcol, int cursor);
 int					get_tabszst(int pos);
 int					get_colsz(void);
 
@@ -110,6 +111,6 @@ void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);
 void				handle_special(char *buf, t_command **cmd);
 void				handle_normal(int c, t_command **cmd);
-char				*read_loop(void);
+char				*read_loop(t_list *env);
 
 #endif

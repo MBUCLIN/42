@@ -6,11 +6,35 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/31 16:10:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/02 16:12:43 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+static int			ft_getent(t_list *env)
+{
+	char			*name;
+	static int		colsz = 0;
+	int				newsz;
+	int				col;
+
+	col = 0;
+	if ((name = search_env("TERM=", env)) == NULL)
+		return (-1);
+	else if (tgetent(NULL, name) != 1)
+		return (-1);
+	if ((newsz = tgetnum("co")) == -1)
+		return (-1);
+	if (colsz == 0)
+		colsz = newsz;
+	else if (colsz != newsz)
+	{
+		col = colsz;
+	}
+	colsz = newsz;
+	return (col);
+}
 
 static int			check_special(char *buf)
 {
@@ -65,9 +89,16 @@ static t_command	*create_command(void)
 	if ((cmd = (t_command *)malloc(sizeof(t_command))) == NULL)
 		return (NULL);
 	if ((cmd->command = (char *)malloc(sizeof(char) * (BUF_SIZE + 1))) == NULL)
+	{
+		free(cmd);
 		return (NULL);
+	}
 	if ((cmd->szchar = (char *)malloc(sizeof(char) * (BUF_SIZE + 1))) == NULL)
+	{
+		free(cmd->command);
+		free(cmd);
 		return (NULL);
+	}
 	ft_bzero(cmd->command, BUF_SIZE + 1);
 	ft_bzero(cmd->szchar, BUF_SIZE + 1);
 	cmd->pos = 0;
@@ -75,7 +106,7 @@ static t_command	*create_command(void)
 	return (cmd);
 }
 
-char				*read_loop(void)
+char				*read_loop(t_list *env)
 {
 	char		buf[7];
 	t_command	*cmd;
@@ -85,18 +116,28 @@ char				*read_loop(void)
 	ft_putstr("$> ");
 	if ((cmd = create_command()) == NULL)
 		return (NULL);
-	while (read(0, buf, 6) > 0)
+	while (42)
 	{
+		if (read(0, buf, 6) < 1)
+			break ;
+		if ((type = ft_getent(env)) == -1)
+			break ;
+//			return (readnon_cannon());
+		else if (type)
+		{
+			place_cursor(type, get_cursor(LOCAT, &cmd));
+		}
 		if (buf[0] == '\n' && !buf[1])
 			return (get_command(&cmd));
+//		if (check_quotelvl(buf) == 0)
+//			return (get_command(&cmd));
 		else if (buf[0] == 27 && buf[1] == 0)
-			return (NULL);
+			break ;
 		if ((type = check_special(buf)) == 2)
 			handle_special(buf, &cmd);
 		if (type == 1)
 			handle_normal(buf[0], &cmd);
 		ft_memset(buf, 0, 7);
 	}
-	ft_putendl("NULL read");
 	return (NULL);
 }

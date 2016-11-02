@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/01 17:50:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/02 15:17:33 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ void			handle_special(char *buf, t_command **cmd)
 	if (mask == 0)
 		handle_del(cmd);
 	else if (IF_MVTRBL(mask))
+	{
 		handle_trbl(buf, cmd);
+	}
 }
 
 static char		*inserton_str(char *szchar, char *cmd, t_command **comd)

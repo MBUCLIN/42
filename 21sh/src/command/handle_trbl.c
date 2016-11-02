@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 16:18:38 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/01 17:19:27 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/02 15:16:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ void		handle_trbl(char *buf, t_command **cmd)
 	if (len == 3)
 	{
 		if (buf[len - 1] == 68)
+		{
 			handle_rightleft(-1, cmd);
+		}
 		else
+		{
 			handle_rightleft(0, cmd);
+		}
 	}
 /*
 	else

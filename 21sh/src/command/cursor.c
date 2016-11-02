@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:50:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/31 15:56:16 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/02 16:47:07 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,31 @@ int				get_cursor(int flag, t_command **cmd)
 	else if (flag == LENGT)
 		return (get_cursorlength(cmd));
 	return (-1);
+}
+
+int				place_cursor(int oldcol, int cursor)
+{
+	int			newcol;
+	int			up;
+	int			mv;
+
+	newcol = get_colsz();
+	up = 0;
+	mv = 0;
+	if (oldcol < newcol)
+		up = cursor / oldcol;
+	else
+		up = cursor / oldcol + ((oldcol / newcol) * (cursor / oldcol));
+	mv = cursor % oldcol;
+	while (mv)
+	{
+		ft_termstr("le");
+		mv--;
+	}
+	while (up)
+	{
+		ft_termstr("up");
+		up--;
+	}
+	return (1);
 }

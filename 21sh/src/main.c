@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:23:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/10/31 18:02:01 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/02 14:29:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void			main_loop(t_list *env)
 			return ;
 		if (!canonize_input(name))
 			return ;
-		if ((command = read_loop()) == NULL)
+		if ((command = read_loop(env)) == NULL)
 		{
 			sherror("21sh", ERRMALLOC, NULL);
 			noncanonize_input(name);

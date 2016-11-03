@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:50:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/02 16:47:07 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/03 15:56:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,40 @@ int				get_cursor(int flag, t_command **cmd)
 	return (-1);
 }
 
-int				place_cursor(int oldcol, int cursor)
+static void		ft_moovecursor(int mv, int up)
+{
+	while (up)
+		if (up < 0)
+		{
+			ft_termstr("up");
+			up++;
+		}
+		else
+		{
+			ft_termstr("do");
+			mv--;
+		}
+	while (mv)
+		if (mv < 0)
+		{
+			ft_termstr("le");
+			mv++;
+		}
+		else
+		{
+			ft_termstr("nd");
+			mv--;
+		}
+}
+
+int				place_cursor(int oldcol, int cursor, t_command *cmd)
 {
 	int			newcol;
 	int			up;
 	int			mv;
+	int			save;
 
-	newcol = get_colsz();
+	newcol = tgetnum("co");
 	up = 0;
 	mv = 0;
 	if (oldcol < newcol)
@@ -69,15 +96,14 @@ int				place_cursor(int oldcol, int cursor)
 	else
 		up = cursor / oldcol + ((oldcol / newcol) * (cursor / oldcol));
 	mv = cursor % oldcol;
-	while (mv)
-	{
-		ft_termstr("le");
-		mv--;
-	}
-	while (up)
-	{
-		ft_termstr("up");
-		up--;
-	}
+	ft_moovecursor((-mv), (-up));
+	ft_putstr("$> ");
+	save = cmd->pos;
+	cmd->pos = 0;
+	rewrite_end(&cmd);
+	cmd->pos = save;
+	mv = (cursor - 3) % newcol;
+	up = cursor / newcol;
+	ft_moovecursor(mv, up);
 	return (1);
 }

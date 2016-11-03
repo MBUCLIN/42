@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 15:00:35 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/02 15:17:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/03 15:57:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		left_moove(int cursor)
 	int			i;
 
 	i = 0;
-	col = get_colsz();
+	col = tgetnum("co");
 	if (cursor % col == 0)
 	{
 		ft_termstr("up");
@@ -77,7 +77,7 @@ void		right_moove(t_command *cmd)
 	int		col;
 
 	cursor = get_cursor(LOCAT, &cmd);
-	col = get_colsz();
+	col = tgetnum("co");
 	if (cursor % col == col - 1)
 		ft_termstr("sf");
 	else

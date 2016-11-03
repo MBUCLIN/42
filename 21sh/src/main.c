@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:23:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/02 14:29:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/03 14:30:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@ static void			main_loop(t_list *env)
 	{
 		if ((name = search_env("TERM=", env)) == NULL)
 			return ;
-		if (!canonize_input(name))
+//			command = readnon_canon();
+		else if (!canonize_input(name))
 			return ;
-		if ((command = read_loop(env)) == NULL)
+//			command = readnon_canon();
+		else if ((command = read_loop()) == NULL)
 		{
 			sherror("21sh", ERRMALLOC, NULL);
 			noncanonize_input(name);
 			return ;
 		}
-		if (!noncanonize_input(name))
-			return ;
+		else
+			noncanonize_input(name);
 		ft_termstr("cl");
 		ft_printf("\n|%s| : command\n", command);
 		free(command);

@@ -6,35 +6,11 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/02 16:12:43 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/03 14:53:35 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-
-static int			ft_getent(t_list *env)
-{
-	char			*name;
-	static int		colsz = 0;
-	int				newsz;
-	int				col;
-
-	col = 0;
-	if ((name = search_env("TERM=", env)) == NULL)
-		return (-1);
-	else if (tgetent(NULL, name) != 1)
-		return (-1);
-	if ((newsz = tgetnum("co")) == -1)
-		return (-1);
-	if (colsz == 0)
-		colsz = newsz;
-	else if (colsz != newsz)
-	{
-		col = colsz;
-	}
-	colsz = newsz;
-	return (col);
-}
 
 static int			check_special(char *buf)
 {
@@ -106,7 +82,7 @@ static t_command	*create_command(void)
 	return (cmd);
 }
 
-char				*read_loop(t_list *env)
+char				*read_loop(void)
 {
 	char		buf[7];
 	t_command	*cmd;
@@ -114,19 +90,13 @@ char				*read_loop(t_list *env)
 
 	ft_memset(buf, 0, 7);
 	ft_putstr("$> ");
+	ft_changesignal();
 	if ((cmd = create_command()) == NULL)
 		return (NULL);
 	while (42)
 	{
 		if (read(0, buf, 6) < 1)
 			break ;
-		if ((type = ft_getent(env)) == -1)
-			break ;
-//			return (readnon_cannon());
-		else if (type)
-		{
-			place_cursor(type, get_cursor(LOCAT, &cmd));
-		}
 		if (buf[0] == '\n' && !buf[1])
 			return (get_command(&cmd));
 //		if (check_quotelvl(buf) == 0)

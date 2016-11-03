@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/02 15:17:33 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/03 15:56:39 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void			handle_normal(int c, t_command **cmd)
 	int			cursor;
 
 	sf = 0;
-	col = get_colsz();
+	col = tgetnum("co");
 	recreate(cmd);
 	inserton_str((*cmd)->szchar, (*cmd)->command, cmd);
 	cursor = get_cursor(LOCAT, cmd);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/02 16:11:19 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/03 16:24:56 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,21 @@ typedef struct		s_command
 	int				len;      /* length command : ..................   */
 }					t_command;
 
+int					is_dori(int sig);
+int					is_other(int sig);
+int					is_message(int sig);
+
+void				ft_change_signal(int sig, void (*func)(int));
+
 int					canonize_input(char *name);
 int					noncanonize_input(char *name);
 
 int					get_cursor(int flag, t_command **cmd);
-int					place_cursor(int oldcol, int cursor);
+int					place_cursor(int oldcol, int cursor, t_command *cmd);
 int					get_tabszst(int pos);
-int					get_colsz(void);
 
-char				*search_env(char *var, t_list *env);
+t_list				*get_env(t_list *env);
+char				*ft_getenv(char *variable);
 
 void				ft_termstr(char *id);
 void				ft_termgoto(char *id, int c, int l);
@@ -105,12 +111,15 @@ void				left_moove(int cursor);
 void				right_moove(t_command *cmd);
 void				recreate(t_command **cmd);
 
+t_command			**get_command(t_command **cmd);
 void				rewrite_end(t_command **cmd);
 
 void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);
 void				handle_special(char *buf, t_command **cmd);
 void				handle_normal(int c, t_command **cmd);
-char				*read_loop(t_list *env);
+char				*read_loop(void);
+
+void				ft_changesignal(int sig, void (*func)(int));
 
 #endif

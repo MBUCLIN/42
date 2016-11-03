@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:46:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/01 11:24:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/03 15:57:04 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			get_tabszst(int pos)
 	int		colpos;
 	int		col;
 
-	col = get_colsz();
+	col = tgetnum("co");
 	colpos = (pos % col);
 	if (colpos - col >= -4)
 		return (-(colpos - col));

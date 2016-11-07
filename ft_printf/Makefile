@@ -17,27 +17,23 @@ SRC_NAME = ft_apply_charc.c ft_apply_conv.c ft_apply_convp.c \
 		   ft_strrev.c ft_strsubp.c ft_strsubfree.c ft_isunsigned.c ft_strdupprintf.c \
 		   ft_itoa.c ft_itoabasep.c ft_apply_int.c ft_carchr.c ft_isgoodcar.c
 
-OBJ_NAME = $(SRC_NAME:.c=.o)
-
-OBJ_PATH = obj/
+OBJ_NAME = $(subst .c,.o,$(SRC_NAME))
 
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 
-OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
+OBJ = $(addprefix $(SRC_PATH),$(OBJ_NAME))
 
 FLAGS = -Wall -Wextra -Werror
 
-$(NAME):
-	@mkdir $(OBJ_PATH)
+$(NAME): $(OBJ)
 	@gcc -c $(FLAGS) $(SRC)
-	@mv $(OBJ_NAME) $(OBJ_PATH)
 	@ar rc $(NAME) $(OBJ)
 	@echo "\033[32mLib has been created!\033[0m"
 
 all: $(NAME)
 
 clean:
-	@rm -Rfv $(OBJ_PATH)
+	@rm -Rfv $(OBJ)
 
 fclean: clean
 	@rm -Rfv $(NAME)

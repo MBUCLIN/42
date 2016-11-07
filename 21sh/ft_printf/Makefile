@@ -1,0 +1,42 @@
+.PHONY: all, clean, fclean, re
+
+NAME = libftprintf.a
+
+SRC_PATH = src/
+
+SRC_NAME = ft_apply_charc.c ft_apply_conv.c ft_apply_convp.c \
+		   ft_apply_flagsi.c ft_apply_number.c ft_apply_pandw.c \
+		   ft_apply_wchar.c ft_apply_widtchar.c ft_apply_wint.c \
+		   ft_atoibasefree.c ft_atoi.c ft_checkconv.c ft_convoct.c \
+		   ft_getadj.c ft_getlen.c ft_get_lm.c ft_getmask.c ft_putnbr.c\
+		   ft_get_nbits.c ft_get_noct.c ft_getoct.c ft_getpreci.c ft_get_ncar.c\
+		   ft_getwidth.c ft_isconv.c ft_isconvc.c ft_isconvi.c ft_isdigit.c \
+		   ft_memcpy.c ft_memsetp.c ft_printf.c ft_sitoabasep.c ft_getconv.c\
+		   ft_sitoa.c ft_strdup.c ft_strdupfree.c ft_string_len.c ft_strjoin.c \
+		   ft_strjoindfree.c ft_strjoinprintf.c ft_strlenp.c ft_strmidadd.c \
+		   ft_strrev.c ft_strsubp.c ft_strsubfree.c ft_isunsigned.c ft_strdupprintf.c \
+		   ft_itoa.c ft_itoabasep.c ft_apply_int.c ft_carchr.c ft_isgoodcar.c
+
+OBJ_NAME = $(subst .c,.o,$(SRC_NAME))
+
+SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
+
+OBJ = $(addprefix $(SRC_PATH),$(OBJ_NAME))
+
+CFLAGS = -Wall -Wextra -Werror
+CC= gcc
+
+$(NAME): $(OBJ)
+	@$(CC) -c $(CFLAGS) $(SRC)
+	@ar rc $(NAME) $(OBJ)
+	@echo "\033[32mLib has been created!\033[0m"
+
+all: $(NAME)
+
+clean:
+	@rm -Rfv $(OBJ)
+
+fclean: clean
+	@rm -Rfv $(NAME)
+
+re: fclean all

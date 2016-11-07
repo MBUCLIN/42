@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/03 14:53:35 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/07 16:44:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static int			check_special(char *buf)
 {
-	static int		special[TABLEN][6] = KEYTAB;
+	static int		special[TABLEN][6] = {HISTN, HISTP, MVOUP, MVODO, MVOLFT,\
+										MVORGT, MVWLFT, MVWRGT, MVST, MVND,\
+										WCUT, WPST, SCUR, RCUR, BCLR, CDEL};
 	int				i;
 
 	i = 0;
@@ -37,7 +39,7 @@ static int			check_special(char *buf)
 	return (1);
 }
 
-static char			*get_command(t_command **cmd)
+static char			*stget_command(t_command **cmd)
 {
 	char	*ret;
 
@@ -90,7 +92,7 @@ char				*read_loop(void)
 
 	ft_memset(buf, 0, 7);
 	ft_putstr("$> ");
-	ft_changesignal();
+	ft_changesignal(0, 0, NULL);
 	if ((cmd = create_command()) == NULL)
 		return (NULL);
 	while (42)
@@ -98,7 +100,7 @@ char				*read_loop(void)
 		if (read(0, buf, 6) < 1)
 			break ;
 		if (buf[0] == '\n' && !buf[1])
-			return (get_command(&cmd));
+			return (stget_command(&cmd));
 //		if (check_quotelvl(buf) == 0)
 //			return (get_command(&cmd));
 		else if (buf[0] == 27 && buf[1] == 0)
@@ -106,7 +108,7 @@ char				*read_loop(void)
 		if ((type = check_special(buf)) == 2)
 			handle_special(buf, &cmd);
 		if (type == 1)
-			handle_normal(buf[0], &cmd);
+			handle_normal(buf, &cmd);
 		ft_memset(buf, 0, 7);
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 15:00:35 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/03 15:57:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/07 15:03:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		insert_char(int c)
 	}
 }
 
-void		left_moove(int cursor)
+int			left_moove(int cursor, int szchar)
 {
 	int			col;
 	int			i;
@@ -64,21 +64,23 @@ void		left_moove(int cursor)
 	if (cursor % col == 0)
 	{
 		ft_termstr("up");
-		while(++i < col)
+		while(++i <= (col - szchar))
 			ft_termstr("nd");
+		return (1);
 	}
 	else
 		ft_termstr("le");
+	return (0);
 }
 
-void		right_moove(t_command *cmd)
+void		right_moove(t_command *cmd, int n)
 {
 	int		cursor;
 	int		col;
 
 	cursor = get_cursor(LOCAT, &cmd);
 	col = tgetnum("co");
-	if (cursor % col == col - 1)
+	if ((cursor + n) % col == col - 1)
 		ft_termstr("sf");
 	else
 		ft_termstr("nd");

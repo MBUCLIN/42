@@ -6,20 +6,20 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:23:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/03 14:30:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/04 14:12:00 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-static void			main_loop(t_list *env)
+static void			main_loop(void)
 {
 	char		*command;
 	char		*name;
 
 	while (42)
 	{
-		if ((name = search_env("TERM=", env)) == NULL)
+		if ((name = ft_getenv("TERM=")) == NULL)
 			return ;
 //			command = readnon_canon();
 		else if (!canonize_input(name))
@@ -56,7 +56,8 @@ int					main(void)
 			ft_putendl(tmp->content);
 			tmp = tmp->next;
 		}
-		main_loop(env);
+		get_env(env);
+		main_loop();
 		ft_lstdel(&env, ft_delstrcontent);
 	}
 	return (0);

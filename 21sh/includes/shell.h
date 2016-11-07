@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/03 16:24:56 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/07 16:38:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,12 @@
 # define BCLR {12, 0, 0, 0, 0, 0} //
 # define CDEL {127, 0, 0, 0, 0, 0}
 
-# define KEYTAB { HISTN, HISTP, MVOUP, MVODO, MVOLFT, MVORGT, MVWLFT, MVWRGT,\
-					MVST, MVND, WCUT, WPST, SCUR, RCUR, BCLR, CDEL }
-
 /* Includes use for the project                 */
 
 # include "error.h"
-//# include "../libft/includes/libft.h" // replacement
-# include "../../libft/includes/libft.h"
-//# include "../ft_printf/includes/ft_printf.h" // replacement
-# include "../../ft_printf/includes/ft_printf.h"
+# include "ft_signal.h"
+# include "../libft/includes/libft.h" // replacement
+# include "../ft_printf/includes/ft_printf.h" // replacement
 # include <stdlib.h>
 # include <curses.h>
 # include <term.h>
@@ -87,11 +83,11 @@ typedef struct		s_command
 	int				len;      /* length command : ..................   */
 }					t_command;
 
+void				ft_prompt(int sig);
+void				win_resized(int sig);
 int					is_dori(int sig);
 int					is_other(int sig);
 int					is_message(int sig);
-
-void				ft_change_signal(int sig, void (*func)(int));
 
 int					canonize_input(char *name);
 int					noncanonize_input(char *name);
@@ -107,19 +103,18 @@ void				ft_termstr(char *id);
 void				ft_termgoto(char *id, int c, int l);
 void				delete_char(void);
 void				insert_char(int c);
-void				left_moove(int cursor);
-void				right_moove(t_command *cmd);
-void				recreate(t_command **cmd);
+int					left_moove(int cursor, int szchar);
+void				right_moove(t_command *cmd, int n);
+void				recreate(t_command **cmd, int len);
 
-t_command			**get_command(t_command **cmd);
+t_command			**set_command(t_command **cmd);
+t_command			**ft_getcommand(void);
 void				rewrite_end(t_command **cmd);
 
 void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);
 void				handle_special(char *buf, t_command **cmd);
-void				handle_normal(int c, t_command **cmd);
+void				handle_normal(char *buf, t_command **cmd);
 char				*read_loop(void);
-
-void				ft_changesignal(int sig, void (*func)(int));
 
 #endif

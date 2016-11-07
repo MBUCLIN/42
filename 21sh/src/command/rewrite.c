@@ -6,41 +6,24 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 11:59:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/03 15:54:33 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/06 16:37:53 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static void			delete_end(int pos, int len, char *szchar)
-{
-	int		i;
-
-	ft_termstr("cd");
-	while (pos < len)
-	{
-		i = 0;
-		while (i < szchar[pos])
-		{
-			delete_char();
-			i++;
-		}
-		pos++;
-	}
-}
-
-static t_command	**set_command(t_command **cmd)
+t_command			**set_command(t_command **cmd)
 {
 	static t_command		*saved = NULL;
 
 	if (cmd == NULL)
 		return (&saved);
 	else
-		&saved = cmd;
+		saved = *cmd;
 	return (cmd);
 }
 
-t_command			**get_command(void)
+t_command			**ft_getcommand(void)
 {
 	return (set_command(NULL));
 }
@@ -51,11 +34,10 @@ void				rewrite_end(t_command **cmd)
 	int		size;
 	int		c;
 	int		len;
-	
-	set_command(cmd);
+
 	len = (*cmd)->len;
 	pos = (*cmd)->pos;
-	delete_end((*cmd)->pos, len, (*cmd)->szchar);
+	ft_termstr("cd");
 	ft_termstr("sc");
 	while ((*cmd)->pos < len)
 	{
@@ -63,6 +45,7 @@ void				rewrite_end(t_command **cmd)
 				'.' : (*cmd)->command[(*cmd)->pos];
 		size = (*cmd)->command[(*cmd)->pos] == '\t' ?\
 			   get_tabszst(get_cursor(LOCAT, cmd)) : 1;
+		(*cmd)->szchar[(*cmd)->pos] = size;
 		while (size)
 		{
 			write(1, &c, 1);
@@ -72,4 +55,5 @@ void				rewrite_end(t_command **cmd)
 	}
 	(*cmd)->pos = pos;
 	ft_termstr("rc");
+	set_command(cmd);
 }

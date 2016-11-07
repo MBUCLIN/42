@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:04:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/03 15:56:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/06 15:18:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			handle_del(t_command **cmd)
 	szchar = (*cmd)->szchar[(*cmd)->pos - 1];
 	while (szchar)
 	{
-		left_moove(cursor);
+		left_moove(cursor, szchar);
 		delete_char();
 		szchar--;
 		cursor--;

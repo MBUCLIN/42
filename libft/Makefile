@@ -18,14 +18,19 @@ SRC = ft_exit.c ft_memset.c ft_handle.c ft_memalloc.c ft_memcpy.c ft_memccpy.c f
 	 ft_creadir.c ft_tabstrsrch.c ft_isempty.c ft_lstindex.c ft_treatquote.c ft_substrc.c \
 	 ft_rpcstr.c ft_strisblank.c ft_artol.c ft_writechar.c
 
-OBJ = $(subst .c,.o,$(SRC))
+PATH = ./
 
-FLAGS = -Wall -Wextra -Werror
+OBJ = $(addprefix $(PATH),$(SRC):.c=.o)
+
+CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+
 
 $(NAME):
-	gcc -c $(FLAGS) $(SRC)
 	ar rc $(NAME) $(OBJ)
 
+$(PATH)%.o: 
+	$(CC) $(CFLAGS) -o $@ -c $<
 all: $(NAME)
 
 clean:
@@ -35,3 +40,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 14:33:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/01 11:38:44 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/07 16:42:19 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ static char		*recreate_szchar(char *szchar)
 	return (newone);
 }
 
-void			recreate(t_command **cmd)
+void			recreate(t_command **cmd, int len)
 {
-	if ((*cmd)->len != 0 && (*cmd)->len % BUF_SIZE == 0)
+	(void)len;
+	if (((*cmd)->len != 0 && (*cmd)->len % BUF_SIZE == 0))
 	{
 		(*cmd)->command = recreate_command((*cmd)->command);
 		(*cmd)->szchar = recreate_szchar((*cmd)->szchar);

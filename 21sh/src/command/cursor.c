@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:50:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/03 15:56:10 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/06 16:43:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void		ft_moovecursor(int mv, int up)
 		else
 		{
 			ft_termstr("do");
-			mv--;
+			up--;
 		}
 	while (mv)
 		if (mv < 0)
@@ -97,13 +97,19 @@ int				place_cursor(int oldcol, int cursor, t_command *cmd)
 		up = cursor / oldcol + ((oldcol / newcol) * (cursor / oldcol));
 	mv = cursor % oldcol;
 	ft_moovecursor((-mv), (-up));
-	ft_putstr("$> ");
+	ft_termstr("cd");
+	ft_termstr("up");
+	ft_putstr("\n$> ");
 	save = cmd->pos;
 	cmd->pos = 0;
 	rewrite_end(&cmd);
 	cmd->pos = save;
-	mv = (cursor - 3) % newcol;
+	cursor = get_cursor(LOCAT, &cmd);
 	up = cursor / newcol;
+	mv = (cursor % newcol);
+	if (up == 0)
+		mv -= 3;
 	ft_moovecursor(mv, up);
+	set_command(&cmd);
 	return (1);
 }

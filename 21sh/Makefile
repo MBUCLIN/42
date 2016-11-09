@@ -2,13 +2,12 @@
 
 NAME = 21sh
 
-
 SRC_NAME = main.c canon.c ft_handle.c\
-		   signal/is_signal.c signal/signal.c signal/initialize.c\
+		   signal/signal.c signal/is_signal.c signal/initialize.c\
 		   command/read_loop.c command/handle.c command/cursor.c\
 		   command/tabulation.c command/recreate.c command/handle_del.c\
 		   command/handle_trbl.c command/termcap.c command/rewrite.c\
-		   command/termcap_special.c\
+		   command/termcap_special.c command/insert.c command/save_cursor.c\
 		   error/shell_error.c\
 		   env/search_env.c
 
@@ -18,32 +17,31 @@ SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 
 OBJ_NAME = $(subst .c,.o,$(SRC_NAME))
 
+LIB = ../libft/libft.a
+
+LIBPRINTF = ../ft_printf/libftprintf.a
+
 OBJ = $(addprefix $(SRC_PATH),$(OBJ_NAME))
-
-LIB = ./libft/libft.a
-
-LIBPRINTF = ./ft_printf/libftprintf.a
 
 CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
 $(NAME): $(OBJ)
-	make -C ./libft
-	make -C ./ft_printf
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB) $(LIBPRINTF) -lncurses
+	make -C ../libft
+	make -C ../ft_printf
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(LIB) $(LIBPRINTF) -lncurses
 
 all: $(NAME)
 
 clean:
-	make clean -C ./libft
-	make clean -C ./ft_printf
+	make clean -C ../libft
+	make clean -C ../ft_printf
 	rm -rfv $(OBJ)
 
 fclean: clean
-	make fclean -C ./libft
-	make fclean -C ./ft_printf
+	make fclean -C ../libft
+	make fclean -C ../ft_printf
 	rm -rfv $(NAME)
 
 re: fclean all
-

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/07 16:44:51 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/08 16:31:03 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ static int			check_special(char *buf)
 			return (2);
 		i++;
 	}
-	if (ft_strlen(buf) > 1)
-		return (0);
-	else if ((buf[0] <= 31 || buf[0] >= 127) &&\
-			(buf[0] != '\t' && buf[0] != '\n'))
-		return (0);
 	return (1);
 }
 
@@ -81,6 +76,7 @@ static t_command	*create_command(void)
 	ft_bzero(cmd->szchar, BUF_SIZE + 1);
 	cmd->pos = 0;
 	cmd->len = 0;
+	set_command(&cmd);
 	return (cmd);
 }
 
@@ -88,7 +84,6 @@ char				*read_loop(void)
 {
 	char		buf[7];
 	t_command	*cmd;
-	int			type;
 
 	ft_memset(buf, 0, 7);
 	ft_putstr("$> ");
@@ -105,9 +100,9 @@ char				*read_loop(void)
 //			return (get_command(&cmd));
 		else if (buf[0] == 27 && buf[1] == 0)
 			break ;
-		if ((type = check_special(buf)) == 2)
+		if (check_special(buf) == 2)
 			handle_special(buf, &cmd);
-		if (type == 1)
+		else
 			handle_normal(buf, &cmd);
 		ft_memset(buf, 0, 7);
 	}

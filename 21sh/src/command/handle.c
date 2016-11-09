@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/07 16:55:53 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/09 16:57:06 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,66 +48,6 @@ void			handle_special(char *buf, t_command **cmd)
 	}
 }
 
-static char		*inserton_str(char *szchar, char *cmd, t_command **comd, int len)
-{
-	char		*sub;
-	int			j;
-	int			save;
-
-	save = (*comd)->pos;
-	j = 0;
-	sub = NULL;
-	if ((sub = ft_strsub(cmd + (*comd)->pos,\
-						0, ft_strlen(cmd + (*comd)->pos))) == NULL)
-		return (NULL);
-	(*comd)->pos += len;
-	while (sub[j])
-	{
-		cmd[(*comd)->pos] = sub[j];
-		if (sub[j] == '\t')
-			szchar[(*comd)->pos] = get_tabszst(get_cursor(LOCAT, comd));
-		else
-			szchar[(*comd)->pos] = 1;
-		j++;
-		(*comd)->pos++;
-	}
-	(*comd)->pos = save;
-	free(sub);
-	return (cmd);
-}
-
-static int		insert_buf(t_command **cmd, char *buf, int cursor)
-{
-	int		i;
-	int		sf;
-	int		col;
-
-	i = 0;
-	sf = 0;
-	col = tgetnum("co");
-	if (buf[0] == '\t' && ft_strlen(buf) == 1)
-	{
-		(*cmd)->len++;
-		(*cmd)->pos++;
-		(*cmd)->command[(*cmd)->pos - 1] = '\t';
-		(*cmd)->szchar[(*cmd)->pos - 1] = get_tabszst(cursor);
-		if ((cursor + (*cmd)->szchar[(*cmd)->pos - 1]) % col == 0)
-			sf = 1;
-		ft_memset(buf, '.', (*cmd)->szchar[(*cmd)->pos - 1]);
-	}
-	else
-		while (buf[i])
-		{
-			(*cmd)->command[(*cmd)->pos] = buf[i];
-			(*cmd)->command[(*cmd)->pos] = 1;
-			(*cmd)->pos++;
-			(*cmd)->len++;
-			if ((cursor + 1) % col == 0)
-				sf = 1;
-			i++;
-		}
-	return (sf);
-}
 void			handle_normal(char *buf, t_command **cmd)
 {
 	int			n;
@@ -116,14 +56,21 @@ void			handle_normal(char *buf, t_command **cmd)
 	int			cursor;
 
 	col = tgetnum("co");
+	sf = 0;
 	recreate(cmd, ft_strlen(buf));
-	inserton_str((*cmd)->szchar, (*cmd)->command, cmd, ft_strlen(buf));
+	inserton_str(cmd, ft_strlen(buf));
 	cursor = get_cursor(LOCAT, cmd);
 	sf = insert_buf(cmd, buf, cursor);
 	n = 0;
 	while (buf[n])
 	{
 		insert_char(buf[n]);
+		cursor++;
+		if (cursor % col == 0)
+		{
+			ft_termstr("sf");
+			sf = 0;
+		}
 		n++;
 	}
 	if (sf)

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/07 16:38:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/09 16:49:25 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@
 
 # include "error.h"
 # include "ft_signal.h"
-# include "../libft/includes/libft.h" // replacement
-# include "../ft_printf/includes/ft_printf.h" // replacement
+# include "../../libft/includes/libft.h" // replacement
+# include "../../ft_printf/includes/ft_printf.h" // replacement
 # include <stdlib.h>
 # include <curses.h>
 # include <term.h>
@@ -92,6 +92,8 @@ int					is_message(int sig);
 int					canonize_input(char *name);
 int					noncanonize_input(char *name);
 
+int					save_cursorpos(int cursor);
+int					retr_cursorpos(int cursor);
 int					get_cursor(int flag, t_command **cmd);
 int					place_cursor(int oldcol, int cursor, t_command *cmd);
 int					get_tabszst(int pos);
@@ -110,6 +112,9 @@ void				recreate(t_command **cmd, int len);
 t_command			**set_command(t_command **cmd);
 t_command			**ft_getcommand(void);
 void				rewrite_end(t_command **cmd);
+
+void				inserton_str(t_command **cmd, int len);
+int					insert_buf(t_command **cmd, char *buf, int cursor);
 
 void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);

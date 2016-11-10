@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:50:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/09 13:56:12 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/10 15:06:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int				get_cursor(int flag, t_command **cmd)
 	return (-1);
 }
 
-static void		ft_moovecursor(int mv, int up)
+void			ft_moovecursor(int mv, int up)
 {
 	ft_termstr("cr");
 	while (up)

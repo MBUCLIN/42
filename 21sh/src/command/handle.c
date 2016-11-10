@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/09 16:57:06 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/10 16:14:50 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,15 @@ void			handle_special(char *buf, t_command **cmd)
 	if (mask == 0)
 		handle_del(cmd);
 	else if (IF_MVTRBL(mask))
-	{
 		handle_trbl(buf, cmd);
-	}
+	else if (IF_MVWRD(mask))
+		handle_mvwrd(buf, cmd);
+	else if (IF_MVSTND(mask))
+		handle_stnd(buf, cmd);
+	else if (IF_SCRC(mask))
+		handle_scrc(buf, cmd);
+	else if (IF_WRDCP(mask))
+		handle_wcp(buf, cmd);
 }
 
 void			handle_normal(char *buf, t_command **cmd)

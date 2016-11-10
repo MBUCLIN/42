@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/09 16:49:25 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/10 16:10:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@
 
 /* Thoose macro are used to choose function */
 
-# define IF_MVTRBL(m) (m & IS_MVTRBL)
-# define IF_MVWRD(m) (m & IS_MVWRD)
-# define IF_MVSTND(m) (m & IS_MVSTNT)
-# define IF_SCRC(m) (m & IS_SCRC)
-# define IF_WRDCP(m) (m & IS_WRDCP)
-# define IF_HIST(m) (m & IS_HIST)
-# define IF_CLEAR(m) (m & IS_CLEAR)
+# define IF_MVTRBL(m) (m & IS_MVTRBL) //OK
+# define IF_MVWRD(m) (m & IS_MVWRD) //OK
+# define IF_MVSTND(m) (m & IS_MVSTND) //OK
+# define IF_SCRC(m) (m & IS_SCRC) //OK
+# define IF_WRDCP(m) (m & IS_WRDCP) //DO
+# define IF_HIST(m) (m & IS_HIST) //NEED ALL COMMAND
+# define IF_CLEAR(m) (m & IS_CLEAR) // OK
 
 /* Thoose define are used as an array of string */
 /* Utility :                                    */
@@ -46,29 +46,29 @@
 /*  normal.                                     */
 
 # define TABLEN 16
-# define HISTN {27, 91, 65, 0, 0, 0} //
-# define HISTP {27, 91, 66, 0, 0, 0} //
-# define MVOUP {27, 27, 91, 65, 0, 0} //
-# define MVODO {27, 27, 91, 66, 0, 0} //
-# define MVOLFT {27, 91, 68, 0, 0, 0} //
-# define MVORGT {27, 91, 67, 0, 0, 0} //
-# define MVWLFT {27, 27, 91, 68, 0, 0} //
-# define MVWRGT {27, 27, 91, 67, 0, 0} //
-# define MVST {27, 91, 72, 0, 0, 0} //
+# define HISTN {27, 91, 65, 0, 0, 0}
+# define HISTP {27, 91, 66, 0, 0, 0}
+# define MVOUP {27, 27, 91, 65, 0, 0}
+# define MVODO {27, 27, 91, 66, 0, 0}
+# define MVOLFT {27, 91, 68, 0, 0, 0}
+# define MVORGT {27, 91, 67, 0, 0, 0}
+# define MVWLFT {27, 27, 91, 68, 0, 0}
+# define MVWRGT {27, 27, 91, 67, 0, 0}
+# define MVST {27, 91, 72, 0, 0, 0}
 # define MVND {27, 91, 70, 0, 0, 0}
-# define WCUT {14, 0, 0, 0, 0, 0} //
-# define WPST {16, 0, 0, 0, 0, 0} //
+# define WCUT {14, 0, 0, 0, 0, 0}
+# define WPST {16, 0, 0, 0, 0, 0}
 # define SCUR {24, 0, 0, 0, 0, 0}
 # define RCUR {18, 0, 0, 0, 0, 0}
-# define BCLR {12, 0, 0, 0, 0, 0} //
+# define BCLR {12, 0, 0, 0, 0, 0}
 # define CDEL {127, 0, 0, 0, 0, 0}
 
 /* Includes use for the project                 */
 
 # include "error.h"
 # include "ft_signal.h"
-# include "../../libft/includes/libft.h" // replacement
-# include "../../ft_printf/includes/ft_printf.h" // replacement
+# include "../../libft/includes/libft.h"
+# include "../../ft_printf/includes/ft_printf.h"
 # include <stdlib.h>
 # include <curses.h>
 # include <term.h>
@@ -77,10 +77,10 @@
 
 typedef struct		s_command
 {
-	char			*command; /* String command : contain char         */
-	char			*szchar;  /* String command len : contain char len */
-	int				pos;      /* Position command : index of command   */
-	int				len;      /* length command : ..................   */
+	char			*command;
+	char			*szchar;
+	int				pos;
+	int				len;
 }					t_command;
 
 void				ft_prompt(int sig);
@@ -95,6 +95,7 @@ int					noncanonize_input(char *name);
 int					save_cursorpos(int cursor);
 int					retr_cursorpos(int cursor);
 int					get_cursor(int flag, t_command **cmd);
+void				ft_moovecursor(int mv, int up);
 int					place_cursor(int oldcol, int cursor, t_command *cmd);
 int					get_tabszst(int pos);
 
@@ -116,6 +117,10 @@ void				rewrite_end(t_command **cmd);
 void				inserton_str(t_command **cmd, int len);
 int					insert_buf(t_command **cmd, char *buf, int cursor);
 
+void				handle_wcp(char *buf, t_command **cmd);
+void				handle_scrc(char *buf, t_command **cmd);
+void				handle_stnd(char *buf, t_command **cmd);
+void				handle_mvwrd(char *buf, t_command **cmd);
 void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);
 void				handle_special(char *buf, t_command **cmd);

@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strisblank.c                                    :+:      :+:    :+:   */
+/*   handle_scrc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/01 14:14:18 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/10 16:04:30 by mbuclin          ###   ########.fr       */
+/*   Created: 2016/11/10 15:47:37 by mbuclin           #+#    #+#             */
+/*   Updated: 2016/11/10 15:49:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "../../includes/shell.h"
 
-int		ft_strisblank(char *str)
+void		handle_scrc(char *buf, t_command **cmd)
 {
-	int		i;
-	int		blank;
-
-	blank = ft_strlen(str);
-	i = 0;
-	if (str == NULL || blank == 0)
-		return (1);
-	while (str[i])
+	static int		savedpos = -1;
+	if (buf[0] == 24)
 	{
-		if (ft_isblank(str[i]))
-			blank--;
-		i++;
+		ft_termstr("sc");
+		savedpos = (*cmd)->pos;
 	}
-	if (blank == 0)
-		return (1);
-	return (0);
+	else if (savedpos != -1)
+	{
+		ft_termstr("rc");
+		(*cmd)->pos = savedpos;
+		savedpos = -1;
+	}
 }

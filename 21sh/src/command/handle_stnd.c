@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:59:19 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/10 15:07:38 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/14 15:36:22 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		handle_stnd(char *buf, t_command **cmd)
 	line_len = get_line(get_cursor(LENGT, cmd));
 	if (buf[2] == 72)
 	{
-		mv = 3;
+		mv = (*cmd)->plen;
 		ft_moovecursor(mv, (-up));
 		(*cmd)->pos = 0;
 	}

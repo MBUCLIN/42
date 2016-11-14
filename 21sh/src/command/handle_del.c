@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:04:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/10 16:49:41 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/11 11:52:39 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ static void		deleteon_str(char *szchar, char *cmd, t_command **comd)
 void			handle_del(t_command **cmd)
 {
 	int			cursor;
-	int			col;
 	int			szchar;
 
 	if ((*cmd)->pos == 0)
 		return ;
-	col = tgetnum("co");
 	cursor = get_cursor(LOCAT, cmd);
 	szchar = (*cmd)->szchar[(*cmd)->pos - 1];
 	while (szchar)

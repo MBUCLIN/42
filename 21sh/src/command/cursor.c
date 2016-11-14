@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:50:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/10 15:06:34 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/14 16:21:21 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,33 +53,6 @@ int				get_cursor(int flag, t_command **cmd)
 	else if (flag == LENGT)
 		return (get_cursorlength(cmd));
 	return (-1);
-}
-
-void			ft_moovecursor(int mv, int up)
-{
-	ft_termstr("cr");
-	while (up)
-		if (up < 0)
-		{
-			ft_termstr("sr");
-			up++;
-		}
-		else
-		{
-			ft_termstr("do");
-			up--;
-		}
-	while (mv)
-		if (mv < 0)
-		{
-			ft_termstr("le");
-			mv++;
-		}
-		else
-		{
-			ft_termstr("nd");
-			mv--;
-		}
 }
 
 int				place_cursor(int oldcol, int cursor, t_command *cmd)

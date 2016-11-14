@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 14:33:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/07 16:42:19 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/14 15:18:56 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,19 @@ static char		*recreate_szchar(char *szchar)
 
 void			recreate(t_command **cmd, int len)
 {
-	(void)len;
-	if (((*cmd)->len != 0 && (*cmd)->len % BUF_SIZE == 0))
-	{
-		(*cmd)->command = recreate_command((*cmd)->command);
-		(*cmd)->szchar = recreate_szchar((*cmd)->szchar);
-		if ((*cmd)->command == NULL || (*cmd)->szchar == NULL)
+	int		n;
+
+	n = ((*cmd)->len + len) / BUF_SIZE - (*cmd)->len / BUF_SIZE;
+	if ((*cmd)->len > 0)
+		while (n)
 		{
-			sherror("21sh", ERRMALLOC, NULL);
-			exit(1);
+			(*cmd)->command = recreate_command((*cmd)->command);
+			(*cmd)->szchar = recreate_szchar((*cmd)->szchar);
+			if ((*cmd)->command == NULL || (*cmd)->szchar == NULL)
+			{
+				sherror("21sh", ERRMALLOC, NULL);
+				exit(1);
+			}
+			n--;
 		}
-	}
 }

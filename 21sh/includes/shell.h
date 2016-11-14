@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/10 16:10:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/14 16:21:26 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SHELL_H
 
 # define TABSZ 4
-# define BUF_SIZE 1024
+# define BUF_SIZE 5
 # define LOCAT 0b1
 # define LENGT 0b10
 
@@ -63,6 +63,8 @@
 # define BCLR {12, 0, 0, 0, 0, 0}
 # define CDEL {127, 0, 0, 0, 0, 0}
 
+# define QTE 1
+# define DQTE 2
 /* Includes use for the project                 */
 
 # include "error.h"
@@ -79,8 +81,11 @@ typedef struct		s_command
 {
 	char			*command;
 	char			*szchar;
+	char			*prompt;
 	int				pos;
 	int				len;
+	int				plen;
+	int				qmask;
 }					t_command;
 
 void				ft_prompt(int sig);
@@ -89,6 +94,7 @@ int					is_dori(int sig);
 int					is_other(int sig);
 int					is_message(int sig);
 
+void				del_command(t_command *cmd);
 int					canonize_input(char *name);
 int					noncanonize_input(char *name);
 
@@ -96,6 +102,7 @@ int					save_cursorpos(int cursor);
 int					retr_cursorpos(int cursor);
 int					get_cursor(int flag, t_command **cmd);
 void				ft_moovecursor(int mv, int up);
+void				moove_end(int cursor, t_command *cmd);
 int					place_cursor(int oldcol, int cursor, t_command *cmd);
 int					get_tabszst(int pos);
 
@@ -114,8 +121,10 @@ t_command			**set_command(t_command **cmd);
 t_command			**ft_getcommand(void);
 void				rewrite_end(t_command **cmd);
 
+int					check_quotelvl(int c);
+void				insert_end(t_command **cmd, char *buf, int cursor);
 void				inserton_str(t_command **cmd, int len);
-int					insert_buf(t_command **cmd, char *buf, int cursor);
+int					insert_buf(t_command **cmd, char *buf, int cursor, int len);
 
 void				handle_wcp(char *buf, t_command **cmd);
 void				handle_scrc(char *buf, t_command **cmd);
@@ -124,7 +133,7 @@ void				handle_mvwrd(char *buf, t_command **cmd);
 void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);
 void				handle_special(char *buf, t_command **cmd);
-void				handle_normal(char *buf, t_command **cmd);
-char				*read_loop(void);
+int					handle_normal(char *buf, t_command **cmd);
+t_command			*read_loop(char *prompt, int mask, char *command);
 
 #endif

@@ -6,11 +6,23 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 15:41:51 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/08 16:16:09 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/14 16:19:37 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+void			insert_end(t_command **cmd, char *buf, int cursor)
+{
+	int		i;
+	int		col;
+
+	i = 1;
+	col = tgetnum("co");
+	moove_end(cursor, *cmd);
+	cursor = get_cursor(LENGT, cmd);
+	write(1, buf, 1);
+}
 
 void			inserton_str(t_command **cmd, int len)
 {
@@ -39,38 +51,29 @@ void			inserton_str(t_command **cmd, int len)
 	free(sub);
 }
 
-static int		insert_tab(t_command **cmd, int col, int cursor, char *buf)
+static int		insert_tab(t_command **cmd, int cursor, char *buf)
 {
 	int			szchar;
-	int			sf;
 
-	sf = 0;
 	(*cmd)->len++;
 	(*cmd)->pos++;
 	(*cmd)->command[(*cmd)->pos - 1] = '\t';
 	szchar = get_tabszst(cursor);
 	(*cmd)->szchar[(*cmd)->pos - 1] = szchar;
-	if ((cursor + szchar) % col == 0)
-		sf = 1;
 	ft_memset(buf, '.', szchar);
-	return (sf);
-
+	return (1);
 }
 
-int				insert_buf(t_command **cmd, char *buf, int cursor)
+int				insert_buf(t_command **cmd, char *buf, int cursor, int len)
 {
-	int		col;
 	int		i;
-	int		sf;
 
-	col = tgetnum("co");
 	i = 0;
-	sf = 0;
 	if (buf[0] == '\t' && ft_strlen(buf) == 1)
 	{
-		return (insert_tab(cmd, col, cursor, buf));
+		return (insert_tab(cmd, cursor, buf));
 	}
-	while (buf[i])
+	while (i < len)
 	{
 		buf[i] = buf[i] <= 31 ? '[' : buf[i];
 		buf[i] = buf[i] >= 127 ? '~' : buf[i];
@@ -79,9 +82,7 @@ int				insert_buf(t_command **cmd, char *buf, int cursor)
 		(*cmd)->pos++;
 		(*cmd)->len++;
 		cursor++;
-		if (cursor % col == 0)
-			sf = 1;
 		i++;
 	}
-	return (sf);
+	return (1);
 }

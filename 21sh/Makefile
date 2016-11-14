@@ -9,7 +9,8 @@ SRC_NAME = main.c canon.c ft_handle.c\
 		   command/handle_trbl.c command/termcap.c command/rewrite.c\
 		   command/termcap_special.c command/insert.c command/save_cursor.c\
 		   command/handle_mvwrd.c command/handle_stnd.c command/handle_scrc.c\
-		   command/handle_wcp.c\
+		   command/handle_wcp.c command/del.c command/handle_special.c\
+		   command/quoting.c command/moove_cursor.c\
 		   error/shell_error.c\
 		   env/search_env.c
 

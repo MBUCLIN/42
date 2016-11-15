@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/15 15:51:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/15 17:01:41 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int					noncanonize_input(char *name);
 int					save_cursorpos(int cursor);
 int					retr_cursorpos(int cursor);
 int					get_cursor(int flag, t_command **cmd);
+int					get_line(int cursor);
+int					get_column(int cursor);
 void				ft_moovecursor(int mv, int up);
 void				moove_end(int cursor, t_command *cmd);
 int					place_cursor(int oldcol, int cursor, t_command *cmd);

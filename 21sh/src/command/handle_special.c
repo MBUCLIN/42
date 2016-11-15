@@ -6,11 +6,30 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 11:31:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/14 11:39:25 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/15 17:02:59 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+
+static void		clear_sreen(t_command **cmd)
+{
+	int			cursor;
+	int			li;
+	int			co;
+	int			pos;
+
+	ft_termstr("cl");
+	cursor = get_cursor(LOCAT, cmd);
+	ft_putstr((*cmd)->prompt);
+	pos = (*cmd)->pos;
+	(*cmd)->pos = 0;
+	rewrite_end(cmd);
+	co = get_column(cursor);
+	li = get_line(cursor);
+	ft_moovecursor(co, li);
+	(*cmd)->pos = pos;
+}
 
 static int		get_mask(char *buf)
 {
@@ -52,4 +71,6 @@ void			handle_special(char *buf, t_command **cmd)
 		handle_scrc(buf, cmd);
 	else if (IF_WRDCP(mask))
 		handle_wcp(buf, cmd);
+	else if (IF_CLEAR(mask))
+		clear_sreen(cmd);
 }

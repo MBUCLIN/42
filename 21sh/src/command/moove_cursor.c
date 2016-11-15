@@ -6,12 +6,27 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 16:01:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/14 15:36:47 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/15 17:00:35 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
+int			get_line(int cursor)
+{
+	int		col;
+
+	col = tgetnum("co");
+	return (cursor / col);
+}
+
+int			get_column(int cursor)
+{
+	int		col;
+
+	col = tgetnum("co");
+	return (cursor % col);
+}
 void		ft_moovecursor(int mv, int up)
 {
 	ft_termstr("cr");

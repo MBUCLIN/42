@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 15:41:51 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/14 16:19:37 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/15 16:45:08 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void			insert_end(t_command **cmd, char *buf, int cursor)
 	moove_end(cursor, *cmd);
 	cursor = get_cursor(LENGT, cmd);
 	write(1, buf, 1);
+	(*cmd)->command[(*cmd)->len] = '\n';
+	(*cmd)->szchar[(*cmd)->len] = '\n';
+	(*cmd)->len++;
+	(*cmd)->pos = (*cmd)->len;
 }
 
 void			inserton_str(t_command **cmd, int len)

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/14 16:21:26 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/15 15:51:55 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct		s_command
 	int				len;
 	int				plen;
 	int				qmask;
+	int				alloc;
 }					t_command;
 
 void				ft_prompt(int sig);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/14 16:48:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/15 16:05:43 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static t_command	*create_command(char *prompt, int mask, char *command)
 		return (NULL);
 	if ((cmd->prompt = ft_strdup(prompt)) == NULL)
 		return (NULL);
+	cmd->alloc = BUF_SIZE;
 	cmd->plen = ft_strlen(prompt);
 	cmd->qmask = mask;
 	ft_bzero(cmd->command, BUF_SIZE + 1);
@@ -95,10 +96,11 @@ static int			redirect_buffer(char *buf, t_command **cmd, int check)
 			else
 				return (1);
 			recreate(cmd, qte->len);
-			ft_strcpy((*cmd)->command + (*cmd)->len, qte->command);
-			ft_strcpy((*cmd)->szchar + (*cmd)->len, qte->szchar);
+			ft_strcpy(((*cmd)->command + (*cmd)->len), qte->command);
+			ft_strcpy(((*cmd)->szchar + (*cmd)->len), qte->szchar);
 			(*cmd)->len += qte->len;
 			del_command(qte);
+			qte = NULL;
 			return (1);
 		}
 	}

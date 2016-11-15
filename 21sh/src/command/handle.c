@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/14 16:51:22 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/15 16:04:53 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ int				handle_normal(char *buf, t_command **cmd)
 {
 	int			n;
 	int			cursor;
+	int			tabu;
 	size_t		len;
 
+	tabu = buf[0] == '\t' ? 1 : 0;
 	len = ft_lenbuf(buf);
 	recreate(cmd, ft_strlen(buf));
 	inserton_str(cmd, len);
@@ -58,7 +60,8 @@ int				handle_normal(char *buf, t_command **cmd)
 	insert_buf(cmd, buf, cursor, len);
 	n = insert_buffer(buf, cursor);
 	rewrite_end(cmd);
-	if (len < ft_strlen(buf))
+	set_command(cmd);
+	if (len < ft_strlen(buf) && !tabu)
 	{
 		check_quotelvl(buf[len]);
 		insert_end(cmd, buf + len, cursor);

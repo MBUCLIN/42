@@ -46,7 +46,7 @@ void			recreate(t_command **cmd, int len)
 		if ((*cmd)->command == NULL || (*cmd)->szchar == NULL)
 		{
 			sherror("21sh", ERRMALLOC, NULL);
-			exit(1);
+			exit(-1);
 		}
 	}
 }

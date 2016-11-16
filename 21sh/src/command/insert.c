@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 15:41:51 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/15 16:52:50 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/16 11:15:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void			inserton_str(t_command **cmd, int len)
 	sub = NULL;
 	if ((sub = ft_strsub(((*cmd)->command + (*cmd)->pos),\
 				0, ft_strlen(((*cmd)->command + (*cmd)->pos)))) == NULL)
-		exit(1);
+	{
+		sherror("21sh", ERRMALLOC, NULL);
+		exit(-1);
+	}
 	(*cmd)->pos += len;
 	while (sub[j])
 	{

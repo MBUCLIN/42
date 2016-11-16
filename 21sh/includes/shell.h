@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/15 17:01:41 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/16 15:02:43 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);
 void				handle_special(char *buf, t_command **cmd);
 int					handle_normal(char *buf, t_command **cmd);
+
+char				*init_noncanon_read(void);
 t_command			*read_loop(char *prompt, int mask, char *command);
 
 #endif

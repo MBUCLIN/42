@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:23:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/14 16:29:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/16 16:04:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ static void			main_loop(void)
 {
 	t_command	*cmd;
 	char		*name;
+	char		*command;
 
 	while (42)
 	{
+		cmd = NULL;
+		command = NULL;
 		if ((name = ft_getenv("TERM=")) == NULL)
-			return ;
-//			command = readnon_canon();
+			command = init_noncanon_read();
 		else if (!canonize_input(name))
-			return ;
-//			command = readnon_canon();
+			command = init_noncanon_read();
 		else if ((cmd = read_loop("$> ", 0, NULL)) == NULL)
 		{
 			sherror("21sh", ERRMALLOC, NULL);
@@ -33,10 +34,16 @@ static void			main_loop(void)
 		}
 		else
 			noncanonize_input(name);
-		ft_termstr("cl");
-		ft_printf("|%s| : command\n", cmd->command);
-		del_command(cmd);
-		cmd = NULL;
+		if (command)
+		{
+			ft_printf("|%s| : command\n", command);
+			free(command);
+		}
+		else
+		{
+			ft_printf("|%s| : cmd->command\n", cmd->command);
+			del_command(cmd);
+		}
 	}
 }
 
@@ -46,7 +53,9 @@ int					main(void)
 	t_list			*env;
 	t_list			*tmp;
 
-	if ((env = ft_artol(environ)) == NULL)
+	env = NULL;
+	if (environ != NULL && environ[0] != NULL &&\
+		(env = ft_artol(environ)) == NULL)
 		sherror("21sh", ERRMALLOC, NULL);
 	else
 	{
@@ -60,5 +69,7 @@ int					main(void)
 		main_loop();
 		ft_lstdel(&env, ft_delstrcontent);
 	}
+	if (env == NULL)
+		main_loop();
 	return (0);
 }

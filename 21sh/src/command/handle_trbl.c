@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 16:18:38 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/09 15:21:23 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/16 14:17:49 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int		get_newcur(int add, t_command **cmd, int cursor, int col)
 
 	lengt = get_cursor(LENGT, cmd);
 	newcur = cursor + (add * col);
-	if (newcur < 3)
-		newcur = 3;
+	if (newcur < (*cmd)->plen)
+		newcur = (*cmd)->plen;
 	else if (lengt < newcur)
 		newcur = lengt;
 	while (((add == -1 && cursor > newcur) ||\

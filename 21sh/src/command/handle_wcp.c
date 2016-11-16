@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:54:42 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/10 16:48:38 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/16 11:14:40 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ static void			cut_word(t_command **cmd)
 		len++;
 	if (len)
 		if ((cuted = ft_strsub((*cmd)->command, (*cmd)->pos, len)) == NULL)
-			exit(1);
+		{
+			sherror("21sh", ERRMALLOC, NULL);
+			exit(-1);
+		}
 	while (i < len)
 	{
 		right_moove(*cmd, 0);

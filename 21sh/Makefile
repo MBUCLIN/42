@@ -11,6 +11,7 @@ SRC_NAME = main.c canon.c ft_handle.c\
 		   command/handle_mvwrd.c command/handle_stnd.c command/handle_scrc.c\
 		   command/handle_wcp.c command/del.c command/handle_special.c\
 		   command/quoting.c command/moove_cursor.c\
+		   command/read_noncanonized.c\
 		   error/shell_error.c\
 		   env/search_env.c
 

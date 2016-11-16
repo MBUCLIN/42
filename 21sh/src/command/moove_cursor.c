@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 16:01:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/15 17:03:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/16 17:47:38 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ void		moove_end(int cursor, t_command *cmd)
 	int		col;
 	int		co;
 	int		li;
+	int		lencur;
 
 	col = tgetnum("co");
-	co = get_cursor(LENGT, &cmd) % col;
-	li = (cursor / col) - (get_cursor(LENGT, &cmd) / col);
+	lencur = get_cursor(LENGT, &cmd);
+	co = lencur % col;
+	li = (lencur / col) - (cursor / col);
 	ft_moovecursor(co, li);
 	cmd->pos = cmd->len;
 }

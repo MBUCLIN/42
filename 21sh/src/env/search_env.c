@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:59:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/04 17:50:05 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/21 13:22:44 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,33 @@ t_list		*get_env(t_list *env)
 	else
 		save = env;
 	return (env);
+}
+
+char		*ft_setenv(char *name, char *value)
+{
+	t_list		*env;
+	t_list		*tmp;
+	char		*join;
+
+	env = get_env(NULL);
+	if ((join = ft_strjoin(name, value)) == NULL)
+		return (NULL);
+	if (env == NULL)
+	{
+		if ((env = ft_lstnew(join, ft_strlen(join))) == NULL)
+			return (NULL);
+		free(join);
+		get_env(env);
+		return (env->content);
+	}
+	tmp = env;
+	while (tmp->next)
+		tmp = tmp->next;
+	if ((tmp->next = ft_lstnew(join, ft_strlen(join))) == NULL)
+		return (NULL);
+	free(join);
+	get_env(env);
+	return (tmp->next->content);
 }
 
 char		*ft_getenv(char *variable)

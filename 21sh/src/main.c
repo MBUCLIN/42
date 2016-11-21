@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:23:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/16 16:04:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/21 15:03:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void			main_loop(void)
 			return ;
 		}
 		else
-			noncanonize_input(name);
+			noncanonize_input(name);;
 		if (command)
 		{
 			ft_printf("|%s| : command\n", command);
@@ -49,27 +49,13 @@ static void			main_loop(void)
 
 int					main(void)
 {
-	extern char		**environ;
 	t_list			*env;
 	t_list			*tmp;
 
 	env = NULL;
-	if (environ != NULL && environ[0] != NULL &&\
-		(env = ft_artol(environ)) == NULL)
-		sherror("21sh", ERRMALLOC, NULL);
-	else
-	{
-		tmp = env;
-		while (tmp)
-		{
-			ft_putendl(tmp->content);
-			tmp = tmp->next;
-		}
-		get_env(env);
-		main_loop();
-		ft_lstdel(&env, ft_delstrcontent);
-	}
-	if (env == NULL)
-		main_loop();
+	create_env();
+	env = get_env(NULL);
+	tmp = env;
+	main_loop();
 	return (0);
 }

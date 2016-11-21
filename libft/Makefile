@@ -18,7 +18,7 @@ SRC_NAME = ft_exit.c ft_memset.c ft_handle.c ft_memalloc.c ft_memcpy.c ft_memccp
 	 ft_swap.c ft_srchenv.c ft_strnchr.c ft_tabstrdup.c ft_lsttotabstrfree.c ft_delstrcontent.c \
 	 ft_deltabswapstr.c ft_swaptabstr.c ft_skpblk.c ft_addstrtotab.c ft_putlst.c ft_chgvalue.c \
 	 ft_creadir.c ft_tabstrsrch.c ft_isempty.c ft_lstindex.c ft_treatquote.c ft_substrc.c \
-	 ft_rpcstr.c ft_strisblank.c ft_artol.c ft_writechar.c
+	 ft_rpcstr.c ft_strisblank.c ft_artol.c ft_writechar.c ft_strcrpl.c
 
 PATH = ./
 SRC = $(addprefix $(PATH),$(SRC_NAME))

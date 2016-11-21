@@ -13,7 +13,7 @@ SRC_NAME = main.c canon.c ft_handle.c\
 		   command/quoting.c command/moove_cursor.c\
 		   command/read_noncanonized.c\
 		   error/shell_error.c\
-		   env/search_env.c
+		   env/search_env.c env/create_env.c env/create_known.c
 
 SRC_PATH = src/
 

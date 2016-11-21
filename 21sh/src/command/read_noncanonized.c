@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 12:06:01 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/16 15:14:53 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/21 15:06:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,8 @@ static char		*get_cmdline(void)
 			return (NULL);
 		ft_memset(buf, 0, BUF_SIZE + 1);
 		if (ft_strchr(line, '\n') || ret == 0)
-		{
-			ft_putendl("read got \\n");
-			ft_putendl(line);
 			return (line);
-		}
 	}
-	ft_putendl("here");
 	sherror("12sh", ERRSTREAM, NULL);
 	return (NULL);
 }
@@ -73,10 +68,8 @@ static char			*readnon_canon(void)
 	ret = NULL;
 	if ((line = get_cmdline()) == NULL)
 		return (NULL);
-	ft_printf("|%s| : line after cmd line\n", line);
 	if (quoting_level(line) == 1)
 	{
-		ft_putendl("quoting on");
 		if ((ret = readnon_canon()) == NULL)
 			return (NULL);
 		if ((line = ft_strjoindfree(line, ret)) == NULL)
@@ -95,7 +88,5 @@ char				*init_noncanon_read(void)
 	command = NULL;
 	ft_putstr("$> ");
 	command = readnon_canon();
-	ft_printf("|%s| : command\n", command);
-	sleep(2);
 	return (command);
 }

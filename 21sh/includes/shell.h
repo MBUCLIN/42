@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/16 15:02:43 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/21 13:14:25 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@
 /* Includes use for the project                 */
 
 # include "error.h"
+# include "env.h"
 # include "ft_signal.h"
 # include "../../libft/includes/libft.h"
 # include "../../ft_printf/includes/ft_printf.h"

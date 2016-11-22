@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:04:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/15 15:23:53 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 14:56:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			handle_del(t_command **cmd)
 	check_quotelvl((*cmd)->command[(*cmd)->pos - 1]);
 	while (szchar)
 	{
-		left_moove(cursor, szchar);
+		left_moove(cursor, szchar, *cmd);
 		delete_char();
 		szchar--;
 		cursor--;

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 11:06:16 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/21 13:47:43 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 12:08:03 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,11 @@ static void		add_to_env(const char *name_var)
 		return ;
 	n = ((long)chr - (long)name_var) + 1;
 	if ((name = ft_strsub(name_var, 0, n)) == NULL)
-	{
-		sherror("21sh", ERRMALLOC, NULL);
-		exit(-1);
-	}
+		ft_exitshell("21sh", ERRMALLOC, NULL);
 	if ((var = ft_strsub(name_var, n, ft_strlen(name_var))) == NULL)
-	{
-		sherror("21sh", ERRMALLOC, NULL);
-		exit(-1);
-	}
+		ft_exitshell("21sh", ERRMALLOC, NULL);
 	if ((ft_setenv(name, var)) == NULL)
-	{
-		sherror("21sh", ERRMALLOC, NULL);
-		exit(-1);
-	}
+		ft_exitshell("21sh", ERRMALLOC, NULL);
 	free(name);
 	free(var);
 }
@@ -75,10 +66,7 @@ static void		create_fromenv(const char **env)
 		else
 		{
 			if ((shlvl = shlvl_increment(env[i])) == NULL)
-			{
-				sherror("21sh", ERRMALLOC, NULL);
-				exit(-1);
-			}
+				ft_exitshell("21sh", ERRMALLOC, NULL);
 			add_to_env(shlvl);
 			free(shlvl);
 		}

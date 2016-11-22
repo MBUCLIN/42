@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:15:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/16 14:44:19 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 12:05:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void		ft_puterror(char *name, char *msg, char *file)
 	ft_putstr_fd(msg, 2);
 	ft_putendl_fd(2, file);
 }
+
 void			sherror(char *name, int errnum, char *file)
 {
 	if (errnum == ERRMALLOC)
@@ -35,4 +36,10 @@ void			sherror(char *name, int errnum, char *file)
 		ft_puterror(name, ": Stream 0 not found: ", file);
 	else
 		ft_puterror(name, ": Errnum wrong value.", file);
+}
+
+void		ft_exitshell(char *name, int errnum, char *file)
+{
+	sherror(name, errnum, file);
+	exit(-1);
 }

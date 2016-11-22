@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 15:00:35 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/10 13:54:55 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 15:09:34 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,22 @@ void		insert_char(int c)
 	}
 }
 
-int			left_moove(int cursor, int szchar)
+int			left_moove(int cursor, int szchar, t_command *cmd)
 {
 	int			col;
 	int			i;
+	int			new_line;
 
 	i = 0;
 	col = tgetnum("co");
+	if (cmd->command[cmd->pos - 1] == '\n')
+	{
+		new_line = (cursor - szchar) % col;
+		ft_termstr("up");
+		while (++i <= new_line)
+			ft_termstr("nd");
+		return (1);
+	}
 	if (cursor % col == 0)
 	{
 		ft_termstr("up");

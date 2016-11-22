@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 12:06:01 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/21 15:06:16 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 12:13:39 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ static char			*readnon_canon(void)
 		if ((ret = readnon_canon()) == NULL)
 			return (NULL);
 		if ((line = ft_strjoindfree(line, ret)) == NULL)
-		{
-			sherror("21sh", ERRMALLOC, NULL);
-			exit(-1);
-		}
+			ft_exitshell("21sh", ERRMALLOC, NULL);
 	}
 	return (line);
 }

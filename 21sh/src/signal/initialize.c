@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:40:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/16 11:21:35 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 12:09:36 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 static void		allocate_check(int **check)
 {
 	if ((*check = (int *)malloc(sizeof(int) * (18 + 1))) == NULL)
-	{
-		sherror("21sh", ERRMALLOC, NULL);
-		exit(-1);
-	}
+		ft_exitshell("21sh", ERRMALLOC, NULL);
 	(*check)[18] = 0;
 }
 
@@ -28,10 +25,7 @@ static void		allocate_message(char ***msg)
 
 	i = 0;
 	if ((*msg = (char **)malloc(sizeof(char *) * (18 + 1))) == NULL)
-	{
-		sherror("21sh", ERRMALLOC, NULL);
-		exit(-1);
-	}
+		ft_exitshell("21sh", ERRMALLOC, NULL);
 	(*msg)[18] = NULL;
 }
 

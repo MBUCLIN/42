@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/16 17:49:44 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 16:19:15 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,10 @@ static t_command	*initialize_loop(char *prompt, int mask, char *command)
 {
 	t_command		*cmd;
 
-//	if (!mask)
-//		ft_changesignal(0, 0, NULL);
+	if (!mask)
+		ft_changesignal(0, 0, NULL);
 	if ((cmd = create_command(prompt, mask, command)) == NULL)
-	{
-		sherror("21sh", ERRMALLOC, NULL);
-		exit(-1);
-	}
+		ft_exitshell("21sh", ERRMALLOC, NULL);
 	set_command(&cmd);
 	ft_putstr(cmd->prompt);
 	return (cmd);

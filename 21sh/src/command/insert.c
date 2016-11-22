@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 15:41:51 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/16 11:15:14 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 15:56:40 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			insert_end(t_command **cmd, char *buf, int cursor)
 	cursor = get_cursor(LENGT, cmd);
 	write(1, buf, 1);
 	(*cmd)->command[(*cmd)->len] = '\n';
-	(*cmd)->szchar[(*cmd)->len] = '\n';
+	(*cmd)->szchar[(*cmd)->len] = cursor % col;
 	(*cmd)->len++;
 	(*cmd)->pos = (*cmd)->len;
 }
@@ -39,10 +39,7 @@ void			inserton_str(t_command **cmd, int len)
 	sub = NULL;
 	if ((sub = ft_strsub(((*cmd)->command + (*cmd)->pos),\
 				0, ft_strlen(((*cmd)->command + (*cmd)->pos)))) == NULL)
-	{
-		sherror("21sh", ERRMALLOC, NULL);
-		exit(-1);
-	}
+		ft_exitshell("21sh", ERRMALLOC, NULL);
 	(*cmd)->pos += len;
 	while (sub[j])
 	{

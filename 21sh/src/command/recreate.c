@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 14:33:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/15 15:59:13 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 12:14:35 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ void			recreate(t_command **cmd, int len)
 		(*cmd)->szchar = recreate_szchar((*cmd)->szchar, (*cmd)->alloc);
 		(*cmd)->alloc += BUF_SIZE;
 		if ((*cmd)->command == NULL || (*cmd)->szchar == NULL)
-		{
-			sherror("21sh", ERRMALLOC, NULL);
-			exit(-1);
-		}
+			ft_exitshell("21sh", ERRMALLOC, NULL);
 	}
 }

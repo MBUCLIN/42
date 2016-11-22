@@ -6,44 +6,52 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:23:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/21 15:03:02 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 15:07:06 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
+static char			*read_command(int canon)
+{
+	t_command		*cmd;
+	char			*command;
+
+	if (canon == 0)
+		if ((cmd = read_loop("$> ", 0, NULL)) == NULL)
+			ft_exitshell("21sh", ERRMALLOC, NULL);
+	if (canon == 1)
+		if ((command = init_noncanon_read()) == NULL)
+			ft_exitshell("21sh", ERRMALLOC, NULL);
+	if (canon == 1)
+		return (command);
+	else if (canon == 0)
+		if ((command = ft_strdup(cmd->command)) == NULL)
+			ft_exitshell("21sh", ERRMALLOC, NULL);
+	del_command(cmd);
+	return (command);
+}
+
 static void			main_loop(void)
 {
-	t_command	*cmd;
 	char		*name;
 	char		*command;
+	int			canon;
 
 	while (42)
 	{
-		cmd = NULL;
 		command = NULL;
+		canon = 0;
 		if ((name = ft_getenv("TERM=")) == NULL)
-			command = init_noncanon_read();
-		else if (!canonize_input(name))
-			command = init_noncanon_read();
-		else if ((cmd = read_loop("$> ", 0, NULL)) == NULL)
-		{
-			sherror("21sh", ERRMALLOC, NULL);
-			noncanonize_input(name);
-			return ;
-		}
-		else
-			noncanonize_input(name);;
-		if (command)
-		{
-			ft_printf("|%s| : command\n", command);
-			free(command);
-		}
-		else
-		{
-			ft_printf("|%s| : cmd->command\n", cmd->command);
-			del_command(cmd);
-		}
+			canon = 1;
+		if (canon == 0)
+			if (canonize_input(name) == 0)
+				canon = 1;
+		command = read_command(canon);
+		save_history(command);
+		noncanonize_input(name);
+		ft_printf("|%s| : command\n", command);
+		free(command);
 	}
 }
 

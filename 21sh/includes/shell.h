@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/21 13:14:25 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/22 16:06:29 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,14 @@ void				del_command(t_command *cmd);
 int					canonize_input(char *name);
 int					noncanonize_input(char *name);
 
+t_list				*save_history(char *command);
 int					save_cursorpos(int cursor);
 int					retr_cursorpos(int cursor);
 int					get_cursor(int flag, t_command **cmd);
 int					get_line(int cursor);
 int					get_column(int cursor);
 void				ft_moovecursor(int mv, int up);
+void				moove_start(int cursor, int co);
 void				moove_end(int cursor, t_command *cmd);
 int					place_cursor(int oldcol, int cursor, t_command *cmd);
 int					get_tabszst(int pos);
@@ -117,7 +119,7 @@ void				ft_termstr(char *id);
 void				ft_termgoto(char *id, int c, int l);
 void				delete_char(void);
 void				insert_char(int c);
-int					left_moove(int cursor, int szchar);
+int					left_moove(int cursor, int szchar, t_command *cmd);
 void				right_moove(t_command *cmd, int n);
 void				recreate(t_command **cmd, int len);
 
@@ -136,6 +138,7 @@ void				handle_stnd(char *buf, t_command **cmd);
 void				handle_mvwrd(char *buf, t_command **cmd);
 void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);
+void				handle_history(char *buf, t_command **cmd);
 void				handle_special(char *buf, t_command **cmd);
 int					handle_normal(char *buf, t_command **cmd);
 

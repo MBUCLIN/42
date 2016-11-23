@@ -6,38 +6,40 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:49:04 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/04 17:47:45 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/23 16:35:13 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SIGNAL_H
 # define FT_SIGNAL_H
 
-/* Thoose define are used to check th signal that print an error message **
-** Could be use for get the string to write on error                     **
-** EQSIG == [EQ][NAME]                                                   */
-
+/*
+** Define the signals that may print error message
+** in exec mode
+*/
 # define MSGSIGSZE 18
+# define EQHNG 0b1
+# define EQIHI 0b100
+# define EQTRP 0b101
+# define EQABT 0b110
+# define EQEMT 0b111
+# define EQFPE 0b1000
+# define EQKIL 0b1001
+# define EQBUS 0b1010
+# define EQSEG 0b1011
+# define EQISC 0b1100
+# define EQALM 0b1110
+# define EQSPD 0b10001
+# define EQCPU 0b11000
+# define EQFSL 0b11001
+# define EQVTA 0b11010
+# define EQPSI 0b11011
+# define EQUD1 0b11110
+# define EQUD2 0b11111
 
-# define EQHNG 0b1 // hangup :: 1
-# define EQIHI 0b100 // illegal hardware instruction :: 4
-# define EQTRP 0b101 // trace trap :: 5
-# define EQABT 0b110 // abort :: 6
-# define EQEMT 0b111 // EMT instruction :: 7
-# define EQFPE 0b1000 // floating point exception :: 8
-# define EQKIL 0b1001 // killed :: 9
-# define EQBUS 0b1010 // bus error :: 10
-# define EQSEG 0b1011 // segmentation fault :: 11
-# define EQISC 0b1100 // invalid system call :: 12
-# define EQALM 0b1110 // alarm :: 14
-# define EQSPD 0b10001 // suspended (signal) :: 17
-# define EQCPU 0b11000 // cpu limit exceeded :: 24
-# define EQFSL 0b11001 // file size limit exceeded :: 25
-# define EQVTA 0b11010 // virtual time alarm :: 26
-# define EQPSI 0b11011 // profil signal :: 27
-# define EQUD1 0b11110 // user-defined signal 1 :: 30
-# define EQUD2 0b11111 // user-defined signal 2 :: 31
-
+/*
+** Define the message printed by signals in exec mode
+*/
 # define MSGHNG "hangup	"
 # define MSGIHI "illegal hardware instruction	"
 # define MSGTRP "trape trace	"
@@ -59,7 +61,29 @@
 
 # include <signal.h>
 
+/*
+** Function that handle signal from shell
+** They are called only in shell mode
+** (edit command/parsing/tokenization)
+*/
+int			place_cursor(int oldcol, int cursor, t_command *cmd);
+void		win_resize(int sig);
+void		ft_prompt(int sig);
+/*
+** Function that initialize array of string or masks
+*/
 int			*get_checker(void);
 char		**get_message(void);
+/*
+** Function that gives the type of signal
+** (default or ignore, win or ^C, display a message)
+*/
+int			is_dori(int sig);
+int			is_other(int sig);
+int			is_message(int sig);
+/*
+** Function that jump to shell mode or exec mode
+*/
 void		ft_changesignal(int sig, int pid, char *name);
+
 #endif

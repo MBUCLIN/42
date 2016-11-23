@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:46:06 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 17:07:15 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/23 13:40:27 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,39 +75,48 @@ static char		*save_command(char *command)
 	static char		*saved = NULL;
 
 	if (command == NULL)
+	{
+		free(saved);
+		saved = NULL;
+	}
+	else if (command[0] == -1)
+	{
+		free(command);
 		return (saved);
+	}
 	else
 		saved = ft_strdup(command);
 	return (saved);
 }
 
-void			handle_history(char *buf, t_command **cmd)
+static int		check_index(int index, t_list *hist)
+{
+	if (hist == NULL || index < 0 || index > ft_lstlen(hist))
+		return (0);
+	return (1);
+}
+
+void			handle_history(int way, t_command **cmd)
 {
 	t_list			*hist;
 	static int		index = 0;
-	t_list			*tmp;
-	int				len;
 
-	if (index == 0)
+	hist = save_history(NULL);
+	if (way == 0)
+	{
+		index = 0;
+		return ;
+	}
+	if (check_index(index + way, hist) == 0)
+		return ;
+	else if (index == 0)
 		save_command((*cmd)->command);
+	get_index(hist, index, way);
 	moove_start(get_cursor(LOCAT, cmd), 0);
 	ft_termstr("cd");
-	hist = save_history(NULL);
-	if (hist == NULL)
-		return ;
 	ft_putlst(hist);
 	free((*cmd)->command);
 	free((*cmd)->szchar);
+	(*cmd)->command = NULL;
 	(*cmd)->szchar = NULL;
-	sleep(2);
-	if ((tmp = get_index(hist, index, buf[2] == 65 ? 1 : -1)) == NULL)
-		(*cmd)->command = save_command(NULL);
-	else
-		(*cmd)->command = ft_strdup(tmp->content);
-	len = ft_strlen((*cmd)->command);
-	(*cmd)->len = len;
-	(*cmd)->alloc = len;
-	index += buf[2] == 65 ? 1 : -1;
-	ft_putstr((*cmd)->prompt);
-	ft_putstr((*cmd)->command);
 }

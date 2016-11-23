@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 11:06:16 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 12:08:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/23 14:02:03 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ static void		create_fromenv(const char **env)
 		}
 		i++;
 	}
+}
+
+static void		create_known(void)
+{
+	create_shlvl(FTSHLVL);
+	create_pwd(FTPWD);
+	create_path(FTPATH);
+	ft_setenv(FTHOME, ft_gethome());
 }
 
 void			create_env(void)

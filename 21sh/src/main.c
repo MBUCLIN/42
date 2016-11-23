@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:23:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 15:07:06 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/23 14:03:20 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,8 @@ static void			main_loop(void)
 
 int					main(void)
 {
-	t_list			*env;
-	t_list			*tmp;
-
-	env = NULL;
 	create_env();
-	env = get_env(NULL);
-	tmp = env;
+	get_env(NULL);
 	main_loop();
 	return (0);
 }

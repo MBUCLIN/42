@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 13:41:22 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/21 15:00:27 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/23 13:58:38 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static void		create_shlvl(char *shlvl)
+void		create_shlvl(char *shlvl)
 {
 	char		*value;
 
@@ -25,7 +25,7 @@ static void		create_shlvl(char *shlvl)
 	free(value);
 }
 
-static void		create_pwd(char *pwd)
+void		create_pwd(char *pwd)
 {
 	char		*value;
 
@@ -81,7 +81,7 @@ static char		*open_path_file(char *filepath)
 	return (pathes);
 }
 
-static void		create_path(char *path)
+void		create_path(char *path)
 {
 	char		*value;
 
@@ -89,10 +89,4 @@ static void		create_path(char *path)
 		return ;
 	ft_setenv(path, value);
 	free(value);
-}
-void			create_known(void)
-{
-	create_shlvl(FTSHLVL);
-	create_pwd(FTPWD);
-	create_path(FTPATH);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 11:31:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 16:10:20 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/23 11:09:22 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void			handle_special(char *buf, t_command **cmd)
 	else if (IF_CLEAR(mask))
 		clear_sreen(cmd);
 	else if (IF_HIST(mask))
-		handle_history(buf, cmd);
+		handle_history(buf[2] == 65 ? 1 : -1, cmd);
 }

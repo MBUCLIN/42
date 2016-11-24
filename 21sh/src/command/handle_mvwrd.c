@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:25 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 15:09:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 18:32:27 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,18 @@ static void		moove_wlft(t_command **cmd)
 	}
 }
 
-static void		moove_wrgt(t_command **cmd)
+int				moove_wrgt(t_command **cmd)
 {
+	int			start;
+
+	start = (*cmd)->pos;
 	while ((*cmd)->pos < (*cmd)->len &&\
 			!ft_isblank((*cmd)->command[(*cmd)->pos + 1]))
 	{
 		moove_cursor(1, cmd);
 		(*cmd)->pos++;
 	}
+	return ((*cmd)->pos - start);
 }
 
 void			handle_mvwrd(char *buf, t_command **cmd)

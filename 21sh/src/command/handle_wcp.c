@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:54:42 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 12:11:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 16:54:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,20 @@ static void			cut_word(t_command **cmd)
 	len = 0;
 	i = 0;
 	cuted = NULL;
-	while (((*cmd)->pos + len) < (*cmd)->len &&\
-			!ft_isblank((*cmd)->command[(*cmd)->pos + len]))
-		len++;
-	if (len)
-		if ((cuted = ft_strsub((*cmd)->command, (*cmd)->pos, len)) == NULL)
-			ft_exitshell("21sh", ERRMALLOC, NULL);
-	while (i < len)
+	len = moove_wrgt(cmd);
+	if (len == 0)
+		return ;
+	(*cmd)->pos -= len;
+	if ((cuted = ft_strsub((*cmd)->command, (*cmd)->pos, len + 1)) == NULL)
+		ft_exitshell("21sh", ERRMALLOC, NULL);
+	while (i <= len)
 	{
 		right_moove(*cmd, 0);
 		(*cmd)->pos++;
 		i++;
 	}
 	i = -1;
-	while (++i < len)
+	while (++i <= len)
 		handle_del(cmd);
 	set_word(cuted, 1);
 }
@@ -80,5 +80,8 @@ void				handle_wcp(char *buf, t_command **cmd)
 	if (buf[0] == 14)
 		cut_word(cmd);
 	else
+	{
 		paste_word(cmd);
+	}
+	set_command(cmd);
 }

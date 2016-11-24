@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 14:53:53 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/04 17:39:49 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 15:08:36 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void			handle_message(int sig, int pid, char *name)
 	}
 }
 
-static void		handle_specialsignal(int sig)
+static void			handle_specialsignal(int sig)
 {
 	if (sig == 2)
 		signal(sig, ft_prompt);
@@ -47,7 +47,7 @@ static void		handle_specialsignal(int sig)
 		signal(sig, win_resized);
 }
 
-void			ft_changesignal(int sig, int pid, char *name)
+void				ft_changesignal(int sig, int pid, char *name)
 {
 	int		i;
 	int		def;

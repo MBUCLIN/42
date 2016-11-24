@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:03:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/23 16:39:09 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 16:40:54 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int					get_cursor(int flag, t_command **cmd);
 void				ft_moovecursor(int mv, int up);
 void				moove_start(int cursor, int co);
 void				moove_end(int cursor, t_command *cmd);
+int					moove_wrgt(t_command **cmd);
 /*
 ** Function that execute several termcaps
 ** they don't have any returns so we won't know if it work'd.
@@ -140,7 +141,9 @@ void				right_moove(t_command *cmd, int n);
 */
 t_command			**set_command(t_command **cmd);
 t_command			**ft_getcommand(void);
+void				display_char(int c, int szchar, int cursor);
 void				recreate(t_command **cmd, int len);
+t_command			*create_command(char *prompt, int mask, char *command);
 void				rewrite_end(t_command **cmd);
 /*
 ** Function that handle the insert part of the input redirection

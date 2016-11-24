@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 14:33:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 12:14:35 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 16:40:14 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,30 @@ void			recreate(t_command **cmd, int len)
 		if ((*cmd)->command == NULL || (*cmd)->szchar == NULL)
 			ft_exitshell("21sh", ERRMALLOC, NULL);
 	}
+}
+
+t_command		*create_command(char *prompt, int mask, char *command)
+{
+	t_command		*cmd;
+
+	cmd = NULL;
+	if ((cmd = (t_command *)malloc(sizeof(t_command))) == NULL)
+		return (NULL);
+	if ((cmd->command = (char *)malloc(sizeof(char) * (BUF_SIZE + 1))) == NULL)
+		return (NULL);
+	if ((cmd->szchar = (char *)malloc(sizeof(char) * (BUF_SIZE + 1))) == NULL)
+		return (NULL);
+	if ((cmd->prompt = ft_strdup(prompt)) == NULL)
+		return (NULL);
+	cmd->alloc = BUF_SIZE;
+	cmd->plen = ft_strlen(prompt);
+	cmd->qmask = mask;
+	ft_bzero(cmd->command, BUF_SIZE + 1);
+	ft_bzero(cmd->szchar, BUF_SIZE + 1);
+	cmd->pos = 0;
+	cmd->len = 0;
+	if (ft_strlen(command) > 0)
+		handle_normal(command, &cmd);
+	set_command(&cmd);
+	return (cmd);
 }

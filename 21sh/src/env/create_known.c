@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 13:41:22 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/23 13:58:38 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 15:09:29 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void		create_shlvl(char *shlvl)
+void			create_shlvl(char *shlvl)
 {
 	char		*value;
 
@@ -25,7 +25,7 @@ void		create_shlvl(char *shlvl)
 	free(value);
 }
 
-void		create_pwd(char *pwd)
+void			create_pwd(char *pwd)
 {
 	char		*value;
 
@@ -81,7 +81,7 @@ static char		*open_path_file(char *filepath)
 	return (pathes);
 }
 
-void		create_path(char *path)
+void			create_path(char *path)
 {
 	char		*value;
 

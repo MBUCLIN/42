@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 11:59:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 15:57:50 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 16:48:56 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@ t_command			**ft_getcommand(void)
 	return (set_command(NULL));
 }
 
+void				display_char(int c, int size, int cursor)
+{
+	int				col;
+
+	col = tgetnum("co");
+	while (size)
+	{
+		if (cursor >= 0)
+		{
+			insert_char(c);
+			if ((cursor + 1) % col == 0)
+				ft_termstr("sf");
+		}
+		else
+			write(1, &c, 1);
+		size--;
+	}
+}
+
 void				rewrite_end(t_command **cmd)
 {
 	int		pos;
@@ -44,13 +63,9 @@ void				rewrite_end(t_command **cmd)
 		c = (*cmd)->command[(*cmd)->pos] == '\t' ?\
 				'.' : (*cmd)->command[(*cmd)->pos];
 		size = (*cmd)->command[(*cmd)->pos] == '\t' ?\
-			   get_tabszst(get_cursor(LOCAT, cmd)) : 1;
+				get_tabszst(get_cursor(LOCAT, cmd)) : 1;
 		(*cmd)->szchar[(*cmd)->pos] = size;
-		while (size)
-		{
-			write(1, &c, 1);
-			size--;
-		}
+		display_char(c, size, -1);
 		(*cmd)->pos++;
 	}
 	retr_cursorpos(get_cursor(LOCAT, cmd));

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/23 14:50:19 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 16:46:58 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,32 +34,6 @@ static int			check_special(char *buf)
 	return (0);
 }
 
-static t_command	*create_command(char *prompt, int mask, char *command)
-{
-	t_command		*cmd;
-
-	cmd = NULL;
-	if ((cmd = (t_command *)malloc(sizeof(t_command))) == NULL)
-		return (NULL);
-	if ((cmd->command = (char *)malloc(sizeof(char) * (BUF_SIZE + 1))) == NULL)
-		return (NULL);
-	if ((cmd->szchar = (char *)malloc(sizeof(char) * (BUF_SIZE + 1))) == NULL)
-		return (NULL);
-	if ((cmd->prompt = ft_strdup(prompt)) == NULL)
-		return (NULL);
-	cmd->alloc = BUF_SIZE;
-	cmd->plen = ft_strlen(prompt);
-	cmd->qmask = mask;
-	ft_bzero(cmd->command, BUF_SIZE + 1);
-	ft_bzero(cmd->szchar, BUF_SIZE + 1);
-	cmd->pos = 0;
-	cmd->len = 0;
-	if (ft_strlen(command) > 0)
-		handle_normal(command, &cmd);
-	set_command(&cmd);
-	return (cmd);
-}
-
 static t_command	*initialize_loop(char *prompt, int mask, char *command)
 {
 	t_command		*cmd;
@@ -73,11 +47,18 @@ static t_command	*initialize_loop(char *prompt, int mask, char *command)
 	return (cmd);
 }
 
+static t_command	*caller_loop(int mask, char *remain)
+{
+	remain = *remain == 0 ? NULL : remain;
+	if (mask & QTE)
+		return (read_loop("quote> ", mask, remain));
+	return (read_loop("dquote> ", mask, remain));
+}
+
 static int			redirect_buffer(char *buf, t_command **cmd, int check)
 {
 	int			insret;
 	t_command	*qte;
-	char		*remain;
 
 	if (check == 1)
 		handle_special(buf, cmd);
@@ -85,11 +66,8 @@ static int			redirect_buffer(char *buf, t_command **cmd, int check)
 	{
 		if ((insret = handle_normal(buf, cmd)) > 0)
 		{
-			remain = *(buf + insret) == 0 ? NULL : buf + insret;
-			if ((*cmd)->qmask & QTE)
-				qte = read_loop("quote> ", (*cmd)->qmask, remain);
-			else if ((*cmd)->qmask & DQTE)
-				qte = read_loop("dquote> ", (*cmd)->qmask, remain);
+			if ((*cmd)->qmask != 0)
+				qte = caller_loop((*cmd)->qmask, buf + insret);
 			else
 				return (1);
 			recreate(cmd, qte->len);

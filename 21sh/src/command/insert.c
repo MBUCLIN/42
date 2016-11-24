@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 15:41:51 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 15:56:40 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 14:36:44 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void			insert_end(t_command **cmd, char *buf, int cursor)
 	(*cmd)->szchar[(*cmd)->len] = cursor % col;
 	(*cmd)->len++;
 	(*cmd)->pos = (*cmd)->len;
+	set_command(cmd);
 }
 
 void			inserton_str(t_command **cmd, int len)
@@ -65,7 +66,7 @@ static int		insert_tab(t_command **cmd, int cursor, char *buf)
 	szchar = get_tabszst(cursor);
 	(*cmd)->szchar[(*cmd)->pos - 1] = szchar;
 	ft_memset(buf, '.', szchar);
-	return (1);
+	return (szchar);
 }
 
 int				insert_buf(t_command **cmd, char *buf, int cursor, int len)

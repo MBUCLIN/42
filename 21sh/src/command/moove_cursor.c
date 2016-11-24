@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 16:01:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 16:14:52 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 14:15:30 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int			get_column(int cursor)
 	col = tgetnum("co");
 	return (cursor % col);
 }
+
 void		ft_moovecursor(int mv, int up)
 {
 	ft_termstr("cr");
@@ -38,7 +39,7 @@ void		ft_moovecursor(int mv, int up)
 		}
 		else
 		{
-			ft_termstr("do");
+			ft_termstr("sf");
 			up--;
 		}
 	while (mv)

@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 12:06:01 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 12:13:39 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 15:03:52 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static int		quoting_level(char *line)
+static int			quoting_level(char *line)
 {
 	int				i;
 	static int		quote[2] = {0, 0};
@@ -39,7 +39,7 @@ static int		quoting_level(char *line)
 	return (0);
 }
 
-static char		*get_cmdline(void)
+static char			*get_cmdline(void)
 {
 	char		buf[BUF_SIZE + 1];
 	char		*line;

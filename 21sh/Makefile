@@ -5,7 +5,7 @@ NAME = 21sh
 SRC_NAME = main.c canon.c ft_handle.c home.c\
 		   signal/signal.c signal/is_signal.c signal/initialize.c\
 		   command/read_loop.c command/handle.c command/cursor.c\
-		   command/tabulation.c command/recreate.c command/handle_del.c\
+		   command/tabulation.c command/alloc.c command/handle_del.c\
 		   command/handle_trbl.c command/termcap.c command/rewrite.c\
 		   command/termcap_special.c command/insert.c command/save_cursor.c\
 		   command/handle_mvwrd.c command/handle_stnd.c command/handle_scrc.c\

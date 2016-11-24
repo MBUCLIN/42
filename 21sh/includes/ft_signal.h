@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:49:04 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/23 16:35:13 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 13:35:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@
 ** They are called only in shell mode
 ** (edit command/parsing/tokenization)
 */
-int			place_cursor(int oldcol, int cursor, t_command *cmd);
-void		win_resize(int sig);
+void		win_resized(int sig);
 void		ft_prompt(int sig);
 /*
 ** Function that initialize array of string or masks

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 11:57:34 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/23 16:13:39 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 15:08:23 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static char		*read_usersdir(DIR *users, char *path)
 	while ((in_dir = readdir(users)) == NULL)
 	{
 		tmp = NULL;
-		if ((tmp = ft_lstnew(in_dir->d_name, ft_strlen(in_dir->d_name))) == NULL)
+		if ((tmp = ft_lstnew(in_dir->d_name,\
+						ft_strlen(in_dir->d_name))) == NULL)
 			ft_exitshell("21sh", ERRMALLOC, NULL);
 		tmp->next = inner;
 		inner = tmp;

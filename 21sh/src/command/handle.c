@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 16:10:10 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/24 16:39:59 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,17 @@ static int		ft_lenbuf(char *buf)
 
 static int		insert_buffer(char *buf, int cursor)
 {
-	int		col;
 	int		n;
 	int		len;
 
-	col = tgetnum("co");
 	len = ft_lenbuf(buf);
 	n = 0;
 	while (n < len)
 	{
 		check_quotelvl(buf[n]);
-		insert_char(buf[n]);
+		display_char(buf[n], 1, cursor);
 		cursor++;
 		n++;
-		if (cursor % col == 0)
-			ft_termstr("sf");
 	}
 	return (n);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:50:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 13:35:39 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:05:20 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,23 @@ static int		get_cursorlength(t_command **cmd)
 	return (cursor + (*cmd)->plen);
 }
 
-int				get_cursor(int flag, t_command **cmd)
+int				get_cursor(int flagcmd, int flagcs, t_command **cmd)
 {
-	if (flag == LOCAT)
-		return (get_cursorpos(cmd));
-	else if (flag == LENGT)
-		return (get_cursorlength(cmd));
-	return (-1);
+	int			col;
+	int			cursor;
+
+	cursor = -1;
+	col = tgetnum("co");
+	if (flagcmd == LOCAT)
+		cursor = get_cursorpos(cmd);
+	else if (flagcmd == LENGT)
+		cursor = get_cursorlength(cmd);
+	if (flagcs && cursor != -1)
+	{
+		if (flagcs == CSLIN)
+			return (cursor / col);
+		else
+			return (cursor % col);
+	}
+	return (cursor);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 11:59:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 16:48:56 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 15:44:42 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ void				rewrite_end(t_command **cmd)
 	len = (*cmd)->len;
 	pos = (*cmd)->pos;
 	ft_termstr("cd");
-	save_cursorpos(get_cursor(LOCAT, cmd));
+	save_cursorpos(get_cursor(LOCAT, NONE, cmd));
 	while ((*cmd)->pos < len)
 	{
 		c = (*cmd)->command[(*cmd)->pos] == '\t' ?\
 				'.' : (*cmd)->command[(*cmd)->pos];
 		size = (*cmd)->command[(*cmd)->pos] == '\t' ?\
-				get_tabszst(get_cursor(LOCAT, cmd)) : 1;
+				get_tabszst(get_cursor(LOCAT, NONE, cmd)) : 1;
 		(*cmd)->szchar[(*cmd)->pos] = size;
 		display_char(c, size, -1);
 		(*cmd)->pos++;
 	}
-	retr_cursorpos(get_cursor(LOCAT, cmd));
+	retr_cursorpos(get_cursor(LOCAT, NONE, cmd));
 	(*cmd)->pos = pos;
 	set_command(cmd);
 }

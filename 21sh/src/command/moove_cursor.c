@@ -6,27 +6,11 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 16:01:36 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 14:15:30 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:05:32 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-
-int			get_line(int cursor)
-{
-	int		col;
-
-	col = tgetnum("co");
-	return (cursor / col);
-}
-
-int			get_column(int cursor)
-{
-	int		col;
-
-	col = tgetnum("co");
-	return (cursor % col);
-}
 
 void		ft_moovecursor(int mv, int up)
 {
@@ -57,20 +41,17 @@ void		moove_start(int cursor, int co)
 	ft_termstr("cr");
 	col = tgetnum("co");
 	li = cursor / col;
-	ft_moovecursor(co, (-li));
+	ft_moovecursor(co, -(li));
 }
 
-void		moove_end(int cursor, t_command *cmd)
+void		moove_end(t_command *cmd)
 {
-	int		col;
 	int		co;
 	int		li;
-	int		lencur;
 
-	col = tgetnum("co");
-	lencur = get_cursor(LENGT, &cmd);
-	co = lencur % col;
-	li = (lencur / col) - (cursor / col);
+	li = get_cursor(LENGT, CSLIN, &cmd);
+	co = get_cursor(LENGT, CSCOL, &cmd);
 	ft_moovecursor(co, li);
 	cmd->pos = cmd->len;
+	set_command(&cmd);
 }

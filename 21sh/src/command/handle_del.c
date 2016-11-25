@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:04:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 14:56:14 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:41:36 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		deleteon_str(char *szchar, char *cmd, t_command **comd)
 		{
 			cmd[i] = cmd[i + 1];
 			if (cmd[i] == '\t')
-				szchar[i] = get_tabszst(get_cursor(LOCAT, comd));
+				szchar[i] = get_tabszst(get_cursor(LOCAT, NONE, comd));
 			else
 				szchar[i] = 1;
 			i++;
@@ -35,6 +35,20 @@ static void		deleteon_str(char *szchar, char *cmd, t_command **comd)
 	(*comd)->pos = pos;
 }
 
+void			delete_char(void)
+{
+	char		*req;
+
+	if ((req = tgetstr("dm", NULL)) == NULL)
+		ft_termstr("dc");
+	else
+	{
+		tputs(req, 1, ft_writechar);
+		ft_termstr("dc");
+		ft_termstr("ed");
+	}
+}
+
 void			handle_del(t_command **cmd)
 {
 	int			cursor;
@@ -42,7 +56,7 @@ void			handle_del(t_command **cmd)
 
 	if ((*cmd)->pos == 0)
 		return ;
-	cursor = get_cursor(LOCAT, cmd);
+	cursor = get_cursor(LOCAT, NONE, cmd);
 	szchar = (*cmd)->szchar[(*cmd)->pos - 1];
 	check_quotelvl((*cmd)->command[(*cmd)->pos - 1]);
 	while (szchar)

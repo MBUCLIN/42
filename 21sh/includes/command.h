@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:03:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 16:40:54 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 15:44:33 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 ** LOCAT get the location of the cursor
 ** LENGT get the location of the end of command
 */
+# define NONE 0b0
 # define LOCAT 0b1
 # define LENGT 0b10
+# define CSLIN 0b1
+# define CSCOL 0b10
 
 /*
 ** Define for creating a mask to redirect to
@@ -109,13 +112,13 @@ int					get_tabszst(int pos);
 */
 int					get_column(int cursor);
 int					get_line(int cursor);
-int					get_cursor(int flag, t_command **cmd);
+int					get_cursor(int flagcmd, int flagcs, t_command **cmd);
 /*
 ** Function that handle moovements of the cursor
 */
 void				ft_moovecursor(int mv, int up);
 void				moove_start(int cursor, int co);
-void				moove_end(int cursor, t_command *cmd);
+void				moove_end(t_command *cmd);
 int					moove_wrgt(t_command **cmd);
 /*
 ** Function that execute several termcaps
@@ -142,7 +145,7 @@ void				right_moove(t_command *cmd, int n);
 t_command			**set_command(t_command **cmd);
 t_command			**ft_getcommand(void);
 void				display_char(int c, int szchar, int cursor);
-void				recreate(t_command **cmd, int len);
+void				recreate(int len);
 t_command			*create_command(char *prompt, int mask, char *command);
 void				rewrite_end(t_command **cmd);
 /*
@@ -158,8 +161,6 @@ int					insert_buf(t_command **cmd, char *buf, int cursor, int len);
 ** input redirection.
 */
 void				handle_wcp(char *buf, t_command **cmd);
-void				handle_scrc(char *buf, t_command **cmd);
-void				handle_stnd(char *buf, t_command **cmd);
 void				handle_mvwrd(char *buf, t_command **cmd);
 void				handle_trbl(char *buf, t_command **cmd);
 void				handle_del(t_command **cmd);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 14:33:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 16:40:14 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:55:01 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ static char		*recreate_szchar(char *szchar, int len)
 	return (newone);
 }
 
-void			recreate(t_command **cmd, int len)
+void			recreate(int len)
 {
+	t_command		**cmd;
+
+	cmd = ft_getcommand();
 	while (((*cmd)->len + len) > (*cmd)->alloc)
 	{
 		(*cmd)->command = recreate_command((*cmd)->command, (*cmd)->alloc);
@@ -46,6 +49,7 @@ void			recreate(t_command **cmd, int len)
 		if ((*cmd)->command == NULL || (*cmd)->szchar == NULL)
 			ft_exitshell("21sh", ERRMALLOC, NULL);
 	}
+	set_command(cmd);
 }
 
 t_command		*create_command(char *prompt, int mask, char *command)

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:25 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 18:32:27 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 13:44:02 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		moove_cursor(int way, t_command **cmd)
 {
 	int		cursor;
 
-	cursor = get_cursor(LOCAT, cmd);
+	cursor = get_cursor(LOCAT, NONE, cmd);
 	if (way == -1)
 		left_moove(cursor, 0, *cmd);
 	else

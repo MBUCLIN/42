@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 16:46:58 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:56:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int			redirect_buffer(char *buf, t_command **cmd, int check)
 				qte = caller_loop((*cmd)->qmask, buf + insret);
 			else
 				return (1);
-			recreate(cmd, qte->len);
+			recreate(qte->len);
 			ft_strcpy(((*cmd)->command + (*cmd)->len), qte->command);
 			ft_strcpy(((*cmd)->szchar + (*cmd)->len), qte->szchar);
 			(*cmd)->len += qte->len;

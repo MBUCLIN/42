@@ -6,27 +6,56 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 11:31:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 16:48:00 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:50:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
+static void		save_and_retrieve_cursor(char *buf, t_command **cmd)
+{
+	static int		savedpos = -1;
+
+	if (buf[0] == 24)
+	{
+		ft_termstr("sc");
+		savedpos = (*cmd)->pos;
+	}
+	else if (savedpos != -1)
+	{
+		ft_termstr("rc");
+		(*cmd)->pos = savedpos;
+		savedpos = -1;
+	}
+}
+
+static void		moove_stnd(char *buf, t_command **cmd)
+{
+	if (buf[2] == 72)
+	{
+		moove_start(get_cursor(LOCAT, NONE, cmd), (*cmd)->plen);
+		(*cmd)->pos = 0;
+	}
+	else
+	{
+		moove_end(*cmd);
+		(*cmd)->pos = (*cmd)->len;
+	}
+}
+
 static void		clear_sreen(t_command **cmd)
 {
-	int			cursor;
 	int			li;
 	int			co;
 	int			pos;
 
 	ft_termstr("cl");
-	cursor = get_cursor(LOCAT, cmd);
 	ft_putstr((*cmd)->prompt);
 	pos = (*cmd)->pos;
 	(*cmd)->pos = 0;
 	rewrite_end(cmd);
-	co = get_column(cursor);
-	li = get_line(cursor);
+	co = get_cursor(LOCAT, CSCOL, cmd);
+	li = get_cursor(LOCAT, CSLIN, cmd);
 	ft_moovecursor(co, li);
 	(*cmd)->pos = pos;
 }
@@ -66,13 +95,13 @@ void			handle_special(char *buf, t_command **cmd)
 	else if (IF_MVWRD(mask))
 		handle_mvwrd(buf, cmd);
 	else if (IF_MVSTND(mask))
-		handle_stnd(buf, cmd);
+		moove_stnd(buf, cmd);
 	else if (IF_SCRC(mask))
-		handle_scrc(buf, cmd);
+		save_and_retrieve_cursor(buf, cmd);
 	else if (IF_WRDCP(mask))
 		handle_wcp(buf, cmd);
 	else if (IF_CLEAR(mask))
 		clear_sreen(cmd);
-	else if (IF_HIST(mask))
-		handle_history(buf[2] == 65 ? 1 : -1, cmd);
+//	else if (IF_HIST(mask))
+//		handle_history(buf[2] == 65 ? 1 : -1, cmd);
 }

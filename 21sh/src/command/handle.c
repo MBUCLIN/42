@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:45:54 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 16:39:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 17:46:01 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,77 @@ static int		ft_lenbuf(char *buf)
 	return (i);
 }
 
-static int		insert_buffer(char *buf, int cursor)
+void			insert_char(int c)
 {
-	int		n;
-	int		len;
+	char		*req;
 
-	len = ft_lenbuf(buf);
-	n = 0;
-	while (n < len)
+	if ((req = tgetstr("im", NULL)) == NULL)
 	{
-		check_quotelvl(buf[n]);
-		display_char(buf[n], 1, cursor);
-		cursor++;
-		n++;
+		if ((req = tgetstr("ic", NULL)) == NULL)
+			write(1, &c, 1);
+		else
+		{
+			tputs(req, 1, ft_writechar);
+			write(1, &c, 1);
+		}
 	}
-	return (n);
+	else
+	{
+		tputs(req, 1, ft_writechar);
+		if ((req = tgetstr("ic", NULL)) == NULL)
+			write(1, &c, 1);
+		else
+		{
+			tputs(req, 1, ft_writechar);
+			write(1, &c, 1);
+		}
+		ft_termstr("ei");
+	}
+}
+
+void			display_char(int c, int size, int cursor)
+{
+	int			col;
+
+	col = tgetnum("co");
+	while (size)
+	{
+		if (cursor >= 0)
+		{
+			insert_char(c);
+			if ((cursor + 1) % col == 0)
+				ft_moovecursor(0, 1);
+		}
+		else
+			write(1, &c, 1);
+		size--;
+	}
+}
+
+static int		insert_buffer(char *buf, int cursor, t_command **cmd)
+{
+	int		i;
+
+	i = 0;
+	while (buf[i] && buf[i] != '\n')
+	{
+		check_quotelvl(buf[i]);
+		display_char(buf[i], (*cmd)->szchar[(*cmd)->pos], cursor);
+		i++;
+		cursor++;
+		(*cmd)->pos++;
+	}
 }
 
 int				handle_normal(char *buf, t_command **cmd)
 {
 	int			n;
-	int			cursor;
-	int			tabu;
-	size_t		len;
 
-	tabu = buf[0] == '\t' ? 1 : 0;
-	len = ft_lenbuf(buf);
-	recreate(cmd, ft_strlen(buf));
-	inserton_str(cmd, len);
-	cursor = get_cursor(LOCAT, cmd);
-	insert_buf(cmd, buf, cursor, len);
-	n = insert_buffer(buf, cursor);
-	rewrite_end(cmd);
-	set_command(cmd);
-	if (len < ft_strlen(buf) && !tabu)
-	{
-		check_quotelvl(buf[len]);
-		insert_end(cmd, buf + len, cursor);
-		return (len + 1);
-	}
-	return (0);
+	recreate(ft_strlen(buf));
+	n = command_insert_buffer();
+
+//	insert_buffer(buf, cursor);
+//	rewrite_end(cmd);
+//	set_command(cmd);
+	return (n);
 }

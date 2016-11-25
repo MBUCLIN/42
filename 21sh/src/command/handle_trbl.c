@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 16:18:38 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/22 14:55:58 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 13:57:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int		get_newcur(int add, t_command **cmd, int cursor, int col)
 	int		newcur;
 	int		lengt;
 
-	lengt = get_cursor(LENGT, cmd);
+	lengt = get_cursor(LENGT, NONE, cmd);
 	newcur = cursor + (add * col);
 	if (newcur < (*cmd)->plen)
 		newcur = (*cmd)->plen;
@@ -42,25 +42,14 @@ static void		handle_updown(int add, t_command **cmd)
 	int			newcur;
 	int			mv;
 
-	cursor = get_cursor(LOCAT, cmd);
+	cursor = get_cursor(LOCAT, NONE, cmd);
 	col = tgetnum("co");
 	if ((add == -1 && cursor / col == 0) ||\
-		(add == 1 && cursor / col == get_cursor(LENGT, cmd) / col))
+		(add == 1 && cursor / col == get_cursor(LENGT, NONE, cmd) / col))
 		return ;
 	newcur = get_newcur(add, cmd, cursor, col);
 	mv = newcur % col;
-	if (add == -1)
-	{
-		ft_termstr("up");
-		ft_termstr("cr");
-	}
-	else
-		ft_termstr("do");
-	while (mv > 0)
-	{
-		ft_termstr("nd");
-		mv--;
-	}
+	ft_moovecursor(mv, add);
 	set_command(cmd);
 }
 
@@ -76,7 +65,7 @@ static void		handle_rightleft(int add, t_command **cmd)
 	while (++n != (szchar = (*cmd)->szchar[(*cmd)->pos + add]))
 		if (add == -1)
 		{
-			if (left_moove(get_cursor(LOCAT, cmd), szchar, *cmd) == 1)
+			if (left_moove(get_cursor(LOCAT, NONE, cmd), szchar, *cmd) == 1)
 				break ;
 		}
 		else

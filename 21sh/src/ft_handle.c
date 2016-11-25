@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 17:34:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 15:08:11 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 13:39:28 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			ft_prompt(int sig)
 static void		rewrite_command(int save)
 {
 	t_command		**cmd;
-	int				cursor;
+	int				line;
 	int				minus;
 
 	minus = 0;
@@ -30,10 +30,10 @@ static void		rewrite_command(int save)
 	ft_putstr((*cmd)->prompt);
 	rewrite_end(cmd);
 	(*cmd)->pos = save;
-	cursor = get_cursor(LOCAT, cmd);
-	if (get_line(cursor) == 0)
+	line = get_cursor(LOCAT, CSLIN, cmd);
+	if (line == 0)
 		minus = 3;
-	ft_moovecursor(get_column(cursor), get_line(cursor));
+	ft_moovecursor(get_cursor(LOCAT, CSCOL, cmd), line);
 	set_command(cmd);
 }
 
@@ -41,13 +41,15 @@ static int		erase_command(int old, int cursor, t_command **cmd)
 {
 	int			newcol;
 	int			save;
+	int			line;
 
 	newcol = tgetnum("co");
+	line = get_cursor(LOCAT, CSLIN, cmd);
 	if (old < newcol)
-		ft_moovecursor(0, get_line(cursor));
+		ft_moovecursor(0, line);
 	else
-		ft_moovecursor(0, -((get_line(cursor) * 2)\
-					+ ((cursor % old) + (old - newcol)) / newcol));
+		ft_moovecursor(0, -(line * 2)\
+					+ ((cursor % old) + (old - newcol)) / newcol);
 	save = (*cmd)->pos;
 	(*cmd)->pos = 0;
 	set_command(cmd);
@@ -71,5 +73,5 @@ void			win_resized(int sig)
 	if ((*cmd) == NULL || (*cmd)->len == 0)
 		return ;
 	new = tgetnum("co");
-	rewrite_command(erase_command(oldsz, get_cursor(LOCAT, cmd), cmd));
+	rewrite_command(erase_command(oldsz, get_cursor(LOCAT, NONE, cmd), cmd));
 }

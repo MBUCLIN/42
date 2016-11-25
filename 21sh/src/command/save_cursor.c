@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 12:12:44 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 15:06:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:04:26 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ int			save_cursorpos(int cursor)
 int			retr_cursorpos(int cursor)
 {
 	int		save;
-	int		up;
+	int		li;
+	int		col;
 
+	col = tgetnum("co");
 	save = save_cursorpos(-1);
-	up = get_line(cursor) - get_line(save);
-	if (get_column(cursor) == 0 && up)
-		ft_moovecursor(get_column(save), -(up - 1));
+	li = (cursor / col) - (save / col);
+	if ((cursor % col) == 0 && li)
+		ft_moovecursor(save % col, -(li - 1));
 	else
-		ft_moovecursor(get_column(save), -(up));
+		ft_moovecursor(save % col, -(li));
 	return (save);
 }

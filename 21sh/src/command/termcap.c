@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 12:16:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/30 15:38:19 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 17:05:25 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			left_moove(int cursor, int szchar, t_command *cmd)
 	}
 	if (cursor % col == 0)
 	{
-		ft_moovecursor((col - szchar) + 1, -1);
+		ft_moovecursor((col - szchar), -1);
 		return (1);
 	}
 	ft_termstr("le");

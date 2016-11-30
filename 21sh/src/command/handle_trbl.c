@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 16:18:38 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/30 15:51:01 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 17:06:13 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void		handle_rightleft(int add, t_command **cmd)
 		(add == -1 && (*cmd)->pos == 0))
 		return ;
 	n = -1;
-	while (++n != (szchar = (*cmd)->szchar[(*cmd)->pos + add]))
+	while (++n < (szchar = (*cmd)->szchar[(*cmd)->pos + add]))
 		if (add == -1)
 		{
 			if (left_moove(get_cursor(LOCAT, NONE, cmd), szchar, *cmd) == 1)
@@ -80,19 +80,14 @@ void			handle_trbl(char *buf)
 {
 	int				len;
 	t_command		**cmd;
+	int				way;
 
 	cmd = ft_getcommand();
 	len = ft_strlen(buf);
 	if (len == 3)
 	{
-		if (buf[len - 1] == 68)
-		{
-			handle_rightleft(-1, cmd);
-		}
-		else
-		{
-			handle_rightleft(0, cmd);
-		}
+		way = buf[len - 1] == 68 ? -1 : 0;
+		handle_rightleft(way, cmd);
 	}
 	else
 	{

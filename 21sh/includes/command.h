@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:03:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/30 15:50:57 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 17:30:51 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 # define COMMAND_H
 
 /*
-** Define for the get_cursor function
+** Define for the get_cursor (cursor.c) function
 ** LOCAT get the location of the cursor
 ** LENGT get the location of the end of command
+** CSLINE get the line for LOCAT or LENGT
+** CSCOL get the column for LOCAT or LENGT
+** NONE get only the LOCAT or the LENGT of the cursor
 */
 # define NONE 0b0
 # define LOCAT 0b1
@@ -26,7 +29,7 @@
 
 /*
 ** Define for creating a mask to redirect to
-** the good handle function (special)
+** the right handle function (handle_special.c)
 */
 # define IS_DEL 0b0
 # define IS_MVTRBL 0b1
@@ -38,7 +41,7 @@
 # define IS_WRDCP 0b1000000
 
 /*
-** Define for redirect to the good handle function (special)
+** Define for redirect to the right handle function (handle_special.c)
 */
 # define IF_MVTRBL(m) (m & IS_MVTRBL)
 # define IF_MVWRD(m) (m & IS_MVWRD)
@@ -50,8 +53,10 @@
 
 /*
 ** Define for cmp with the input from user,
-** if the cmp is NULL then it goes to special else
-** it goes to normal
+** if the user input compared with those define by
+** the function check_special (read_loop.c) is true
+** then we can assume that a call to the special function
+** handleling is asked (handle_special.c)
 */
 # define TABLEN 16
 # define HISTN {27, 91, 65, 0, 0, 0}
@@ -73,7 +78,8 @@
 
 /*
 ** Define that give the mask (qmask) for the quoting
-** it gives the good prompt of quoting level
+** it gives the good prompt of quoting level (quoting.c)
+** It can also determine the prompt to print
 */
 # define QTE 1
 # define DQTE 2
@@ -107,14 +113,18 @@ void				del_cmdhist(t_command *cmd);
 int					get_tabszst(int pos);
 /*
 ** Function that return information about the cursor
-** (His line, column, the position of the location OR
-** the position of the length)
+** (the line OR column OF the location OR
+** the length of the cursor)
 */
-int					get_column(int cursor);
-int					get_line(int cursor);
 int					get_cursor(int flagcmd, int flagcs, t_command **cmd);
 /*
 ** Function that handle moovements of the cursor
+** -	ft_moovecursor >> mv moove column int between 0 and COLSZ
+** up moove line int < 0 to moove up and > 0 to moove down
+** -	moove_start >> moove to the start of the command
+** -	moove_end >> moove to the end of the command
+** -	moove_wrgt >> moove one word to the right
+** used to mv word or to cut word
 */
 void				ft_moovecursor(int mv, int up);
 void				moove_start(int cursor, int co);
@@ -123,7 +133,7 @@ int					moove_wrgt(t_command **cmd);
 /*
 ** Function that execute several termcaps
 ** they don't have any returns so we won't know if it work'd.
-** The left_moove function does retrun a integer :
+** The left_moove function retrun a integer :
 ** TRUE : it mooves to the upper line and szchar X left
 ** FALSE : it mooves one left
 */
@@ -136,25 +146,43 @@ void				insert_char(int c);
 int					left_moove(int cursor, int szchar, t_command *cmd);
 void				right_moove(t_command *cmd, int n);
 /*
-** Function to save the actual command in a static var
-** (use in signal part) or for the rewrite function that is
-** called for all function that change the charaters of the command.
-** The recreate function realloc the command string and szchar string
-** of the t_command struct and set the new value of alloc integer
+** Function that save the t_command struct given
+** or retrieve the last saved t_command struct
 */
 t_command			**set_command(t_command **cmd);
 t_command			**ft_getcommand(void);
+/*
+** Function that set the command && szchar variable
+** in the t_command struct
+*/
 int					command_settobuf(t_command **cmd, int c, int cursor);
+/*
+** Function to display on the stream a character 'c'
+** 'szchar' times if the 'cursor' is >= 0 it will use insert_char
+** else if it is < 0 it will only write the character
+*/
 void				display_char(int c, int szchar, int cursor);
+/*
+** Function that allocate or realocate some memory for the
+** command and szchar variable in t_command struct
+*/
 void				recreate(int len);
 t_command			*create_command(char *prompt, int mask, char *command);
+/*
+** Function thay rewrite the end of the command starting to pos
+** ending to len of the last saved t_command struct
+*/
 void				rewrite_end(void);
 /*
 ** Function that handle the insert part of the input redirection
 ** insert the input (buf) and deal with quotting and new lines
 */
-int					check_quotelvl(int c);
 int					command_insert(char *buf);
+/*
+** Check and set the quotting level
+** it also set the mask in the t_command struct
+*/
+int					check_quotelvl(int c);
 /*
 ** Function that are called by the special part of the
 ** input redirection.
@@ -166,9 +194,6 @@ void				handle_del(t_command **cmd);
 void				handle_history(int way, t_command **cmd);
 /*
 ** Function that handle the input from user
-** If the cmp of the buf with the defined string before
-** is true then input is redirected to special else it goes
-** to normal
 */
 void				handle_special(char *buf, t_command **cmd);
 int					handle_normal(char *buf);

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:54:42 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 16:54:11 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/28 13:41:47 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ static void			cut_word(t_command **cmd)
 	set_word(cuted, 1);
 }
 
-static void			paste_word(t_command **cmd)
+static void			paste_word()
 {
 	char		*pasted;
 
 	pasted = NULL;
 	pasted = get_word();
 	if (pasted != NULL)
-		handle_normal(pasted, cmd);
+		handle_normal(pasted);
 }
 
 void				handle_wcp(char *buf, t_command **cmd)
@@ -81,7 +81,7 @@ void				handle_wcp(char *buf, t_command **cmd)
 		cut_word(cmd);
 	else
 	{
-		paste_word(cmd);
+		paste_word();
 	}
 	set_command(cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:04:20 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 14:41:36 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 15:52:31 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void			handle_del(t_command **cmd)
 	(*cmd)->pos--;
 	(*cmd)->len--;
 	deleteon_str((*cmd)->szchar, (*cmd)->command, cmd);
-	rewrite_end(cmd);
+	set_command(cmd);
+	rewrite_end();
 }

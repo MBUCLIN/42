@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:55:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 14:56:18 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/28 15:23:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int			redirect_buffer(char *buf, t_command **cmd, int check)
 		handle_special(buf, cmd);
 	else
 	{
-		if ((insret = handle_normal(buf, cmd)) > 0)
+		if ((insret = handle_normal(buf)) > 0)
 		{
 			if ((*cmd)->qmask != 0)
 				qte = caller_loop((*cmd)->qmask, buf + insret);

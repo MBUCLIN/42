@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 12:16:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 14:49:51 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 15:38:19 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		right_moove(t_command *cmd, int n)
 	cursor = get_cursor(LOCAT, NONE, &cmd);
 	col = tgetnum("co");
 	if ((cursor + n) % col == col -1)
-		ft_moovecursor(0, -1);
+		ft_moovecursor(0, 1);
 	else
 		ft_termstr("nd");
 }

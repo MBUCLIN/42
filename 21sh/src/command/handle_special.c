@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 11:31:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 14:50:51 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 15:53:11 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void		clear_sreen(t_command **cmd)
 	ft_putstr((*cmd)->prompt);
 	pos = (*cmd)->pos;
 	(*cmd)->pos = 0;
-	rewrite_end(cmd);
+	set_command(cmd);
+	rewrite_end();
 	co = get_cursor(LOCAT, CSCOL, cmd);
 	li = get_cursor(LOCAT, CSLIN, cmd);
 	ft_moovecursor(co, li);
@@ -91,7 +92,7 @@ void			handle_special(char *buf, t_command **cmd)
 	if (mask == 0)
 		handle_del(cmd);
 	else if (IF_MVTRBL(mask))
-		handle_trbl(buf, cmd);
+		handle_trbl(buf);
 	else if (IF_MVWRD(mask))
 		handle_mvwrd(buf, cmd);
 	else if (IF_MVSTND(mask))

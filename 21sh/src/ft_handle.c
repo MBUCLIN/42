@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 17:34:03 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 13:39:28 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 15:52:07 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		rewrite_command(int save)
 	minus = 0;
 	cmd = ft_getcommand();
 	ft_putstr((*cmd)->prompt);
-	rewrite_end(cmd);
+	rewrite_end();
 	(*cmd)->pos = save;
 	line = get_cursor(LOCAT, CSLIN, cmd);
 	if (line == 0)

@@ -6,13 +6,13 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 15:41:51 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 17:17:26 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 15:49:26 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-static int		command_settobuf(t_command **cmd, int c, int cursor)
+int				command_settobuf(t_command **cmd, int c, int cursor)
 {
 	int		col;
 
@@ -21,6 +21,7 @@ static int		command_settobuf(t_command **cmd, int c, int cursor)
 	{
 		(*cmd)->command[(*cmd)->pos] = c;
 		(*cmd)->szchar[(*cmd)->pos] = get_tabszst(cursor);
+		return (' ');
 	}
 	else if (c == '\n')
 	{
@@ -37,69 +38,46 @@ static int		command_settobuf(t_command **cmd, int c, int cursor)
 	return (c);
 }
 
-static void		command_end(char *buf, t_command **cmd)
+static int		command_end(char *buf, t_command **cmd)
 {
-	int		li;
-	int		i;
 	int		cursor;
 
-	i = 0;
-	while ((*cmd)->command[(*cmd)->pos])
-		(*cmd)->pos++;
 	cursor = get_cursor(LOCAT, NONE, cmd);
-	ft_moovecursor(get_cursor(LOCAT, CSCOL, cmd),\
-					get_cursor(LOCAT, CSLIN, cmd));
-	buf[i] = command_settobuf(cmd, buf[i], cursor);
+	command_settobuf(cmd, *buf, cursor);
 	return (1);
 }
 
-static int		command_buffer_insert(char *buf, t_command **cmd,\
-										int cursor, int len)
+static int		insert_buf_to_command(t_command **cmd, char *buf, int cursor)
 {
-	int		i;
-	int		n;
-	int		ret;
+	unsigned int		i;
 
 	i = 0;
-	n = 0;
-	ret = 0;
 	while (buf[i] && buf[i] != '\n')
 	{
 		buf[i] = command_settobuf(cmd, buf[i], cursor);
+		cursor += (*cmd)->szchar[(*cmd)->pos];
 		(*cmd)->pos++;
-		cursor++;
+		(*cmd)->len++;
 		i++;
 	}
 	if (i < ft_strlen(buf))
-		ret = command_end(buf + i, cmd, len);
-	set_command(cmd);
-	return (ret);
+		return (i);
+	return (0);
 }
 
-static int		command_pushchar(t_command **cmd, int len)
+static void		push_sub_to_command(t_command **cmd, char *sub, int cursor)
 {
-	char		*sub_moove;
-	int			j;
-	int			save;
+	int		i;
 
-	j = 0;
-	save = (*cmd)->pos;
-	if ((sub = ft_strsub((*cmd)->command, (*cmd)->pos,\
-					ft_strlen((*cmd)->command + (*cmd)->pos))) == NULL)
-		ft_exitshell("21sh", ERRMALLOC, NULL);
-	(*cmd)->pos += len;
-	(*cmd)->len += len;
-	while (sub[j])
+	i = 0;
+	while (sub[i])
 	{
-		(*cmd)->command[(*cmd)->pos] = sub[j];
-		(*cmd)->szchar[(*cmd)->pos] = sub[j] == '\t' ?\
-						get_tabszst(get_cursor(LOCAT, NONE, cmd)) : 1;
-		j++;
+		command_settobuf(cmd, sub[i], cursor);
+		cursor += (*cmd)->szchar[(*cmd)->pos];
 		(*cmd)->pos++;
+		i++;
 	}
-	(*cmd)->pos = save;
 	free(sub);
-	return (ft_strlen(*cmd)->command + (*cmd)->pos);
 }
 
 int				command_insert(char *buf)
@@ -107,11 +85,19 @@ int				command_insert(char *buf)
 	t_command		**cmd;
 	int				ret;
 	int				pos;
+	char			*sub;
 
 	cmd = ft_getcommand();
 	pos = (*cmd)->pos;
-	command_pushchar(cmd, ft_linelen(buf));
-	ret = command_buffer_insert(buf, cmd, get_cursor(LOCAT, NONE, cmd));
+	if ((sub = ft_strsub((*cmd)->command,\
+						pos, ft_strlen((*cmd)->command + pos))) == NULL)
+		ft_exitshell("21sh", ERRMALLOC, NULL);
+	(*cmd)->command[(*cmd)->pos] = 0;
+	ret = insert_buf_to_command(cmd, buf, get_cursor(LOCAT, NONE, cmd));
+	(*cmd)->command[(*cmd)->pos] = 0;
+	push_sub_to_command(cmd, sub, get_cursor(LOCAT, NONE, cmd));
+	if (buf[ret] == '\n')
+		ret += command_end(buf + ret, cmd);
 	(*cmd)->pos = pos;
 	set_command(cmd);
 	return (ret);

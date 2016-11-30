@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 11:59:11 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 15:44:42 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 16:13:31 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,47 +28,27 @@ t_command			**ft_getcommand(void)
 	return (set_command(NULL));
 }
 
-void				display_char(int c, int size, int cursor)
-{
-	int				col;
-
-	col = tgetnum("co");
-	while (size)
-	{
-		if (cursor >= 0)
-		{
-			insert_char(c);
-			if ((cursor + 1) % col == 0)
-				ft_termstr("sf");
-		}
-		else
-			write(1, &c, 1);
-		size--;
-	}
-}
-
-void				rewrite_end(t_command **cmd)
+void				rewrite_end(void)
 {
 	int		pos;
-	int		size;
-	int		c;
+	t_command		**cmd;
+	int		cursor;
 	int		len;
 
+	cmd = ft_getcommand();
 	len = (*cmd)->len;
 	pos = (*cmd)->pos;
-	ft_termstr("cd");
-	save_cursorpos(get_cursor(LOCAT, NONE, cmd));
+	cursor = get_cursor(LOCAT, NONE, cmd);
+	save_cursorpos(cursor);
 	while ((*cmd)->pos < len)
 	{
-		c = (*cmd)->command[(*cmd)->pos] == '\t' ?\
-				'.' : (*cmd)->command[(*cmd)->pos];
-		size = (*cmd)->command[(*cmd)->pos] == '\t' ?\
-				get_tabszst(get_cursor(LOCAT, NONE, cmd)) : 1;
-		(*cmd)->szchar[(*cmd)->pos] = size;
-		display_char(c, size, -1);
+		display_char(\
+				command_settobuf(cmd, (*cmd)->command[(*cmd)->pos], cursor),\
+				(*cmd)->szchar[(*cmd)->pos], -1);
+		cursor += (*cmd)->szchar[(*cmd)->pos];
 		(*cmd)->pos++;
 	}
-	retr_cursorpos(get_cursor(LOCAT, NONE, cmd));
+	retr_cursorpos(cursor);
 	(*cmd)->pos = pos;
 	set_command(cmd);
 }

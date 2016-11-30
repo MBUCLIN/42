@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:03:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 15:44:33 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/30 15:50:57 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,25 +144,24 @@ void				right_moove(t_command *cmd, int n);
 */
 t_command			**set_command(t_command **cmd);
 t_command			**ft_getcommand(void);
+int					command_settobuf(t_command **cmd, int c, int cursor);
 void				display_char(int c, int szchar, int cursor);
 void				recreate(int len);
 t_command			*create_command(char *prompt, int mask, char *command);
-void				rewrite_end(t_command **cmd);
+void				rewrite_end(void);
 /*
 ** Function that handle the insert part of the input redirection
 ** insert the input (buf) and deal with quotting and new lines
 */
 int					check_quotelvl(int c);
-void				insert_end(t_command **cmd, char *buf, int cursor);
-void				inserton_str(t_command **cmd, int len);
-int					insert_buf(t_command **cmd, char *buf, int cursor, int len);
+int					command_insert(char *buf);
 /*
 ** Function that are called by the special part of the
 ** input redirection.
 */
 void				handle_wcp(char *buf, t_command **cmd);
 void				handle_mvwrd(char *buf, t_command **cmd);
-void				handle_trbl(char *buf, t_command **cmd);
+void				handle_trbl(char *buf);
 void				handle_del(t_command **cmd);
 void				handle_history(int way, t_command **cmd);
 /*
@@ -172,7 +171,7 @@ void				handle_history(int way, t_command **cmd);
 ** to normal
 */
 void				handle_special(char *buf, t_command **cmd);
-int					handle_normal(char *buf, t_command **cmd);
+int					handle_normal(char *buf);
 /*
 ** Function that read input from user
 ** It read until a new line is entered and

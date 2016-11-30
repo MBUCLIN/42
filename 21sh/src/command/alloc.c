@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 14:33:21 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 14:55:01 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/11/28 13:10:27 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_command		*create_command(char *prompt, int mask, char *command)
 	cmd->pos = 0;
 	cmd->len = 0;
 	if (ft_strlen(command) > 0)
-		handle_normal(command, &cmd);
+		handle_normal(command);
 	set_command(&cmd);
 	return (cmd);
 }

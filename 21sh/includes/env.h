@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 11:13:32 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/23 16:31:46 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:15:18 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 t_list		*get_env(t_list *env);
 char		*ft_setenv(char *name, char *value);
 char		*ft_getenv(char *variable);
+void		ft_displayenv(void);
 /*
 ** Function that we call to create our environment
 ** if the parent one is null (extern char **environ)
 */
-void		create_shlvl(char *shlvl);
 void		create_pwd(char *pwd);
 void		create_path(char *path);
 void		create_env(void);

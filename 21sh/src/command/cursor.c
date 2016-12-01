@@ -6,12 +6,23 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:50:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 14:05:20 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:12:08 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
+int				get_tabszst(int cursor)
+{
+	int			co;
+	int			col;
+
+	col = tgetnum("co");
+	co = (cursor % col);
+	if ((co - col) >= -4)
+		return (-(co - col));
+	return (-((co % 4) - 4));
+}
 static int		get_cursorpos(t_command **cmd)
 {
 	int		i;

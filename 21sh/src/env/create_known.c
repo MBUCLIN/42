@@ -6,24 +6,11 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 13:41:22 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 15:09:29 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:11:16 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-
-void			create_shlvl(char *shlvl)
-{
-	char		*value;
-
-	if ((value = ft_strdup("1")) == NULL)
-	{
-		sherror("21sh", ERRMALLOC, NULL);
-		exit(-1);
-	}
-	ft_setenv(shlvl, value);
-	free(value);
-}
 
 void			create_pwd(char *pwd)
 {

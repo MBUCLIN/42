@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 11:06:16 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/23 14:02:03 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:18:35 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ static char		*shlvl_increment(const char *shlvl)
 	int			value;
 	char		*var;
 
-	if ((name = ft_strsub(shlvl, 0, 6)) == NULL)
+	if ((name = ft_strdup("SHLVL=")) == NULL)
 		return (NULL);
-	if ((var = ft_strsub(shlvl, 6, ft_strlen(shlvl))) == NULL)
-		return (NULL);
-	value = ft_atoi(var);
-	value += 1;
-	free(var);
+	if (shlvl != NULL)
+	{
+		if ((var = ft_strsub(shlvl, 6, ft_strlen(shlvl))) == NULL)
+			return (NULL);
+		value = ft_atoi(var);
+		value += 1;
+		free(var);
+	}
+	else
+		value = 1;
 	if ((var = ft_itoa(value)) == NULL)
 		return (NULL);
 	if ((name = ft_strjoinfree(name, var)) == NULL)
@@ -57,8 +62,10 @@ static void		create_fromenv(const char **env)
 {
 	int			i;
 	char		*shlvl;
+	int			found;
 
 	i = 0;
+	found = 0;
 	while (env[i])
 	{
 		if (ft_strstr(env[i], "SHLVL=") == NULL)
@@ -69,14 +76,17 @@ static void		create_fromenv(const char **env)
 				ft_exitshell("21sh", ERRMALLOC, NULL);
 			add_to_env(shlvl);
 			free(shlvl);
+			found = 1;
 		}
 		i++;
 	}
+	if (found)
+		shlvl_increment(NULL);
 }
 
 static void		create_known(void)
 {
-	create_shlvl(FTSHLVL);
+	ft_setenv(FTSHLVL, "1");
 	create_pwd(FTPWD);
 	create_path(FTPATH);
 	ft_setenv(FTHOME, ft_gethome());

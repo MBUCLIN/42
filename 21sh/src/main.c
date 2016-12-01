@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:23:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 14:10:07 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:14:59 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static char			*read_command(int canon)
 	else if (canon == 0)
 		if ((command = ft_strdup(cmd->command)) == NULL)
 			ft_exitshell("21sh", ERRMALLOC, NULL);
+	moove_end(cmd);
 	del_command(cmd);
 	return (command);
 }
@@ -48,9 +49,8 @@ static void			main_loop(void)
 			if (canonize_input(name) == 0)
 				canon = 1;
 		command = read_command(canon);
-//		save_history(command);
 		noncanonize_input(name);
-		ft_printf("|%s| : command\n", command);
+		ft_printf("\n|%s| : command\n", command);
 		free(command);
 	}
 }
@@ -58,7 +58,7 @@ static void			main_loop(void)
 int					main(void)
 {
 	create_env();
-	get_env(NULL);
+	ft_displayenv();
 	main_loop();
 	return (0);
 }

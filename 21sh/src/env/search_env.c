@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:59:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/21 13:22:44 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:19:04 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,18 @@ char		*ft_getenv(char *variable)
 		tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+void		ft_displayenv(void)
+{
+	t_list		*env;
+	t_list		*tmp;
+
+	env = get_env(NULL);
+	tmp = env;
+	while (tmp)
+	{
+		ft_putendl(tmp->content);
+		tmp = tmp->next;
+	}
 }

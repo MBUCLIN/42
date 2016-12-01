@@ -7,11 +7,11 @@ SRC_NAME = main.c canon.c ft_handle.c home.c\
 		   error/shell_error.c\
 		   env/search_env.c env/create_env.c env/create_known.c\
 		   command/read_loop.c command/handle.c command/cursor.c\
-		   command/tabulation.c command/alloc.c command/handle_del.c\
-		   command/handle_trbl.c command/termcap.c command/rewrite.c\
-		    command/insert.c command/save_cursor.c command/handle_mvwrd.c\
-		   command/handle_wcp.c command/del.c command/handle_special.c\
-		   command/quoting.c command/moove_cursor.c command/read_noncanonized.c
+		   command/alloc.c command/handle_del.c command/handle_trbl.c\
+		   command/termcap.c command/rewrite.c command/insert.c\
+		   command/save_cursor.c command/handle_mvwrd.c command/handle_wcp.c\
+		   command/del.c command/handle_special.c command/quoting.c\
+		   command/moove_cursor.c command/read_noncanonized.c
 
 SRC_PATH = src/
 

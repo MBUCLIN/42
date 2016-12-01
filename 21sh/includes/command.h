@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:03:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/30 17:30:51 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:11:20 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,13 @@ void				del_cmdhist(t_command *cmd);
 ** Function that return the size of the tabulation
 ** for the curent cursor pos (int pos)
 */
-int					get_tabszst(int pos);
 /*
 ** Function that return information about the cursor
 ** (the line OR column OF the location OR
 ** the length of the cursor)
+** get_tabszst gives the tabulation size for the cursor
 */
+int					get_tabszst(int cursor);
 int					get_cursor(int flagcmd, int flagcs, t_command **cmd);
 /*
 ** Function that handle moovements of the cursor

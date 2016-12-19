@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:23:24 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/12/01 13:14:59 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 14:52:01 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void			main_loop(void)
 			if (canonize_input(name) == 0)
 				canon = 1;
 		command = read_command(canon);
+		history_file_save(command);
 		noncanonize_input(name);
 		ft_printf("\n|%s| : command\n", command);
 		free(command);

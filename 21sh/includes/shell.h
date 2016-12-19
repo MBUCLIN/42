@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:22:46 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/25 14:10:12 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 16:06:10 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SHELL_H
 
 # define BUF_SIZE 100
+# define HISTORY_FILE ".42sh_history"
 
 /*
 ** Includes my libs
@@ -48,7 +49,7 @@ int					noncanonize_input(char *name);
 /*
 ** Function that save the command in .42shhistory file
 */
-//t_list				*save_history(char *command);
+void				history_file_save(char *command);
 /*
 ** Function that search the home directory
 ** (The most recent modifyed directory in /Users path)

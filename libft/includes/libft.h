@@ -6,7 +6,7 @@
 /*   By: mbuclin <mbuclin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:11:41 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/21 14:56:08 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:57:33 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int					ft_chrnotoption(char *chr, char *option);
 int					ft_atoi(char *str);
 int					ft_atoibase(char *nbr_b, char *base);
 int					ft_memcmp(const void *s1, const void *s2, size_t len);
+int					ft_strccnt(char *str, int c);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);

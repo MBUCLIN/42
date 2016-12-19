@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:15:00 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/24 15:09:07 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:49:41 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void			sherror(char *name, int errnum, char *file)
 		ft_puterror(name, ": Environment variable not set: ", file);
 	else if (errnum == ERRSTREAM)
 		ft_puterror(name, ": Stream 0 not found: ", file);
+	else if (errnum == ERRFILEOPEN)
+		ft_puterror(name, ": Error opening file: ", file);
 	else
 		ft_puterror(name, ": Errnum wrong value.", file);
 }

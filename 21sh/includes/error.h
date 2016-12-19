@@ -6,7 +6,7 @@
 /*   By: mbuclin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:26:49 by mbuclin           #+#    #+#             */
-/*   Updated: 2016/11/23 16:33:25 by mbuclin          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:48:44 by mbuclin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERRTERM 2
 # define ERRENV 3
 # define ERRSTREAM 4
+# define ERRFILEOPEN 5
 
 /*
 ** function that print error message

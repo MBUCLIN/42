@@ -2,7 +2,7 @@
 
 NAME = 21sh
 
-SRC_NAME = main.c canon.c ft_handle.c home.c\
+SRC_NAME = main.c canon.c ft_handle.c home.c history.c\
 		   signal/signal.c signal/is_signal.c signal/initialize.c\
 		   error/shell_error.c\
 		   env/search_env.c env/create_env.c env/create_known.c\
